@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
 using System.Windows.Forms;
-using CZS_ERP_Library;
-using CZS_ERP_Library.Models;
-using Syncfusion.Pdf.Graphics;
+using CZS_LaVictoria_Library;
+using CZS_LaVictoria_Library.Models;
 using Syncfusion.Pdf.Grid;
 using Syncfusion.WinForms.DataGrid;
 using Syncfusion.WinForms.Input.Enums;
 
-namespace CZS_ERP_UI.ÓrdenesPage
+namespace CZS_LaVictoria.ÓrdenesPage
 {
     public partial class OrdenVentaCrearForm : Form
     {

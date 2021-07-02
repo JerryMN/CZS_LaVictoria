@@ -1,5 +1,5 @@
 ﻿
-namespace CZS_ERP_UI.PlásticosPage
+namespace CZS_LaVictoria.PlásticosPage
 {
     partial class RegistrarCortadoForm
     {

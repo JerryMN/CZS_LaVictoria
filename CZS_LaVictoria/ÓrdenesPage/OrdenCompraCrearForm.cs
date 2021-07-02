@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
 using System.Windows.Forms;
-using CZS_ERP_Library;
-using CZS_ERP_Library.Models;
+using CZS_LaVictoria_Library;
+using CZS_LaVictoria_Library.Models;
 using DevExpress.XtraEditors.Repository;
 
-namespace CZS_ERP_UI.ÓrdenesPage
+namespace CZS_LaVictoria.ÓrdenesPage
 {
     public partial class OrdenCompraCrearForm : Form
     {

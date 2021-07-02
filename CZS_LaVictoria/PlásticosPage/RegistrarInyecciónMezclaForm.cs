@@ -3,10 +3,10 @@ using System.Collections;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
-using CZS_ERP_Library;
-using CZS_ERP_Library.Models;
+using CZS_LaVictoria_Library;
+using CZS_LaVictoria_Library.Models;
 
-namespace CZS_ERP_UI.PlásticosPage
+namespace CZS_LaVictoria.PlásticosPage
 {
     public partial class RegistrarInyecciónMezclaForm : Form
     {

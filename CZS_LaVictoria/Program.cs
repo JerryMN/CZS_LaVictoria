@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using CZS_ERP_Library;
+using CZS_LaVictoria_Library;
 
-namespace CZS_ERP_UI
+namespace CZS_LaVictoria
 {
     static class Program
     {

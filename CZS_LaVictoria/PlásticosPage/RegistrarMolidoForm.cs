@@ -4,16 +4,16 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
-using CZS_ERP_Library.Models;
+using CZS_LaVictoria_Library.Models;
 
-namespace CZS_ERP_UI.PlásticosPage
+namespace CZS_LaVictoria.PlásticosPage
 {
-    public partial class RegistrarMolidoButton : Form
+    public partial class RegistrarMolidoForm : Form
     {
         MaterialModel _materialEntrada = new MaterialModel();
         MaterialModel _materialSalida = new MaterialModel();
 
-        public RegistrarMolidoButton()
+        public RegistrarMolidoForm()
         {
             InitializeComponent();
             CreateSampleData();

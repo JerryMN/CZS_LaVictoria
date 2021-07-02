@@ -1,6 +1,6 @@
-﻿using CZS_ERP_Library.DataAccess;
+﻿using CZS_LaVictoria_Library.DataAccess;
 
-namespace CZS_ERP_Library
+namespace CZS_LaVictoria_Library
 {
     public static class GlobalConfig
     {

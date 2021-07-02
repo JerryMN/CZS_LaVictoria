@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CZS_ERP_Library.Models
+namespace CZS_LaVictoria_Library.Models
 {
     public class PurchaseOrderModel
     {

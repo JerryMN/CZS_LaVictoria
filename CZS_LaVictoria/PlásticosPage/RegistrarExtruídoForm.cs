@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace CZS_ERP_UI.PlásticosPage
+namespace CZS_LaVictoria.PlásticosPage
 {
     public partial class RegistrarExtruídoForm : Form
     {

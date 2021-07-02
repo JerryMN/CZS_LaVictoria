@@ -1,5 +1,5 @@
 ﻿
-namespace CZS_ERP_UI
+namespace CZS_LaVictoria
 {
     partial class MainMenuForm
     {
@@ -54,6 +54,7 @@ namespace CZS_ERP_UI
             this.CrearMezclaButton = new DevExpress.XtraBars.BarButtonItem();
             this.CrearAreaButton = new DevExpress.XtraBars.BarButtonItem();
             this.VerAreasButton = new DevExpress.XtraBars.BarButtonItem();
+            this.VerMezclasButton = new DevExpress.XtraBars.BarButtonItem();
             this.ÓrdenesTab = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.Órdenes_CompraGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Órdenes_VentaGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -69,7 +70,6 @@ namespace CZS_ERP_UI
             this.Datos_AreasGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Datos_MezclasGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ChildPanel = new DevExpress.XtraEditors.PanelControl();
-            this.VerMezclasButton = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.RibbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ChildPanel)).BeginInit();
             this.SuspendLayout();
@@ -181,6 +181,7 @@ namespace CZS_ERP_UI
             this.RegistrarMolidoButton.Id = 8;
             this.RegistrarMolidoButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("RegistrarMolidoButton.ImageOptions.SvgImage")));
             this.RegistrarMolidoButton.Name = "RegistrarMolidoButton";
+            this.RegistrarMolidoButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.RegistrarMolidoButton_ItemClick);
             // 
             // RegistrarExtruídoButton
             // 
@@ -188,6 +189,7 @@ namespace CZS_ERP_UI
             this.RegistrarExtruídoButton.Id = 9;
             this.RegistrarExtruídoButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("RegistrarExtruídoButton.ImageOptions.SvgImage")));
             this.RegistrarExtruídoButton.Name = "RegistrarExtruídoButton";
+            this.RegistrarExtruídoButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.RegistrarExtruídoButton_ItemClick);
             // 
             // RegistrarCortadoButton
             // 
@@ -195,18 +197,21 @@ namespace CZS_ERP_UI
             this.RegistrarCortadoButton.Id = 10;
             this.RegistrarCortadoButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("RegistrarCortadoButton.ImageOptions.SvgImage")));
             this.RegistrarCortadoButton.Name = "RegistrarCortadoButton";
+            this.RegistrarCortadoButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.RegistrarCortadoButton_ItemClick);
             // 
             // RegistrarInyecciónMezclaButton
             // 
             this.RegistrarInyecciónMezclaButton.Caption = "Registrar Inyección con Mezcla";
             this.RegistrarInyecciónMezclaButton.Id = 11;
             this.RegistrarInyecciónMezclaButton.Name = "RegistrarInyecciónMezclaButton";
+            this.RegistrarInyecciónMezclaButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.RegistrarInyecciónMezclaButton_ItemClick);
             // 
             // RegistrarInyecciónButton
             // 
-            this.RegistrarInyecciónButton.Caption = "Registrar Inyección Sin Mezcla";
+            this.RegistrarInyecciónButton.Caption = "Registrar Inyección sin Mezcla";
             this.RegistrarInyecciónButton.Id = 12;
             this.RegistrarInyecciónButton.Name = "RegistrarInyecciónButton";
+            this.RegistrarInyecciónButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.RegistrarInyecciónButton_ItemClick);
             // 
             // RegistarInsertadoButton
             // 
@@ -214,6 +219,7 @@ namespace CZS_ERP_UI
             this.RegistarInsertadoButton.Id = 13;
             this.RegistarInsertadoButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("RegistarInsertadoButton.ImageOptions.SvgImage")));
             this.RegistarInsertadoButton.Name = "RegistarInsertadoButton";
+            this.RegistarInsertadoButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.RegistarInsertadoButton_ItemClick);
             // 
             // Datos_ProveedoresMaterialesSubmenu
             // 
@@ -294,6 +300,13 @@ namespace CZS_ERP_UI
             this.VerAreasButton.Id = 26;
             this.VerAreasButton.Name = "VerAreasButton";
             this.VerAreasButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerAreasButton_ItemClick);
+            // 
+            // VerMezclasButton
+            // 
+            this.VerMezclasButton.Caption = "Ver / Editar";
+            this.VerMezclasButton.Id = 27;
+            this.VerMezclasButton.Name = "VerMezclasButton";
+            this.VerMezclasButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerMezclasButton_ItemClick);
             // 
             // ÓrdenesTab
             // 
@@ -414,13 +427,6 @@ namespace CZS_ERP_UI
             this.ChildPanel.Size = new System.Drawing.Size(1278, 841);
             this.ChildPanel.TabIndex = 1;
             // 
-            // VerMezclasButton
-            // 
-            this.VerMezclasButton.Caption = "Ver / Editar";
-            this.VerMezclasButton.Id = 27;
-            this.VerMezclasButton.Name = "VerMezclasButton";
-            this.VerMezclasButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerMezclasButton_ItemClick);
-            // 
             // MainMenuForm
             // 
             this.Appearance.BackColor = System.Drawing.SystemColors.Control;
@@ -432,7 +438,7 @@ namespace CZS_ERP_UI
             this.Controls.Add(this.ChildPanel);
             this.Controls.Add(this.RibbonControl);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IconOptions.Image = global::CZS_ERP_UI.Properties.Resources.newicon1;
+            this.IconOptions.Image = global::CZS_LaVictoria.Properties.Resources.newicon1;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "MainMenuForm";
             this.Ribbon = this.RibbonControl;

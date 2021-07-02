@@ -1,5 +1,5 @@
 ﻿
-namespace CZS_ERP_UI.ÓrdenesPage
+namespace CZS_LaVictoria.ÓrdenesPage
 {
     partial class OrdenCompraVerForm
     {

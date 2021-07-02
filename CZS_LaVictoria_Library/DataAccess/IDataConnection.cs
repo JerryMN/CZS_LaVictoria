@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using CZS_ERP_Library.Models;
+﻿using System.Collections.Generic;
+using CZS_LaVictoria_Library.Models;
 
-namespace CZS_ERP_Library.DataAccess
+namespace CZS_LaVictoria_Library.DataAccess
 {
     public interface IDataConnection
     {

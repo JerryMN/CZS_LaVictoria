@@ -1,7 +1,7 @@
 ﻿
-namespace CZS_ERP_UI.PlásticosPage
+namespace CZS_LaVictoria.PlásticosPage
 {
-    partial class RegistrarMolidoButton
+    partial class RegistrarMolidoForm
     {
         /// <summary>
         /// Required designer variable.

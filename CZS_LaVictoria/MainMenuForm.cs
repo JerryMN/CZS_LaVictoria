@@ -1,9 +1,10 @@
-﻿using DevExpress.XtraBars;
-using System.Windows.Forms;
-using CZS_ERP_UI.DatosPage;
-using CZS_ERP_UI.ÓrdenesPage;
+﻿using System.Windows.Forms;
+using CZS_LaVictoria.DatosPage;
+using CZS_LaVictoria.ÓrdenesPage;
+using CZS_LaVictoria.PlásticosPage;
+using DevExpress.XtraBars;
 
-namespace CZS_ERP_UI
+namespace CZS_LaVictoria
 {
     public partial class MainMenuForm : DevExpress.XtraBars.Ribbon.RibbonForm
     {
@@ -129,6 +130,36 @@ namespace CZS_ERP_UI
             childForm.Show();
             _currentChildForm?.Close();
             _currentChildForm = childForm;
+        }
+
+        void RegistrarMolidoButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new RegistrarMolidoForm());
+        }
+
+        void RegistrarExtruídoButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+        }
+
+        void RegistrarCortadoButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+        }
+
+        void RegistrarInyecciónMezclaButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+        }
+
+        void RegistrarInyecciónButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+        }
+
+        void RegistarInsertadoButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
         }
     }
 }

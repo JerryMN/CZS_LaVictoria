@@ -4,10 +4,10 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
-using CZS_ERP_Library.Models;
+using CZS_LaVictoria_Library.Models;
 using Dapper;
 
-namespace CZS_ERP_Library.DataAccess
+namespace CZS_LaVictoria_Library.DataAccess
 {
     public class SqlConnector : IDataConnection
     {

@@ -3,10 +3,10 @@ using System.Collections;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using CZS_ERP_Library;
-using CZS_ERP_Library.Models;
+using CZS_LaVictoria_Library;
+using CZS_LaVictoria_Library.Models;
 
-namespace CZS_ERP_UI.DatosPage
+namespace CZS_LaVictoria.DatosPage
 {
     public partial class MezclaCrearForm : Form
     {

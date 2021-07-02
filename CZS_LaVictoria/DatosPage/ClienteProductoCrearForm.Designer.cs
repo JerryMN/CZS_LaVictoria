@@ -1,5 +1,5 @@
 ﻿
-namespace CZS_ERP_UI.DatosPage
+namespace CZS_LaVictoria.DatosPage
 {
     partial class ClienteProductoCrearForm
     {
