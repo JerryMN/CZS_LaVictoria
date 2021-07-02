@@ -3,20 +3,27 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using CZS_LaVictoria_Library;
 using CZS_LaVictoria_Library.Models;
+using DevExpress.CodeParser;
+using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraExport.Helpers;
+using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraGrid.Views.Grid;
+using Syncfusion.Windows.Forms.Diagram;
+using Syncfusion.WinForms.DataGrid;
 
 namespace CZS_LaVictoria.ÓrdenesPage
 {
     public partial class OrdenCompraCrearForm : Form
     {
+        ProveedorModel _selectedProveedor;
+        List<ProveedorProductoModel> _productos;
         List<PurchaseOrderLineModel> _orderLines = new List<PurchaseOrderLineModel>();
-        readonly AgregarNotasForm _addNotesForm;
         int _count;
 
         public OrdenCompraCrearForm()
         {
             InitializeComponent();
-            _addNotesForm = new AgregarNotasForm();
             GetProveedores();
             GetAreas();
         }
@@ -25,23 +32,18 @@ namespace CZS_LaVictoria.ÓrdenesPage
 
         void ProveedorCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var proveedorModel = (ProveedorModel)ProveedorCombo.SelectedItem;
+            _selectedProveedor = (ProveedorModel)ProveedorCombo.SelectedItem;
             GetCondiciones();
-            TeléfonoText.Text = proveedorModel.Teléfono;
-            CorreoText.Text = proveedorModel.Correo;
-            AtencionText.Text = proveedorModel.Responsable;
-            CondicionesCombo.Text = proveedorModel.Condiciones;
+            TeléfonoText.Text = _selectedProveedor.Teléfono;
+            CorreoText.Text = _selectedProveedor.Correo;
+            AtencionText.Text = _selectedProveedor.Responsable;
+            CondicionesCombo.Text = _selectedProveedor.Condiciones;
             GetProducts();
         }
 
         void AreaCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             GetProducts();
-        }
-
-        void NotasButton_Click(object sender, EventArgs e)
-        {
-            _ = _addNotesForm.ShowDialog();
         }
 
         #endregion
@@ -89,66 +91,77 @@ namespace CZS_LaVictoria.ÓrdenesPage
 
         void GetProducts()
         {
-            var proveedorModel = (ProveedorModel)ProveedorCombo.SelectedItem;
+            _productos = GlobalConfig.Connection.ProveedorProducto_GetByProveedorArea(_selectedProveedor.IdProvider, AreaCombo.Text);
+
             var riComboBox = new RepositoryItemComboBox();
-            var productos = GlobalConfig.Connection.ProveedorProducto_GetByProveedorArea(proveedorModel.IdProvider, AreaCombo.Text);
-            foreach (var item in productos)
+            foreach (var item in _productos)
             {
-                riComboBox.Items.Add(item.MaterialExterno); 
+                riComboBox.Items.Add(item.MaterialExterno);
             }
             GridControl.RepositoryItems.Add(riComboBox);
-            GridView.Columns[0].ColumnEdit = riComboBox;
-
+            GridView.Columns["Producto"].ColumnEdit = riComboBox;
         }
 
-        //string CrearPdf()
-        //{
-        //    var path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        //    _count = 0;
-
-        //    //Create a new PDF document
-        //    var purchaseOrder = new PdfDocument();
-
-        //    //Add a page
-        //    var page = purchaseOrder.Pages.Add();
-
-        //    //Create a PdfGrid
-        //    var pdfGridGeneral = new PdfGrid();
-
-        //    //Create a DataTable
-        //    var generalInfoTable = new DataTable();
-
-        //    //Create a PdfGrid
-        //    var pdfGridProduct = new PdfGrid();
-
-        //    //Sección de creación de la tabla de datos generales y de proveedor
-        //    generalInfoTable.Columns.Add("1");
-        //    generalInfoTable.Columns.Add("2");
-        //    generalInfoTable.Columns.Add("3");
-
-        //    generalInfoTable.Rows.Add("No. orden: " + NumOrdenText.Text.Trim(), "Proveedor: " + ProveedorCombo.Text.Trim(), "Atención:" + AtencionText.Text.Trim());
-        //    generalInfoTable.Rows.Add("Fecha de creación: " + FechaOrdenPicker.Value.ToString().Substring(0, 10), "Teléfono: " + TeléfonoText.Text.Trim(), "Area: " + AreaCombo.Text.Trim());
-        //    generalInfoTable.Rows.Add("Fecha de entrega: " + FechaEntregaPicker.Value.ToString().Substring(0, 10), "Correo: " + CorreoText.Text.Trim(), "Condiciones: " + CondicionesCombo.Text.Trim());
-        //    pdfGridGeneral.DataSource = generalInfoTable;
-        //    pdfGridGeneral.BeginCellLayout += PdfGridGeneral_BeginCellLayout;
-        //    var layoutFormat = new PdfGridLayoutFormat {Layout = PdfLayoutType.Paginate};
-        //    PdfLayoutResult result = pdfGridGeneral.Draw(page, new PointF(10, 10), layoutFormat);
-
-        //    //Table 2 Properties
-        //    //Create pdfGrid for table 2
-        //    var pdfGridProducts = new PdfGrid();
-        //    //Create a DataTable
-        //    var productsTable = new DataTable();
-
-        //    //Draw grid to the resultant page of the first grid
-        //    pdfGridProducts.Draw(result.Page, new PointF(10, result.Bounds.Height + 20));
-        //    const string fileName = "/Compra/output.pdf";
-        //    purchaseOrder.Save(path + fileName);
-        //    purchaseOrder.Close(true);
-        //    return path + fileName;
-        //}
-
         #endregion
+
+        void GridView_CellValueChanging(object sender, CellValueChangedEventArgs e)
+        {
+            var selectedProducto = new ProveedorProductoModel();
+            if (e.RowHandle < 0) return;
+
+            foreach (var producto in _productos)
+            {
+                if (producto.MaterialExterno != GridView.GetRowCellValue(e.RowHandle, "Producto").ToString() && ProveedorCombo.Text != producto.Proveedor) continue;
+                selectedProducto = producto;
+            }
+
+            GridView.SetRowCellValue(e.RowHandle, "PrecioUnitario", selectedProducto.PrecioUnitario);
+
+            double.TryParse(e.Value.ToString(), out var cantidad);
+            double.TryParse(GridView.GetRowCellValue(e.RowHandle, "PrecioUnitario").ToString(), out var precio);
+
+            if (cantidad == 0) return;
+            
+            if (GridView.GetRowCellValue(e.RowHandle, "Iva").ToString() == "True")
+            {
+                GridView.SetRowCellValue(e.RowHandle, "Subtotal", cantidad * precio * 1.16);
+            }
+            else
+            {
+                GridView.SetRowCellValue(e.RowHandle, "Subtotal", cantidad * precio);
+            }
+        }
+
+        void GridView_InitNewRow(object sender, InitNewRowEventArgs e)
+        {
+            var view = sender as GridView;
+            view?.SetRowCellValue(e.RowHandle, view.Columns["CantidadOrden"], 0);
+            view?.SetRowCellValue(e.RowHandle, view.Columns["Iva"], 0);
+            view?.SetRowCellValue(e.RowHandle, view.Columns["Subtotal"], 0);
+
+            var newRowId = GridView.RowCount;
+            view?.SetRowCellValue(e.RowHandle, view.Columns["NumLinea"], newRowId);
+        }
+
+        BaseEdit _edit;
+
+        void GridView_ShownEditor(object sender, EventArgs e)
+        {
+            var view = sender as GridView;
+            _edit = view?.ActiveEditor;
+            if (_edit != null) _edit.EditValueChanged += edit_EditValueChanged;
+        }
+
+        void GridView_HiddenEditor(object sender, EventArgs e)
+        {
+            _edit.EditValueChanged -= edit_EditValueChanged;
+            _edit = null;
+        }
+
+        void edit_EditValueChanged(object sender, EventArgs e)
+        {
+            GridView.PostEditor();
+        }
     }
 }
 

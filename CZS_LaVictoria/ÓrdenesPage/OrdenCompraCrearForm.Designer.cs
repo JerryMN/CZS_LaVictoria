@@ -29,15 +29,21 @@ namespace CZS_LaVictoria.ÓrdenesPage
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OrdenCompraCrearForm));
             this.ProductosGroupBox = new System.Windows.Forms.GroupBox();
             this.GridControl = new DevExpress.XtraGrid.GridControl();
+            this.purchaseOrderLineModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.GridView = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colproducto = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colNumLinea = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colProducto = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            this.colcantidadOrden = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colprecioUnitario = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.coliva = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colsubtotal = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCantidadOrden = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCantidadEntregada = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colCantidadPendiente = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colPrecioUnitario = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colIva = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colSubtotal = new DevExpress.XtraGrid.Columns.GridColumn();
             this.DatosGroupBox = new System.Windows.Forms.GroupBox();
             this.TeléfonoText = new Syncfusion.Windows.Forms.Tools.MaskedEditBox();
             this.CondicionesCombo = new System.Windows.Forms.ComboBox();
@@ -60,13 +66,18 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.RevisarButton = new FontAwesome.Sharp.IconButton();
             this.NotasButton = new FontAwesome.Sharp.IconButton();
             this.SubtitleLabel = new System.Windows.Forms.Label();
+            this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            this.behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
             this.ProductosGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.purchaseOrderLineModelBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
             this.DatosGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TeléfonoText)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumOrdenText)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).BeginInit();
             this.SuspendLayout();
             // 
             // ProductosGroupBox
@@ -81,38 +92,71 @@ namespace CZS_LaVictoria.ÓrdenesPage
             // 
             // GridControl
             // 
+            this.GridControl.DataSource = this.purchaseOrderLineModelBindingSource;
             this.GridControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GridControl.Location = new System.Drawing.Point(3, 25);
             this.GridControl.MainView = this.GridView;
             this.GridControl.Name = "GridControl";
             this.GridControl.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemComboBox1});
+            this.repositoryItemComboBox1,
+            this.repositoryItemCheckEdit1});
             this.GridControl.Size = new System.Drawing.Size(1170, 322);
-            this.GridControl.TabIndex = 0;
+            this.GridControl.TabIndex = 1;
             this.GridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.GridView});
+            // 
+            // purchaseOrderLineModelBindingSource
+            // 
+            this.purchaseOrderLineModelBindingSource.DataSource = typeof(CZS_LaVictoria_Library.Models.PurchaseOrderLineModel);
             // 
             // GridView
             // 
             this.GridView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colproducto,
-            this.colcantidadOrden,
-            this.colprecioUnitario,
-            this.coliva,
-            this.colsubtotal});
+            this.colNumLinea,
+            this.colProducto,
+            this.colCantidadOrden,
+            this.colCantidadEntregada,
+            this.colCantidadPendiente,
+            this.colPrecioUnitario,
+            this.colIva,
+            this.colSubtotal});
             this.GridView.GridControl = this.GridControl;
             this.GridView.Name = "GridView";
+            this.GridView.NewItemRowText = "Nueva línea";
+            this.GridView.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
+            this.GridView.OptionsCustomization.AllowFilter = false;
+            this.GridView.OptionsCustomization.AllowGroup = false;
+            this.GridView.OptionsCustomization.AllowSort = false;
             this.GridView.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Bottom;
-            this.GridView.OptionsView.ShowFooter = true;
+            this.GridView.OptionsView.ShowGroupPanel = false;
+            this.GridView.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.colSubtotal, DevExpress.Data.ColumnSortOrder.Ascending)});
+            this.GridView.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.GridView_InitNewRow);
+            this.GridView.HiddenEditor += new System.EventHandler(this.GridView_HiddenEditor);
+            this.GridView.ShownEditor += new System.EventHandler(this.GridView_ShownEditor);
+            this.GridView.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.GridView_CellValueChanging);
             // 
-            // colproducto
+            // colNumLinea
             // 
-            this.colproducto.Caption = "Producto";
-            this.colproducto.ColumnEdit = this.repositoryItemComboBox1;
-            this.colproducto.FieldName = "producto";
-            this.colproducto.Name = "colproducto";
-            this.colproducto.Visible = true;
-            this.colproducto.VisibleIndex = 0;
+            this.colNumLinea.FieldName = "NumLinea";
+            this.colNumLinea.Name = "colNumLinea";
+            this.colNumLinea.OptionsColumn.AllowEdit = false;
+            this.colNumLinea.OptionsColumn.ReadOnly = true;
+            this.colNumLinea.Visible = true;
+            this.colNumLinea.VisibleIndex = 0;
+            this.colNumLinea.Width = 69;
+            // 
+            // colProducto
+            // 
+            this.colProducto.Caption = "Producto";
+            this.colProducto.ColumnEdit = this.repositoryItemComboBox1;
+            this.colProducto.FieldName = "Producto";
+            this.colProducto.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("colProducto.ImageOptions.Image")));
+            this.colProducto.ImageOptions.SvgImageSize = new System.Drawing.Size(10, 10);
+            this.colProducto.Name = "colProducto";
+            this.colProducto.Visible = true;
+            this.colProducto.VisibleIndex = 1;
+            this.colProducto.Width = 98;
             // 
             // repositoryItemComboBox1
             // 
@@ -121,37 +165,53 @@ namespace CZS_LaVictoria.ÓrdenesPage
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repositoryItemComboBox1.Name = "repositoryItemComboBox1";
             // 
-            // colcantidadOrden
+            // colCantidadOrden
             // 
-            this.colcantidadOrden.Caption = "Cantidad";
-            this.colcantidadOrden.FieldName = "cantidadOrden";
-            this.colcantidadOrden.Name = "colcantidadOrden";
-            this.colcantidadOrden.Visible = true;
-            this.colcantidadOrden.VisibleIndex = 1;
+            this.colCantidadOrden.FieldName = "CantidadOrden";
+            this.colCantidadOrden.Name = "colCantidadOrden";
+            this.colCantidadOrden.Visible = true;
+            this.colCantidadOrden.VisibleIndex = 2;
+            this.colCantidadOrden.Width = 98;
             // 
-            // colprecioUnitario
+            // colCantidadEntregada
             // 
-            this.colprecioUnitario.Caption = "Precio";
-            this.colprecioUnitario.FieldName = "precioUnitario";
-            this.colprecioUnitario.Name = "colprecioUnitario";
-            this.colprecioUnitario.Visible = true;
-            this.colprecioUnitario.VisibleIndex = 2;
+            this.colCantidadEntregada.FieldName = "CantidadEntregada";
+            this.colCantidadEntregada.Name = "colCantidadEntregada";
             // 
-            // coliva
+            // colCantidadPendiente
             // 
-            this.coliva.Caption = "IVA";
-            this.coliva.FieldName = "iva";
-            this.coliva.Name = "coliva";
-            this.coliva.Visible = true;
-            this.coliva.VisibleIndex = 3;
+            this.colCantidadPendiente.FieldName = "CantidadPendiente";
+            this.colCantidadPendiente.Name = "colCantidadPendiente";
             // 
-            // colsubtotal
+            // colPrecioUnitario
             // 
-            this.colsubtotal.Caption = "Subtotal";
-            this.colsubtotal.FieldName = "subtotal";
-            this.colsubtotal.Name = "colsubtotal";
-            this.colsubtotal.Visible = true;
-            this.colsubtotal.VisibleIndex = 4;
+            this.colPrecioUnitario.DisplayFormat.FormatString = "$#,##.00";
+            this.colPrecioUnitario.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colPrecioUnitario.FieldName = "PrecioUnitario";
+            this.colPrecioUnitario.Name = "colPrecioUnitario";
+            this.colPrecioUnitario.Visible = true;
+            this.colPrecioUnitario.VisibleIndex = 3;
+            this.colPrecioUnitario.Width = 98;
+            // 
+            // colIva
+            // 
+            this.colIva.Caption = "IVA";
+            this.colIva.ColumnEdit = this.repositoryItemCheckEdit1;
+            this.colIva.FieldName = "Iva";
+            this.colIva.Name = "colIva";
+            this.colIva.Visible = true;
+            this.colIva.VisibleIndex = 4;
+            this.colIva.Width = 98;
+            // 
+            // colSubtotal
+            // 
+            this.colSubtotal.DisplayFormat.FormatString = "$#,##.00";
+            this.colSubtotal.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colSubtotal.FieldName = "Subtotal";
+            this.colSubtotal.Name = "colSubtotal";
+            this.colSubtotal.Visible = true;
+            this.colSubtotal.VisibleIndex = 5;
+            this.colSubtotal.Width = 105;
             // 
             // DatosGroupBox
             // 
@@ -388,7 +448,6 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.NotasButton.Text = "Notas";
             this.NotasButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.NotasButton.UseVisualStyleBackColor = true;
-            this.NotasButton.Click += new System.EventHandler(this.NotasButton_Click);
             // 
             // SubtitleLabel
             // 
@@ -399,6 +458,11 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.SubtitleLabel.Size = new System.Drawing.Size(234, 37);
             this.SubtitleLabel.TabIndex = 29;
             this.SubtitleLabel.Text = "Orden de Compra";
+            // 
+            // repositoryItemCheckEdit1
+            // 
+            this.repositoryItemCheckEdit1.AutoHeight = false;
+            this.repositoryItemCheckEdit1.Name = "repositoryItemCheckEdit1";
             // 
             // OrdenCompraCrearForm
             // 
@@ -419,12 +483,15 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.Text = "PurchasingOrderForm";
             this.ProductosGroupBox.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GridControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.purchaseOrderLineModelBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
             this.DatosGroupBox.ResumeLayout(false);
             this.DatosGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TeléfonoText)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumOrdenText)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -457,11 +524,17 @@ namespace CZS_LaVictoria.ÓrdenesPage
         private System.Windows.Forms.Label SubtitleLabel;
         private DevExpress.XtraGrid.GridControl GridControl;
         private DevExpress.XtraGrid.Views.Grid.GridView GridView;
-        private DevExpress.XtraGrid.Columns.GridColumn colproducto;
+        private System.Windows.Forms.BindingSource purchaseOrderLineModelBindingSource;
+        private DevExpress.XtraGrid.Columns.GridColumn colNumLinea;
+        private DevExpress.XtraGrid.Columns.GridColumn colProducto;
+        private DevExpress.XtraGrid.Columns.GridColumn colCantidadOrden;
+        private DevExpress.XtraGrid.Columns.GridColumn colCantidadEntregada;
+        private DevExpress.XtraGrid.Columns.GridColumn colCantidadPendiente;
+        private DevExpress.XtraGrid.Columns.GridColumn colPrecioUnitario;
+        private DevExpress.XtraGrid.Columns.GridColumn colIva;
+        private DevExpress.XtraGrid.Columns.GridColumn colSubtotal;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox1;
-        private DevExpress.XtraGrid.Columns.GridColumn colcantidadOrden;
-        private DevExpress.XtraGrid.Columns.GridColumn colprecioUnitario;
-        private DevExpress.XtraGrid.Columns.GridColumn coliva;
-        private DevExpress.XtraGrid.Columns.GridColumn colsubtotal;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit1;
+        private DevExpress.Utils.Behaviors.BehaviorManager behaviorManager1;
     }
 }

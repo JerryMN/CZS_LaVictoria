@@ -1,4 +1,5 @@
 ﻿
+
 namespace CZS_LaVictoria.ÓrdenesPage
 {
     partial class OrdenVentaCrearForm
