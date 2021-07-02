@@ -1,0 +1,370 @@
+﻿<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5CD0B046-22DF-4FE0-AE91-2A0360321D49}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CZS_ERP_UI</RootNamespace>
+    <AssemblyName>CZS_ERP_UI</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>CZS_ERP_UI.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>newicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.BonusSkins.v21.1" />
+    <Reference Include="DevExpress.CodeParser.v21.1, Version=21.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Data.Desktop.v21.1" />
+    <Reference Include="DevExpress.Data.v21.1" />
+    <Reference Include="DevExpress.DataAccess.v21.1, Version=21.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v21.1.Core" />
+    <Reference Include="DevExpress.Utils.v21.1" />
+    <Reference Include="DevExpress.Xpo.v21.1, Version=21.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraBars.v21.1" />
+    <Reference Include="DevExpress.Sparkline.v21.1.Core" />
+    <Reference Include="DevExpress.XtraEditors.v21.1" />
+    <Reference Include="DevExpress.XtraGrid.v21.1, Version=21.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v21.1, Version=21.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraPrinting.v21.1, Version=21.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="FontAwesome.Sharp, Version=5.15.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesome.Sharp.5.15.3\lib\net472\FontAwesome.Sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Core.WinForms, Version=19.1460.0.63, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
+    <Reference Include="Syncfusion.Data.WinForms, Version=19.1460.0.63, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
+    <Reference Include="Syncfusion.Grid.Base, Version=19.1460.0.63, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Syncfusion\Essential Studio\Windows\19.1.0.63\precompiledassemblies\4.6\Syncfusion.Grid.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Grid.Windows, Version=19.1460.0.63, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Syncfusion\Essential Studio\Windows\19.1.0.63\precompiledassemblies\4.6\Syncfusion.Grid.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.GridCommon.WinForms, Version=19.1460.0.63, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
+    <Reference Include="Syncfusion.Licensing, Version=19.1460.0.63, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Syncfusion\Essential Studio\Windows\19.1.0.63\precompiledassemblies\4.6\Syncfusion.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Linq.Base, Version=19.1460.0.63, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
+    <Reference Include="Syncfusion.Pdf.Base, Version=19.1460.0.63, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
+    <Reference Include="Syncfusion.PdfViewer.Windows, Version=19.1460.0.63, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.PivotAnalysis.Base, Version=19.1460.0.63, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
+    <Reference Include="Syncfusion.PivotAnalysis.Windows, Version=19.1460.0.63, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.SfDataGrid.WinForms, Version=19.1460.0.63, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.SfInput.WinForms, Version=19.1460.0.63, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
+    <Reference Include="Syncfusion.SfListView.WinForms, Version=19.1460.0.63, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
+    <Reference Include="Syncfusion.Shared.Base, Version=19.1460.0.63, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Syncfusion\Essential Studio\Windows\19.1.0.63\precompiledassemblies\4.6\Syncfusion.Shared.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Shared.Windows, Version=19.1460.0.63, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Syncfusion\Essential Studio\Windows\19.1.0.63\precompiledassemblies\4.6\Syncfusion.Shared.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SpellChecker.Base, Version=19.1460.0.63, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Syncfusion\Essential Studio\Windows\19.1.0.63\precompiledassemblies\4.6\Syncfusion.SpellChecker.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Tools.Base, Version=19.1460.0.63, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Syncfusion\Essential Studio\Windows\19.1.0.63\precompiledassemblies\4.6\Syncfusion.Tools.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Tools.Windows, Version=19.1460.0.63, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Syncfusion\Essential Studio\Windows\19.1.0.63\precompiledassemblies\4.6\Syncfusion.Tools.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DatosPage\AreaCrearForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DatosPage\AreaCrearForm.Designer.cs">
+      <DependentUpon>AreaCrearForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatosPage\AreaVerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DatosPage\AreaVerForm.Designer.cs">
+      <DependentUpon>AreaVerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatosPage\ClienteCrearForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DatosPage\ClienteCrearForm.Designer.cs">
+      <DependentUpon>ClienteCrearForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatosPage\ClienteProductoCrearForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DatosPage\ClienteProductoCrearForm.Designer.cs">
+      <DependentUpon>ClienteProductoCrearForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatosPage\ClienteProductoVerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DatosPage\ClienteProductoVerForm.Designer.cs">
+      <DependentUpon>ClienteProductoVerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatosPage\ClienteVerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DatosPage\ClienteVerForm.Designer.cs">
+      <DependentUpon>ClienteVerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatosPage\MezclaCrearForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DatosPage\MezclaCrearForm.Designer.cs">
+      <DependentUpon>MezclaCrearForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatosPage\ProveedorProductoCrearForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DatosPage\ProveedorProductoCrearForm.Designer.cs">
+      <DependentUpon>ProveedorProductoCrearForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatosPage\ProveedorCrearForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DatosPage\ProveedorCrearForm.Designer.cs">
+      <DependentUpon>ProveedorCrearForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatosPage\ProveedorProductoVerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DatosPage\ProveedorProductoVerForm.Designer.cs">
+      <DependentUpon>ProveedorProductoVerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatosPage\ProveedorVerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DatosPage\ProveedorVerForm.Designer.cs">
+      <DependentUpon>ProveedorVerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainMenuForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainMenuForm.Designer.cs">
+      <DependentUpon>MainMenuForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PlásticosPage\RegistrarCortadoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PlásticosPage\RegistrarCortadoForm.Designer.cs">
+      <DependentUpon>RegistrarCortadoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PlásticosPage\RegistrarExtruídoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PlásticosPage\RegistrarExtruídoForm.Designer.cs">
+      <DependentUpon>RegistrarExtruídoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PlásticosPage\RegistrarInsertadoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PlásticosPage\RegistrarInsertadoForm.Designer.cs">
+      <DependentUpon>RegistrarInsertadoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PlásticosPage\RegistrarInyecciónForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PlásticosPage\RegistrarInyecciónForm.Designer.cs">
+      <DependentUpon>RegistrarInyecciónForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PlásticosPage\RegistrarInyecciónMezclaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PlásticosPage\RegistrarInyecciónMezclaForm.Designer.cs">
+      <DependentUpon>RegistrarInyecciónMezclaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PlásticosPage\RegistrarMolidoButton.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PlásticosPage\RegistrarMolidoButton.Designer.cs">
+      <DependentUpon>RegistrarMolidoButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ÓrdenesPage\AgregarNotasForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ÓrdenesPage\AgregarNotasForm.Designer.cs">
+      <DependentUpon>AgregarNotasForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ÓrdenesPage\OrdenCompraVerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ÓrdenesPage\OrdenCompraVerForm.Designer.cs">
+      <DependentUpon>OrdenCompraVerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ÓrdenesPage\OrdenVentaVerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ÓrdenesPage\OrdenVentaVerForm.Designer.cs">
+      <DependentUpon>OrdenVentaVerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ÓrdenesPage\OrdenCompraCrearForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ÓrdenesPage\OrdenCompraCrearForm.Designer.cs">
+      <DependentUpon>OrdenCompraCrearForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ÓrdenesPage\OrdenVentaCrearForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ÓrdenesPage\OrdenVentaCrearForm.Designer.cs">
+      <DependentUpon>OrdenVentaCrearForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DatosPage\AreaCrearForm.resx">
+      <DependentUpon>AreaCrearForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatosPage\AreaVerForm.resx">
+      <DependentUpon>AreaVerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatosPage\ClienteCrearForm.resx">
+      <DependentUpon>ClienteCrearForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatosPage\ClienteProductoCrearForm.resx">
+      <DependentUpon>ClienteProductoCrearForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatosPage\ClienteProductoVerForm.resx">
+      <DependentUpon>ClienteProductoVerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatosPage\ClienteVerForm.resx">
+      <DependentUpon>ClienteVerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatosPage\MezclaCrearForm.resx">
+      <DependentUpon>MezclaCrearForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatosPage\ProveedorProductoCrearForm.resx">
+      <DependentUpon>ProveedorProductoCrearForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatosPage\ProveedorCrearForm.resx">
+      <DependentUpon>ProveedorCrearForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatosPage\ProveedorProductoVerForm.resx">
+      <DependentUpon>ProveedorProductoVerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatosPage\ProveedorVerForm.resx">
+      <DependentUpon>ProveedorVerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainMenuForm.resx">
+      <DependentUpon>MainMenuForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlásticosPage\RegistrarCortadoForm.resx">
+      <DependentUpon>RegistrarCortadoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlásticosPage\RegistrarExtruídoForm.resx">
+      <DependentUpon>RegistrarExtruídoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlásticosPage\RegistrarInsertadoForm.resx">
+      <DependentUpon>RegistrarInsertadoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlásticosPage\RegistrarInyecciónForm.resx">
+      <DependentUpon>RegistrarInyecciónForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlásticosPage\RegistrarInyecciónMezclaForm.resx">
+      <DependentUpon>RegistrarInyecciónMezclaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlásticosPage\RegistrarMolidoButton.resx">
+      <DependentUpon>RegistrarMolidoButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="ÓrdenesPage\AgregarNotasForm.resx">
+      <DependentUpon>AgregarNotasForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ÓrdenesPage\OrdenCompraVerForm.resx">
+      <DependentUpon>OrdenCompraVerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ÓrdenesPage\OrdenVentaVerForm.resx">
+      <DependentUpon>OrdenVentaVerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ÓrdenesPage\OrdenCompraCrearForm.resx">
+      <DependentUpon>OrdenCompraCrearForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ÓrdenesPage\OrdenVentaCrearForm.resx">
+      <DependentUpon>OrdenVentaCrearForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\newicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="newicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CZS_LaVictoria_Library\CZS_LaVictoria_Library.csproj">
+      <Project>{4f02b305-3579-4a09-84e8-561d69583857}</Project>
+      <Name>CZS_LaVictoria_Library</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
