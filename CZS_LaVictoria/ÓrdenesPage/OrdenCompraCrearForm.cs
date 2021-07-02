@@ -7,10 +7,8 @@ using DevExpress.CodeParser;
 using DevExpress.Data;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Repository;
-using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
-using Syncfusion.Windows.Forms.Diagram;
 using Syncfusion.WinForms.DataGrid;
 
 namespace CZS_LaVictoria.ÓrdenesPage
