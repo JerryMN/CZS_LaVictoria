@@ -1,33 +1,66 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Globalization;
 using System.Windows.Forms;
 using CZS_LaVictoria_Library;
 using CZS_LaVictoria_Library.Models;
-using DevExpress.CodeParser;
-using DevExpress.Data;
-using DevExpress.XtraEditors;
-using DevExpress.XtraEditors.Repository;
-using DevExpress.XtraGrid.Views.Base;
-using DevExpress.XtraGrid.Views.Grid;
+using Syncfusion.Data;
 using Syncfusion.WinForms.DataGrid;
+using Syncfusion.WinForms.DataGrid.Enums;
+using Syncfusion.WinForms.DataGrid.Events;
+using Syncfusion.WinForms.Input.Enums;
+using Syncfusion.WinForms.DataGridConverter;
+using Syncfusion.WinForms.DataGridConverter.Events;
+using Syncfusion.Pdf.Graphics;
+using Syncfusion.Pdf;
 
 namespace CZS_LaVictoria.ÓrdenesPage
 {
     public partial class OrdenCompraCrearForm : Form
     {
-        BaseEdit _edit;
         ProveedorModel _selectedProveedor;
         List<ProveedorProductoModel> _productos;
-        List<PurchaseOrderLineModel> _orderLines = new List<PurchaseOrderLineModel>();
-        int _count;
+        readonly List<PurchaseOrderLineModel> _orderLines = new List<PurchaseOrderLineModel>();
+        int _numLinea = 1;
 
         public OrdenCompraCrearForm()
         {
             InitializeComponent();
+            FechaOrdenPicker.Culture = new CultureInfo("es-MX");
+            FechaEntregaPicker.Culture = new CultureInfo("es-MX");
             GetProveedores();
             GetAreas();
+            DataGrid.DataSource = _orderLines;
+            DataGrid.CellComboBoxSelectionChanged += DataGridOnCellComboBoxSelectionChanged;
+
+            var tableSummary = new GridTableSummaryRow
+            {
+                Name = "TableSummary", ShowSummaryInRow = false, Position = VerticalPosition.Bottom
+            };
+
+            var productSummary = new GridSummaryColumn
+            {
+                Name = "NumLinea",
+                SummaryType = SummaryType.Int32Aggregate,
+                Format = "Productos: {Count:D}",
+                MappingName = "NumLinea"
+            };
+
+            var subtotalSummary = new GridSummaryColumn
+            {
+                Name = "Subtotal",
+                SummaryType = SummaryType.DoubleAggregate,
+                Format = "Total: {Sum:c}",
+                MappingName = "Subtotal"
+            };
+
+            tableSummary.SummaryColumns.Add(productSummary);
+            tableSummary.SummaryColumns.Add(subtotalSummary);
+
+            DataGrid.TableSummaryRows.Add(tableSummary);
         }
-        
+
         #region Events
 
         /// <summary>
@@ -55,86 +88,187 @@ namespace CZS_LaVictoria.ÓrdenesPage
         }
 
         /// <summary>
-        /// Genera el número de línea correspondiente.
+        /// Genera las columnas de la tabla.
         /// </summary>
-        void GridView_InitNewRow(object sender, InitNewRowEventArgs e)
+        void DataGrid_AutoGeneratingColumn(object sender, AutoGeneratingColumnArgs e)
         {
-            var view = sender as GridView;
-            var newRowId = GridView.RowCount;
-            view?.SetRowCellValue(e.RowHandle, view.Columns["NumLinea"], newRowId);
+            if (e.Column.MappingName == "NumLinea")
+            {
+                e.Column.HeaderText = "Línea";
+            }
+
+            if (e.Column.MappingName == "Producto")
+            {
+                e.Column = new GridComboBoxColumn { MappingName = "Producto", HeaderText = "Producto" };
+            }
+
+            if (e.Column.MappingName == "CantidadOrden")
+            {
+                e.Column.HeaderText = "Cantidad";
+            }
+
+            if (e.Column.MappingName == "CantidadEntregada")
+            {
+                e.Cancel = true;
+            }
+
+            if (e.Column.MappingName == "CantidadPendiente")
+            {
+                e.Cancel = true;
+            }
+
+            if (e.Column.MappingName == "PrecioUnitario")
+            {
+                e.Column = new GridNumericColumn
+                    { MappingName = "PrecioUnitario", HeaderText = "Precio Unitario", FormatMode = FormatMode.Currency };
+            }
+
+            if (e.Column.MappingName == "Iva")
+            {
+                e.Column = new GridCheckBoxColumn { MappingName = "Iva", HeaderText = "IVA" };
+            }
+
+            if (e.Column.MappingName == "Subtotal")
+            {
+                e.Column = new GridNumericColumn
+                    { MappingName = "Subtotal", HeaderText = "Subtotal", FormatMode = FormatMode.Currency };
+            }
         }
 
         /// <summary>
-        /// Obtiene el precio unitario del producto seleccionado y calcula el subtotal.
+        /// Da el número de línea adecuado a cada fila de la tabla.
         /// </summary>
-        void GridView_CellValueChanging(object sender, CellValueChangedEventArgs e)
+        void DataGrid_AddNewRowInitiating(object sender, AddNewRowInitiatingEventArgs e)
         {
-            var selectedProducto = new ProveedorProductoModel();
-            if (e.RowHandle < 0) return;
-
-            foreach (var producto in _productos)
-            {
-                if (producto.MaterialExterno != GridView.GetRowCellValue(e.RowHandle, "Producto").ToString() && ProveedorCombo.Text != producto.Proveedor) continue;
-                selectedProducto = producto;
-            }
-
-            GridView.SetRowCellValue(e.RowHandle, "PrecioUnitario", selectedProducto.PrecioUnitario);
-
-            double.TryParse(e.Value.ToString(), out var cantidad);
-            double.TryParse(GridView.GetRowCellValue(e.RowHandle, "PrecioUnitario").ToString(), out var precio);
-
-            if (cantidad == 0) return;
-            GridView.SetRowCellValue(e.RowHandle, "Subtotal", cantidad * precio);
+            if (e.NewObject is PurchaseOrderLineModel data) data.NumLinea = _numLinea;
+            _numLinea += 1;
         }
 
         /// <summary>
-        /// Agrega el IVA y ordena las filas.
+        /// Cambia el precio unitario al del producto seleccionado.
         /// </summary>
-        void GridView_CellValueChanged(object sender, CellValueChangedEventArgs e)
+        void DataGridOnCellComboBoxSelectionChanged(object sender, CellComboBoxSelectionChangedEventArgs e)
         {
-            if (e.Column.FieldName == "Producto")
+            if (e.GridColumn.MappingName != "Producto") return;
+            if (e.Record is PurchaseOrderLineModel row)
             {
-                GridView.BeginSort();
-                try
+                if (e.SelectedItem is ProveedorProductoModel producto)
                 {
-                    GridView.ClearSorting();
-                    GridView.Columns[0].SortOrder = ColumnSortOrder.Ascending;
-                }
-                finally
-                {
-                    GridView.EndSort();
+                    row.PrecioUnitario = producto.PrecioUnitario;
                 }
             }
-
-            if (e.Column.FieldName != "Iva") return;
-            double.TryParse(GridView.GetRowCellValue(e.RowHandle, "CantidadOrden").ToString(), out var cantidad);
-            double.TryParse(GridView.GetRowCellValue(e.RowHandle, "PrecioUnitario").ToString(), out var precio);
-            if ((bool)e.Value)
+            if (e.RowIndex == DataGrid.GetAddNewRowIndex())
             {
-                GridView.SetRowCellValue(e.RowHandle, "Subtotal", cantidad * precio * 1.16);
+                DataGrid.TableControl.Invalidate(DataGrid.TableControl.GetRowRectangle(DataGrid.GetAddNewRowIndex(), false));
+            }
+        }
+
+        /// <summary>
+        /// Calcula el subtotal al cambiar la cantidad o el precio unitario.
+        /// </summary>
+        void DataGrid_CurrentCellEndEdit(object sender, CurrentCellEndEditEventArgs e)
+        {
+            var rowIndex = e.DataRow.RowIndex;
+            var col = e.DataColumn.GridColumn;
+
+            var recordIndex = DataGrid.TableControl.ResolveToRecordIndex(rowIndex);
+            if (recordIndex < 0) return;
+            object data;
+            if (DataGrid.View.TopLevelGroup != null)
+            {
+                var record = DataGrid.View.TopLevelGroup.DisplayElements[recordIndex];
+                if (!record.IsRecords)
+                    return;
+                data = ((RecordEntry)record).Data;
             }
             else
             {
-                GridView.SetRowCellValue(e.RowHandle, "Subtotal", cantidad * precio);
+                data = DataGrid.View.Records.GetItemAt(recordIndex);
+            }
+
+            var cantidad = decimal.Parse(DataGrid.View.GetPropertyAccessProvider().GetValue(data, "CantidadOrden").ToString());
+            var precio = decimal.Parse(DataGrid.View.GetPropertyAccessProvider().GetValue(data, "PrecioUnitario").ToString());
+
+            if (col.MappingName == "CantidadOrden" || col.MappingName == "PrecioUnitario")
+            {
+                DataGrid.View.GetPropertyAccessProvider().SetValue(data, "Subtotal", cantidad * precio);
             }
         }
 
-        void GridView_ShownEditor(object sender, EventArgs e)
+        /// <summary>
+        /// Calcula el subtotal al seleccionar o deseleccionar la casilla de IVA.
+        /// </summary>
+        void DataGrid_CellCheckBoxClick(object sender, CellCheckBoxClickEventArgs e)
         {
-            var view = sender as GridView;
-            _edit = view?.ActiveEditor;
-            if (_edit != null) _edit.EditValueChanged += Edit_EditValueChanged;
+            var rowIndex = e.RowIndex;
+            var recordIndex = DataGrid.TableControl.ResolveToRecordIndex(rowIndex);
+            if (recordIndex < 0) return;
+            object data;
+            if (DataGrid.View.TopLevelGroup != null)
+            {
+                var record = DataGrid.View.TopLevelGroup.DisplayElements[recordIndex];
+                if (!record.IsRecords)
+                    return;
+                data = ((RecordEntry)record).Data;
+            }
+            else
+            {
+                data = DataGrid.View.Records.GetItemAt(recordIndex);
+            }
+
+            var cantidad = decimal.Parse(DataGrid.View.GetPropertyAccessProvider().GetValue(data, "CantidadOrden").ToString());
+            var precio = decimal.Parse(DataGrid.View.GetPropertyAccessProvider().GetValue(data, "PrecioUnitario").ToString());
+
+            if (e.NewValue == CheckState.Checked)
+            {
+                DataGrid.View.GetPropertyAccessProvider().SetValue(data, "Subtotal", cantidad * precio * 1.16m);
+            }
+            else
+            {
+                DataGrid.View.GetPropertyAccessProvider().SetValue(data, "Subtotal", cantidad * precio);
+            }
         }
 
-        void GridView_HiddenEditor(object sender, EventArgs e)
+        /// <summary>
+        /// Genera un PDF con el encabezado de la orden y la tabla.
+        /// </summary>
+        // TODO - Resolver dónde guardar el pdf.
+        void PdfButton_Click(object sender, EventArgs e)
         {
-            _edit.EditValueChanged -= Edit_EditValueChanged;
-            _edit = null;
+            var options = new PdfExportingOptions { AutoColumnWidth = true };
+            options.HeaderFooterExporting += OnHeaderFooterExporting;
+            options.CellExporting += OnCellExporting;
+            DataGrid.ExportToPdf(options).Save("Test.pdf");
         }
 
-        void Edit_EditValueChanged(object sender, EventArgs e)
+        /// <summary>
+        /// Cambia el texto de la columna IVA del pdf.
+        /// </summary>
+        static void OnCellExporting(object sender, DataGridCellPdfExportingEventArgs e)
         {
-            GridView.PostEditor();
+            if (e.ColumnName == "Iva" && e.CellType == ExportCellType.RecordCell)
+            {
+                e.CellValue = e.CellValue.ToString() == "True" ? "Sí" : "No";
+            }
+        }
+
+        /// <summary>
+        /// Genera el encabezado del pdf.
+        /// </summary>
+        void OnHeaderFooterExporting(object sender, PdfHeaderFooterEventArgs e)
+        {
+            PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 16f, PdfFontStyle.Bold);
+            PdfFont smallFont = new PdfStandardFont(PdfFontFamily.Helvetica, 12f, PdfFontStyle.Regular);
+            var brush = new PdfSolidBrush(Color.Black);
+            var width = e.PdfPage.GetClientSize().Width;
+            var header = new PdfPageTemplateElement(width, 80);
+
+            header.Graphics.DrawString($"Escobas La Victoria -- Orden de Compra {2100001}", font, brush, 0, 10);
+            header.Graphics.DrawString($"Fecha Orden: {FechaOrdenPicker.Value.ToString().Substring(0, 11)}  |   " +
+                                       $"Fecha Entrega: {FechaEntregaPicker.Value.ToString().Substring(0, 11)}  |  " +
+                                       $"Área: {AreaCombo.Text}", smallFont, brush, 0, 30);
+            header.Graphics.DrawString($"Proveedor: {_selectedProveedor.Nombre}  |  Atención: {AtencionText.Text}", smallFont, brush, 0, 45);
+            e.PdfDocumentTemplate.Top = header;
         }
 
         #endregion
@@ -194,18 +328,12 @@ namespace CZS_LaVictoria.ÓrdenesPage
         /// </summary>
         void GetProducts()
         {
+            if (_selectedProveedor == null || AreaCombo.Text == "") return;
             _productos = GlobalConfig.Connection.ProveedorProducto_GetByProveedorArea(_selectedProveedor.IdProvider, AreaCombo.Text);
-
-            var riComboBox = new RepositoryItemComboBox();
-            foreach (var item in _productos)
-            {
-                riComboBox.Items.Add(item.MaterialExterno);
-            }
-            GridControl.RepositoryItems.Add(riComboBox);
-            GridView.Columns["Producto"].ColumnEdit = riComboBox;
+            ((GridComboBoxColumn) DataGrid.Columns["Producto"]).DataSource = _productos;
+            ((GridComboBoxColumn) DataGrid.Columns["Producto"]).DisplayMember = "MaterialExterno";
         }
 
         #endregion
     }
 }
-

@@ -39,12 +39,10 @@
     <ApplicationIcon>newicon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevExpress.Data.Desktop.v21.1" />
     <Reference Include="DevExpress.Data.v21.1" />
     <Reference Include="DevExpress.Utils.v21.1" />
     <Reference Include="DevExpress.XtraBars.v21.1" />
     <Reference Include="DevExpress.XtraEditors.v21.1" />
-    <Reference Include="DevExpress.XtraGrid.v21.1, Version=21.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="FontAwesome.Sharp, Version=5.15.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FontAwesome.Sharp.5.15.3\lib\net472\FontAwesome.Sharp.dll</HintPath>
     </Reference>
@@ -90,6 +88,7 @@
     <Reference Include="Syncfusion.Grid.Windows, Version=19.2460.0.44, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.Grid.Windows.19.2.0.44\lib\net46\Syncfusion.Grid.Windows.dll</HintPath>
     </Reference>
+    <Reference Include="Syncfusion.GridCommon.WinForms, Version=19.2460.0.44, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
     <Reference Include="Syncfusion.Gridconverter.Windows, Version=19.2460.0.44, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.GridExport.WinForms.19.2.0.44\lib\net46\Syncfusion.Gridconverter.Windows.dll</HintPath>
     </Reference>
@@ -107,6 +106,9 @@
     </Reference>
     <Reference Include="Syncfusion.Pdf.Base, Version=19.2460.0.44, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.Pdf.WinForms.19.2.0.44\lib\net46\Syncfusion.Pdf.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.PdfViewer.Windows, Version=19.2460.0.44, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.PdfViewer.Windows.19.2.0.44\lib\net46\Syncfusion.PdfViewer.Windows.dll</HintPath>
     </Reference>
     <Reference Include="Syncfusion.PivotChart.Windows, Version=19.2460.0.44, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.PivotChart.Windows.19.2.0.44\lib\net46\Syncfusion.PivotChart.Windows.dll</HintPath>
@@ -128,6 +130,9 @@
     </Reference>
     <Reference Include="Syncfusion.SfDataGrid.WinForms, Version=19.2460.0.44, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.SfDataGrid.WinForms.19.2.0.44\lib\net46\Syncfusion.SfDataGrid.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfDataGridConverter.WinForms, Version=19.2460.0.44, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.DataGridExport.WinForms.19.2.0.44\lib\net46\Syncfusion.SfDataGridConverter.WinForms.dll</HintPath>
     </Reference>
     <Reference Include="Syncfusion.SfInput.WinForms, Version=19.2460.0.44, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.SfInput.WinForms.19.2.0.44\lib\net46\Syncfusion.SfInput.WinForms.dll</HintPath>
@@ -155,8 +160,13 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>

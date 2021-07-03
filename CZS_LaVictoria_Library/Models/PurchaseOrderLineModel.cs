@@ -10,5 +10,21 @@
         public decimal PrecioUnitario { get; set; }
         public bool Iva { get; set; }
         public decimal Subtotal { get; set; }
+
+        public PurchaseOrderLineModel()
+        {
+            
+        }
+
+        public PurchaseOrderLineModel(int numLinea, string producto, string cantidadOrden, string precioUnitario)
+        {
+            NumLinea = numLinea;
+            Producto = producto;
+            CantidadOrden = double.Parse(cantidadOrden);
+            var precio = precioUnitario.Replace("$", "").Replace(",", "");
+            PrecioUnitario = decimal.Parse(precio);
+            Iva = false;
+            Subtotal = (decimal) CantidadOrden * PrecioUnitario;
+        }
     }
 }
