@@ -30,6 +30,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OrdenCompraCrearForm));
             this.ProductosGroupBox = new System.Windows.Forms.GroupBox();
             this.DataGrid = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             this.DatosGroupBox = new System.Windows.Forms.GroupBox();
@@ -53,7 +54,9 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.NumOrdenLabel = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.SubtitleLabel = new System.Windows.Forms.Label();
             this.purchaseOrderLineModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.PdfButton = new System.Windows.Forms.Button();
+            this.MailButton = new DevExpress.XtraEditors.SimpleButton();
+            this.PdfButton = new DevExpress.XtraEditors.SimpleButton();
+            this.GuardarButton = new DevExpress.XtraEditors.SimpleButton();
             this.ProductosGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGrid)).BeginInit();
             this.DatosGroupBox.SuspendLayout();
@@ -318,16 +321,52 @@ namespace CZS_LaVictoria.ÓrdenesPage
             // 
             this.purchaseOrderLineModelBindingSource.DataSource = typeof(CZS_LaVictoria_Library.Models.PurchaseOrderLineModel);
             // 
+            // MailButton
+            // 
+            this.MailButton.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MailButton.Appearance.Options.UseFont = true;
+            this.MailButton.AutoSize = true;
+            this.MailButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton1.ImageOptions.SvgImage")));
+            this.MailButton.Location = new System.Drawing.Point(180, 625);
+            this.MailButton.LookAndFeel.SkinName = "Office 2019 Colorful";
+            this.MailButton.LookAndFeel.UseDefaultLookAndFeel = false;
+            this.MailButton.Name = "MailButton";
+            this.MailButton.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
+            this.MailButton.Size = new System.Drawing.Size(165, 36);
+            this.MailButton.TabIndex = 31;
+            this.MailButton.Text = "Enviar por Correo";
+            this.MailButton.Click += new System.EventHandler(this.MailButton_Click);
+            // 
             // PdfButton
             // 
+            this.PdfButton.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PdfButton.Appearance.Options.UseFont = true;
             this.PdfButton.AutoSize = true;
-            this.PdfButton.Location = new System.Drawing.Point(53, 628);
+            this.PdfButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("PdfButton.ImageOptions.SvgImage")));
+            this.PdfButton.Location = new System.Drawing.Point(50, 625);
+            this.PdfButton.LookAndFeel.SkinName = "Office 2019 Colorful";
+            this.PdfButton.LookAndFeel.UseDefaultLookAndFeel = false;
             this.PdfButton.Name = "PdfButton";
-            this.PdfButton.Size = new System.Drawing.Size(75, 31);
-            this.PdfButton.TabIndex = 30;
-            this.PdfButton.Text = "PDF";
-            this.PdfButton.UseVisualStyleBackColor = true;
+            this.PdfButton.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
+            this.PdfButton.Size = new System.Drawing.Size(112, 36);
+            this.PdfButton.TabIndex = 31;
+            this.PdfButton.Text = "Crear PDF";
             this.PdfButton.Click += new System.EventHandler(this.PdfButton_Click);
+            // 
+            // GuardarButton
+            // 
+            this.GuardarButton.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GuardarButton.Appearance.Options.UseFont = true;
+            this.GuardarButton.AutoSize = true;
+            this.GuardarButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("GuardarButton.ImageOptions.SvgImage")));
+            this.GuardarButton.Location = new System.Drawing.Point(351, 625);
+            this.GuardarButton.LookAndFeel.SkinName = "Office 2019 Colorful";
+            this.GuardarButton.LookAndFeel.UseDefaultLookAndFeel = false;
+            this.GuardarButton.Name = "GuardarButton";
+            this.GuardarButton.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
+            this.GuardarButton.Size = new System.Drawing.Size(99, 36);
+            this.GuardarButton.TabIndex = 31;
+            this.GuardarButton.Text = "Guardar";
             // 
             // OrdenCompraCrearForm
             // 
@@ -335,6 +374,8 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1276, 839);
             this.Controls.Add(this.PdfButton);
+            this.Controls.Add(this.GuardarButton);
+            this.Controls.Add(this.MailButton);
             this.Controls.Add(this.SubtitleLabel);
             this.Controls.Add(this.ProductosGroupBox);
             this.Controls.Add(this.DatosGroupBox);
@@ -382,6 +423,8 @@ namespace CZS_LaVictoria.ÓrdenesPage
         private System.Windows.Forms.Label SubtitleLabel;
         private System.Windows.Forms.BindingSource purchaseOrderLineModelBindingSource;
         private Syncfusion.WinForms.DataGrid.SfDataGrid DataGrid;
-        private System.Windows.Forms.Button PdfButton;
+        private DevExpress.XtraEditors.SimpleButton MailButton;
+        private DevExpress.XtraEditors.SimpleButton PdfButton;
+        private DevExpress.XtraEditors.SimpleButton GuardarButton;
     }
 }

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using System.Net;
+using System.Net.Mail;
 using System.Windows.Forms;
 using CZS_LaVictoria_Library;
 using CZS_LaVictoria_Library.Models;
@@ -23,6 +25,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
         List<ProveedorProductoModel> _productos;
         readonly List<PurchaseOrderLineModel> _orderLines = new List<PurchaseOrderLineModel>();
         int _numLinea = 1;
+        string _pdfPath;
 
         public OrdenCompraCrearForm()
         {
@@ -241,10 +244,12 @@ namespace CZS_LaVictoria.ÓrdenesPage
             var saveFileDialog = new SaveFileDialog
             {
                 Filter = "PDF Files(*.pdf)|*.pdf",
-                FileName = NumOrdenText.Text
+                FileName = NumOrdenText.Text,
+                RestoreDirectory = true
             };
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
+                _pdfPath = saveFileDialog.FileName;
                 using (var stream = saveFileDialog.OpenFile()) document.Save(stream);
                 if (MessageBox.Show("Quieres abrir el PDF?", "PDF guardado", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
@@ -348,5 +353,27 @@ namespace CZS_LaVictoria.ÓrdenesPage
         }
 
         #endregion
+
+        void MailButton_Click(object sender, EventArgs e)
+        {
+            using (var mail = new MailMessage())
+            {
+                using (var smtpServer = new SmtpClient("smtp.gmail.com"))
+                {
+                    mail.From = new MailAddress("splend3ad@gmail.com");
+                    mail.To.Add("gerardo.mondragonb@hotmail.com");
+                    mail.Subject = "Test Mail 1";
+                    mail.Body =
+                        $"Estimado Proveedor {_selectedProveedor.Nombre}:" +
+                        $"\nSe ha generado una nueva orden de compra #{NumOrdenText.Text} la cual encontrará anexa." +
+                        $"\nFavor de confirmar de recibido. Gracias, \n \n Escobas La Victoria";
+                    mail.Attachments.Add(new Attachment(_pdfPath));
+                    smtpServer.Port = 587;
+                    smtpServer.Credentials = new NetworkCredential("splend3ad@gmail.com", "xggtroybzdniydta");
+                    smtpServer.EnableSsl = true;
+                    smtpServer.Send(mail);
+                }
+            }
+        }
     }
 }
