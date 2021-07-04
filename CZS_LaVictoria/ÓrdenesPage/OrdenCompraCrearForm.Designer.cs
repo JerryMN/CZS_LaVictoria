@@ -292,6 +292,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.NumOrdenText.ReadOnly = true;
             this.NumOrdenText.Size = new System.Drawing.Size(150, 29);
             this.NumOrdenText.TabIndex = 9;
+            this.NumOrdenText.Text = "2100000";
             // 
             // NumOrdenLabel
             // 

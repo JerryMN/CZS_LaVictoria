@@ -232,13 +232,26 @@ namespace CZS_LaVictoria.ÓrdenesPage
         /// <summary>
         /// Genera un PDF con el encabezado de la orden y la tabla.
         /// </summary>
-        // TODO - Resolver dónde guardar el pdf.
         void PdfButton_Click(object sender, EventArgs e)
         {
             var options = new PdfExportingOptions { AutoColumnWidth = true };
             options.HeaderFooterExporting += OnHeaderFooterExporting;
             options.CellExporting += OnCellExporting;
-            DataGrid.ExportToPdf(options).Save("Test.pdf");
+            var document = DataGrid.ExportToPdf(options);
+            var saveFileDialog = new SaveFileDialog
+            {
+                Filter = "PDF Files(*.pdf)|*.pdf",
+                FileName = NumOrdenText.Text
+            };
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                using (var stream = saveFileDialog.OpenFile()) document.Save(stream);
+                if (MessageBox.Show("Quieres abrir el PDF?", "PDF guardado", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    System.Diagnostics.Process.Start(saveFileDialog.FileName);
+                }
+            }
+
         }
 
         /// <summary>
@@ -263,7 +276,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             var width = e.PdfPage.GetClientSize().Width;
             var header = new PdfPageTemplateElement(width, 80);
 
-            header.Graphics.DrawString($"Escobas La Victoria -- Orden de Compra {2100001}", font, brush, 0, 10);
+            header.Graphics.DrawString($"Escobas La Victoria -- Orden de Compra {NumOrdenText.Text}", font, brush, 0, 10);
             header.Graphics.DrawString($"Fecha Orden: {FechaOrdenPicker.Value.ToString().Substring(0, 11)}  |   " +
                                        $"Fecha Entrega: {FechaEntregaPicker.Value.ToString().Substring(0, 11)}  |  " +
                                        $"Área: {AreaCombo.Text}", smallFont, brush, 0, 30);
