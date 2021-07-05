@@ -19,7 +19,7 @@ using Syncfusion.Pdf.Graphics;
 using Syncfusion.Pdf;
 using Syncfusion.WinForms.ListView.Enums;
 using System.Collections;
-using Syncfusion.SVG.IO;
+using System.Diagnostics;
 using Syncfusion.WinForms.DataGrid.Interactivity;
 
 namespace CZS_LaVictoria.ÓrdenesPage
@@ -28,7 +28,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
     {
         ProveedorModel _selectedProveedor;
         List<ProveedorProductoModel> _productos;
-        List<PurchaseOrderLineModel> _orderLines = new List<PurchaseOrderLineModel>();
+        readonly List<PurchaseOrderLineModel> _orderLines = new List<PurchaseOrderLineModel>();
         int _numLinea = 1;
         string _pdfPath;
 
@@ -284,7 +284,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 using (var stream = saveFileDialog.OpenFile()) document.Save(stream);
                 if (MessageBox.Show("Quieres abrir el PDF?", "PDF guardado", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
-                    System.Diagnostics.Process.Start(saveFileDialog.FileName);
+                    Process.Start(saveFileDialog.FileName);
                 }
 
                 MsgBox.Text = $"PDF guardado en {saveFileDialog.FileName}.";
@@ -381,14 +381,18 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 return;
             }
 
-            var order = new PurchaseOrderModel();
-            order.NumOrden = long.Parse(NumOrdenText.Text);
-            order.TipoOrden = "C";
-            order.Area = AreaCombo.Text;
-            order.Proveedor = _selectedProveedor.Nombre;
-            order.Condiciones = CondicionesCombo.Text;
-            order.FechaOrden = (DateTime) FechaOrdenPicker.Value;
-            order.FechaEntrega = (DateTime) FechaEntregaPicker.Value;
+            Debug.Assert(FechaOrdenPicker.Value != null, "FechaOrdenPicker.Value != null");
+            Debug.Assert(FechaEntregaPicker.Value != null, "FechaEntregaPicker.Value != null");
+            var order = new PurchaseOrderModel
+            {
+                NumOrden = long.Parse(NumOrdenText.Text),
+                TipoOrden = "C",
+                Area = AreaCombo.Text,
+                Proveedor = _selectedProveedor.Nombre,
+                Condiciones = CondicionesCombo.Text,
+                FechaOrden = (DateTime) FechaOrdenPicker.Value,
+                FechaEntrega = (DateTime) FechaEntregaPicker.Value
+            };
 
             foreach (var record in DataGrid.View.Records)
             {
@@ -506,9 +510,8 @@ namespace CZS_LaVictoria.ÓrdenesPage
 
             if (NumOrdenText.Text == "")
             {
-                output = false;
                 MsgBox.Text += "Ocurrió un error al obtener el número de orden.\n";
-                return output;
+                return false;
             }
             if (ProveedorCombo.Text == "")
             {
