@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using CZS_LaVictoria_Library.Models;
 
 namespace CZS_LaVictoria_Library.DataAccess
@@ -94,6 +95,20 @@ namespace CZS_LaVictoria_Library.DataAccess
         bool Mezcla_Create(MezclaModel model);
 
         List<MezclaModel> Mezcla_GetAll();
+
+        #endregion
+
+        #region Orden de Compra
+
+        long PurchaseOrder_GetLastNumber();
+
+        bool PurchaseOrder_Insert(PurchaseOrderModel model);
+
+        #endregion
+
+        #region Orden de Venta
+
+        string SaleOrder_GetLastNumber();
 
         #endregion
     }

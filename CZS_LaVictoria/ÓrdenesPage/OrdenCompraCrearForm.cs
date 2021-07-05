@@ -18,6 +18,9 @@ using Syncfusion.WinForms.DataGridConverter.Events;
 using Syncfusion.Pdf.Graphics;
 using Syncfusion.Pdf;
 using Syncfusion.WinForms.ListView.Enums;
+using System.Collections;
+using Syncfusion.SVG.IO;
+using Syncfusion.WinForms.DataGrid.Interactivity;
 
 namespace CZS_LaVictoria.ÓrdenesPage
 {
@@ -34,6 +37,9 @@ namespace CZS_LaVictoria.ÓrdenesPage
             InitializeComponent();
             FechaOrdenPicker.Culture = new CultureInfo("es-MX");
             FechaEntregaPicker.Culture = new CultureInfo("es-MX");
+            FechaOrdenPicker.Value = DateTime.Today;
+            FechaEntregaPicker.Value = DateTime.Today;
+            NumOrdenText.Text = GetNumOrden();
             GetProveedores();
             GetAreas();
             DataGrid.DataSource = _orderLines;
@@ -76,6 +82,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
         void ProveedorCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             _selectedProveedor = (ProveedorModel)ProveedorCombo.SelectedItem;
+            if (_selectedProveedor == null) return;
             GetCondiciones();
             TeléfonoText.Text = _selectedProveedor.Teléfono;
             CorreoText.Text = _selectedProveedor.Correo;
@@ -371,10 +378,40 @@ namespace CZS_LaVictoria.ÓrdenesPage
             if (!ValidateForm())
             {
                 MsgBox.Visible = true;
-                MsgBoxTimer.Start();
                 return;
             }
 
+            var order = new PurchaseOrderModel();
+            order.NumOrden = long.Parse(NumOrdenText.Text);
+            order.TipoOrden = "C";
+            order.Area = AreaCombo.Text;
+            order.Proveedor = _selectedProveedor.Nombre;
+            order.Condiciones = CondicionesCombo.Text;
+            order.FechaOrden = (DateTime) FechaOrdenPicker.Value;
+            order.FechaEntrega = (DateTime) FechaEntregaPicker.Value;
+
+            foreach (var record in DataGrid.View.Records)
+            {
+                var data = record.Data as PurchaseOrderLineModel;
+                order.Líneas.Add(data);
+            }
+
+            var saveSuccess = GlobalConfig.Connection.PurchaseOrder_Insert(order);
+
+            if (saveSuccess)
+            {
+                ClearForm();
+                MsgBox.Text = "Orden de compra registrada con éxito.";
+                MsgBox.IconColor = Color.DarkGreen;
+            }
+            else
+            {
+                MsgBox.Text = "Error al registrar orden de compra.";
+                MsgBox.IconColor = Color.DarkRed;
+            }
+
+            MsgBox.Visible = true;
+            MsgBoxTimer.Start();
         }
 
         void MsgBoxTimer_Tick(object sender, EventArgs e)
@@ -386,6 +423,17 @@ namespace CZS_LaVictoria.ÓrdenesPage
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Obtiene el número de la última orden, y le suma 1.
+        /// </summary>
+        /// <returns>El número consecutivo para la orden nueva.</returns>
+        string GetNumOrden()
+        {
+            var order = GlobalConfig.Connection.PurchaseOrder_GetLastNumber();
+            order += 1;
+            return order.ToString();
+        }
 
         /// <summary>
         /// Obtiene todos los proveedores en SQL.
@@ -447,11 +495,21 @@ namespace CZS_LaVictoria.ÓrdenesPage
             ((GridComboBoxColumn) DataGrid.Columns["Producto"]).ValueMember = "MaterialExterno";
         }
 
+        /// <summary>
+        /// Valida que la orden se pueda crear.
+        /// </summary>
+        /// <returns>True, si la orden se puede crear, False de lo contrario.</returns>
         bool ValidateForm()
         {
             var output = true;
             MsgBox.Text = "";
 
+            if (NumOrdenText.Text == "")
+            {
+                output = false;
+                MsgBox.Text += "Ocurrió un error al obtener el número de orden.\n";
+                return output;
+            }
             if (ProveedorCombo.Text == "")
             {
                 output = false;
@@ -464,13 +522,55 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 MsgBox.Text += "Selecciona una área.\n";
             }
 
-            if (DataGrid.RowCount == 0)
+            if (DataGrid.View.Records.Count == 0)
             {
                 output = false;
                 MsgBox.Text += "Agrega líneas a la orden.\n";
             }
 
             return output;
+        }
+
+        /// <summary>
+        /// Reestablece el formulario a su aspecto original.
+        /// </summary>
+        void ClearForm()
+        {
+            NumOrdenText.Text = GetNumOrden();
+            CorreoText.Text = "Selecciona un proveedor...";
+            AtencionText.Text = "Selecciona un proveedor...";
+            FechaOrdenPicker.Value = DateTime.Today;
+            FechaEntregaPicker.Value = DateTime.Today;
+            DataGrid.AllowDeleting = true;
+            for (var i = DataGrid.RowCount - 1 ; i > 0; i--)
+            {
+                var record = DataGrid.GetRecordAtRowIndex(i);
+                DataGrid.SelectedItem = record;
+                DataGrid.DeleteSelectedRecords();
+            }
+
+            _numLinea = 1;
+            DataGrid.AllowDeleting = false;
+            ProveedorCombo.Focus();
+
+            void Func(IEnumerable controls)
+            {
+                foreach (Control control in controls)
+                    if (control is TextBox box)
+                    {
+                        if (box.Name == "NumOrdenText") continue;
+                        box.Clear();
+                    }
+                    else if (control is ComboBox comboBox)
+                    {
+                        comboBox.Text = "";
+                        comboBox.SelectedItem = null;
+                    }
+                    else
+                        Func(control.Controls);
+            }
+
+            Func(Controls);
         }
 
         #endregion

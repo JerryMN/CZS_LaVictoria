@@ -53,12 +53,12 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.NumOrdenText = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
             this.NumOrdenLabel = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.SubtitleLabel = new System.Windows.Forms.Label();
-            this.purchaseOrderLineModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.MailButton = new DevExpress.XtraEditors.SimpleButton();
             this.PdfButton = new DevExpress.XtraEditors.SimpleButton();
             this.GuardarButton = new DevExpress.XtraEditors.SimpleButton();
             this.MsgBox = new FontAwesome.Sharp.IconButton();
             this.MsgBoxTimer = new System.Windows.Forms.Timer(this.components);
+            this.purchaseOrderLineModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ProductosGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGrid)).BeginInit();
             this.DatosGroupBox.SuspendLayout();
@@ -319,10 +319,6 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.SubtitleLabel.TabIndex = 29;
             this.SubtitleLabel.Text = "Orden de Compra";
             // 
-            // purchaseOrderLineModelBindingSource
-            // 
-            this.purchaseOrderLineModelBindingSource.DataSource = typeof(CZS_LaVictoria_Library.Models.PurchaseOrderLineModel);
-            // 
             // MailButton
             // 
             this.MailButton.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -394,6 +390,10 @@ namespace CZS_LaVictoria.ÓrdenesPage
             // 
             this.MsgBoxTimer.Interval = 3000;
             this.MsgBoxTimer.Tick += new System.EventHandler(this.MsgBoxTimer_Tick);
+            // 
+            // purchaseOrderLineModelBindingSource
+            // 
+            this.purchaseOrderLineModelBindingSource.DataSource = typeof(CZS_LaVictoria_Library.Models.PurchaseOrderLineModel);
             // 
             // OrdenCompraCrearForm
             // 

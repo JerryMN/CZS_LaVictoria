@@ -771,5 +771,105 @@ namespace CZS_LaVictoria_Library.DataAccess
         }
 
         #endregion
+
+        #region Orden de Compra
+
+        public long PurchaseOrder_GetLastNumber()
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var output =
+                        connection.ExecuteScalar("SELECT TOP 1 numOrden FROM PurchaseOrder ORDER BY numOrden DESC").ToString();
+                    return long.Parse(output);
+                }
+                catch (NullReferenceException)
+                {
+                    return 2100000;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.ToString());
+                    Debug.Assert(false);
+                    return 0;
+                }
+            }
+        }
+
+        public bool PurchaseOrder_Insert(PurchaseOrderModel model)
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@NumOrden", model.NumOrden);
+                p.Add("@TipoOrden", model.TipoOrden);
+                p.Add("@Area", model.Area);
+                p.Add("@Proveedor", model.Proveedor);
+                p.Add("@Condiciones", model.Condiciones);
+                p.Add("@FechaOrden", model.FechaOrden);
+                p.Add("@FechaEntrega", model.FechaEntrega);
+                p.Add("@UniqueId", 0, direction: ParameterDirection.Output);
+
+                try
+                {
+                    connection.Execute("dbo.spPurchaseOrder_Insert", p, commandType: CommandType.StoredProcedure);
+                    model.UniqueIdOrder = p.Get<int>("@UniqueId");
+
+                    foreach (var line in model.Líneas)
+                    {
+                        p = new DynamicParameters();
+                        p.Add("@IdOrder", model.UniqueIdOrder);
+                        p.Add("@NumLinea", line.NumLinea);
+                        p.Add("@Producto", line.Producto);
+                        p.Add("@CantidadOrden", line.CantidadOrden);
+                        p.Add("@CantidadEntregada", line.CantidadEntregada);
+                        p.Add("@CantidadPendiente", line.CantidadPendiente);
+                        p.Add("@PrecioUnitario", line.PrecioUnitario);
+                        p.Add("@Iva", line.Iva);
+                        p.Add("@Subtotal", line.Subtotal);
+
+                        try
+                        {
+                            connection.Execute("dbo.spPurchaseOrderDetails_Insert", p, commandType: CommandType.StoredProcedure);
+                        }
+                        catch (Exception)
+                        {
+                            Debug.Assert(false);
+                            return false;
+                        }
+                    }
+
+                    return true;
+                }
+                catch (Exception)
+                {
+                    Debug.Assert(false);
+                    return false;
+                }
+            }
+        }
+
+        #endregion
+
+        #region Orden de Venta
+
+        public string SaleOrder_GetLastNumber()
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    return connection.ExecuteScalar("SELECT TOP 1 numOrden FROM SaleOrder ORDER BY numOrden DESC").ToString();
+                }
+                catch (Exception)
+                {
+                    Debug.Assert(false);
+                    return "2100001";
+                }
+            }
+        }
+
+        #endregion
     }
 }
