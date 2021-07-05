@@ -18,7 +18,6 @@ using Syncfusion.WinForms.DataGridConverter.Events;
 using Syncfusion.Pdf.Graphics;
 using Syncfusion.Pdf;
 using Syncfusion.WinForms.ListView.Enums;
-using static Syncfusion.Windows.Forms.ThemedComboBoxDrawing;
 
 namespace CZS_LaVictoria.ÓrdenesPage
 {
@@ -38,6 +37,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             GetProveedores();
             GetAreas();
             DataGrid.DataSource = _orderLines;
+            DataGrid.Columns["NumLinea"].AllowEditing = false;
             DataGrid.LiveDataUpdateMode = LiveDataUpdateMode.AllowDataShaping;
             DataGrid.CellComboBoxSelectionChanged += DataGridOnCellComboBoxSelectionChanged;
 
@@ -206,8 +206,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             {
                 DataGrid.SortColumnDescriptions.RemoveAt(0);
             }
-            DataGrid.SortColumnDescriptions.Add(new SortColumnDescription {ColumnName = "NumLinea", SortDirection = ListSortDirection.Ascending});
-
+            DataGrid.SortColumnDescriptions.Add(new SortColumnDescription { ColumnName = "NumLinea", SortDirection = ListSortDirection.Ascending });
         }
 
         /// <summary>
@@ -242,6 +241,12 @@ namespace CZS_LaVictoria.ÓrdenesPage
             {
                 DataGrid.View.GetPropertyAccessProvider().SetValue(data, "Subtotal", cantidad * precio);
             }
+
+            if (DataGrid.SortColumnDescriptions.Count != 0)
+            {
+                DataGrid.SortColumnDescriptions.RemoveAt(0);
+            }
+            DataGrid.SortColumnDescriptions.Add(new SortColumnDescription { ColumnName = "NumLinea", SortDirection = ListSortDirection.Ascending });
         }
 
         /// <summary>
@@ -331,7 +336,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
                     mail.Body =
                         $"Estimado Proveedor {_selectedProveedor.Nombre}:" +
                         $"\nSe ha generado una nueva orden de compra #{NumOrdenText.Text} la cual encontrará anexa." +
-                        $"\nFavor de confirmar de recibido. Gracias, \n \n Escobas La Victoria";
+                        "\nFavor de confirmar de recibido. Gracias, \n \n Escobas La Victoria";
                     mail.Attachments.Add(new Attachment(_pdfPath));
                     smtpServer.Port = 587;
                     smtpServer.Credentials = new NetworkCredential("splend3ad@gmail.com", "xggtroybzdniydta");
