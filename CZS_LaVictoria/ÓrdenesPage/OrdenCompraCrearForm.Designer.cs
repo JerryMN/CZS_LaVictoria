@@ -57,6 +57,8 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.MailButton = new DevExpress.XtraEditors.SimpleButton();
             this.PdfButton = new DevExpress.XtraEditors.SimpleButton();
             this.GuardarButton = new DevExpress.XtraEditors.SimpleButton();
+            this.MsgBox = new FontAwesome.Sharp.IconButton();
+            this.MsgBoxTimer = new System.Windows.Forms.Timer(this.components);
             this.ProductosGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGrid)).BeginInit();
             this.DatosGroupBox.SuspendLayout();
@@ -326,7 +328,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.MailButton.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MailButton.Appearance.Options.UseFont = true;
             this.MailButton.AutoSize = true;
-            this.MailButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton1.ImageOptions.SvgImage")));
+            this.MailButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("MailButton.ImageOptions.SvgImage")));
             this.MailButton.Location = new System.Drawing.Point(180, 625);
             this.MailButton.LookAndFeel.SkinName = "Office 2019 Colorful";
             this.MailButton.LookAndFeel.UseDefaultLookAndFeel = false;
@@ -367,12 +369,38 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.GuardarButton.Size = new System.Drawing.Size(99, 36);
             this.GuardarButton.TabIndex = 31;
             this.GuardarButton.Text = "Guardar";
+            this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
+            // 
+            // MsgBox
+            // 
+            this.MsgBox.FlatAppearance.BorderSize = 0;
+            this.MsgBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.MsgBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MsgBox.IconChar = FontAwesome.Sharp.IconChar.ExclamationTriangle;
+            this.MsgBox.IconColor = System.Drawing.Color.DarkRed;
+            this.MsgBox.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.MsgBox.IconSize = 32;
+            this.MsgBox.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.MsgBox.Location = new System.Drawing.Point(806, 625);
+            this.MsgBox.Name = "MsgBox";
+            this.MsgBox.Size = new System.Drawing.Size(420, 157);
+            this.MsgBox.TabIndex = 32;
+            this.MsgBox.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.MsgBox.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.MsgBox.UseVisualStyleBackColor = true;
+            this.MsgBox.Visible = false;
+            // 
+            // MsgBoxTimer
+            // 
+            this.MsgBoxTimer.Interval = 3000;
+            this.MsgBoxTimer.Tick += new System.EventHandler(this.MsgBoxTimer_Tick);
             // 
             // OrdenCompraCrearForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1276, 839);
+            this.Controls.Add(this.MsgBox);
             this.Controls.Add(this.PdfButton);
             this.Controls.Add(this.GuardarButton);
             this.Controls.Add(this.MailButton);
@@ -426,5 +454,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
         private DevExpress.XtraEditors.SimpleButton MailButton;
         private DevExpress.XtraEditors.SimpleButton PdfButton;
         private DevExpress.XtraEditors.SimpleButton GuardarButton;
+        private FontAwesome.Sharp.IconButton MsgBox;
+        private System.Windows.Forms.Timer MsgBoxTimer;
     }
 }

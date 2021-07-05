@@ -137,6 +137,7 @@
     <Reference Include="Syncfusion.SfInput.WinForms, Version=19.2460.0.44, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.SfInput.WinForms.19.2.0.44\lib\net46\Syncfusion.SfInput.WinForms.dll</HintPath>
     </Reference>
+    <Reference Include="Syncfusion.SfListView.WinForms, Version=19.2460.0.44, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
     <Reference Include="Syncfusion.SfSmithChart.WinForms, Version=19.2460.0.44, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.SfSmithChart.WinForms.19.2.0.44\lib\net46\Syncfusion.SfSmithChart.WinForms.dll</HintPath>
     </Reference>

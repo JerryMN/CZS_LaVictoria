@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.Net;
@@ -16,6 +17,8 @@ using Syncfusion.WinForms.DataGridConverter;
 using Syncfusion.WinForms.DataGridConverter.Events;
 using Syncfusion.Pdf.Graphics;
 using Syncfusion.Pdf;
+using Syncfusion.WinForms.ListView.Enums;
+using static Syncfusion.Windows.Forms.ThemedComboBoxDrawing;
 
 namespace CZS_LaVictoria.ÓrdenesPage
 {
@@ -23,7 +26,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
     {
         ProveedorModel _selectedProveedor;
         List<ProveedorProductoModel> _productos;
-        readonly List<PurchaseOrderLineModel> _orderLines = new List<PurchaseOrderLineModel>();
+        List<PurchaseOrderLineModel> _orderLines = new List<PurchaseOrderLineModel>();
         int _numLinea = 1;
         string _pdfPath;
 
@@ -35,6 +38,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             GetProveedores();
             GetAreas();
             DataGrid.DataSource = _orderLines;
+            DataGrid.LiveDataUpdateMode = LiveDataUpdateMode.AllowDataShaping;
             DataGrid.CellComboBoxSelectionChanged += DataGridOnCellComboBoxSelectionChanged;
 
             var tableSummary = new GridTableSummaryRow
@@ -45,14 +49,14 @@ namespace CZS_LaVictoria.ÓrdenesPage
             var productSummary = new GridSummaryColumn
             {
                 Name = "NumLinea",
-                SummaryType = SummaryType.Int32Aggregate,
+                SummaryType = SummaryType.CountAggregate,
                 Format = "Productos: {Count:D}",
                 MappingName = "NumLinea"
             };
 
             var subtotalSummary = new GridSummaryColumn
             {
-                Name = "Subtotal",
+                Name = "UnitPrice",
                 SummaryType = SummaryType.DoubleAggregate,
                 Format = "Total: {Sum:c}",
                 MappingName = "Subtotal"
@@ -102,7 +106,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
 
             if (e.Column.MappingName == "Producto")
             {
-                e.Column = new GridComboBoxColumn { MappingName = "Producto", HeaderText = "Producto" };
+                e.Column = new GridComboBoxColumn { MappingName = "Producto", HeaderText = "Producto", DropDownStyle = DropDownStyle.DropDownList };
             }
 
             if (e.Column.MappingName == "CantidadOrden")
@@ -158,6 +162,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 if (e.SelectedItem is ProveedorProductoModel producto)
                 {
                     row.PrecioUnitario = producto.PrecioUnitario;
+                    row.Producto = producto.MaterialInterno;
                 }
             }
             if (e.RowIndex == DataGrid.GetAddNewRowIndex())
@@ -196,6 +201,13 @@ namespace CZS_LaVictoria.ÓrdenesPage
             {
                 DataGrid.View.GetPropertyAccessProvider().SetValue(data, "Subtotal", cantidad * precio);
             }
+
+            if (DataGrid.SortColumnDescriptions.Count != 0)
+            {
+                DataGrid.SortColumnDescriptions.RemoveAt(0);
+            }
+            DataGrid.SortColumnDescriptions.Add(new SortColumnDescription {ColumnName = "NumLinea", SortDirection = ListSortDirection.Ascending});
+
         }
 
         /// <summary>
@@ -237,6 +249,13 @@ namespace CZS_LaVictoria.ÓrdenesPage
         /// </summary>
         void PdfButton_Click(object sender, EventArgs e)
         {
+            if (!ValidateForm())
+            {
+                MsgBox.Visible = true;
+                MsgBoxTimer.Start();
+                return;
+            }
+
             var options = new PdfExportingOptions { AutoColumnWidth = true };
             options.HeaderFooterExporting += OnHeaderFooterExporting;
             options.CellExporting += OnCellExporting;
@@ -255,6 +274,11 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 {
                     System.Diagnostics.Process.Start(saveFileDialog.FileName);
                 }
+
+                MsgBox.Text = $"PDF guardado en {saveFileDialog.FileName}.";
+                MsgBox.IconColor = Color.DarkGreen;
+                MsgBox.Visible = true;
+                MsgBoxTimer.Start();
             }
 
         }
@@ -287,6 +311,71 @@ namespace CZS_LaVictoria.ÓrdenesPage
                                        $"Área: {AreaCombo.Text}", smallFont, brush, 0, 30);
             header.Graphics.DrawString($"Proveedor: {_selectedProveedor.Nombre}  |  Atención: {AtencionText.Text}", smallFont, brush, 0, 45);
             e.PdfDocumentTemplate.Top = header;
+        }
+
+        /// <summary>
+        /// Envía el pdf generado por correo.
+        /// </summary>
+        void MailButton_Click(object sender, EventArgs e)
+        {
+            PdfButton_Click(sender, e);
+            using (var mail = new MailMessage())
+            {
+                var addresses = "";
+                using (var smtpServer = new SmtpClient("smtp.gmail.com"))
+                {
+                    // TODO - Obtener las direcciones adecuadas.
+                    mail.From = new MailAddress("splend3ad@gmail.com");
+                    mail.To.Add("gerardo.mondragonb@hotmail.com");
+                    mail.Subject = "Test Mail 1";
+                    mail.Body =
+                        $"Estimado Proveedor {_selectedProveedor.Nombre}:" +
+                        $"\nSe ha generado una nueva orden de compra #{NumOrdenText.Text} la cual encontrará anexa." +
+                        $"\nFavor de confirmar de recibido. Gracias, \n \n Escobas La Victoria";
+                    mail.Attachments.Add(new Attachment(_pdfPath));
+                    smtpServer.Port = 587;
+                    smtpServer.Credentials = new NetworkCredential("splend3ad@gmail.com", "xggtroybzdniydta");
+                    smtpServer.EnableSsl = true;
+                    smtpServer.Send(mail);
+                }
+
+                foreach (var address in mail.To)
+                {
+                    if (mail.To.Count == 1)
+                    {
+                        addresses += address.Address;
+                    }
+                    else
+                    {
+                        addresses += address.Address + ", ";
+                    }
+                }
+
+                MsgBox.Text = $"Mensaje enviado a {addresses}";
+                MsgBox.IconColor = Color.DarkGreen;
+                MsgBox.Visible = true;
+                MsgBoxTimer.Start();
+            }
+        }
+
+        /// <summary>
+        /// Guarda la orden de compra en SQL.
+        /// </summary>
+        void GuardarButton_Click(object sender, EventArgs e)
+        {
+            if (!ValidateForm())
+            {
+                MsgBox.Visible = true;
+                MsgBoxTimer.Start();
+                return;
+            }
+
+        }
+
+        void MsgBoxTimer_Tick(object sender, EventArgs e)
+        {
+            MsgBox.Visible = false;
+            MsgBoxTimer.Stop();
         }
 
         #endregion
@@ -350,30 +439,35 @@ namespace CZS_LaVictoria.ÓrdenesPage
             _productos = GlobalConfig.Connection.ProveedorProducto_GetByProveedorArea(_selectedProveedor.IdProvider, AreaCombo.Text);
             ((GridComboBoxColumn) DataGrid.Columns["Producto"]).DataSource = _productos;
             ((GridComboBoxColumn) DataGrid.Columns["Producto"]).DisplayMember = "MaterialExterno";
+            ((GridComboBoxColumn) DataGrid.Columns["Producto"]).ValueMember = "MaterialExterno";
+        }
+
+        bool ValidateForm()
+        {
+            var output = true;
+            MsgBox.Text = "";
+
+            if (ProveedorCombo.Text == "")
+            {
+                output = false;
+                MsgBox.Text += "Selecciona un proveedor.\n";
+            }
+
+            if (AreaCombo.Text == "")
+            {
+                output = false;
+                MsgBox.Text += "Selecciona una área.\n";
+            }
+
+            if (DataGrid.RowCount == 0)
+            {
+                output = false;
+                MsgBox.Text += "Agrega líneas a la orden.\n";
+            }
+
+            return output;
         }
 
         #endregion
-
-        void MailButton_Click(object sender, EventArgs e)
-        {
-            using (var mail = new MailMessage())
-            {
-                using (var smtpServer = new SmtpClient("smtp.gmail.com"))
-                {
-                    mail.From = new MailAddress("splend3ad@gmail.com");
-                    mail.To.Add("gerardo.mondragonb@hotmail.com");
-                    mail.Subject = "Test Mail 1";
-                    mail.Body =
-                        $"Estimado Proveedor {_selectedProveedor.Nombre}:" +
-                        $"\nSe ha generado una nueva orden de compra #{NumOrdenText.Text} la cual encontrará anexa." +
-                        $"\nFavor de confirmar de recibido. Gracias, \n \n Escobas La Victoria";
-                    mail.Attachments.Add(new Attachment(_pdfPath));
-                    smtpServer.Port = 587;
-                    smtpServer.Credentials = new NetworkCredential("splend3ad@gmail.com", "xggtroybzdniydta");
-                    smtpServer.EnableSsl = true;
-                    smtpServer.Send(mail);
-                }
-            }
-        }
     }
 }
