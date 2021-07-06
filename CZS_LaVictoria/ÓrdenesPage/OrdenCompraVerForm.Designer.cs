@@ -30,7 +30,6 @@ namespace CZS_LaVictoria.ÓrdenesPage
         private void InitializeComponent()
         {
             this.BuscarButton = new FontAwesome.Sharp.IconButton();
-            this.GuardarButton = new FontAwesome.Sharp.IconButton();
             this.DataGrid = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             this.NumOrdenText = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
             this.NumOrdenLabel = new Syncfusion.Windows.Forms.Tools.AutoLabel();
@@ -63,25 +62,6 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.BuscarButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BuscarButton.UseVisualStyleBackColor = true;
             this.BuscarButton.Click += new System.EventHandler(this.BuscarButton_Click);
-            // 
-            // GuardarButton
-            // 
-            this.GuardarButton.AutoSize = true;
-            this.GuardarButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.GuardarButton.Enabled = false;
-            this.GuardarButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GuardarButton.IconChar = FontAwesome.Sharp.IconChar.Save;
-            this.GuardarButton.IconColor = System.Drawing.Color.Black;
-            this.GuardarButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.GuardarButton.IconSize = 24;
-            this.GuardarButton.Location = new System.Drawing.Point(179, 97);
-            this.GuardarButton.Name = "GuardarButton";
-            this.GuardarButton.Size = new System.Drawing.Size(101, 31);
-            this.GuardarButton.TabIndex = 9;
-            this.GuardarButton.Text = "Guardar";
-            this.GuardarButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.GuardarButton.UseVisualStyleBackColor = true;
-            this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
             // 
             // DataGrid
             // 
@@ -213,7 +193,6 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.Controls.Add(this.NumOrdenText);
             this.Controls.Add(this.NumOrdenLabel);
             this.Controls.Add(this.BuscarButton);
-            this.Controls.Add(this.GuardarButton);
             this.Controls.Add(this.DataGrid);
             this.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -233,7 +212,6 @@ namespace CZS_LaVictoria.ÓrdenesPage
         #endregion
 
         private FontAwesome.Sharp.IconButton BuscarButton;
-        private FontAwesome.Sharp.IconButton GuardarButton;
         private Syncfusion.WinForms.DataGrid.SfDataGrid DataGrid;
         private Syncfusion.Windows.Forms.Tools.TextBoxExt NumOrdenText;
         private Syncfusion.Windows.Forms.Tools.AutoLabel NumOrdenLabel;

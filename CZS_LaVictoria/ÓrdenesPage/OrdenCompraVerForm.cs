@@ -9,7 +9,6 @@ using Syncfusion.WinForms.Input.Enums;
 using Syncfusion.WinForms.DataGrid.Enums;
 using System.Globalization;
 using CZS_LaVictoria_Library.Models;
-using Syncfusion.Data;
 
 namespace CZS_LaVictoria.ÓrdenesPage
 {
@@ -21,37 +20,42 @@ namespace CZS_LaVictoria.ÓrdenesPage
         {
             InitializeComponent();
             DataGrid.CurrentCellValidating += DataGridOnCurrentCellValidating;
+            DataGrid.CurrentCellValidated += DataGridOnCurrentCellValidated;
         }
 
         #region Events
 
         /// <summary>
         /// Busca las líneas de una orden de compra.
-        /// Si no hay alguna orden seleccionada, muestra todas las líneas de todas las órdenes.
         /// </summary>
         void BuscarButton_Click(object sender, EventArgs e)
         {
+            // Si no hay alguna orden seleccionada, muestra todas las líneas de todas las órdenes.
+            // No se pueden editar las cantidades en esta modalidad.
             if (NumOrdenText.Text == "")
             {
                 DataGrid.DataSource = GlobalConfig.Connection.PurchaseOrderLine_GetAll();
+                DataGrid.Columns["CantidadEntregada"].AllowEditing = false;
                 ProveedorText.Text = "";
                 FechaEntregaPicker.Value = new DateTime(1900, 1, 1);
                 AreaText.Text = "";
                 CondicionesText.Text = "";
-                GuardarButton.Enabled = false;
             }
+            // Al seleccionar una orden, muestra todas las líneas de esa orden.
+            // Sí se pueden editar las cantidades en esta modalidad.
             else
             {
                 DataGrid.DataSource = GlobalConfig.Connection.PurchaseOrderLine_GetByNumOrden(NumOrdenText.Text);
+                DataGrid.Columns["CantidadEntregada"].AllowEditing = true;
                 _orden = GlobalConfig.Connection.PurchaseOrder_GetByNumOrden(NumOrdenText.Text);
                 if (_orden == null) return;
                 ProveedorText.Text = _orden.Proveedor;
                 FechaEntregaPicker.Value = _orden.FechaEntrega;
                 AreaText.Text = _orden.Area;
                 CondicionesText.Text = _orden.Condiciones;
-                GuardarButton.Enabled = true;
             }
 
+            // Ordenar tabla por Número de Orden.
             if (DataGrid.SortColumnDescriptions.Count != 0)
             {
                 DataGrid.SortColumnDescriptions.RemoveAt(0);
@@ -91,7 +95,6 @@ namespace CZS_LaVictoria.ÓrdenesPage
             if (e.Column.MappingName == "CantidadEntregada")
             {
                 e.Column.HeaderText = "Cantidad Entregada";
-                e.Column.AllowEditing = true;
             }
 
             if (e.Column.MappingName == "CantidadPendiente")
@@ -138,50 +141,54 @@ namespace CZS_LaVictoria.ÓrdenesPage
             }
         }
 
-        void GuardarButton_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Una vez que la línea es válida, actualiza las tablas de SQL con las cantidades apropiadas.
+        /// </summary>
+        void DataGridOnCurrentCellValidated(object sender, CurrentCellValidatedEventArgs e)
         {
-            if (_orden == null) return;
-            foreach (var record in DataGrid.View.Records)
-            {
-                UpdatePurchaseOrderLine(record);
-                UpdateStock(record);
-            }
+            var data = e.RowData as PurchaseOrderLineModel;
+            UpdatePurchaseOrderLine(data);
+            UpdateStock(data, double.Parse(e.OldValue.ToString()), double.Parse(e.NewValue.ToString()));
 
-            MessageBox.Show($"Orden de compra {_orden.NumOrden} actualizada con éxito.");
         }
 
         #endregion
 
         #region Methods
 
-        void UpdatePurchaseOrderLine(RecordEntry record)
+        /// <summary>
+        /// Actualiza la cantidad entregada y pendiente en la tabla PurchaseOrderDetails en SQL.
+        /// </summary>
+        /// <param name="model">La línea a actualizar.</param>
+        void UpdatePurchaseOrderLine(PurchaseOrderLineModel model)
         {
-            var model = record.Data as PurchaseOrderLineModel;
             GlobalConfig.Connection.PurchaseOrderLine_Update(_orden.UniqueIdOrder, model);
         }
 
-        void UpdateStock(RecordEntry record)
+        /// <summary>
+        /// Crea o actualiza el material en la tabla Stock en SQL.
+        /// </summary>
+        /// <param name="model">La línea donde se encuentra el material.</param>
+        /// <param name="oldQty">La cantidad entregada anterior.</param>
+        /// <param name="newQty">La cantidad entregada actualizada.</param>
+        void UpdateStock(PurchaseOrderLineModel model, double oldQty, double newQty)
         {
-            var model = record.Data as PurchaseOrderLineModel;
-
-            // Obtener el modelo ProveedorProducto para obtener el nombre interno (que es el usado en inventarios).
+            // Obtener el modelo ProveedorProducto para obtener el nombre interno (que es el usado en Stock).
             var producto = GlobalConfig.Connection.ProveedorProducto_Find(model?.Producto, AreaText.Text, ProveedorText.Text);
 
-            // Averiguar si el material ya existe en el inventario.
+            // Averiguar si el material ya existe en la tabla Stock.
             var material = GlobalConfig.Connection.Material_GetByNombreArea(producto.MaterialInterno, AreaText.Text);
             if (material  == null)
             {
-                // Si no existe lo creamos.
+                // Si no existe se crea.
                 var newMaterial = new MaterialModel(producto.MaterialInterno, AreaText.Text, null, 
                     model?.CantidadEntregada.ToString(CultureInfo.InvariantCulture), null);
                 GlobalConfig.Connection.Material_Create(newMaterial);
             }
             else
             {
-                // Si existe, actualizamos la cantidad disponible.
-                // TODO - Fix this next line
-                Debug.Assert(model != null, nameof(model) + " != null");
-                material.CantidadDisponible += (model.CantidadEntregada);
+                // Si existe, se actualiza la cantidad disponible.
+                material.CantidadDisponible += (newQty - oldQty);
                 GlobalConfig.Connection.Material_Update(material);
             }
         }
