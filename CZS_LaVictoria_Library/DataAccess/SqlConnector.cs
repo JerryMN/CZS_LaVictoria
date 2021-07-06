@@ -639,6 +639,27 @@ namespace CZS_LaVictoria_Library.DataAccess
             }
         }
 
+        public List<MaterialModel> Material_GetAll()
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var output = connection.Query<MaterialModel>("dbo.spStock_GetAll", commandType: CommandType.StoredProcedure).ToList();
+                    return output;
+                }
+                catch (Exception e)
+                {
+                    if (e.Message != "Sequence contains no elements")
+                    {
+                        Debug.Assert(false);
+                    }
+
+                    return null;
+                }
+            }
+        }
+
         public List<MaterialModel> Material_GetByAreaCat(string area, string categoría)
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))

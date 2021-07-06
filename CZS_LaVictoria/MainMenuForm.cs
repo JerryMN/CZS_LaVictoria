@@ -15,6 +15,23 @@ namespace CZS_LaVictoria
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Abre un formulario dentro del formulario principal.
+        /// </summary>
+        /// <param name="childForm">El formulario a abrir.</param>
+        void OpenChildForm(Form childForm)
+        {
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Dock = DockStyle.Fill;
+            ChildPanel.Controls.Add(childForm);
+            ChildPanel.Tag = childForm;
+            childForm.BringToFront();
+            childForm.Show();
+            _currentChildForm?.Close();
+            _currentChildForm = childForm;
+        }
+
         #region Ordenes
 
         void CrearOrdenCompraButton_ItemClick(object sender, ItemClickEventArgs e)
@@ -35,6 +52,11 @@ namespace CZS_LaVictoria
         void VerOrdenVentaButton_ItemClick(object sender, ItemClickEventArgs e)
         {
             OpenChildForm(new OrdenVentaVerForm());
+        }
+
+        void VerInventarioButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new InventarioVerForm());
         }
 
         #endregion
@@ -115,22 +137,7 @@ namespace CZS_LaVictoria
 
         #endregion
 
-        /// <summary>
-        /// Abre un formulario dentro del formulario principal.
-        /// </summary>
-        /// <param name="childForm">El formulario a abrir.</param>
-        void OpenChildForm(Form childForm)
-        {
-            childForm.TopLevel = false;
-            childForm.FormBorderStyle = FormBorderStyle.None;
-            childForm.Dock = DockStyle.Fill;
-            ChildPanel.Controls.Add(childForm);
-            ChildPanel.Tag = childForm;
-            childForm.BringToFront();
-            childForm.Show();
-            _currentChildForm?.Close();
-            _currentChildForm = childForm;
-        }
+        #region Plásticos
 
         void RegistrarMolidoButton_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -139,27 +146,29 @@ namespace CZS_LaVictoria
 
         void RegistrarExtruídoButton_ItemClick(object sender, ItemClickEventArgs e)
         {
-
+            OpenChildForm(new RegistrarExtruídoForm());
         }
 
         void RegistrarCortadoButton_ItemClick(object sender, ItemClickEventArgs e)
         {
-
+            OpenChildForm(new RegistrarCortadoForm());
         }
 
         void RegistrarInyecciónMezclaButton_ItemClick(object sender, ItemClickEventArgs e)
         {
-
+            OpenChildForm(new RegistrarInyecciónMezclaForm());
         }
 
         void RegistrarInyecciónButton_ItemClick(object sender, ItemClickEventArgs e)
         {
-
+            OpenChildForm(new RegistrarInyecciónForm());
         }
 
-        void RegistarInsertadoButton_ItemClick(object sender, ItemClickEventArgs e)
+        void RegistrarInsertadoButton_ItemClick(object sender, ItemClickEventArgs e)
         {
-
+            OpenChildForm(new RegistrarInsertadoForm());
         }
+
+        #endregion
     }
 }

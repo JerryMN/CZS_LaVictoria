@@ -84,6 +84,8 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         bool Material_Create(MaterialModel model);
 
+        List<MaterialModel> Material_GetAll();
+
         List<MaterialModel> Material_GetByAreaCat(string area, string categoría);
 
         MaterialModel Material_GetByNombreArea(string nombre, string area);

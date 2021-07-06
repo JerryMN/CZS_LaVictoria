@@ -43,7 +43,7 @@ namespace CZS_LaVictoria
             this.RegistrarCortadoButton = new DevExpress.XtraBars.BarButtonItem();
             this.RegistrarInyecciónMezclaButton = new DevExpress.XtraBars.BarButtonItem();
             this.RegistrarInyecciónButton = new DevExpress.XtraBars.BarButtonItem();
-            this.RegistarInsertadoButton = new DevExpress.XtraBars.BarButtonItem();
+            this.RegistrarInsertadoButton = new DevExpress.XtraBars.BarButtonItem();
             this.Datos_ProveedoresMaterialesSubmenu = new DevExpress.XtraBars.BarSubItem();
             this.VerMaterialesButton = new DevExpress.XtraBars.BarButtonItem();
             this.CrearClienteButton = new DevExpress.XtraBars.BarButtonItem();
@@ -70,6 +70,8 @@ namespace CZS_LaVictoria
             this.Datos_AreasGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Datos_MezclasGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ChildPanel = new DevExpress.XtraEditors.PanelControl();
+            this.Órdenes_InventarioGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.VerInventarioButton = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.RibbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ChildPanel)).BeginInit();
             this.SuspendLayout();
@@ -93,7 +95,7 @@ namespace CZS_LaVictoria
             this.RegistrarCortadoButton,
             this.RegistrarInyecciónMezclaButton,
             this.RegistrarInyecciónButton,
-            this.RegistarInsertadoButton,
+            this.RegistrarInsertadoButton,
             this.Datos_ProveedoresMaterialesSubmenu,
             this.VerMaterialesButton,
             this.CrearClienteButton,
@@ -104,10 +106,11 @@ namespace CZS_LaVictoria
             this.CrearMezclaButton,
             this.CrearAreaButton,
             this.VerAreasButton,
-            this.VerMezclasButton});
+            this.VerMezclasButton,
+            this.VerInventarioButton});
             this.RibbonControl.Location = new System.Drawing.Point(0, 0);
             this.RibbonControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.RibbonControl.MaxItemId = 28;
+            this.RibbonControl.MaxItemId = 29;
             this.RibbonControl.Name = "RibbonControl";
             this.RibbonControl.OptionsMenuMinWidth = 495;
             this.RibbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -213,13 +216,13 @@ namespace CZS_LaVictoria
             this.RegistrarInyecciónButton.Name = "RegistrarInyecciónButton";
             this.RegistrarInyecciónButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.RegistrarInyecciónButton_ItemClick);
             // 
-            // RegistarInsertadoButton
+            // RegistrarInsertadoButton
             // 
-            this.RegistarInsertadoButton.Caption = "Registrar Insertado";
-            this.RegistarInsertadoButton.Id = 13;
-            this.RegistarInsertadoButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("RegistarInsertadoButton.ImageOptions.SvgImage")));
-            this.RegistarInsertadoButton.Name = "RegistarInsertadoButton";
-            this.RegistarInsertadoButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.RegistarInsertadoButton_ItemClick);
+            this.RegistrarInsertadoButton.Caption = "Registrar Insertado";
+            this.RegistrarInsertadoButton.Id = 13;
+            this.RegistrarInsertadoButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("RegistarInsertadoButton.ImageOptions.SvgImage")));
+            this.RegistrarInsertadoButton.Name = "RegistrarInsertadoButton";
+            this.RegistrarInsertadoButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.RegistrarInsertadoButton_ItemClick);
             // 
             // Datos_ProveedoresMaterialesSubmenu
             // 
@@ -314,7 +317,8 @@ namespace CZS_LaVictoria
             this.ÓrdenesTab.Appearance.Options.UseFont = true;
             this.ÓrdenesTab.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.Órdenes_CompraGroup,
-            this.Órdenes_VentaGroup});
+            this.Órdenes_VentaGroup,
+            this.Órdenes_InventarioGroup});
             this.ÓrdenesTab.Name = "ÓrdenesTab";
             this.ÓrdenesTab.Text = "Órdenes";
             // 
@@ -372,7 +376,7 @@ namespace CZS_LaVictoria
             // 
             // Plásticos_InsertadoGroup
             // 
-            this.Plásticos_InsertadoGroup.ItemLinks.Add(this.RegistarInsertadoButton);
+            this.Plásticos_InsertadoGroup.ItemLinks.Add(this.RegistrarInsertadoButton);
             this.Plásticos_InsertadoGroup.Name = "Plásticos_InsertadoGroup";
             this.Plásticos_InsertadoGroup.Text = "Insertado";
             // 
@@ -427,6 +431,20 @@ namespace CZS_LaVictoria
             this.ChildPanel.Size = new System.Drawing.Size(1278, 841);
             this.ChildPanel.TabIndex = 1;
             // 
+            // Órdenes_InventarioGroup
+            // 
+            this.Órdenes_InventarioGroup.ItemLinks.Add(this.VerInventarioButton);
+            this.Órdenes_InventarioGroup.Name = "Órdenes_InventarioGroup";
+            this.Órdenes_InventarioGroup.Text = "Inventario";
+            // 
+            // VerInventarioButton
+            // 
+            this.VerInventarioButton.Caption = "Ver Inventario";
+            this.VerInventarioButton.Id = 28;
+            this.VerInventarioButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("VerInventarioButton.ImageOptions.SvgImage")));
+            this.VerInventarioButton.Name = "VerInventarioButton";
+            this.VerInventarioButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerInventarioButton_ItemClick);
+            // 
             // MainMenuForm
             // 
             this.Appearance.BackColor = System.Drawing.SystemColors.Control;
@@ -472,7 +490,7 @@ namespace CZS_LaVictoria
         private DevExpress.XtraBars.BarButtonItem RegistrarCortadoButton;
         private DevExpress.XtraBars.BarButtonItem RegistrarInyecciónMezclaButton;
         private DevExpress.XtraBars.BarButtonItem RegistrarInyecciónButton;
-        private DevExpress.XtraBars.BarButtonItem RegistarInsertadoButton;
+        private DevExpress.XtraBars.BarButtonItem RegistrarInsertadoButton;
         private DevExpress.XtraBars.Ribbon.RibbonPage PlásticosTab;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup Plásticos_MolidoGroup;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup Plásticos_ExtruídoGroup;
@@ -493,6 +511,8 @@ namespace CZS_LaVictoria
         private DevExpress.XtraBars.BarButtonItem VerAreasButton;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup Datos_AreasGroup;
         private DevExpress.XtraBars.BarButtonItem VerMezclasButton;
+        private DevExpress.XtraBars.BarButtonItem VerInventarioButton;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup Órdenes_InventarioGroup;
     }
 }
 

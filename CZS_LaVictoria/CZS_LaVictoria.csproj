@@ -286,6 +286,12 @@
     <Compile Include="ÓrdenesPage\AgregarNotasForm.Designer.cs">
       <DependentUpon>AgregarNotasForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ÓrdenesPage\InventarioVerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ÓrdenesPage\InventarioVerForm.Designer.cs">
+      <DependentUpon>InventarioVerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ÓrdenesPage\OrdenCompraVerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -366,8 +372,12 @@
     <EmbeddedResource Include="PlásticosPage\RegistrarMolidoForm.resx">
       <DependentUpon>RegistrarMolidoForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="ÓrdenesPage\AgregarNotasForm.resx">
       <DependentUpon>AgregarNotasForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ÓrdenesPage\InventarioVerForm.resx">
+      <DependentUpon>InventarioVerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ÓrdenesPage\OrdenCompraVerForm.resx">
       <DependentUpon>OrdenCompraVerForm.cs</DependentUpon>
