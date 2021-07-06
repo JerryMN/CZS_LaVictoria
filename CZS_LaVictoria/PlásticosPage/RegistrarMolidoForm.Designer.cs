@@ -213,7 +213,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.GuardarButton.Name = "GuardarButton";
             this.GuardarButton.Size = new System.Drawing.Size(78, 35);
             this.GuardarButton.TabIndex = 36;
-            this.GuardarButton.Text = "Validar";
+            this.GuardarButton.Text = "Guardar";
             this.GuardarButton.UseVisualStyleBackColor = true;
             this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
             // 
@@ -222,7 +222,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.MsgBoxTimer.Interval = 3000;
             this.MsgBoxTimer.Tick += new System.EventHandler(this.MsgBoxTimer_Tick);
             // 
-            // RegistrarMolidoButton
+            // RegistrarMolidoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -244,7 +244,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "RegistrarMolidoButton";
+            this.Name = "RegistrarMolidoForm";
             this.Text = "RegistrarMolidoButton";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
+using CZS_LaVictoria_Library;
 using CZS_LaVictoria_Library.Models;
 
 namespace CZS_LaVictoria.PlásticosPage
@@ -12,33 +12,13 @@ namespace CZS_LaVictoria.PlásticosPage
     {
         MaterialModel _materialEntrada = new MaterialModel();
         MaterialModel _materialSalida = new MaterialModel();
+        double _cantidadEntrada;
+        double _cantidadSalida;
 
         public RegistrarMolidoForm()
         {
             InitializeComponent();
-            CreateSampleData();
-            //GetMateriales();
-        }
-
-        // TODO - REMOVE
-        void CreateSampleData()
-        {
-            _materialEntrada.IdMaterial = 1;
-            _materialEntrada.Area = "Plásticos";
-            _materialEntrada.Nombre = "Merma Por Moler 1";
-            _materialEntrada.CantidadDisponible = 100;
-            _materialEntrada.Categoría = "Por Moler";
-
-            _materialSalida.IdMaterial = 2;
-            _materialSalida.Nombre = "Merma Molida";
-            _materialSalida.CantidadDisponible = 100;
-            _materialSalida.Categoría = "Molido";
-            _materialSalida.Area = "Plásticos";
-
-            EntradaCombo.Items.Add(_materialEntrada);
-            SalidaCombo.Items.Add(_materialSalida);
-            EntradaCombo.DisplayMember = "Nombre";
-            SalidaCombo.DisplayMember = "Nombre";
+            GetMateriales();
         }
 
         #region Events
@@ -56,9 +36,9 @@ namespace CZS_LaVictoria.PlásticosPage
         void CantidadText_TextChanged(object sender, EventArgs e)
         {
             if (CantidadEntradaText.Text == "" || CantidadEntradaText.Text == "0.00" || CantidadSalidaText.Text == "" || CantidadSalidaText.Text == "0.00") return;
-            double.TryParse(CantidadEntradaText.Text, out var cantidadEntrada);
-            double.TryParse(CantidadSalidaText.Text, out var cantidadSalida);
-            var merma = cantidadEntrada - cantidadSalida;
+            double.TryParse(CantidadEntradaText.Text, out _cantidadEntrada);
+            double.TryParse(CantidadSalidaText.Text, out _cantidadSalida);
+            var merma = _cantidadEntrada - _cantidadSalida;
             MermaText.Text = merma <= 0 ? "0.00" : merma.ToString(CultureInfo.InvariantCulture);
         }
 
@@ -70,11 +50,23 @@ namespace CZS_LaVictoria.PlásticosPage
                 return;
             }
 
-            // TODO - UPDATE _materialEntrada on SQL
-            // TODO - UPDATE _materialSalida on SQL
-            var saveSuccess = true;
+            _materialEntrada.CantidadDisponible -= _cantidadEntrada;
+            var saveEntrada = GlobalConfig.Connection.Material_Update(_materialEntrada);
+            bool saveSalida;
+            if (_materialSalida.IdMaterial == 0)
+            {
+                _materialSalida = new MaterialModel(SalidaCombo.Text, "Plásticos", "Molido", _cantidadSalida, 0);
+                saveSalida = GlobalConfig.Connection.Material_Create(_materialSalida);
+                GetMateriales();
+            }
+            else
+            {
+                _materialSalida.CantidadDisponible += _cantidadSalida;
+                saveSalida = GlobalConfig.Connection.Material_Update(_materialSalida);
+            }
+            
 
-            if (saveSuccess)
+            if (saveEntrada && saveSalida)
             {
                 ClearForm();
                 MsgBox.Text = "Molido registrado con éxito.";
@@ -105,15 +97,13 @@ namespace CZS_LaVictoria.PlásticosPage
             EntradaCombo.Items.Clear();
             SalidaCombo.Items.Clear();
 
-            // TODO - "SELECT * FROM ____ WHERE Categoría = 'Por Moler'
-            var materiales = new List<MaterialModel>();
+            var materiales = GlobalConfig.Connection.Material_GetByCat("Por Moler");
             foreach (var material in materiales)
             {
                 EntradaCombo.Items.Add(material);
             }
 
-            // TODO - "SELECT * FROM ____ WHERE Categoría = 'Molido'
-            materiales = new List<MaterialModel>();
+            materiales = GlobalConfig.Connection.Material_GetByCat("Molido");
             foreach (var material in materiales)
             {
                 SalidaCombo.Items.Add(material);
@@ -126,8 +116,6 @@ namespace CZS_LaVictoria.PlásticosPage
         bool ValidateForm()
         {
             var output = true;
-            double.TryParse(CantidadEntradaText.Text, out var cantidadEntrada);
-            double.TryParse(CantidadSalidaText.Text, out var cantidadSalida);
             MsgBox.Text = "";
 
             if (EntradaCombo.Text == "")
@@ -141,7 +129,7 @@ namespace CZS_LaVictoria.PlásticosPage
                 output = false;
                 MsgBox.Text += "Ingresa la cantidad sin moler.\n";
             }
-            else if (cantidadEntrada > _materialEntrada.CantidadDisponible)
+            else if (_cantidadEntrada > _materialEntrada.CantidadDisponible)
             {
                 output = false;
                 MsgBox.Text += $"Cantidad de entrada excede el disponible ({_materialEntrada.CantidadDisponible}).\n";
@@ -159,7 +147,7 @@ namespace CZS_LaVictoria.PlásticosPage
                 MsgBox.Text += "Ingresa la cantidad molida.\n";
             }
 
-            if (cantidadSalida > cantidadEntrada)
+            if (_cantidadSalida > _cantidadEntrada)
             {
                 output = false;
                 MsgBox.Text += "Cantidad de salida no puede ser mayor a cantidad de entrada.\n";

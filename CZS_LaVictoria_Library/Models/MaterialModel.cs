@@ -26,5 +26,14 @@
             double.TryParse(peso, out var pesoResult);
             Peso = pesoResult;
         }
+
+        public MaterialModel(string nombre, string area, string categoría, double cantidadDisponible, double peso)
+        {
+            Nombre = nombre;
+            Area = area;
+            Categoría = categoría;
+            CantidadDisponible = cantidadDisponible;
+            Peso = peso;
+        }
     }
 }
