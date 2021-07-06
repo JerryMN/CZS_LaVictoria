@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using CZS_LaVictoria_Library.Models;
 using Dapper;
@@ -317,6 +318,25 @@ namespace CZS_LaVictoria_Library.DataAccess
                     return null;
                 }
                 return output;
+            }
+        }
+
+        public ProveedorProductoModel ProveedorProducto_Find(string nombreExterno, string area, string proveedor)
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var output = connection.QuerySingle<ProveedorProductoModel>(
+                        $"SELECT TOP 1 * FROM ProviderProduct WHERE materialExterno = '{nombreExterno}' AND area = '{area}' AND proveedor = '{proveedor}'");
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.ToString());
+                    Debug.Assert(false);
+                    return null;
+                }
             }
         }
 
@@ -637,6 +657,29 @@ namespace CZS_LaVictoria_Library.DataAccess
             }
         }
 
+        public MaterialModel Material_GetByNombreArea(string nombre, string area)
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var output =
+                        connection.QuerySingle<MaterialModel>(
+                            $"SELECT * FROM Stock WHERE nombre = '{nombre}' AND area = '{area}'");
+                    return output;
+                }
+                catch (Exception e)
+                {
+                    if (e.Message != "Sequence contains no elements")
+                    {
+                        Debug.Assert(false);
+                    }
+
+                    return null;
+                }
+            }
+        }
+
         public List<MaterialModel> Material_GetByCat(string categoría)
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
@@ -844,6 +887,88 @@ namespace CZS_LaVictoria_Library.DataAccess
                 }
                 catch (Exception)
                 {
+                    Debug.Assert(false);
+                    return false;
+                }
+            }
+        }
+
+        public PurchaseOrderModel PurchaseOrder_GetByNumOrden(string numOrden)
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@NumOrden", numOrden);
+                try
+                {
+                    var output = connection.QuerySingle<PurchaseOrderModel>("dbo.spPurchaseOrder_GetByNumOrden", p, commandType:CommandType.StoredProcedure);
+                    return output;
+                }
+                catch (Exception)
+                {
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
+        }
+
+        public List<PurchaseOrderLineModel> PurchaseOrderLine_GetByNumOrden(string numOrden)
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@NumOrden", long.Parse(numOrden));
+                try
+                {
+                    var output = connection.Query<PurchaseOrderLineModel>("dbo.spPurchaseOrderDetails_GetByNumOrden", p,
+                        commandType: CommandType.StoredProcedure).ToList();
+                    return output;
+                }
+                catch (Exception)
+                {
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
+        }
+
+        public List<PurchaseOrderLineModel> PurchaseOrderLine_GetAll()
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var output = connection.Query<PurchaseOrderLineModel>("dbo.spPurchaseOrderDetails_GetAll",
+                        commandType: CommandType.StoredProcedure).ToList();
+                    return output;
+                }
+                catch (Exception)
+                {
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
+        }
+
+        public bool PurchaseOrderLine_Update(long orderId, PurchaseOrderLineModel model)
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@IdOrden", orderId);
+                p.Add("@NumLinea", model.NumLinea);
+                p.Add("@CantidadEntregada", model.CantidadEntregada);
+                p.Add("@CantidadPendiente", model.CantidadPendiente);
+
+                try
+                {
+                    connection.Execute("dbo.spPurchaseOrderDetails_Update", p,
+                        commandType: CommandType.StoredProcedure);
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.ToString());
                     Debug.Assert(false);
                     return false;
                 }

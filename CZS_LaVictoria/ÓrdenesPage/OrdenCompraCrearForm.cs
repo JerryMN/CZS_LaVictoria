@@ -106,6 +106,11 @@ namespace CZS_LaVictoria.ÓrdenesPage
         /// </summary>
         void DataGrid_AutoGeneratingColumn(object sender, AutoGeneratingColumnArgs e)
         {
+            if (e.Column.MappingName == "NumOrden")
+            {
+                e.Cancel = true;
+            }
+
             if (e.Column.MappingName == "NumLinea")
             {
                 e.Column.HeaderText = "Línea";
@@ -213,6 +218,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             {
                 DataGrid.SortColumnDescriptions.RemoveAt(0);
             }
+
             DataGrid.SortColumnDescriptions.Add(new SortColumnDescription { ColumnName = "NumLinea", SortDirection = ListSortDirection.Ascending });
         }
 
@@ -253,6 +259,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             {
                 DataGrid.SortColumnDescriptions.RemoveAt(0);
             }
+
             DataGrid.SortColumnDescriptions.Add(new SortColumnDescription { ColumnName = "NumLinea", SortDirection = ListSortDirection.Ascending });
         }
 
@@ -397,6 +404,8 @@ namespace CZS_LaVictoria.ÓrdenesPage
             foreach (var record in DataGrid.View.Records)
             {
                 var data = record.Data as PurchaseOrderLineModel;
+                Debug.Assert(data != null, nameof(data) + " != null");
+                data.CantidadPendiente = data.CantidadOrden;
                 order.Líneas.Add(data);
             }
 

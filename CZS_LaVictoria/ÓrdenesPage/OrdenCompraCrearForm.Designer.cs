@@ -253,6 +253,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             // 
             this.FechaOrdenPicker.AllowValueChangeOnMouseWheel = true;
             this.FechaOrdenPicker.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.FechaOrdenPicker.Enabled = false;
             this.FechaOrdenPicker.Location = new System.Drawing.Point(130, 85);
             this.FechaOrdenPicker.Name = "FechaOrdenPicker";
             this.FechaOrdenPicker.Size = new System.Drawing.Size(150, 31);

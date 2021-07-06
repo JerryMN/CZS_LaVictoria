@@ -2,6 +2,7 @@
 {
     public class PurchaseOrderLineModel
     {
+        public long NumOrden { get; private set; }
         public int NumLinea { get; set; }
         public string Producto { get; set; }
         public double CantidadOrden { get; set; }

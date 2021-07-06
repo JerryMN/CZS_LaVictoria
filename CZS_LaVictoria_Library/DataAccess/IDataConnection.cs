@@ -44,6 +44,8 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         List<ProveedorProductoModel> ProveedorProducto_GetByProveedorArea(int idProveedor, string area);
 
+        ProveedorProductoModel ProveedorProducto_Find(string nombreExterno, string area, string proveedor);
+
         bool ProveedorProducto_Delete(ProveedorProductoModel model);
 
         #endregion
@@ -84,6 +86,8 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         List<MaterialModel> Material_GetByAreaCat(string area, string categoría);
 
+        MaterialModel Material_GetByNombreArea(string nombre, string area);
+
         List<MaterialModel> Material_GetByCat(string categoría);
 
         bool Material_Update(MaterialModel model);
@@ -103,6 +107,14 @@ namespace CZS_LaVictoria_Library.DataAccess
         long PurchaseOrder_GetLastNumber();
 
         bool PurchaseOrder_Insert(PurchaseOrderModel model);
+
+        PurchaseOrderModel PurchaseOrder_GetByNumOrden(string numOrden);
+
+        List<PurchaseOrderLineModel> PurchaseOrderLine_GetByNumOrden(string numOrden);
+
+        List<PurchaseOrderLineModel> PurchaseOrderLine_GetAll();
+
+        bool PurchaseOrderLine_Update(long orderId, PurchaseOrderLineModel model);
 
         #endregion
 
