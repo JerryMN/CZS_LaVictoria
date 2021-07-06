@@ -241,6 +241,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                 p.Add("@MaterialInterno", model.MaterialInterno);
                 p.Add("@PrecioUnitario", model.PrecioUnitario);
                 p.Add("@Area", model.Area);
+                p.Add("@Categoría", model.Categoría);
                 p.Add("@IdProveedor", proveedor.IdProvider);
                 p.Add("@Proveedor", proveedor.Nombre);
 
@@ -265,7 +266,6 @@ namespace CZS_LaVictoria_Library.DataAccess
                 p.Add("@MaterialExterno", model.MaterialExterno);
                 p.Add("@MaterialInterno", model.MaterialInterno);
                 p.Add("@PrecioUnitario", model.PrecioUnitario);
-                p.Add("@Area", model.Area);
                 p.Add("@IdProducto", model.IdProviderProduct);
 
                 try
@@ -321,14 +321,19 @@ namespace CZS_LaVictoria_Library.DataAccess
             }
         }
 
-        public ProveedorProductoModel ProveedorProducto_Find(string nombreExterno, string area, string proveedor)
+        public ProveedorProductoModel ProveedorProducto_Find(string nombreExterno, string proveedor, string area)
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
+                var p = new DynamicParameters();
+                p.Add("@NombreExterno", nombreExterno);
+                p.Add("@Proveedor", proveedor);
+                p.Add("@Area", area);
+
                 try
                 {
-                    var output = connection.QuerySingle<ProveedorProductoModel>(
-                        $"SELECT TOP 1 * FROM ProviderProduct WHERE materialExterno = '{nombreExterno}' AND area = '{area}' AND proveedor = '{proveedor}'");
+                    var output = connection.QuerySingle<ProveedorProductoModel>("dbo.spProviderProduct_Find", p,
+                        commandType: CommandType.StoredProcedure);
                     return output;
                 }
                 catch (Exception ex)
@@ -719,6 +724,27 @@ namespace CZS_LaVictoria_Library.DataAccess
                 {
                     Debug.Assert(false);
                     return false;
+                }
+            }
+        }
+
+        public List<string> Categorías_GetDistinct()
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var output = connection.Query<string>("SELECT DISTINCT categoría FROM Stock").ToList();
+                    return output;
+                }
+                catch (Exception e)
+                {
+                    if (e.Message != "Sequence contains no elements")
+                    {
+                        Debug.Assert(false);
+                    }
+
+                    return null;
                 }
             }
         }

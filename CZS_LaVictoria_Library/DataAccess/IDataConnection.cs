@@ -44,7 +44,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         List<ProveedorProductoModel> ProveedorProducto_GetByProveedorArea(int idProveedor, string area);
 
-        ProveedorProductoModel ProveedorProducto_Find(string nombreExterno, string area, string proveedor);
+        ProveedorProductoModel ProveedorProducto_Find(string nombreExterno, string proveedor, string area);
 
         bool ProveedorProducto_Delete(ProveedorProductoModel model);
 
@@ -91,6 +91,8 @@ namespace CZS_LaVictoria_Library.DataAccess
         List<MaterialModel> Material_GetByCat(string categoría);
 
         bool Material_Update(MaterialModel model);
+
+        List<string> Categorías_GetDistinct();
 
         #endregion
 

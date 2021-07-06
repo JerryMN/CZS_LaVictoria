@@ -7,6 +7,7 @@
         public string MaterialInterno { get; set; }
         public decimal PrecioUnitario { get; set; }
         public string Area { get; set; }
+        public string Categoría { get; set; }
         public int IdProvider { get; set; }
         public string Proveedor { get; set; }
 
@@ -14,7 +15,7 @@
         {
         }
 
-        public ProveedorProductoModel(string materialExterno, string materialInterno, string precioUnitario, string area)
+        public ProveedorProductoModel(string materialExterno, string materialInterno, string precioUnitario, string area, string categoría)
         {
             MaterialExterno = materialExterno;
             MaterialInterno = materialInterno;
@@ -23,6 +24,7 @@
             PrecioUnitario = precioResult;
 
             Area = area;
+            Categoría = categoría;
         }
     }
 }

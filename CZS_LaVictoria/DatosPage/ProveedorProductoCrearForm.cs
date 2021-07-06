@@ -14,6 +14,7 @@ namespace CZS_LaVictoria.DatosPage
             InitializeComponent();
             GetProveedores();
             GetAreas();
+            GetCategorías();
         }
 
         #region Events
@@ -27,7 +28,7 @@ namespace CZS_LaVictoria.DatosPage
                 return;
             }
 
-            var model = new ProveedorProductoModel(MaterialProveedorText.Text, MaterialInternoText.Text, PrecioUnitarioText.Text, AreaCombo.Text);
+            var model = new ProveedorProductoModel(MaterialProveedorText.Text, MaterialInternoText.Text, PrecioUnitarioText.Text, AreaCombo.Text, CategoríaCombo.Text);
             var proveedor = (ProveedorModel)ProveedorCombo.SelectedItem;
             var saveSuccess = GlobalConfig.Connection.ProveedorProducto_Create(model, proveedor);
 
@@ -79,6 +80,16 @@ namespace CZS_LaVictoria.DatosPage
             }
 
             AreaCombo.DisplayMember = "Area";
+        }
+
+        void GetCategorías()
+        {
+            var categorías = GlobalConfig.Connection.Categorías_GetDistinct();
+
+            foreach (var categoría in categorías)
+            {
+                if (categoría != null) CategoríaCombo.Items.Add(categoría);
+            }
         }
 
         bool ValidateForm()

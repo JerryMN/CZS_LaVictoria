@@ -181,7 +181,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             if (material  == null)
             {
                 // Si no existe se crea.
-                var newMaterial = new MaterialModel(producto.MaterialInterno, AreaText.Text, null, 
+                var newMaterial = new MaterialModel(producto.MaterialInterno, AreaText.Text, producto.Categoría, 
                     model?.CantidadEntregada.ToString(CultureInfo.InvariantCulture), null);
                 GlobalConfig.Connection.Material_Create(newMaterial);
             }
