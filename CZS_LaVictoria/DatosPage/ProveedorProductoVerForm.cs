@@ -27,6 +27,12 @@ namespace CZS_LaVictoria.DatosPage
             if (e.Column.HeaderText == "IdProviderProduct")
             {
                 e.Column.HeaderText = "Id Producto";
+                e.Column.AllowEditing = false;
+            }
+
+            if (e.Column.HeaderText == "Proveedor")
+            {
+                e.Column.AllowEditing = false;
             }
 
             if (e.Column.HeaderText == "MaterialExterno")
@@ -47,6 +53,12 @@ namespace CZS_LaVictoria.DatosPage
             if (e.Column.HeaderText == "Area")
             {
                 e.Column.HeaderText = "Área";
+                e.Column.AllowEditing = false;
+            }
+
+            if (e.Column.HeaderText == "Categoría")
+            {
+                e.Column.AllowEditing = false;
             }
         }
 
