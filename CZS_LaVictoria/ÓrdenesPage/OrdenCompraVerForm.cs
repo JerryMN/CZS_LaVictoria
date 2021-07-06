@@ -174,7 +174,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
         void UpdateStock(PurchaseOrderLineModel model, double oldQty, double newQty)
         {
             // Obtener el modelo ProveedorProducto para obtener el nombre interno (que es el usado en Stock).
-            var producto = GlobalConfig.Connection.ProveedorProducto_Find(model?.Producto, AreaText.Text, ProveedorText.Text);
+            var producto = GlobalConfig.Connection.ProveedorProducto_Find(model?.Producto, ProveedorText.Text, AreaText.Text);
 
             // Averiguar si el material ya existe en la tabla Stock.
             var material = GlobalConfig.Connection.Material_GetByNombreArea(producto.MaterialInterno, AreaText.Text);
