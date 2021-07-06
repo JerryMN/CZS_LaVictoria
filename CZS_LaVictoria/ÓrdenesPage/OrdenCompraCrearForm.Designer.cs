@@ -47,14 +47,10 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.ProveedorCombo = new System.Windows.Forms.ComboBox();
             this.ProveedorLabel = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.FechaOrdenPicker = new Syncfusion.WinForms.Input.SfDateTimeEdit();
-            this.FechaEntregaPicker = new Syncfusion.WinForms.Input.SfDateTimeEdit();
-            this.FechaEntregaLabel = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.FechaOrdenLabel = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.NumOrdenText = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
             this.NumOrdenLabel = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.SubtitleLabel = new System.Windows.Forms.Label();
-            this.MailButton = new DevExpress.XtraEditors.SimpleButton();
-            this.PdfButton = new DevExpress.XtraEditors.SimpleButton();
             this.GuardarButton = new DevExpress.XtraEditors.SimpleButton();
             this.MsgBox = new FontAwesome.Sharp.IconButton();
             this.MsgBoxTimer = new System.Windows.Forms.Timer(this.components);
@@ -82,7 +78,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.DataGrid.AccessibleName = "Table";
             this.DataGrid.AddNewRowPosition = Syncfusion.WinForms.DataGrid.Enums.RowPosition.Bottom;
             this.DataGrid.AddNewRowText = "Da click para agregar una nueva línea";
-            this.DataGrid.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
+            this.DataGrid.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.AllCellsWithLastColumnFill;
             this.DataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DataGrid.EditMode = Syncfusion.WinForms.DataGrid.Enums.EditMode.SingleClick;
             this.DataGrid.LiveDataUpdateMode = Syncfusion.Data.LiveDataUpdateMode.AllowDataShaping;
@@ -114,8 +110,6 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.DatosGroupBox.Controls.Add(this.ProveedorCombo);
             this.DatosGroupBox.Controls.Add(this.ProveedorLabel);
             this.DatosGroupBox.Controls.Add(this.FechaOrdenPicker);
-            this.DatosGroupBox.Controls.Add(this.FechaEntregaPicker);
-            this.DatosGroupBox.Controls.Add(this.FechaEntregaLabel);
             this.DatosGroupBox.Controls.Add(this.FechaOrdenLabel);
             this.DatosGroupBox.Controls.Add(this.NumOrdenText);
             this.DatosGroupBox.Controls.Add(this.NumOrdenLabel);
@@ -253,32 +247,12 @@ namespace CZS_LaVictoria.ÓrdenesPage
             // 
             this.FechaOrdenPicker.AllowValueChangeOnMouseWheel = true;
             this.FechaOrdenPicker.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.FechaOrdenPicker.Enabled = false;
             this.FechaOrdenPicker.Location = new System.Drawing.Point(130, 85);
             this.FechaOrdenPicker.Name = "FechaOrdenPicker";
             this.FechaOrdenPicker.Size = new System.Drawing.Size(150, 31);
             this.FechaOrdenPicker.TabIndex = 14;
             this.FechaOrdenPicker.Value = new System.DateTime(2021, 7, 2, 0, 0, 0, 0);
-            // 
-            // FechaEntregaPicker
-            // 
-            this.FechaEntregaPicker.AllowValueChangeOnMouseWheel = true;
-            this.FechaEntregaPicker.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.FechaEntregaPicker.Location = new System.Drawing.Point(130, 135);
-            this.FechaEntregaPicker.Name = "FechaEntregaPicker";
-            this.FechaEntregaPicker.Size = new System.Drawing.Size(150, 31);
-            this.FechaEntregaPicker.TabIndex = 13;
-            this.FechaEntregaPicker.Value = new System.DateTime(2021, 7, 2, 0, 0, 0, 0);
-            // 
-            // FechaEntregaLabel
-            // 
-            this.FechaEntregaLabel.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.FechaEntregaLabel.Location = new System.Drawing.Point(30, 140);
-            this.FechaEntregaLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.FechaEntregaLabel.Name = "FechaEntregaLabel";
-            this.FechaEntregaLabel.Size = new System.Drawing.Size(66, 21);
-            this.FechaEntregaLabel.TabIndex = 12;
-            this.FechaEntregaLabel.Text = "Entrega:";
+            this.FechaOrdenPicker.ValueChanged += new Syncfusion.WinForms.Input.Events.DateTimeValueChangedEventHandler(this.FechaOrdenPicker_ValueChanged);
             // 
             // FechaOrdenLabel
             // 
@@ -320,45 +294,13 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.SubtitleLabel.TabIndex = 29;
             this.SubtitleLabel.Text = "Orden de Compra";
             // 
-            // MailButton
-            // 
-            this.MailButton.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MailButton.Appearance.Options.UseFont = true;
-            this.MailButton.AutoSize = true;
-            this.MailButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("MailButton.ImageOptions.SvgImage")));
-            this.MailButton.Location = new System.Drawing.Point(180, 625);
-            this.MailButton.LookAndFeel.SkinName = "Office 2019 Colorful";
-            this.MailButton.LookAndFeel.UseDefaultLookAndFeel = false;
-            this.MailButton.Name = "MailButton";
-            this.MailButton.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
-            this.MailButton.Size = new System.Drawing.Size(165, 36);
-            this.MailButton.TabIndex = 31;
-            this.MailButton.Text = "Enviar por Correo";
-            this.MailButton.Click += new System.EventHandler(this.MailButton_Click);
-            // 
-            // PdfButton
-            // 
-            this.PdfButton.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PdfButton.Appearance.Options.UseFont = true;
-            this.PdfButton.AutoSize = true;
-            this.PdfButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("PdfButton.ImageOptions.SvgImage")));
-            this.PdfButton.Location = new System.Drawing.Point(50, 625);
-            this.PdfButton.LookAndFeel.SkinName = "Office 2019 Colorful";
-            this.PdfButton.LookAndFeel.UseDefaultLookAndFeel = false;
-            this.PdfButton.Name = "PdfButton";
-            this.PdfButton.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
-            this.PdfButton.Size = new System.Drawing.Size(112, 36);
-            this.PdfButton.TabIndex = 31;
-            this.PdfButton.Text = "Crear PDF";
-            this.PdfButton.Click += new System.EventHandler(this.PdfButton_Click);
-            // 
             // GuardarButton
             // 
             this.GuardarButton.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GuardarButton.Appearance.Options.UseFont = true;
             this.GuardarButton.AutoSize = true;
             this.GuardarButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("GuardarButton.ImageOptions.SvgImage")));
-            this.GuardarButton.Location = new System.Drawing.Point(351, 625);
+            this.GuardarButton.Location = new System.Drawing.Point(50, 625);
             this.GuardarButton.LookAndFeel.SkinName = "Office 2019 Colorful";
             this.GuardarButton.LookAndFeel.UseDefaultLookAndFeel = false;
             this.GuardarButton.Name = "GuardarButton";
@@ -402,9 +344,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1276, 839);
             this.Controls.Add(this.MsgBox);
-            this.Controls.Add(this.PdfButton);
             this.Controls.Add(this.GuardarButton);
-            this.Controls.Add(this.MailButton);
             this.Controls.Add(this.SubtitleLabel);
             this.Controls.Add(this.ProductosGroupBox);
             this.Controls.Add(this.DatosGroupBox);
@@ -438,8 +378,6 @@ namespace CZS_LaVictoria.ÓrdenesPage
         private System.Windows.Forms.ComboBox ProveedorCombo;
         private Syncfusion.Windows.Forms.Tools.AutoLabel ProveedorLabel;
         private Syncfusion.WinForms.Input.SfDateTimeEdit FechaOrdenPicker;
-        private Syncfusion.WinForms.Input.SfDateTimeEdit FechaEntregaPicker;
-        private Syncfusion.Windows.Forms.Tools.AutoLabel FechaEntregaLabel;
         private Syncfusion.Windows.Forms.Tools.AutoLabel FechaOrdenLabel;
         private Syncfusion.Windows.Forms.Tools.TextBoxExt NumOrdenText;
         private System.Windows.Forms.ComboBox CondicionesCombo;
@@ -452,8 +390,6 @@ namespace CZS_LaVictoria.ÓrdenesPage
         private System.Windows.Forms.Label SubtitleLabel;
         private System.Windows.Forms.BindingSource purchaseOrderLineModelBindingSource;
         private Syncfusion.WinForms.DataGrid.SfDataGrid DataGrid;
-        private DevExpress.XtraEditors.SimpleButton MailButton;
-        private DevExpress.XtraEditors.SimpleButton PdfButton;
         private DevExpress.XtraEditors.SimpleButton GuardarButton;
         private FontAwesome.Sharp.IconButton MsgBox;
         private System.Windows.Forms.Timer MsgBoxTimer;
