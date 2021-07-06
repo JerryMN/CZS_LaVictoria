@@ -116,6 +116,8 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         List<PurchaseOrderLineModel> PurchaseOrderLine_GetByNumOrden(string numOrden);
 
+        List<PurchaseOrderLineModel> PurchaseOrderLine_GetPending();
+
         List<PurchaseOrderLineModel> PurchaseOrderLine_GetAll();
 
         bool PurchaseOrderLine_Update(long orderId, PurchaseOrderLineModel model);

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
-using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using CZS_LaVictoria_Library.Models;
 using Dapper;
@@ -898,7 +897,6 @@ namespace CZS_LaVictoria_Library.DataAccess
                 p.Add("@Proveedor", model.Proveedor);
                 p.Add("@Condiciones", model.Condiciones);
                 p.Add("@FechaOrden", model.FechaOrden);
-                p.Add("@FechaEntrega", model.FechaEntrega);
                 p.Add("@UniqueId", 0, direction: ParameterDirection.Output);
 
                 try
@@ -913,11 +911,12 @@ namespace CZS_LaVictoria_Library.DataAccess
                         p.Add("@NumLinea", line.NumLinea);
                         p.Add("@Producto", line.Producto);
                         p.Add("@CantidadOrden", line.CantidadOrden);
-                        p.Add("@CantidadEntregada", line.CantidadEntregada);
+                        p.Add("@CantidadRecibida", line.CantidadRecibida);
                         p.Add("@CantidadPendiente", line.CantidadPendiente);
                         p.Add("@PrecioUnitario", line.PrecioUnitario);
                         p.Add("@Iva", line.Iva);
                         p.Add("@Subtotal", line.Subtotal);
+                        p.Add("@FechaEntrega", line.FechaEntrega);
 
                         try
                         {
@@ -979,6 +978,24 @@ namespace CZS_LaVictoria_Library.DataAccess
             }
         }
 
+        public List<PurchaseOrderLineModel> PurchaseOrderLine_GetPending()
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var output = connection.Query<PurchaseOrderLineModel>("dbo.spPurchaseOrderDetails_GetAllPending",
+                        commandType: CommandType.StoredProcedure).ToList();
+                    return output;
+                }
+                catch (Exception)
+                {
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
+        }
+
         public List<PurchaseOrderLineModel> PurchaseOrderLine_GetAll()
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
@@ -1004,7 +1021,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                 var p = new DynamicParameters();
                 p.Add("@IdOrden", orderId);
                 p.Add("@NumLinea", model.NumLinea);
-                p.Add("@CantidadEntregada", model.CantidadEntregada);
+                p.Add("@CantidadRecibida", model.CantidadRecibida);
                 p.Add("@CantidadPendiente", model.CantidadPendiente);
 
                 try
