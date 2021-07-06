@@ -6,7 +6,6 @@ using CZS_LaVictoria_Library;
 using Syncfusion.WinForms.DataGrid.Events;
 using Syncfusion.WinForms.DataGrid;
 using Syncfusion.WinForms.Input.Enums;
-using Syncfusion.WinForms.DataGrid.Enums;
 using System.Globalization;
 using CZS_LaVictoria_Library.Models;
 
@@ -32,27 +31,23 @@ namespace CZS_LaVictoria.ÓrdenesPage
         {
             // Si no hay alguna orden seleccionada, muestra todas las líneas de todas las órdenes.
             // No se pueden editar las cantidades en esta modalidad.
-            if (NumOrdenText.Text == "")
+            if (NumOrdenText.Text == "" && PendientesCheck.CheckState == CheckState.Unchecked)
             {
                 DataGrid.DataSource = GlobalConfig.Connection.PurchaseOrderLine_GetAll();
-                DataGrid.Columns["CantidadEntregada"].AllowEditing = false;
-                ProveedorText.Text = "";
-                FechaEntregaPicker.Value = new DateTime(1900, 1, 1);
-                AreaText.Text = "";
-                CondicionesText.Text = "";
+                DataGrid.Columns["CantidadRecibida"].AllowEditing = false;
+            }
+            else if (NumOrdenText.Text == "" && PendientesCheck.CheckState == CheckState.Checked)
+            {
+                DataGrid.DataSource = GlobalConfig.Connection.PurchaseOrderLine_GetPending();
+                DataGrid.Columns["CantidadRecibida"].AllowEditing = false;
             }
             // Al seleccionar una orden, muestra todas las líneas de esa orden.
             // Sí se pueden editar las cantidades en esta modalidad.
             else
             {
                 DataGrid.DataSource = GlobalConfig.Connection.PurchaseOrderLine_GetByNumOrden(NumOrdenText.Text);
-                DataGrid.Columns["CantidadEntregada"].AllowEditing = true;
+                DataGrid.Columns["CantidadRecibida"].AllowEditing = true;
                 _orden = GlobalConfig.Connection.PurchaseOrder_GetByNumOrden(NumOrdenText.Text);
-                if (_orden == null) return;
-                ProveedorText.Text = _orden.Proveedor;
-                FechaEntregaPicker.Value = _orden.FechaEntrega;
-                AreaText.Text = _orden.Area;
-                CondicionesText.Text = _orden.Condiciones;
             }
 
             // Ordenar tabla por Número de Orden.
@@ -69,6 +64,11 @@ namespace CZS_LaVictoria.ÓrdenesPage
         /// </summary>
         void DataGrid_AutoGeneratingColumn(object sender, AutoGeneratingColumnArgs e)
         {
+            if (e.Column.MappingName == "Area")
+            {
+                e.Column.HeaderText = "Área";
+            }
+
             if (e.Column.MappingName == "NumOrden")
             {
                 var nfi = new NumberFormatInfo { NumberDecimalDigits = 0, NumberGroupSizes = new int[] { } };
@@ -79,12 +79,12 @@ namespace CZS_LaVictoria.ÓrdenesPage
             if (e.Column.MappingName == "NumLinea")
             {
                 e.Column.HeaderText = "Línea";
+                e.Column.AllowFiltering = false;
             }
 
             if (e.Column.MappingName == "Producto")
             {
                 e.Column.HeaderText = "Producto";
-                e.Column.AutoSizeColumnsMode = AutoSizeColumnsMode.LastColumnFill;
             }
 
             if (e.Column.MappingName == "CantidadOrden")
@@ -92,9 +92,9 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 e.Column.HeaderText = "Cantidad Orden";
             }
 
-            if (e.Column.MappingName == "CantidadEntregada")
+            if (e.Column.MappingName == "CantidadRecibida")
             {
-                e.Column.HeaderText = "Cantidad Entregada";
+                e.Column.HeaderText = "Cantidad Recibida";
             }
 
             if (e.Column.MappingName == "CantidadPendiente")
@@ -105,7 +105,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             if (e.Column.MappingName == "PrecioUnitario")
             {
                 e.Column = new GridNumericColumn
-                { MappingName = "PrecioUnitario", HeaderText = "Precio Unitario", FormatMode = FormatMode.Currency };
+                { MappingName = "PrecioUnitario", HeaderText = "Precio Unitario", FormatMode = FormatMode.Currency};
             }
 
             if (e.Column.MappingName == "Iva")
@@ -117,6 +117,33 @@ namespace CZS_LaVictoria.ÓrdenesPage
             {
                 e.Column = new GridNumericColumn
                 { MappingName = "Subtotal", HeaderText = "Subtotal", FormatMode = FormatMode.Currency };
+            }
+
+            if (e.Column.MappingName == "FechaEntrega")
+            {
+                e.Column = new GridDateTimeColumn
+                {
+                    MappingName = "FechaEntrega",
+                    HeaderText = "Fecha Entrega"
+                };
+            }
+
+            if (e.Column.MappingName == "FechaUltRecepción")
+            {
+                e.Column = new GridDateTimeColumn
+                {
+                    MappingName = "FechaUltRecepción",
+                    HeaderText = "Fecha Últ. Recepción"
+                };
+            }
+
+            if (e.Column.MappingName == "FechaCancelación")
+            {
+                e.Column = new GridDateTimeColumn
+                {
+                    MappingName = "FechaCancelación",
+                    HeaderText = "Fecha Cancelación"
+                };
             }
         }
 
@@ -174,15 +201,15 @@ namespace CZS_LaVictoria.ÓrdenesPage
         void UpdateStock(PurchaseOrderLineModel model, double oldQty, double newQty)
         {
             // Obtener el modelo ProveedorProducto para obtener el nombre interno (que es el usado en Stock).
-            var producto = GlobalConfig.Connection.ProveedorProducto_Find(model?.Producto, ProveedorText.Text, AreaText.Text);
+            var producto = GlobalConfig.Connection.ProveedorProducto_Find(model?.Producto, model?.Proveedor, model?.Area);
 
             // Averiguar si el material ya existe en la tabla Stock.
-            var material = GlobalConfig.Connection.Material_GetByNombreArea(producto.MaterialInterno, AreaText.Text);
+            var material = GlobalConfig.Connection.Material_GetByNombreArea(producto.MaterialInterno, model?.Area);
             if (material  == null)
             {
                 // Si no existe se crea.
-                var newMaterial = new MaterialModel(producto.MaterialInterno, AreaText.Text, producto.Categoría, 
-                    model?.CantidadEntregada.ToString(CultureInfo.InvariantCulture), null);
+                var newMaterial = new MaterialModel(producto.MaterialInterno, model?.Area, producto.Categoría, 
+                    model?.CantidadRecibida.ToString(CultureInfo.InvariantCulture), null);
                 GlobalConfig.Connection.Material_Create(newMaterial);
             }
             else
