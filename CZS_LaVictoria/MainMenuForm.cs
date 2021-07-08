@@ -59,6 +59,11 @@ namespace CZS_LaVictoria
             OpenChildForm(new InventarioVerForm());
         }
 
+        void VerHistorialButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new HistorialVerForm());
+        }
+
         #endregion
 
         #region Datos - Proveedores

@@ -353,7 +353,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 order.Líneas.Add(data);
             }
 
-            var saveSuccess = GlobalConfig.Connection.PurchaseOrder_Insert(order);
+            var saveSuccess = GlobalConfig.Connection.PurchaseOrder_Create(order);
 
             if (saveSuccess)
             {

@@ -163,6 +163,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
 
             UpdatePurchaseOrderLine(_orden, línea, línea?.Estatus);
             UpdateStock(línea, _oldQty, _newQty);
+            AddDelivery(línea);
             // Unhook para que este método sólo se ejecute después de Recibir Button.
             DataGrid.SelectionChanging -= DataGridOnSelectionChanging;
         }
@@ -198,8 +199,6 @@ namespace CZS_LaVictoria.ÓrdenesPage
             // Guardar la fecha de última recepción.
             // TODO - Tabla de historial de recepciones?
             línea.FechaUltRecepción = DateTime.Today;
-            // Reset para que el diálogo siempre aparezca vacío.
-            _newQtyString = "";
         }
 
         void CancelarButton_Click(object sender, EventArgs e)
@@ -315,6 +314,14 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 material.CantidadDisponible += (newQty - oldQty);
                 GlobalConfig.Connection.Material_Update(material);
             }
+        }
+
+        void AddDelivery(PurchaseOrderLineModel model)
+        {
+            var quantity = double.Parse(_newQtyString);
+            GlobalConfig.Connection.Delivery_Create("C", _orden.NumOrden, model, quantity);
+            // Reset para que el diálogo siempre aparezca vacío.
+            _newQtyString = "";
         }
 
         #endregion

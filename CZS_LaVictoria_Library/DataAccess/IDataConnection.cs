@@ -110,7 +110,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         long PurchaseOrder_GetLastNumber();
 
-        bool PurchaseOrder_Insert(PurchaseOrderModel model);
+        bool PurchaseOrder_Create(PurchaseOrderModel model);
 
         PurchaseOrderModel PurchaseOrder_GetByNumOrden(string numOrden);
 
@@ -127,6 +127,16 @@ namespace CZS_LaVictoria_Library.DataAccess
         #region Orden de Venta
 
         string SaleOrder_GetLastNumber();
+
+        #endregion
+
+        #region Historial de Entregas
+
+        bool Delivery_Create(string tipoOrden, long numOrden, PurchaseOrderLineModel model, double quantity);
+
+        List<HistorialModel> Delivery_GetCompra();
+
+        List<HistorialModel> Delivery_GetVenta();
 
         #endregion
     }

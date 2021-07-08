@@ -51,6 +51,7 @@
     <Compile Include="Models\ClienteCiudadModel.cs" />
     <Compile Include="Models\ClienteModel.cs" />
     <Compile Include="Models\ClienteProductoModel.cs" />
+    <Compile Include="Models\HistorialModel.cs" />
     <Compile Include="Models\MaterialModel.cs" />
     <Compile Include="Models\MezclaModel.cs" />
     <Compile Include="Models\PurchaseOrderLineModel.cs" />

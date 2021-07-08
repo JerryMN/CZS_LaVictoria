@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.NetworkInformation;
 using CZS_LaVictoria_Library.Models;
 using Dapper;
 
@@ -886,7 +887,7 @@ namespace CZS_LaVictoria_Library.DataAccess
             }
         }
 
-        public bool PurchaseOrder_Insert(PurchaseOrderModel model)
+        public bool PurchaseOrder_Create(PurchaseOrderModel model)
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
@@ -901,7 +902,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
                 try
                 {
-                    connection.Execute("dbo.spPurchaseOrder_Insert", p, commandType: CommandType.StoredProcedure);
+                    connection.Execute("dbo.spPurchaseOrder_Create", p, commandType: CommandType.StoredProcedure);
                     model.UniqueIdOrder = p.Get<int>("@UniqueId");
 
                     foreach (var line in model.Líneas)
@@ -1059,6 +1060,72 @@ namespace CZS_LaVictoria_Library.DataAccess
                 {
                     Debug.Assert(false);
                     return "2100001";
+                }
+            }
+        }
+
+        #endregion
+
+        #region Historial de Entregas
+
+        public bool Delivery_Create(string tipoOrden, long numOrden, PurchaseOrderLineModel model, double quantity)
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@TipoOrden", tipoOrden);
+                p.Add("@NumOrden", numOrden);
+                p.Add("@NumLinea", model.NumLinea);
+                p.Add("@Producto", model.Producto);
+                p.Add("@Cantidad", quantity);
+                p.Add("@Fecha", model.FechaUltRecepción);
+
+                try
+                {
+                    connection.Execute("dbo.spDelivery_Insert", p,
+                        commandType: CommandType.StoredProcedure);
+                    return true;
+                }
+                catch (Exception)
+                {
+                    Debug.Assert(false);
+                    return false;
+                }
+            }
+        }
+
+        public List<HistorialModel> Delivery_GetCompra()
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var output = connection.Query<HistorialModel>("dbo.spDelivery_GetCompra",
+                        commandType: CommandType.StoredProcedure).ToList();
+                    return output;
+                }
+                catch (Exception)
+                {
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
+        }
+
+        public List<HistorialModel> Delivery_GetVenta()
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var output = connection.Query<HistorialModel>("dbo.spDelivery_GetVenta",
+                        commandType: CommandType.StoredProcedure).ToList();
+                    return output;
+                }
+                catch (Exception)
+                {
+                    Debug.Assert(false);
+                    return null;
                 }
             }
         }
