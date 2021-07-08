@@ -32,7 +32,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             var data = e.RemovedItems[0] as PurchaseOrderLineModel;
             _orden = GlobalConfig.Connection.PurchaseOrder_GetByNumOrden(data?.NumOrden.ToString());
             UpdatePurchaseOrderLine(_orden, data); // TODO - Actualizar fecha tambien.
-            // TODO - Actualizar inventario.
+            UpdateStock(data, _oldQty, _newQty);
         }
 
         #region Events
