@@ -63,6 +63,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.DataGrid.AccessibleName = "Table";
             this.DataGrid.AllowEditing = false;
             this.DataGrid.AllowFiltering = true;
+            this.DataGrid.AllowResizingColumns = true;
             this.DataGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -140,6 +141,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.CancelarButton.Text = "Cancelar Línea";
             this.CancelarButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.CancelarButton.UseVisualStyleBackColor = true;
+            this.CancelarButton.Click += new System.EventHandler(this.CancelarButton_Click);
             // 
             // OrdenCompraVerForm
             // 

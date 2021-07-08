@@ -15,13 +15,14 @@ namespace CZS_LaVictoria_Library.Models
         decimal _precioUnitario;
         bool _iva;
         decimal _subtotal;
-        DateTime _fechaEntrega;
-        DateTime _fechaUltRecepción;
-        DateTime _fechaCancelación;
+        DateTime? _fechaEntrega;
+        DateTime? _fechaUltRecepción;
+        DateTime? _fechaCancelación;
+        string _estatus;
 
         public string Proveedor { get; set; }
         public string Area { get; set; }
-        public long NumOrden { get; set; }
+        public long NumOrden { get; set;  }
 
         public int NumLinea
         {
@@ -71,23 +72,30 @@ namespace CZS_LaVictoria_Library.Models
             set { _subtotal = value; RaisePropertyChanged("Subtotal"); }
         }
 
-        public DateTime FechaEntrega
+        public DateTime? FechaEntrega
         {
             get => _fechaEntrega;
             set { _fechaEntrega = value; RaisePropertyChanged("FechaEntrega"); }
         }
 
-        public DateTime FechaUltRecepción
+        public DateTime? FechaUltRecepción
         {
             get => _fechaUltRecepción;
             set { _fechaUltRecepción = value; RaisePropertyChanged("FechaUltRecepción"); }
         }
 
-        public DateTime FechaCancelación
+        public DateTime? FechaCancelación
         {
             get => _fechaCancelación;
             set { _fechaCancelación = value; RaisePropertyChanged("FechaCancelación"); }
         }
+
+        public string Estatus
+        {
+            get => _estatus;
+            set { _estatus = value; RaisePropertyChanged("Estatus"); }
+        }
+
 
         public PurchaseOrderLineModel()
         {

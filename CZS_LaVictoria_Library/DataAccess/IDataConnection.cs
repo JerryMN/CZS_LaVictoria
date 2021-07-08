@@ -120,7 +120,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         List<PurchaseOrderLineModel> PurchaseOrderLine_GetAll();
 
-        bool PurchaseOrderLine_Update(long orderId, PurchaseOrderLineModel model);
+        bool PurchaseOrderLine_Update(long orderId, PurchaseOrderLineModel model, string estatus);
 
         #endregion
 

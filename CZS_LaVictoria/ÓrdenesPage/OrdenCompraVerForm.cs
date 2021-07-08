@@ -23,16 +23,6 @@ namespace CZS_LaVictoria.ÓrdenesPage
         public OrdenCompraVerForm()
         {
             InitializeComponent();
-            DataGrid.SelectionChanging += DataGridOnSelectionChanging;
-        }
-
-        void DataGridOnSelectionChanging(object sender, SelectionChangingEventArgs e)
-        {
-            if (e.RemovedItems.Count == 0) return;
-            var data = e.RemovedItems[0] as PurchaseOrderLineModel;
-            _orden = GlobalConfig.Connection.PurchaseOrder_GetByNumOrden(data?.NumOrden.ToString());
-            UpdatePurchaseOrderLine(_orden, data); // TODO - Actualizar fecha tambien.
-            UpdateStock(data, _oldQty, _newQty);
         }
 
         #region Events
@@ -132,7 +122,8 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 e.Column = new GridDateTimeColumn
                 {
                     MappingName = "FechaEntrega",
-                    HeaderText = "Fecha Entrega"
+                    HeaderText = "Fecha Entrega",
+                    NullValue = null
                 };
             }
 
@@ -141,7 +132,8 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 e.Column = new GridDateTimeColumn
                 {
                     MappingName = "FechaUltRecepción",
-                    HeaderText = "Fecha Últ. Recepción"
+                    HeaderText = "Fecha Últ. Recepción",
+                    NullValue = null
                 };
             }
 
@@ -150,9 +142,29 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 e.Column = new GridDateTimeColumn
                 {
                     MappingName = "FechaCancelación",
-                    HeaderText = "Fecha Cancelación"
+                    HeaderText = "Fecha Cancelación",
+                    NullValue = null,
                 };
             }
+        }
+
+        /// <summary>
+        /// Actualiza una línea al moverse de ella.
+        /// </summary>
+        void DataGridOnSelectionChanging(object sender, SelectionChangingEventArgs e)
+        {
+            if (e.RemovedItems.Count == 0) return;
+            var línea = e.RemovedItems[0] as PurchaseOrderLineModel;
+            _orden = GlobalConfig.Connection.PurchaseOrder_GetByNumOrden(línea?.NumOrden.ToString());
+            if (línea?.CantidadPendiente == 0)
+            {
+                línea.Estatus = "Entregada";
+            }
+
+            UpdatePurchaseOrderLine(_orden, línea, línea?.Estatus);
+            UpdateStock(línea, _oldQty, _newQty);
+            // Unhook para que este método sólo se ejecute después de Recibir Button.
+            DataGrid.SelectionChanging -= DataGridOnSelectionChanging;
         }
 
         /// <summary>
@@ -160,11 +172,13 @@ namespace CZS_LaVictoria.ÓrdenesPage
         /// </summary>
         void RecibirButton_Click(object sender, EventArgs e)
         {
+            DataGrid.SelectionChanging += DataGridOnSelectionChanging;
             if (DataGrid.SelectedIndex < 0)
             {
                 MessageBox.Show("Selecciona una línea.");
                 return;
             }
+
             var línea = DataGrid.SelectedItem as PurchaseOrderLineModel;
             Debug.Assert(línea != null, nameof(línea) + " != null");
 
@@ -186,6 +200,29 @@ namespace CZS_LaVictoria.ÓrdenesPage
             línea.FechaUltRecepción = DateTime.Today;
             // Reset para que el diálogo siempre aparezca vacío.
             _newQtyString = "";
+        }
+
+        void CancelarButton_Click(object sender, EventArgs e)
+        {
+            if (DataGrid.SelectedIndex < 0)
+            {
+                MessageBox.Show("Selecciona una línea.");
+                return;
+            }
+
+            var línea = DataGrid.SelectedItem as PurchaseOrderLineModel;
+            Debug.Assert(línea != null, nameof(línea) + " != null");
+            if (línea.Estatus == "Cancelada")
+            {
+                MessageBox.Show("Esta línea ya está cancelada.");
+                return;
+            }
+
+            _orden = GlobalConfig.Connection.PurchaseOrder_GetByNumOrden(línea?.NumOrden.ToString());
+            línea.CantidadPendiente = 0;
+            línea.FechaCancelación = DateTime.Today;
+            línea.Estatus = "Cancelada";
+            UpdatePurchaseOrderLine(_orden, línea, línea.Estatus);
         }
 
         #endregion
@@ -247,9 +284,9 @@ namespace CZS_LaVictoria.ÓrdenesPage
         /// </summary>
         /// <param name="order">La orden a la que pertenece la línea</param>
         /// <param name="line">La línea a actualizar.</param>
-        void UpdatePurchaseOrderLine(PurchaseOrderModel order, PurchaseOrderLineModel line)
+        void UpdatePurchaseOrderLine(PurchaseOrderModel order, PurchaseOrderLineModel line, string estatus)
         {
-            GlobalConfig.Connection.PurchaseOrderLine_Update(order.NumOrden, line);
+            GlobalConfig.Connection.PurchaseOrderLine_Update(order.UniqueIdOrder, line, estatus);
         }
 
         /// <summary>

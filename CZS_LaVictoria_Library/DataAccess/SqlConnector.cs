@@ -917,6 +917,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                         p.Add("@Iva", line.Iva);
                         p.Add("@Subtotal", line.Subtotal);
                         p.Add("@FechaEntrega", line.FechaEntrega);
+                        p.Add("@Estatus", "Abierta");
 
                         try
                         {
@@ -1014,7 +1015,7 @@ namespace CZS_LaVictoria_Library.DataAccess
             }
         }
 
-        public bool PurchaseOrderLine_Update(long orderId, PurchaseOrderLineModel model)
+        public bool PurchaseOrderLine_Update(long orderId, PurchaseOrderLineModel model, string estatus)
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
@@ -1023,6 +1024,9 @@ namespace CZS_LaVictoria_Library.DataAccess
                 p.Add("@NumLinea", model.NumLinea);
                 p.Add("@CantidadRecibida", model.CantidadRecibida);
                 p.Add("@CantidadPendiente", model.CantidadPendiente);
+                p.Add("@FechaUltRecepción", model.FechaUltRecepción);
+                p.Add("@FechaCancelación", model.FechaCancelación);
+                p.Add("@Estatus", estatus);
 
                 try
                 {
