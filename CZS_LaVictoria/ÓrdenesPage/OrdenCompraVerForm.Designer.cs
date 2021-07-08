@@ -34,6 +34,8 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.NumOrdenText = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
             this.NumOrdenLabel = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.PendientesCheck = new System.Windows.Forms.CheckBox();
+            this.RecibirButton = new FontAwesome.Sharp.IconButton();
+            this.CancelarButton = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)(this.DataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumOrdenText)).BeginInit();
             this.SuspendLayout();
@@ -47,7 +49,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.BuscarButton.IconColor = System.Drawing.Color.Black;
             this.BuscarButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.BuscarButton.IconSize = 24;
-            this.BuscarButton.Location = new System.Drawing.Point(173, 65);
+            this.BuscarButton.Location = new System.Drawing.Point(275, 21);
             this.BuscarButton.Name = "BuscarButton";
             this.BuscarButton.Size = new System.Drawing.Size(90, 31);
             this.BuscarButton.TabIndex = 8;
@@ -66,10 +68,10 @@ namespace CZS_LaVictoria.ÓrdenesPage
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DataGrid.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.AllCells;
             this.DataGrid.EditMode = Syncfusion.WinForms.DataGrid.Enums.EditMode.SingleClick;
-            this.DataGrid.Location = new System.Drawing.Point(0, 127);
+            this.DataGrid.Location = new System.Drawing.Point(0, 75);
             this.DataGrid.Name = "DataGrid";
             this.DataGrid.ShowGroupDropArea = true;
-            this.DataGrid.Size = new System.Drawing.Size(1276, 711);
+            this.DataGrid.Size = new System.Drawing.Size(1276, 763);
             this.DataGrid.TabIndex = 7;
             this.DataGrid.Text = "sfDataGrid1";
             this.DataGrid.ValidationMode = Syncfusion.WinForms.DataGrid.Enums.GridValidationMode.InEdit;
@@ -97,12 +99,47 @@ namespace CZS_LaVictoria.ÓrdenesPage
             // PendientesCheck
             // 
             this.PendientesCheck.AutoSize = true;
-            this.PendientesCheck.Location = new System.Drawing.Point(275, 69);
+            this.PendientesCheck.Location = new System.Drawing.Point(375, 25);
             this.PendientesCheck.Name = "PendientesCheck";
             this.PendientesCheck.Size = new System.Drawing.Size(140, 25);
             this.PendientesCheck.TabIndex = 12;
             this.PendientesCheck.Text = "Sólo pendientes";
             this.PendientesCheck.UseVisualStyleBackColor = true;
+            // 
+            // RecibirButton
+            // 
+            this.RecibirButton.AutoSize = true;
+            this.RecibirButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.RecibirButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RecibirButton.IconChar = FontAwesome.Sharp.IconChar.Receipt;
+            this.RecibirButton.IconColor = System.Drawing.Color.Green;
+            this.RecibirButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.RecibirButton.IconSize = 24;
+            this.RecibirButton.Location = new System.Drawing.Point(550, 22);
+            this.RecibirButton.Name = "RecibirButton";
+            this.RecibirButton.Size = new System.Drawing.Size(133, 31);
+            this.RecibirButton.TabIndex = 8;
+            this.RecibirButton.Text = "Recibir Línea";
+            this.RecibirButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.RecibirButton.UseVisualStyleBackColor = true;
+            this.RecibirButton.Click += new System.EventHandler(this.RecibirButton_Click);
+            // 
+            // CancelarButton
+            // 
+            this.CancelarButton.AutoSize = true;
+            this.CancelarButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.CancelarButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CancelarButton.IconChar = FontAwesome.Sharp.IconChar.Ban;
+            this.CancelarButton.IconColor = System.Drawing.Color.DarkRed;
+            this.CancelarButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.CancelarButton.IconSize = 24;
+            this.CancelarButton.Location = new System.Drawing.Point(700, 22);
+            this.CancelarButton.Name = "CancelarButton";
+            this.CancelarButton.Size = new System.Drawing.Size(145, 31);
+            this.CancelarButton.TabIndex = 8;
+            this.CancelarButton.Text = "Cancelar Línea";
+            this.CancelarButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.CancelarButton.UseVisualStyleBackColor = true;
             // 
             // OrdenCompraVerForm
             // 
@@ -112,6 +149,8 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.Controls.Add(this.PendientesCheck);
             this.Controls.Add(this.NumOrdenText);
             this.Controls.Add(this.NumOrdenLabel);
+            this.Controls.Add(this.CancelarButton);
+            this.Controls.Add(this.RecibirButton);
             this.Controls.Add(this.BuscarButton);
             this.Controls.Add(this.DataGrid);
             this.Font = new System.Drawing.Font("Segoe UI", 12F);
@@ -136,5 +175,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
         private Syncfusion.Windows.Forms.Tools.TextBoxExt NumOrdenText;
         private Syncfusion.Windows.Forms.Tools.AutoLabel NumOrdenLabel;
         private System.Windows.Forms.CheckBox PendientesCheck;
+        private FontAwesome.Sharp.IconButton RecibirButton;
+        private FontAwesome.Sharp.IconButton CancelarButton;
     }
 }

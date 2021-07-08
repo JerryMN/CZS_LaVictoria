@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.Windows.Forms;
 using CZS_LaVictoria_Library;
 using Syncfusion.WinForms.DataGrid.Events;
@@ -8,18 +9,30 @@ using Syncfusion.WinForms.DataGrid;
 using Syncfusion.WinForms.Input.Enums;
 using System.Globalization;
 using CZS_LaVictoria_Library.Models;
+// ReSharper disable UseObjectOrCollectionInitializer
 
 namespace CZS_LaVictoria.ÓrdenesPage
 {
     public partial class OrdenCompraVerForm : Form
     {
         PurchaseOrderModel _orden;
+        double _oldQty;
+        double _newQty;
+        string _newQtyString;
 
         public OrdenCompraVerForm()
         {
             InitializeComponent();
-            DataGrid.CurrentCellValidating += DataGridOnCurrentCellValidating;
-            DataGrid.CurrentCellValidated += DataGridOnCurrentCellValidated;
+            DataGrid.SelectionChanging += DataGridOnSelectionChanging;
+        }
+
+        void DataGridOnSelectionChanging(object sender, SelectionChangingEventArgs e)
+        {
+            if (e.RemovedItems.Count == 0) return;
+            var data = e.RemovedItems[0] as PurchaseOrderLineModel;
+            _orden = GlobalConfig.Connection.PurchaseOrder_GetByNumOrden(data?.NumOrden.ToString());
+            UpdatePurchaseOrderLine(_orden, data); // TODO - Actualizar fecha tambien.
+            // TODO - Actualizar inventario.
         }
 
         #region Events
@@ -30,23 +43,18 @@ namespace CZS_LaVictoria.ÓrdenesPage
         void BuscarButton_Click(object sender, EventArgs e)
         {
             // Si no hay alguna orden seleccionada, muestra todas las líneas de todas las órdenes.
-            // No se pueden editar las cantidades en esta modalidad.
             if (NumOrdenText.Text == "" && PendientesCheck.CheckState == CheckState.Unchecked)
             {
                 DataGrid.DataSource = GlobalConfig.Connection.PurchaseOrderLine_GetAll();
-                DataGrid.Columns["CantidadRecibida"].AllowEditing = false;
             }
             else if (NumOrdenText.Text == "" && PendientesCheck.CheckState == CheckState.Checked)
             {
                 DataGrid.DataSource = GlobalConfig.Connection.PurchaseOrderLine_GetPending();
-                DataGrid.Columns["CantidadRecibida"].AllowEditing = false;
             }
             // Al seleccionar una orden, muestra todas las líneas de esa orden.
-            // Sí se pueden editar las cantidades en esta modalidad.
             else
             {
                 DataGrid.DataSource = GlobalConfig.Connection.PurchaseOrderLine_GetByNumOrden(NumOrdenText.Text);
-                DataGrid.Columns["CantidadRecibida"].AllowEditing = true;
                 _orden = GlobalConfig.Connection.PurchaseOrder_GetByNumOrden(NumOrdenText.Text);
             }
 
@@ -148,35 +156,36 @@ namespace CZS_LaVictoria.ÓrdenesPage
         }
 
         /// <summary>
-        /// Valida la cantidad entregada de la línea.
+        /// Pregunta al usuario la cantidad recibida de alguna línea seleccionada.
         /// </summary>
-        void DataGridOnCurrentCellValidating(object sender, CurrentCellValidatingEventArgs e)
+        void RecibirButton_Click(object sender, EventArgs e)
         {
-            var data = e.RowData as PurchaseOrderLineModel;
-            Debug.Assert(data != null, nameof(data) + " != null");
-            var cantidadOrden = data.CantidadOrden;
-            var cantidadEntregada = (double)e.NewValue;
-            var cantidadPendiente = cantidadOrden - cantidadEntregada;
-            if (cantidadPendiente < 0)
+            if (DataGrid.SelectedIndex < 0)
             {
-                e.IsValid = false;
-                e.ErrorMessage = "La cantidad entregada no puede ser mayor a la cantidad ordenada.";
+                MessageBox.Show("Selecciona una línea.");
+                return;
             }
-            else
-            {
-                data.CantidadPendiente = cantidadPendiente;
-            }
-        }
+            var línea = DataGrid.SelectedItem as PurchaseOrderLineModel;
+            Debug.Assert(línea != null, nameof(línea) + " != null");
 
-        /// <summary>
-        /// Una vez que la línea es válida, actualiza las tablas de SQL con las cantidades apropiadas.
-        /// </summary>
-        void DataGridOnCurrentCellValidated(object sender, CurrentCellValidatedEventArgs e)
-        {
-            var data = e.RowData as PurchaseOrderLineModel;
-            UpdatePurchaseOrderLine(data);
-            UpdateStock(data, double.Parse(e.OldValue.ToString()), double.Parse(e.NewValue.ToString()));
+            // Obtener la cantidad recibida hasta el momento.
+            _oldQty = línea.CantidadRecibida;
+            // Preguntar la cantidad que se entregó. (No es cantidad acumulada).
+            // De esta manera, la nueva cantidad es la recibida hasta el momento
+            // más la ingresada por el usuario.
+            ShowInputDialog(ref _newQtyString);
+            if (string.IsNullOrEmpty(_newQtyString)) return;
+            _newQty = _oldQty + double.Parse(_newQtyString);
+            // Guardar las cantidades en la tabla.
+            línea.CantidadRecibida = _newQty;
+            var pendiente = línea.CantidadOrden - _newQty;
+            línea.CantidadPendiente = pendiente < 0 ? 0 : pendiente;
 
+            // Guardar la fecha de última recepción.
+            // TODO - Tabla de historial de recepciones?
+            línea.FechaUltRecepción = DateTime.Today;
+            // Reset para que el diálogo siempre aparezca vacío.
+            _newQtyString = "";
         }
 
         #endregion
@@ -184,12 +193,63 @@ namespace CZS_LaVictoria.ÓrdenesPage
         #region Methods
 
         /// <summary>
+        /// Muestra el diálogo para que el usuario ingrese una cantidad.
+        /// Checa si el input es válido (un número).
+        /// </summary>
+        /// <param name="input">La variable donde se guarda el input.</param>
+        static void ShowInputDialog(ref string input)
+        {
+            var size = new Size(300, 70);
+            var inputBox = new Form();
+
+            inputBox.FormBorderStyle = FormBorderStyle.FixedDialog;
+            inputBox.ClientSize = size;
+            inputBox.Text = "Cantidad recibida:";
+
+            var textBox = new TextBox();
+            textBox.Size = new Size(size.Width - 10, 23);
+            textBox.Location = new Point(5, 5);
+            textBox.Text = input;
+            inputBox.Controls.Add(textBox);
+
+            var okButton = new Button();
+            okButton.DialogResult = DialogResult.OK;
+            okButton.Name = "okButton";
+            okButton.Size = new Size(75, 23);
+            okButton.Text = "&OK";
+            okButton.Location = new Point(size.Width - 80 - 80, 39);
+            inputBox.Controls.Add(okButton);
+
+            var cancelButton = new Button();
+            cancelButton.DialogResult = DialogResult.Cancel;
+            cancelButton.Name = "cancelButton";
+            cancelButton.Size = new Size(75, 23);
+            cancelButton.Text = "&Cancelar";
+            cancelButton.Location = new Point(size.Width - 80, 39);
+            inputBox.Controls.Add(cancelButton);
+
+            inputBox.AcceptButton = okButton;
+            inputBox.CancelButton = cancelButton;
+            inputBox.StartPosition = FormStartPosition.CenterScreen;
+
+            var result = inputBox.ShowDialog();
+            if (result == DialogResult.Cancel) return;
+            if (!double.TryParse(textBox.Text, out _))
+            {
+                MessageBox.Show("Ingresa un número!");
+                return;
+            }
+            input = textBox.Text;
+        }
+
+        /// <summary>
         /// Actualiza la cantidad entregada y pendiente en la tabla PurchaseOrderDetails en SQL.
         /// </summary>
-        /// <param name="model">La línea a actualizar.</param>
-        void UpdatePurchaseOrderLine(PurchaseOrderLineModel model)
+        /// <param name="order">La orden a la que pertenece la línea</param>
+        /// <param name="line">La línea a actualizar.</param>
+        void UpdatePurchaseOrderLine(PurchaseOrderModel order, PurchaseOrderLineModel line)
         {
-            GlobalConfig.Connection.PurchaseOrderLine_Update(_orden.UniqueIdOrder, model);
+            GlobalConfig.Connection.PurchaseOrderLine_Update(order.NumOrden, line);
         }
 
         /// <summary>
