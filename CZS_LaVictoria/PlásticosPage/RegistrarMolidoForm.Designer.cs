@@ -42,16 +42,18 @@ namespace CZS_LaVictoria.PlásticosPage
             this.CantidadSalidaText = new Syncfusion.WinForms.Input.SfNumericTextBox();
             this.MermaLabel = new System.Windows.Forms.Label();
             this.MermaText = new Syncfusion.WinForms.Input.SfNumericTextBox();
-            this.MsgBox = new FontAwesome.Sharp.IconButton();
-            this.GuardarButton = new System.Windows.Forms.Button();
             this.MsgBoxTimer = new System.Windows.Forms.Timer(this.components);
-            this.sfDateTimeEdit1 = new Syncfusion.WinForms.Input.SfDateTimeEdit();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.FechaPicker = new Syncfusion.WinForms.Input.SfDateTimeEdit();
+            this.OperadorCombo = new System.Windows.Forms.ComboBox();
+            this.MaquinaText = new System.Windows.Forms.NumericUpDown();
             this.FechaLabel = new System.Windows.Forms.Label();
             this.OperadorLabel = new System.Windows.Forms.Label();
             this.MaquinaLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.TurnoText = new System.Windows.Forms.NumericUpDown();
+            this.GuardarButton = new System.Windows.Forms.Button();
+            this.MsgBox = new FontAwesome.Sharp.IconButton();
+            ((System.ComponentModel.ISupportInitialize)(this.MaquinaText)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TurnoText)).BeginInit();
             this.SuspendLayout();
             // 
             // SubtitleLabel
@@ -193,67 +195,36 @@ namespace CZS_LaVictoria.PlásticosPage
             this.MermaText.TabIndex = 35;
             this.MermaText.WatermarkText = "Calculado automáticamente";
             // 
-            // MsgBox
-            // 
-            this.MsgBox.FlatAppearance.BorderSize = 0;
-            this.MsgBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.MsgBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MsgBox.IconChar = FontAwesome.Sharp.IconChar.ExclamationTriangle;
-            this.MsgBox.IconColor = System.Drawing.Color.DarkRed;
-            this.MsgBox.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.MsgBox.IconSize = 32;
-            this.MsgBox.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.MsgBox.Location = new System.Drawing.Point(550, 350);
-            this.MsgBox.Name = "MsgBox";
-            this.MsgBox.Size = new System.Drawing.Size(420, 165);
-            this.MsgBox.TabIndex = 37;
-            this.MsgBox.TextAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.MsgBox.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.MsgBox.UseVisualStyleBackColor = true;
-            this.MsgBox.Visible = false;
-            // 
-            // GuardarButton
-            // 
-            this.GuardarButton.AutoSize = true;
-            this.GuardarButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GuardarButton.Location = new System.Drawing.Point(892, 300);
-            this.GuardarButton.Name = "GuardarButton";
-            this.GuardarButton.Size = new System.Drawing.Size(78, 35);
-            this.GuardarButton.TabIndex = 36;
-            this.GuardarButton.Text = "Guardar";
-            this.GuardarButton.UseVisualStyleBackColor = true;
-            this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
-            // 
             // MsgBoxTimer
             // 
             this.MsgBoxTimer.Interval = 3000;
             this.MsgBoxTimer.Tick += new System.EventHandler(this.MsgBoxTimer_Tick);
             // 
-            // sfDateTimeEdit1
+            // FechaPicker
             // 
-            this.sfDateTimeEdit1.AllowValueChangeOnMouseWheel = true;
-            this.sfDateTimeEdit1.Location = new System.Drawing.Point(200, 147);
-            this.sfDateTimeEdit1.Name = "sfDateTimeEdit1";
-            this.sfDateTimeEdit1.Size = new System.Drawing.Size(250, 31);
-            this.sfDateTimeEdit1.TabIndex = 38;
+            this.FechaPicker.AllowValueChangeOnMouseWheel = true;
+            this.FechaPicker.Location = new System.Drawing.Point(200, 147);
+            this.FechaPicker.Name = "FechaPicker";
+            this.FechaPicker.Size = new System.Drawing.Size(250, 31);
+            this.FechaPicker.TabIndex = 38;
             // 
-            // comboBox1
+            // OperadorCombo
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(200, 197);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(250, 29);
-            this.comboBox1.TabIndex = 34;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.EntradaCombo_SelectedIndexChanged);
+            this.OperadorCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.OperadorCombo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OperadorCombo.FormattingEnabled = true;
+            this.OperadorCombo.Location = new System.Drawing.Point(200, 197);
+            this.OperadorCombo.Name = "OperadorCombo";
+            this.OperadorCombo.Size = new System.Drawing.Size(250, 29);
+            this.OperadorCombo.TabIndex = 34;
+            this.OperadorCombo.SelectedIndexChanged += new System.EventHandler(this.EntradaCombo_SelectedIndexChanged);
             // 
-            // numericUpDown1
+            // MaquinaText
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(200, 247);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(250, 29);
-            this.numericUpDown1.TabIndex = 39;
+            this.MaquinaText.Location = new System.Drawing.Point(200, 247);
+            this.MaquinaText.Name = "MaquinaText";
+            this.MaquinaText.Size = new System.Drawing.Size(120, 29);
+            this.MaquinaText.TabIndex = 39;
             // 
             // FechaLabel
             // 
@@ -281,24 +252,63 @@ namespace CZS_LaVictoria.PlásticosPage
             this.MaquinaLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaquinaLabel.Location = new System.Drawing.Point(50, 250);
             this.MaquinaLabel.Name = "MaquinaLabel";
-            this.MaquinaLabel.Size = new System.Drawing.Size(71, 21);
+            this.MaquinaLabel.Size = new System.Drawing.Size(126, 21);
             this.MaquinaLabel.TabIndex = 32;
-            this.MaquinaLabel.Text = "Máquina";
+            this.MaquinaLabel.Text = "Máquina / Turno";
+            // 
+            // TurnoText
+            // 
+            this.TurnoText.Location = new System.Drawing.Point(330, 247);
+            this.TurnoText.Name = "TurnoText";
+            this.TurnoText.Size = new System.Drawing.Size(120, 29);
+            this.TurnoText.TabIndex = 39;
+            // 
+            // GuardarButton
+            // 
+            this.GuardarButton.AutoSize = true;
+            this.GuardarButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GuardarButton.Location = new System.Drawing.Point(892, 300);
+            this.GuardarButton.Name = "GuardarButton";
+            this.GuardarButton.Size = new System.Drawing.Size(78, 35);
+            this.GuardarButton.TabIndex = 36;
+            this.GuardarButton.Text = "Guardar";
+            this.GuardarButton.UseVisualStyleBackColor = true;
+            this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
+            // 
+            // MsgBox
+            // 
+            this.MsgBox.FlatAppearance.BorderSize = 0;
+            this.MsgBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.MsgBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MsgBox.IconChar = FontAwesome.Sharp.IconChar.ExclamationTriangle;
+            this.MsgBox.IconColor = System.Drawing.Color.DarkRed;
+            this.MsgBox.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.MsgBox.IconSize = 32;
+            this.MsgBox.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.MsgBox.Location = new System.Drawing.Point(550, 350);
+            this.MsgBox.Name = "MsgBox";
+            this.MsgBox.Size = new System.Drawing.Size(420, 165);
+            this.MsgBox.TabIndex = 37;
+            this.MsgBox.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.MsgBox.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.MsgBox.UseVisualStyleBackColor = true;
+            this.MsgBox.Visible = false;
             // 
             // RegistrarMolidoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1276, 839);
-            this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.sfDateTimeEdit1);
+            this.Controls.Add(this.TurnoText);
+            this.Controls.Add(this.MaquinaText);
+            this.Controls.Add(this.FechaPicker);
             this.Controls.Add(this.MsgBox);
             this.Controls.Add(this.GuardarButton);
             this.Controls.Add(this.MermaText);
             this.Controls.Add(this.CantidadSalidaText);
             this.Controls.Add(this.CantidadEntradaText);
             this.Controls.Add(this.SalidaCombo);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.OperadorCombo);
             this.Controls.Add(this.EntradaCombo);
             this.Controls.Add(this.ArrowButton);
             this.Controls.Add(this.MermaLabel);
@@ -315,7 +325,8 @@ namespace CZS_LaVictoria.PlásticosPage
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "RegistrarMolidoForm";
             this.Text = "RegistrarMolidoButton";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MaquinaText)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TurnoText)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -335,14 +346,15 @@ namespace CZS_LaVictoria.PlásticosPage
         private Syncfusion.WinForms.Input.SfNumericTextBox CantidadSalidaText;
         private System.Windows.Forms.Label MermaLabel;
         private Syncfusion.WinForms.Input.SfNumericTextBox MermaText;
-        private FontAwesome.Sharp.IconButton MsgBox;
-        private System.Windows.Forms.Button GuardarButton;
         private System.Windows.Forms.Timer MsgBoxTimer;
-        private Syncfusion.WinForms.Input.SfDateTimeEdit sfDateTimeEdit1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private Syncfusion.WinForms.Input.SfDateTimeEdit FechaPicker;
+        private System.Windows.Forms.ComboBox OperadorCombo;
+        private System.Windows.Forms.NumericUpDown MaquinaText;
         private System.Windows.Forms.Label FechaLabel;
         private System.Windows.Forms.Label OperadorLabel;
         private System.Windows.Forms.Label MaquinaLabel;
+        private System.Windows.Forms.NumericUpDown TurnoText;
+        private System.Windows.Forms.Button GuardarButton;
+        private FontAwesome.Sharp.IconButton MsgBox;
     }
 }

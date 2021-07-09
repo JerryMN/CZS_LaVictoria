@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
@@ -18,7 +20,9 @@ namespace CZS_LaVictoria.PlásticosPage
         public RegistrarMolidoForm()
         {
             InitializeComponent();
+            GetOperadores();
             GetMateriales();
+            FechaPicker.Culture = new CultureInfo("es-MX");
         }
 
         #region Events
@@ -64,6 +68,20 @@ namespace CZS_LaVictoria.PlásticosPage
                 _materialSalida.CantidadDisponible += _cantidadSalida;
                 saveSalida = GlobalConfig.Connection.Material_Update(_materialSalida);
             }
+
+            var orden = new ProducciónPlásticosModel();
+            Debug.Assert(FechaPicker.Value != null, "FechaPicker.Value != null");
+            orden.Fecha = (DateTime) FechaPicker.Value;
+            orden.Proceso = "Molido";
+            orden.Turno = int.Parse(TurnoText.Text);
+            orden.Máquina = int.Parse(MaquinaText.Text);
+            orden.Operador = OperadorCombo.Text;
+            orden.MaterialEntra = _materialEntrada.Nombre;
+            orden.CantidadEntra = double.Parse(CantidadEntradaText.Text);
+            orden.MaterialSale = _materialSalida.Nombre;
+            orden.CantidadSale = double.Parse(CantidadSalidaText.Text);
+            orden.MermaFinal = double.Parse(MermaText.Text);
+            // TODO - Guardar orden.
             
 
             if (saveEntrada && saveSalida)
@@ -91,6 +109,17 @@ namespace CZS_LaVictoria.PlásticosPage
         #endregion
 
         #region Methods
+
+        void GetOperadores()
+        {
+            var operadores = new List<OperadorModel>(); // TODO - Fill.
+            foreach (var operador in operadores)
+            {
+                OperadorCombo.Items.Add(operador);
+            }
+
+            OperadorCombo.DisplayMember = "Nombre";
+        }
 
         void GetMateriales()
         {
