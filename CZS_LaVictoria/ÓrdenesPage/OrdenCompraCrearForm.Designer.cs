@@ -336,7 +336,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             // 
             // purchaseOrderLineModelBindingSource
             // 
-            this.purchaseOrderLineModelBindingSource.DataSource = typeof(CZS_LaVictoria_Library.Models.PurchaseOrderLineModel);
+            this.purchaseOrderLineModelBindingSource.DataSource = typeof(CZS_LaVictoria_Library.Models.OrdenCompraLíneaModel);
             // 
             // OrdenCompraCrearForm
             // 

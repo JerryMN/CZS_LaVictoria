@@ -28,7 +28,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
     {
         ProveedorModel _selectedProveedor;
         List<ProveedorProductoModel> _productos;
-        readonly List<PurchaseOrderLineModel> _orderLines = new List<PurchaseOrderLineModel>();
+        readonly List<OrdenCompraLíneaModel> _orderLines = new List<OrdenCompraLíneaModel>();
         int _numLinea = 1;
         string _pdfPath;
 
@@ -203,7 +203,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
         /// </summary>
         void DataGrid_AddNewRowInitiating(object sender, AddNewRowInitiatingEventArgs e)
         {
-            if (e.NewObject is PurchaseOrderLineModel data)
+            if (e.NewObject is OrdenCompraLíneaModel data)
             {
                 data.NumLinea = _numLinea;
                 data.FechaEntrega = DateTime.Today;
@@ -217,7 +217,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
         void DataGridOnCellComboBoxSelectionChanged(object sender, CellComboBoxSelectionChangedEventArgs e)
         {
             if (e.GridColumn.MappingName != "Producto") return;
-            if (e.Record is PurchaseOrderLineModel row)
+            if (e.Record is OrdenCompraLíneaModel row)
             {
                 if (e.SelectedItem is ProveedorProductoModel producto)
                 {
@@ -335,7 +335,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             SendMail();
 
             Debug.Assert(FechaOrdenPicker.Value != null, "FechaOrdenPicker.Value != null");
-            var order = new PurchaseOrderModel
+            var order = new OrdenCompraModel
             {
                 NumOrden = long.Parse(NumOrdenText.Text),
                 TipoOrden = "C",
@@ -347,7 +347,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
 
             foreach (var record in DataGrid.View.Records)
             {
-                var data = record.Data as PurchaseOrderLineModel;
+                var data = record.Data as OrdenCompraLíneaModel;
                 Debug.Assert(data != null, nameof(data) + " != null");
                 data.CantidadPendiente = data.CantidadOrden;
                 order.Líneas.Add(data);

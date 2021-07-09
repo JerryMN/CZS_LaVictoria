@@ -15,7 +15,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
 {
     public partial class OrdenCompraVerForm : Form
     {
-        PurchaseOrderModel _orden;
+        OrdenCompraModel _orden;
         double _oldQty;
         double _newQty;
         string _newQtyString;
@@ -154,7 +154,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
         void DataGridOnSelectionChanging(object sender, SelectionChangingEventArgs e)
         {
             if (e.RemovedItems.Count == 0) return;
-            var línea = e.RemovedItems[0] as PurchaseOrderLineModel;
+            var línea = e.RemovedItems[0] as OrdenCompraLíneaModel;
             _orden = GlobalConfig.Connection.PurchaseOrder_GetByNumOrden(línea?.NumOrden.ToString());
             if (línea?.CantidadPendiente == 0)
             {
@@ -180,7 +180,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 return;
             }
 
-            var línea = DataGrid.SelectedItem as PurchaseOrderLineModel;
+            var línea = DataGrid.SelectedItem as OrdenCompraLíneaModel;
             Debug.Assert(línea != null, nameof(línea) + " != null");
 
             // Obtener la cantidad recibida hasta el momento.
@@ -209,7 +209,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 return;
             }
 
-            var línea = DataGrid.SelectedItem as PurchaseOrderLineModel;
+            var línea = DataGrid.SelectedItem as OrdenCompraLíneaModel;
             Debug.Assert(línea != null, nameof(línea) + " != null");
             if (línea.Estatus == "Cancelada")
             {
@@ -283,7 +283,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
         /// </summary>
         /// <param name="order">La orden a la que pertenece la línea</param>
         /// <param name="line">La línea a actualizar.</param>
-        void UpdatePurchaseOrderLine(PurchaseOrderModel order, PurchaseOrderLineModel line, string estatus)
+        void UpdatePurchaseOrderLine(OrdenCompraModel order, OrdenCompraLíneaModel line, string estatus)
         {
             GlobalConfig.Connection.PurchaseOrderLine_Update(order.UniqueIdOrder, line, estatus);
         }
@@ -294,7 +294,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
         /// <param name="model">La línea donde se encuentra el material.</param>
         /// <param name="oldQty">La cantidad entregada anterior.</param>
         /// <param name="newQty">La cantidad entregada actualizada.</param>
-        void UpdateStock(PurchaseOrderLineModel model, double oldQty, double newQty)
+        void UpdateStock(OrdenCompraLíneaModel model, double oldQty, double newQty)
         {
             // Obtener el modelo ProveedorProducto para obtener el nombre interno (que es el usado en Stock).
             var producto = GlobalConfig.Connection.ProveedorProducto_Find(model?.Producto, model?.Proveedor, model?.Area);
@@ -316,7 +316,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             }
         }
 
-        void AddDelivery(PurchaseOrderLineModel model)
+        void AddDelivery(OrdenCompraLíneaModel model)
         {
             var quantity = double.Parse(_newQtyString);
             GlobalConfig.Connection.Delivery_Create("C", _orden.NumOrden, model, quantity);
