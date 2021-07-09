@@ -51,6 +51,7 @@ namespace CZS_LaVictoria.DatosPage
             this.BorrarButton.Text = "Borrar";
             this.BorrarButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BorrarButton.UseVisualStyleBackColor = true;
+            this.BorrarButton.Click += new System.EventHandler(this.BorrarButton_Click);
             // 
             // EditarButton
             // 
@@ -68,6 +69,7 @@ namespace CZS_LaVictoria.DatosPage
             this.EditarButton.Text = "Editar";
             this.EditarButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.EditarButton.UseVisualStyleBackColor = true;
+            this.EditarButton.Click += new System.EventHandler(this.EditarButton_Click);
             // 
             // DataGrid
             // 

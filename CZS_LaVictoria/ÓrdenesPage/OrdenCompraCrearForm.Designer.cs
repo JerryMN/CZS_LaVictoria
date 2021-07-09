@@ -251,7 +251,6 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.FechaOrdenPicker.Name = "FechaOrdenPicker";
             this.FechaOrdenPicker.Size = new System.Drawing.Size(150, 31);
             this.FechaOrdenPicker.TabIndex = 14;
-            this.FechaOrdenPicker.Value = new System.DateTime(2021, 7, 2, 0, 0, 0, 0);
             this.FechaOrdenPicker.ValueChanged += new Syncfusion.WinForms.Input.Events.DateTimeValueChangedEventHandler(this.FechaOrdenPicker_ValueChanged);
             // 
             // FechaOrdenLabel

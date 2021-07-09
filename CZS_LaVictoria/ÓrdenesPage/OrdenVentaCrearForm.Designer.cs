@@ -30,12 +30,12 @@ namespace CZS_LaVictoria.ÓrdenesPage
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OrdenVentaCrearForm));
             this.DatosGroupBox = new System.Windows.Forms.GroupBox();
             this.AreaCombo = new System.Windows.Forms.ComboBox();
             this.AreaLabel = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.FechaOrdenPicker = new Syncfusion.WinForms.Input.SfDateTimeEdit();
-            this.FechaEntregaPicker = new Syncfusion.WinForms.Input.SfDateTimeEdit();
-            this.FechaEntregaLabel = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.FechaOrdenLabel = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.NumOrdenText = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
             this.NumOrdenLabel = new Syncfusion.Windows.Forms.Tools.AutoLabel();
@@ -49,9 +49,10 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.PresentaciónLabel = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.ProductosGroupBox = new System.Windows.Forms.GroupBox();
             this.DataGrid = new Syncfusion.WinForms.DataGrid.SfDataGrid();
-            this.RevisarButton = new FontAwesome.Sharp.IconButton();
-            this.NotasButton = new FontAwesome.Sharp.IconButton();
             this.SubtitleLabel = new System.Windows.Forms.Label();
+            this.MsgBox = new FontAwesome.Sharp.IconButton();
+            this.GuardarButton = new DevExpress.XtraEditors.SimpleButton();
+            this.MsgBoxTimer = new System.Windows.Forms.Timer(this.components);
             this.DatosGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumOrdenText)).BeginInit();
             this.ProductosGroupBox.SuspendLayout();
@@ -63,8 +64,6 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.DatosGroupBox.Controls.Add(this.AreaCombo);
             this.DatosGroupBox.Controls.Add(this.AreaLabel);
             this.DatosGroupBox.Controls.Add(this.FechaOrdenPicker);
-            this.DatosGroupBox.Controls.Add(this.FechaEntregaPicker);
-            this.DatosGroupBox.Controls.Add(this.FechaEntregaLabel);
             this.DatosGroupBox.Controls.Add(this.FechaOrdenLabel);
             this.DatosGroupBox.Controls.Add(this.NumOrdenText);
             this.DatosGroupBox.Controls.Add(this.NumOrdenLabel);
@@ -76,7 +75,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.DatosGroupBox.Controls.Add(this.TransporteLabel);
             this.DatosGroupBox.Controls.Add(this.PuestoLabel);
             this.DatosGroupBox.Controls.Add(this.PresentaciónLabel);
-            this.DatosGroupBox.Location = new System.Drawing.Point(50, 150);
+            this.DatosGroupBox.Location = new System.Drawing.Point(50, 100);
             this.DatosGroupBox.Name = "DatosGroupBox";
             this.DatosGroupBox.Size = new System.Drawing.Size(1176, 183);
             this.DatosGroupBox.TabIndex = 1;
@@ -111,25 +110,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.FechaOrdenPicker.Name = "FechaOrdenPicker";
             this.FechaOrdenPicker.Size = new System.Drawing.Size(150, 31);
             this.FechaOrdenPicker.TabIndex = 43;
-            // 
-            // FechaEntregaPicker
-            // 
-            this.FechaEntregaPicker.AllowValueChangeOnMouseWheel = true;
-            this.FechaEntregaPicker.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.FechaEntregaPicker.Location = new System.Drawing.Point(130, 135);
-            this.FechaEntregaPicker.Name = "FechaEntregaPicker";
-            this.FechaEntregaPicker.Size = new System.Drawing.Size(150, 31);
-            this.FechaEntregaPicker.TabIndex = 42;
-            // 
-            // FechaEntregaLabel
-            // 
-            this.FechaEntregaLabel.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.FechaEntregaLabel.Location = new System.Drawing.Point(30, 140);
-            this.FechaEntregaLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.FechaEntregaLabel.Name = "FechaEntregaLabel";
-            this.FechaEntregaLabel.Size = new System.Drawing.Size(66, 21);
-            this.FechaEntregaLabel.TabIndex = 41;
-            this.FechaEntregaLabel.Text = "Entrega:";
+            this.FechaOrdenPicker.ValueChanged += new Syncfusion.WinForms.Input.Events.DateTimeValueChangedEventHandler(this.FechaOrdenPicker_ValueChanged);
             // 
             // FechaOrdenLabel
             // 
@@ -149,6 +130,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.NumOrdenText.ReadOnly = true;
             this.NumOrdenText.Size = new System.Drawing.Size(150, 29);
             this.NumOrdenText.TabIndex = 39;
+            this.NumOrdenText.Text = "2100000";
             // 
             // NumOrdenLabel
             // 
@@ -240,9 +222,9 @@ namespace CZS_LaVictoria.ÓrdenesPage
             // ProductosGroupBox
             // 
             this.ProductosGroupBox.Controls.Add(this.DataGrid);
-            this.ProductosGroupBox.Location = new System.Drawing.Point(50, 350);
+            this.ProductosGroupBox.Location = new System.Drawing.Point(50, 300);
             this.ProductosGroupBox.Name = "ProductosGroupBox";
-            this.ProductosGroupBox.Size = new System.Drawing.Size(1176, 350);
+            this.ProductosGroupBox.Size = new System.Drawing.Size(1176, 300);
             this.ProductosGroupBox.TabIndex = 2;
             this.ProductosGroupBox.TabStop = false;
             this.ProductosGroupBox.Text = "Productos";
@@ -250,75 +232,89 @@ namespace CZS_LaVictoria.ÓrdenesPage
             // DataGrid
             // 
             this.DataGrid.AccessibleName = "Table";
-            this.DataGrid.AddNewRowPosition = Syncfusion.WinForms.DataGrid.Enums.RowPosition.FixedBottom;
-            this.DataGrid.AddNewRowText = "Nueva línea";
-            this.DataGrid.AllowDeleting = true;
-            this.DataGrid.AllowGrouping = false;
-            this.DataGrid.AllowSorting = false;
-            this.DataGrid.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.Fill;
+            this.DataGrid.AddNewRowPosition = Syncfusion.WinForms.DataGrid.Enums.RowPosition.Bottom;
+            this.DataGrid.AddNewRowText = "Da click para agregar una nueva línea";
+            this.DataGrid.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.AllCellsWithLastColumnFill;
             this.DataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DataGrid.EditMode = Syncfusion.WinForms.DataGrid.Enums.EditMode.SingleClick;
+            this.DataGrid.LiveDataUpdateMode = Syncfusion.Data.LiveDataUpdateMode.AllowDataShaping;
             this.DataGrid.Location = new System.Drawing.Point(3, 25);
             this.DataGrid.Name = "DataGrid";
-            this.DataGrid.Size = new System.Drawing.Size(1170, 322);
-            this.DataGrid.TabIndex = 1;
+            this.DataGrid.NewItemPlaceholderPosition = Syncfusion.Data.NewItemPlaceholderPosition.AtEnd;
+            this.DataGrid.Size = new System.Drawing.Size(1170, 272);
+            this.DataGrid.Style.AddNewRowStyle.BackColor = System.Drawing.Color.Maroon;
+            this.DataGrid.Style.AddNewRowStyle.TextColor = System.Drawing.Color.White;
+            this.DataGrid.TabIndex = 42;
             this.DataGrid.Text = "sfDataGrid1";
             this.DataGrid.AutoGeneratingColumn += new Syncfusion.WinForms.DataGrid.Events.AutoGeneratingColumnEventHandler(this.DataGrid_AutoGeneratingColumn);
-            // 
-            // RevisarButton
-            // 
-            this.RevisarButton.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.RevisarButton.IconChar = FontAwesome.Sharp.IconChar.None;
-            this.RevisarButton.IconColor = System.Drawing.Color.Black;
-            this.RevisarButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.RevisarButton.Location = new System.Drawing.Point(50, 710);
-            this.RevisarButton.Name = "RevisarButton";
-            this.RevisarButton.Size = new System.Drawing.Size(119, 35);
-            this.RevisarButton.TabIndex = 8;
-            this.RevisarButton.Text = "Revisar orden";
-            this.RevisarButton.UseVisualStyleBackColor = true;
-            // 
-            // NotasButton
-            // 
-            this.NotasButton.AutoSize = true;
-            this.NotasButton.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.NotasButton.IconChar = FontAwesome.Sharp.IconChar.Pen;
-            this.NotasButton.IconColor = System.Drawing.Color.Black;
-            this.NotasButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.NotasButton.IconSize = 25;
-            this.NotasButton.Location = new System.Drawing.Point(200, 710);
-            this.NotasButton.Name = "NotasButton";
-            this.NotasButton.Size = new System.Drawing.Size(86, 35);
-            this.NotasButton.TabIndex = 9;
-            this.NotasButton.Text = "Notas";
-            this.NotasButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.NotasButton.UseVisualStyleBackColor = true;
-            this.NotasButton.Click += new System.EventHandler(this.NotasButton_Click);
+            this.DataGrid.CurrentCellEndEdit += new Syncfusion.WinForms.DataGrid.Events.CurrentCellEndEditEventHandler(this.DataGrid_CurrentCellEndEdit);
+            this.DataGrid.AddNewRowInitiating += new Syncfusion.WinForms.DataGrid.Events.AddNewRowInitiatingEventHandler(this.DataGrid_AddNewRowInitiating);
+            this.DataGrid.CellCheckBoxClick += new Syncfusion.WinForms.DataGrid.Events.CellCheckBoxClickEventHandler(this.DataGrid_CellCheckBoxClick);
             // 
             // SubtitleLabel
             // 
             this.SubtitleLabel.AutoSize = true;
             this.SubtitleLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SubtitleLabel.Location = new System.Drawing.Point(50, 50);
+            this.SubtitleLabel.Location = new System.Drawing.Point(50, 25);
             this.SubtitleLabel.Name = "SubtitleLabel";
             this.SubtitleLabel.Size = new System.Drawing.Size(206, 37);
             this.SubtitleLabel.TabIndex = 30;
             this.SubtitleLabel.Text = "Orden de Venta";
             // 
-            // SaleOrderForm
+            // MsgBox
+            // 
+            this.MsgBox.FlatAppearance.BorderSize = 0;
+            this.MsgBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.MsgBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MsgBox.IconChar = FontAwesome.Sharp.IconChar.ExclamationTriangle;
+            this.MsgBox.IconColor = System.Drawing.Color.DarkRed;
+            this.MsgBox.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.MsgBox.IconSize = 32;
+            this.MsgBox.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.MsgBox.Location = new System.Drawing.Point(806, 625);
+            this.MsgBox.Name = "MsgBox";
+            this.MsgBox.Size = new System.Drawing.Size(420, 157);
+            this.MsgBox.TabIndex = 34;
+            this.MsgBox.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.MsgBox.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.MsgBox.UseVisualStyleBackColor = true;
+            this.MsgBox.Visible = false;
+            // 
+            // GuardarButton
+            // 
+            this.GuardarButton.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GuardarButton.Appearance.Options.UseFont = true;
+            this.GuardarButton.AutoSize = true;
+            this.GuardarButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("GuardarButton.ImageOptions.SvgImage")));
+            this.GuardarButton.Location = new System.Drawing.Point(50, 625);
+            this.GuardarButton.LookAndFeel.SkinName = "Office 2019 Colorful";
+            this.GuardarButton.LookAndFeel.UseDefaultLookAndFeel = false;
+            this.GuardarButton.Name = "GuardarButton";
+            this.GuardarButton.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
+            this.GuardarButton.Size = new System.Drawing.Size(99, 36);
+            this.GuardarButton.TabIndex = 33;
+            this.GuardarButton.Text = "Guardar";
+            this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
+            // 
+            // MsgBoxTimer
+            // 
+            this.MsgBoxTimer.Interval = 3000;
+            this.MsgBoxTimer.Tick += new System.EventHandler(this.MsgBoxTimer_Tick);
+            // 
+            // OrdenVentaCrearForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1276, 839);
+            this.Controls.Add(this.MsgBox);
+            this.Controls.Add(this.GuardarButton);
             this.Controls.Add(this.SubtitleLabel);
-            this.Controls.Add(this.NotasButton);
             this.Controls.Add(this.ProductosGroupBox);
-            this.Controls.Add(this.RevisarButton);
             this.Controls.Add(this.DatosGroupBox);
             this.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "SaleOrderForm";
+            this.Name = "OrdenVentaCrearForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "SellingOrderForm";
@@ -335,7 +331,6 @@ namespace CZS_LaVictoria.ÓrdenesPage
         #endregion
         private System.Windows.Forms.GroupBox DatosGroupBox;
         private System.Windows.Forms.GroupBox ProductosGroupBox;
-        private FontAwesome.Sharp.IconButton RevisarButton;
         private System.Windows.Forms.ComboBox PuestoCombo;
         private System.Windows.Forms.ComboBox PresentaciónCombo;
         private Syncfusion.Windows.Forms.Tools.AutoLabel TransporteLabel;
@@ -345,15 +340,15 @@ namespace CZS_LaVictoria.ÓrdenesPage
         private Syncfusion.Windows.Forms.Tools.AutoLabel ClienteLabel;
         private System.Windows.Forms.ComboBox TransporteCombo;
         private Syncfusion.WinForms.Input.SfDateTimeEdit FechaOrdenPicker;
-        private Syncfusion.WinForms.Input.SfDateTimeEdit FechaEntregaPicker;
-        private Syncfusion.Windows.Forms.Tools.AutoLabel FechaEntregaLabel;
         private Syncfusion.Windows.Forms.Tools.AutoLabel FechaOrdenLabel;
         private Syncfusion.Windows.Forms.Tools.TextBoxExt NumOrdenText;
         private Syncfusion.Windows.Forms.Tools.AutoLabel NumOrdenLabel;
-        private FontAwesome.Sharp.IconButton NotasButton;
         private System.Windows.Forms.ComboBox AreaCombo;
         private Syncfusion.Windows.Forms.Tools.AutoLabel AreaLabel;
-        private Syncfusion.WinForms.DataGrid.SfDataGrid DataGrid;
         private System.Windows.Forms.Label SubtitleLabel;
+        private FontAwesome.Sharp.IconButton MsgBox;
+        private DevExpress.XtraEditors.SimpleButton GuardarButton;
+        private Syncfusion.WinForms.DataGrid.SfDataGrid DataGrid;
+        private System.Windows.Forms.Timer MsgBoxTimer;
     }
 }

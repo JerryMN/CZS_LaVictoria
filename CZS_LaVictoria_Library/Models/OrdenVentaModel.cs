@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CZS_LaVictoria_Library.Models
 {
-    public class SaleOrderModel
+    public class OrdenVentaModel
     {
         public int UniqueIdOrder { get; set; }
         public long NumOrden { get; set; }
@@ -15,6 +15,6 @@ namespace CZS_LaVictoria_Library.Models
         public string Presentación { get; set; }
         public DateTime FechaOrden { get; set; }
         public DateTime FechaEntrega { get; set; }
-        public List<SaleOrderLineModel> Líneas { get; set; } = new List<SaleOrderLineModel>();
+        public List<OrdenVentaLíneaModel> Líneas { get; set; } = new List<OrdenVentaLíneaModel>();
     }
 }

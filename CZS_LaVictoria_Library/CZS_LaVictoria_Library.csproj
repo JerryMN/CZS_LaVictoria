@@ -61,8 +61,8 @@
     <Compile Include="Models\ProveedorCondicionesModel.cs" />
     <Compile Include="Models\ProveedorModel.cs" />
     <Compile Include="Models\ProveedorProductoModel.cs" />
-    <Compile Include="Models\SaleOrderLineModel.cs" />
-    <Compile Include="Models\SaleOrderModel.cs" />
+    <Compile Include="Models\OrdenVentaLíneaModel.cs" />
+    <Compile Include="Models\OrdenVentaModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
