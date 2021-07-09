@@ -110,17 +110,17 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         long PurchaseOrder_GetLastNumber();
 
-        bool PurchaseOrder_Create(PurchaseOrderModel model);
+        bool PurchaseOrder_Create(OrdenCompraModel model);
 
-        PurchaseOrderModel PurchaseOrder_GetByNumOrden(string numOrden);
+        OrdenCompraModel PurchaseOrder_GetByNumOrden(string numOrden);
 
-        List<PurchaseOrderLineModel> PurchaseOrderLine_GetByNumOrden(string numOrden);
+        List<OrdenCompraLíneaModel> PurchaseOrderLine_GetByNumOrden(string numOrden);
 
-        List<PurchaseOrderLineModel> PurchaseOrderLine_GetPending();
+        List<OrdenCompraLíneaModel> PurchaseOrderLine_GetPending();
 
-        List<PurchaseOrderLineModel> PurchaseOrderLine_GetAll();
+        List<OrdenCompraLíneaModel> PurchaseOrderLine_GetAll();
 
-        bool PurchaseOrderLine_Update(long orderId, PurchaseOrderLineModel model, string estatus);
+        bool PurchaseOrderLine_Update(long orderId, OrdenCompraLíneaModel model, string estatus);
 
         #endregion
 
@@ -132,7 +132,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         #region Historial de Entregas
 
-        bool Delivery_Create(string tipoOrden, long numOrden, PurchaseOrderLineModel model, double quantity);
+        bool Delivery_Create(string tipoOrden, long numOrden, OrdenCompraLíneaModel model, double quantity);
 
         List<HistorialModel> Delivery_GetCompra();
 

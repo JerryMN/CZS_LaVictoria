@@ -74,6 +74,9 @@ namespace CZS_LaVictoria
             this.Datos_AreasGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Datos_MezclasGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ChildPanel = new DevExpress.XtraEditors.PanelControl();
+            this.Datos_PersonalGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.CrearOperadorButton = new DevExpress.XtraBars.BarButtonItem();
+            this.VerOperadoresButton = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.RibbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ChildPanel)).BeginInit();
             this.SuspendLayout();
@@ -110,10 +113,12 @@ namespace CZS_LaVictoria
             this.VerAreasButton,
             this.VerMezclasButton,
             this.VerInventarioButton,
-            this.VerHistorialButton});
+            this.VerHistorialButton,
+            this.CrearOperadorButton,
+            this.VerOperadoresButton});
             this.RibbonControl.Location = new System.Drawing.Point(0, 0);
             this.RibbonControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.RibbonControl.MaxItemId = 30;
+            this.RibbonControl.MaxItemId = 32;
             this.RibbonControl.Name = "RibbonControl";
             this.RibbonControl.OptionsMenuMinWidth = 495;
             this.RibbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -420,7 +425,8 @@ namespace CZS_LaVictoria
             this.Datos_ProveedoresGroup,
             this.Datos_ClientesGroup,
             this.Datos_AreasGroup,
-            this.Datos_MezclasGroup});
+            this.Datos_MezclasGroup,
+            this.Datos_PersonalGroup});
             this.DatosTab.Name = "DatosTab";
             this.DatosTab.Text = "Datos";
             // 
@@ -462,6 +468,30 @@ namespace CZS_LaVictoria
             this.ChildPanel.Name = "ChildPanel";
             this.ChildPanel.Size = new System.Drawing.Size(1278, 841);
             this.ChildPanel.TabIndex = 1;
+            // 
+            // Datos_PersonalGroup
+            // 
+            this.Datos_PersonalGroup.ItemLinks.Add(this.CrearOperadorButton);
+            this.Datos_PersonalGroup.ItemLinks.Add(this.VerOperadoresButton);
+            this.Datos_PersonalGroup.Name = "Datos_PersonalGroup";
+            this.Datos_PersonalGroup.Text = "Personal";
+            // 
+            // CrearOperadorButton
+            // 
+            this.CrearOperadorButton.Caption = "Crear Operador";
+            this.CrearOperadorButton.Id = 30;
+            this.CrearOperadorButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("CrearOperadorButton.ImageOptions.SvgImage")));
+            this.CrearOperadorButton.Name = "CrearOperadorButton";
+            this.CrearOperadorButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.CrearOperadorButton_ItemClick);
+            // 
+            // VerOperadoresButton
+            // 
+            this.VerOperadoresButton.Caption = "Ver Operadores";
+            this.VerOperadoresButton.Id = 31;
+            this.VerOperadoresButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("VerOperadoresButton.ImageOptions.Image")));
+            this.VerOperadoresButton.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("VerOperadoresButton.ImageOptions.LargeImage")));
+            this.VerOperadoresButton.Name = "VerOperadoresButton";
+            this.VerOperadoresButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerOperadoresButton_ItemClick);
             // 
             // MainMenuForm
             // 
@@ -533,6 +563,9 @@ namespace CZS_LaVictoria
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup Órdenes_InventarioGroup;
         private DevExpress.XtraBars.BarButtonItem VerHistorialButton;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup Órdenes_HistorialGroup;
+        private DevExpress.XtraBars.BarButtonItem CrearOperadorButton;
+        private DevExpress.XtraBars.BarButtonItem VerOperadoresButton;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup Datos_PersonalGroup;
     }
 }
 

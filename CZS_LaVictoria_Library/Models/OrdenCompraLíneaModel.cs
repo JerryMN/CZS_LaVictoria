@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace CZS_LaVictoria_Library.Models
 {
-    public class PurchaseOrderLineModel : INotifyPropertyChanged
+    public class OrdenCompraLíneaModel : INotifyPropertyChanged
     {
         int _numLinea;
         string _producto;
@@ -97,12 +97,12 @@ namespace CZS_LaVictoria_Library.Models
         }
 
 
-        public PurchaseOrderLineModel()
+        public OrdenCompraLíneaModel()
         {
             
         }
 
-        public PurchaseOrderLineModel(int numLinea, string producto, string cantidadOrden, string precioUnitario)
+        public OrdenCompraLíneaModel(int numLinea, string producto, string cantidadOrden, string precioUnitario)
         {
             NumLinea = numLinea;
             Producto = producto;

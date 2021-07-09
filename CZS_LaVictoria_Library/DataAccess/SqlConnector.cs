@@ -887,7 +887,7 @@ namespace CZS_LaVictoria_Library.DataAccess
             }
         }
 
-        public bool PurchaseOrder_Create(PurchaseOrderModel model)
+        public bool PurchaseOrder_Create(OrdenCompraModel model)
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
@@ -941,7 +941,7 @@ namespace CZS_LaVictoria_Library.DataAccess
             }
         }
 
-        public PurchaseOrderModel PurchaseOrder_GetByNumOrden(string numOrden)
+        public OrdenCompraModel PurchaseOrder_GetByNumOrden(string numOrden)
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
@@ -949,7 +949,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                 p.Add("@NumOrden", numOrden);
                 try
                 {
-                    var output = connection.QuerySingle<PurchaseOrderModel>("dbo.spPurchaseOrder_GetByNumOrden", p, commandType:CommandType.StoredProcedure);
+                    var output = connection.QuerySingle<OrdenCompraModel>("dbo.spPurchaseOrder_GetByNumOrden", p, commandType:CommandType.StoredProcedure);
                     return output;
                 }
                 catch (Exception)
@@ -960,7 +960,7 @@ namespace CZS_LaVictoria_Library.DataAccess
             }
         }
 
-        public List<PurchaseOrderLineModel> PurchaseOrderLine_GetByNumOrden(string numOrden)
+        public List<OrdenCompraLíneaModel> PurchaseOrderLine_GetByNumOrden(string numOrden)
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
@@ -968,7 +968,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                 p.Add("@NumOrden", long.Parse(numOrden));
                 try
                 {
-                    var output = connection.Query<PurchaseOrderLineModel>("dbo.spPurchaseOrderDetails_GetByNumOrden", p,
+                    var output = connection.Query<OrdenCompraLíneaModel>("dbo.spPurchaseOrderDetails_GetByNumOrden", p,
                         commandType: CommandType.StoredProcedure).ToList();
                     return output;
                 }
@@ -980,13 +980,13 @@ namespace CZS_LaVictoria_Library.DataAccess
             }
         }
 
-        public List<PurchaseOrderLineModel> PurchaseOrderLine_GetPending()
+        public List<OrdenCompraLíneaModel> PurchaseOrderLine_GetPending()
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
                 try
                 {
-                    var output = connection.Query<PurchaseOrderLineModel>("dbo.spPurchaseOrderDetails_GetAllPending",
+                    var output = connection.Query<OrdenCompraLíneaModel>("dbo.spPurchaseOrderDetails_GetAllPending",
                         commandType: CommandType.StoredProcedure).ToList();
                     return output;
                 }
@@ -998,13 +998,13 @@ namespace CZS_LaVictoria_Library.DataAccess
             }
         }
 
-        public List<PurchaseOrderLineModel> PurchaseOrderLine_GetAll()
+        public List<OrdenCompraLíneaModel> PurchaseOrderLine_GetAll()
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
                 try
                 {
-                    var output = connection.Query<PurchaseOrderLineModel>("dbo.spPurchaseOrderDetails_GetAll",
+                    var output = connection.Query<OrdenCompraLíneaModel>("dbo.spPurchaseOrderDetails_GetAll",
                         commandType: CommandType.StoredProcedure).ToList();
                     return output;
                 }
@@ -1016,7 +1016,7 @@ namespace CZS_LaVictoria_Library.DataAccess
             }
         }
 
-        public bool PurchaseOrderLine_Update(long orderId, PurchaseOrderLineModel model, string estatus)
+        public bool PurchaseOrderLine_Update(long orderId, OrdenCompraLíneaModel model, string estatus)
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
@@ -1068,7 +1068,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         #region Historial de Entregas
 
-        public bool Delivery_Create(string tipoOrden, long numOrden, PurchaseOrderLineModel model, double quantity)
+        public bool Delivery_Create(string tipoOrden, long numOrden, OrdenCompraLíneaModel model, double quantity)
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {

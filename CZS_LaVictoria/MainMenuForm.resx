@@ -522,4 +522,51 @@
         NC40LDEwLDEwUzIxLjYsMjYsMTYsMjZ6IiBjbGFzcz0iR3JlZW4iIC8+DQogIDwvZz4NCjwvc3ZnPgs=
 </value>
   </data>
+  <data name="CrearOperadorButton.ImageOptions.SvgImage" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v21.1" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFlEZXZFeHByZXNzLkRhdGEudjIxLjEsIFZlcnNpb249MjEuMS4z
+        LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjg4ZDE3NTRkNzAwZTQ5YQUBAAAAHURl
+        dkV4cHJlc3MuVXRpbHMuU3ZnLlN2Z0ltYWdlAQAAAAREYXRhBwICAAAACQMAAAAPAwAAAOsCAAAC77u/
+        PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnPz4NCjxzdmcgeD0iMHB4IiB5PSIwcHgi
+        IHZpZXdCb3g9IjAgMCAzMiAzMiIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcv
+        MjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4bWw6c3Bh
+        Y2U9InByZXNlcnZlIiBpZD0iTGF5ZXJfMSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAg
+        MzIgMzIiPg0KICA8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLkJsYWNre2ZpbGw6IzcyNzI3Mjt9Cgku
+        WWVsbG93e2ZpbGw6I0ZGQjExNTt9CgkuQmx1ZXtmaWxsOiMxMTc3RDc7fQoJLlJlZHtmaWxsOiNEMTFD
+        MUM7fQoJLldoaXRle2ZpbGw6I0ZGRkZGRjt9CgkuR3JlZW57ZmlsbDojMDM5QzIzO30KCS5zdDB7Zmls
+        bDojNzI3MjcyO30KCS5zdDF7b3BhY2l0eTowLjU7fQoJLnN0MntvcGFjaXR5OjAuNzU7fQo8L3N0eWxl
+        Pg0KICA8ZyBpZD0iQWRkRmlsZSI+DQogICAgPHBhdGggZD0iTTE2LDI2SDZWNGgxOHYxNGgyVjNjMC0w
+        LjUtMC41LTEtMS0xSDVDNC41LDIsNCwyLjUsNCwzdjI0YzAsMC41LDAuNSwxLDEsMWgxMVYyNnoiIGNs
+        YXNzPSJCbGFjayIgLz4NCiAgICA8cG9seWdvbiBwb2ludHM9IjMwLDI0IDI2LDI0IDI2LDIwIDIyLDIw
+        IDIyLDI0IDE4LDI0IDE4LDI4IDIyLDI4IDIyLDMyIDI2LDMyIDI2LDI4IDMwLDI4ICAiIGNsYXNzPSJH
+        cmVlbiIgLz4NCiAgPC9nPg0KPC9zdmc+Cw==
+</value>
+  </data>
+  <data name="VerOperadoresButton.ImageOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAAAMnRFWHRUaXRsZQBDdXN0b21l
+        cjtFbXBsb3llZTtQZXJzb247Q29udGFjdDtVc2VyO0NsaWVudH4RNugAAADNSURBVDhPpdExDkFBFAXQ
+        X4jeMkg0Kir03xrsRaWxCIuQ6EXCGv4KqL8CkXGvzLzMPP8xoTgymXffDaZwzv3l9TFbbLUh7OHiHWAM
+        Sc4qaMEJnHKGNkjWKuiCXg56IFmrYAJNyzQFyVoFS2haJs4kaxWM4AF6mXf8cyVrFdAOdAHvktynAj7Z
+        DcIyz9nPGMzh6PH8lrEKOrCC+M155h1nktUFA9jAHfi119D3eOYdZ8wwmxSUcIXwm79htowLqmiYq4oL
+        ajXMUUvB71zxBKd8P7UB7yhRAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="VerOperadoresButton.ImageOptions.LargeImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAAAMnRFWHRUaXRsZQBDdXN0b21l
+        cjtFbXBsb3llZTtQZXJzb247Q29udGFjdDtVc2VyO0NsaWVudH4RNugAAAH4SURBVFhHxdaxS1VhGMdx
+        QRcHh8BoVWppyL3VEApsCPpjoiFCF8FddHEPGhqFXGxVgoiGIAIlR7FoMEg4/n6H8xze571frw7e6/BZ
+        3vO8z/fcex2caJrmVg0cPF/ZuY5leSe/5H/nWN7LC6E7SfRS3Gi4siHNFbaF7vail+JGw4WnQkHyUmhH
+        K3opbjRc8NdOMfJBaEcreiluNFz4LhQjP4R2tKKX4kbDhb9CMfJbaEcreiluNFyg0GX+Ce1oRS/FjYY7
+        i0KhYXyHdvW9FDca7mwKRYbxHdrV91LcaLizJhQZxndoV99LcaPhzn05EQoRz/oO7ep7KW40XHgjFCOv
+        hHa0opfiRsOFR0Ix4lna0YpeihsNVz4KBUu7Qnd70Utxo+HKgpwJhc3PPEN3e9FLcaNh8ExOpY7/ET+j
+        O0n0Utxo+BJ35bX4J/kkb+We0OyA6KW40XBlEs5qU3CWRC/FjYYLj+WzPCjOav7r/yKepeet6KW4wfCc
+        rMg3id96T6alnp2RA4k531mVeUmz0UtxK4buyJb4/71YWNqXJ+Kv25bkq9Csd3iXd17rBR7KT6FltfMO
+        Pat5p3f3vRQ3PZyVQ6EFN8G7Z6NHL7BeDI/KevToBUb56cNh9OgF6MKNix69wFE9PAJH0Rt4gXHDw3HC
+        w3HCw/FpJi4ACnRMQSftMegAAAAASUVORK5CYII=
+</value>
+  </data>
 </root>

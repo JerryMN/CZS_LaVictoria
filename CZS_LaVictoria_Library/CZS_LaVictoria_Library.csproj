@@ -54,8 +54,10 @@
     <Compile Include="Models\HistorialModel.cs" />
     <Compile Include="Models\MaterialModel.cs" />
     <Compile Include="Models\MezclaModel.cs" />
-    <Compile Include="Models\PurchaseOrderLineModel.cs" />
-    <Compile Include="Models\PurchaseOrderModel.cs" />
+    <Compile Include="Models\OperadorModel.cs" />
+    <Compile Include="Models\ProducciónPlásticosModel.cs" />
+    <Compile Include="Models\OrdenCompraLíneaModel.cs" />
+    <Compile Include="Models\OrdenCompraModel.cs" />
     <Compile Include="Models\ProveedorCondicionesModel.cs" />
     <Compile Include="Models\ProveedorModel.cs" />
     <Compile Include="Models\ProveedorProductoModel.cs" />

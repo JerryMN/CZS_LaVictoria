@@ -142,6 +142,20 @@ namespace CZS_LaVictoria
 
         #endregion
 
+        #region Datos - Personal
+
+        void CrearOperadorButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new OperadorCreateForm());
+        }
+
+        void VerOperadoresButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new OperadorVerForm());
+        }
+
+        #endregion
+
         #region Plásticos
 
         void RegistrarMolidoButton_ItemClick(object sender, ItemClickEventArgs e)
