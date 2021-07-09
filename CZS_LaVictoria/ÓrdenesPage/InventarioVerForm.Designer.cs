@@ -30,7 +30,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
         private void InitializeComponent()
         {
             this.DataGrid = new Syncfusion.WinForms.DataGrid.SfDataGrid();
-            this.EditarButton = new FontAwesome.Sharp.IconButton();
+            this.NuevoButton = new FontAwesome.Sharp.IconButton();
             this.BorrarButton = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)(this.DataGrid)).BeginInit();
             this.SuspendLayout();
@@ -52,22 +52,23 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.DataGrid.Text = "sfDataGrid1";
             this.DataGrid.AutoGeneratingColumn += new Syncfusion.WinForms.DataGrid.Events.AutoGeneratingColumnEventHandler(this.DataGrid_AutoGeneratingColumn);
             // 
-            // EditarButton
+            // NuevoButton
             // 
-            this.EditarButton.AutoSize = true;
-            this.EditarButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.EditarButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EditarButton.IconChar = FontAwesome.Sharp.IconChar.Edit;
-            this.EditarButton.IconColor = System.Drawing.Color.Black;
-            this.EditarButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.EditarButton.IconSize = 24;
-            this.EditarButton.Location = new System.Drawing.Point(12, 12);
-            this.EditarButton.Name = "EditarButton";
-            this.EditarButton.Size = new System.Drawing.Size(84, 31);
-            this.EditarButton.TabIndex = 7;
-            this.EditarButton.Text = "Editar";
-            this.EditarButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.EditarButton.UseVisualStyleBackColor = true;
+            this.NuevoButton.AutoSize = true;
+            this.NuevoButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.NuevoButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NuevoButton.IconChar = FontAwesome.Sharp.IconChar.Edit;
+            this.NuevoButton.IconColor = System.Drawing.Color.Black;
+            this.NuevoButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.NuevoButton.IconSize = 24;
+            this.NuevoButton.Location = new System.Drawing.Point(12, 12);
+            this.NuevoButton.Name = "NuevoButton";
+            this.NuevoButton.Size = new System.Drawing.Size(90, 31);
+            this.NuevoButton.TabIndex = 7;
+            this.NuevoButton.Text = "Nuevo";
+            this.NuevoButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.NuevoButton.UseVisualStyleBackColor = true;
+            this.NuevoButton.Click += new System.EventHandler(this.NuevoButton_Click);
             // 
             // BorrarButton
             // 
@@ -92,7 +93,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1276, 839);
             this.Controls.Add(this.BorrarButton);
-            this.Controls.Add(this.EditarButton);
+            this.Controls.Add(this.NuevoButton);
             this.Controls.Add(this.DataGrid);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -108,7 +109,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
         #endregion
 
         private Syncfusion.WinForms.DataGrid.SfDataGrid DataGrid;
-        private FontAwesome.Sharp.IconButton EditarButton;
+        private FontAwesome.Sharp.IconButton NuevoButton;
         private FontAwesome.Sharp.IconButton BorrarButton;
     }
 }

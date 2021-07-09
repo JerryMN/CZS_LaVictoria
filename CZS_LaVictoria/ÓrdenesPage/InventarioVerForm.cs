@@ -56,6 +56,13 @@ namespace CZS_LaVictoria.ÓrdenesPage
             }
         }
 
+        void NuevoButton_Click(object sender, System.EventArgs e)
+        {
+            var newForm = new InventarioCrearForm();
+            newForm.Show();
+            DataGrid.DataSource = GetStock();
+        }
+
         #endregion
 
         #region Methods
