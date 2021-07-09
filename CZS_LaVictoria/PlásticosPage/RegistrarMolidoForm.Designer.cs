@@ -45,6 +45,13 @@ namespace CZS_LaVictoria.PlásticosPage
             this.MsgBox = new FontAwesome.Sharp.IconButton();
             this.GuardarButton = new System.Windows.Forms.Button();
             this.MsgBoxTimer = new System.Windows.Forms.Timer(this.components);
+            this.sfDateTimeEdit1 = new Syncfusion.WinForms.Input.SfDateTimeEdit();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.FechaLabel = new System.Windows.Forms.Label();
+            this.OperadorLabel = new System.Windows.Forms.Label();
+            this.MaquinaLabel = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // SubtitleLabel
@@ -61,7 +68,7 @@ namespace CZS_LaVictoria.PlásticosPage
             // 
             this.EntradaLabel.AutoSize = true;
             this.EntradaLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EntradaLabel.Location = new System.Drawing.Point(50, 150);
+            this.EntradaLabel.Location = new System.Drawing.Point(50, 300);
             this.EntradaLabel.Name = "EntradaLabel";
             this.EntradaLabel.Size = new System.Drawing.Size(67, 21);
             this.EntradaLabel.TabIndex = 32;
@@ -71,7 +78,7 @@ namespace CZS_LaVictoria.PlásticosPage
             // 
             this.CantidadEntradaLabel.AutoSize = true;
             this.CantidadEntradaLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CantidadEntradaLabel.Location = new System.Drawing.Point(50, 200);
+            this.CantidadEntradaLabel.Location = new System.Drawing.Point(50, 350);
             this.CantidadEntradaLabel.Name = "CantidadEntradaLabel";
             this.CantidadEntradaLabel.Size = new System.Drawing.Size(72, 21);
             this.CantidadEntradaLabel.TabIndex = 32;
@@ -116,7 +123,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.EntradaCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.EntradaCombo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EntradaCombo.FormattingEnabled = true;
-            this.EntradaCombo.Location = new System.Drawing.Point(200, 147);
+            this.EntradaCombo.Location = new System.Drawing.Point(200, 297);
             this.EntradaCombo.Name = "EntradaCombo";
             this.EntradaCombo.Size = new System.Drawing.Size(250, 29);
             this.EntradaCombo.TabIndex = 34;
@@ -139,7 +146,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.CantidadEntradaText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.CantidadEntradaText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CantidadEntradaText.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.CantidadEntradaText.Location = new System.Drawing.Point(200, 197);
+            this.CantidadEntradaText.Location = new System.Drawing.Point(200, 347);
             this.CantidadEntradaText.MinValue = 0D;
             this.CantidadEntradaText.Name = "CantidadEntradaText";
             this.CantidadEntradaText.Size = new System.Drawing.Size(250, 29);
@@ -222,23 +229,85 @@ namespace CZS_LaVictoria.PlásticosPage
             this.MsgBoxTimer.Interval = 3000;
             this.MsgBoxTimer.Tick += new System.EventHandler(this.MsgBoxTimer_Tick);
             // 
+            // sfDateTimeEdit1
+            // 
+            this.sfDateTimeEdit1.AllowValueChangeOnMouseWheel = true;
+            this.sfDateTimeEdit1.Location = new System.Drawing.Point(200, 147);
+            this.sfDateTimeEdit1.Name = "sfDateTimeEdit1";
+            this.sfDateTimeEdit1.Size = new System.Drawing.Size(250, 31);
+            this.sfDateTimeEdit1.TabIndex = 38;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(200, 197);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(250, 29);
+            this.comboBox1.TabIndex = 34;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.EntradaCombo_SelectedIndexChanged);
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(200, 247);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(250, 29);
+            this.numericUpDown1.TabIndex = 39;
+            // 
+            // FechaLabel
+            // 
+            this.FechaLabel.AutoSize = true;
+            this.FechaLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FechaLabel.Location = new System.Drawing.Point(50, 150);
+            this.FechaLabel.Name = "FechaLabel";
+            this.FechaLabel.Size = new System.Drawing.Size(144, 21);
+            this.FechaLabel.TabIndex = 32;
+            this.FechaLabel.Text = "Fecha de operación";
+            // 
+            // OperadorLabel
+            // 
+            this.OperadorLabel.AutoSize = true;
+            this.OperadorLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OperadorLabel.Location = new System.Drawing.Point(50, 200);
+            this.OperadorLabel.Name = "OperadorLabel";
+            this.OperadorLabel.Size = new System.Drawing.Size(77, 21);
+            this.OperadorLabel.TabIndex = 32;
+            this.OperadorLabel.Text = "Operador";
+            // 
+            // MaquinaLabel
+            // 
+            this.MaquinaLabel.AutoSize = true;
+            this.MaquinaLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MaquinaLabel.Location = new System.Drawing.Point(50, 250);
+            this.MaquinaLabel.Name = "MaquinaLabel";
+            this.MaquinaLabel.Size = new System.Drawing.Size(71, 21);
+            this.MaquinaLabel.TabIndex = 32;
+            this.MaquinaLabel.Text = "Máquina";
+            // 
             // RegistrarMolidoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1276, 839);
+            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.sfDateTimeEdit1);
             this.Controls.Add(this.MsgBox);
             this.Controls.Add(this.GuardarButton);
             this.Controls.Add(this.MermaText);
             this.Controls.Add(this.CantidadSalidaText);
             this.Controls.Add(this.CantidadEntradaText);
             this.Controls.Add(this.SalidaCombo);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.EntradaCombo);
             this.Controls.Add(this.ArrowButton);
             this.Controls.Add(this.MermaLabel);
             this.Controls.Add(this.CantidadSalidaLabel);
             this.Controls.Add(this.CantidadEntradaLabel);
             this.Controls.Add(this.SalidaLabel);
+            this.Controls.Add(this.MaquinaLabel);
+            this.Controls.Add(this.OperadorLabel);
+            this.Controls.Add(this.FechaLabel);
             this.Controls.Add(this.EntradaLabel);
             this.Controls.Add(this.SubtitleLabel);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -246,6 +315,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "RegistrarMolidoForm";
             this.Text = "RegistrarMolidoButton";
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -268,5 +338,11 @@ namespace CZS_LaVictoria.PlásticosPage
         private FontAwesome.Sharp.IconButton MsgBox;
         private System.Windows.Forms.Button GuardarButton;
         private System.Windows.Forms.Timer MsgBoxTimer;
+        private Syncfusion.WinForms.Input.SfDateTimeEdit sfDateTimeEdit1;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label FechaLabel;
+        private System.Windows.Forms.Label OperadorLabel;
+        private System.Windows.Forms.Label MaquinaLabel;
     }
 }
