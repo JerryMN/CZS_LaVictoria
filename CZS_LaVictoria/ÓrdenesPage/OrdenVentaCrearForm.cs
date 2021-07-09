@@ -28,7 +28,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
     {
         ClienteModel _selectedClient;
         List<ClienteProductoModel> _productos;
-        List<OrdenVentaLíneaModel> _orderLines = new List<OrdenVentaLíneaModel>();
+        readonly List<OrdenVentaLíneaModel> _orderLines = new List<OrdenVentaLíneaModel>();
         int _numLinea = 1;
         string _pdfPath;
 
@@ -46,6 +46,34 @@ namespace CZS_LaVictoria.ÓrdenesPage
             DataGrid.CellComboBoxSelectionChanged += DataGridOnCellComboBoxSelectionChanged;
             TransporteCombo.Items.AddRange(new object[]{"Cliente", "Propio"});
             PuestoCombo.Items.AddRange(new object[]{"Cliente", "Planta"});
+
+            var tableSummary = new GridTableSummaryRow
+            {
+                Name = "TableSummary",
+                ShowSummaryInRow = false,
+                Position = VerticalPosition.Bottom
+            };
+
+            var productSummary = new GridSummaryColumn
+            {
+                Name = "NumLinea",
+                SummaryType = SummaryType.CountAggregate,
+                Format = "Productos: {Count:D}",
+                MappingName = "NumLinea"
+            };
+
+            var subtotalSummary = new GridSummaryColumn
+            {
+                Name = "UnitPrice",
+                SummaryType = SummaryType.DoubleAggregate,
+                Format = "Total: {Sum:c}",
+                MappingName = "Subtotal"
+            };
+
+            tableSummary.SummaryColumns.Add(productSummary);
+            tableSummary.SummaryColumns.Add(subtotalSummary);
+
+            DataGrid.TableSummaryRows.Add(tableSummary);
         }
 
         #region Events
