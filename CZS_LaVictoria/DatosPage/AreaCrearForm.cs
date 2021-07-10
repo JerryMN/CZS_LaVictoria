@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Drawing;
+using System.Net.Mail;
 using System.Windows.Forms;
 using CZS_LaVictoria_Library;
 using CZS_LaVictoria_Library.Models;
@@ -56,6 +57,7 @@ namespace CZS_LaVictoria.DatosPage
         #endregion
 
         #region Methods
+
         void GetAreas()
         {
             var areas = GlobalConfig.Connection.Area_GetAll();
@@ -70,7 +72,6 @@ namespace CZS_LaVictoria.DatosPage
 
         bool ValidateForm()
         {
-            // TODO - Validar correo.
             var output = true;
 
             if (AreaCombo.Text == "")
@@ -85,6 +86,24 @@ namespace CZS_LaVictoria.DatosPage
                 MsgBox.Text += "Ingresa el nombre del responsable.\n";
             }
 
+            if (CorreoText.Text == "")
+            {
+                output = false;
+                MsgBox.Text += "Ingresa el correo del responsable.\n";
+            }
+            else
+            {
+                try
+                {
+                    var unused = new MailAddress(CorreoText.Text);
+                }
+                catch (Exception)
+                {
+                    output = false;
+                    MsgBox.Text += "Ingresa un correo válido.\n";
+                }
+            }
+
             return output;
         }
 
@@ -95,10 +114,10 @@ namespace CZS_LaVictoria.DatosPage
                 foreach (Control control in controls)
                     if (control is TextBox box)
                         box.Clear();
-                    else if (control is ComboBox cbox)
+                    else if (control is ComboBox comboBox)
                     {
-                        cbox.Text = "";
-                        cbox.SelectedItem = null;
+                        comboBox.Text = "";
+                        comboBox.SelectedItem = null;
                     }
                     else
                         Func(control.Controls);
