@@ -20,14 +20,9 @@ namespace CZS_LaVictoria.DatosPage
 
         void DataGrid_AutoGeneratingColumn(object sender, Syncfusion.WinForms.DataGrid.Events.AutoGeneratingColumnArgs e)
         {
-            if (e.Column.HeaderText == "IdArea")
+            if (e.Column.HeaderText == "Id")
             {
-                e.Column.HeaderText = "Id Área";
-            }
-
-            if (e.Column.HeaderText == "Area")
-            {
-                e.Column.HeaderText = "Área";
+                e.Cancel = true;
             }
         }
 
@@ -36,7 +31,6 @@ namespace CZS_LaVictoria.DatosPage
             if (EditarButton.Text == "Editar")
             {
                 DataGrid.AllowEditing = true;
-                DataGrid.Columns["IdArea"].AllowEditing = false;
                 EditarButton.Text = "Guardar";
 
             }
@@ -50,11 +44,11 @@ namespace CZS_LaVictoria.DatosPage
                 {
                     DataGrid.AllowEditing = false;
                     EditarButton.Text = "Editar";
-                    MessageBox.Show($"Área actualizada con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Área {model.Área} actualizada con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    MessageBox.Show($"Error al actualizar área.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Error al actualizar área {model.Área}.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 DataGrid.AllowEditing = false;
@@ -66,7 +60,7 @@ namespace CZS_LaVictoria.DatosPage
         {
             var model = (AreaModel)DataGrid.SelectedItem;
 
-            if (MessageBox.Show($"Estás seguro de eliminar la área {model.Area}? Esta acción es irreversible.", "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            if (MessageBox.Show($"Estás seguro de eliminar el área {model.Área}? Esta acción es irreversible.", "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
             {
                 return;
             }
@@ -76,11 +70,11 @@ namespace CZS_LaVictoria.DatosPage
             if (deleteSuccess)
             {
                 DataGrid.DataSource = GetAreas();
-                MessageBox.Show($"Área {model.Area} eliminada con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Área {model.Área} eliminada con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show($"Error al eliminar área {model.Area}.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Error al eliminar área {model.Área}.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

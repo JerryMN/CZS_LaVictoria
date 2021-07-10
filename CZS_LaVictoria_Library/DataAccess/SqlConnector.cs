@@ -21,7 +21,7 @@ namespace CZS_LaVictoria_Library.DataAccess
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
                 var p = new DynamicParameters();
-                p.Add("@Area", model.Area);
+                p.Add("@Area", model.Área);
                 p.Add("@Responsable", model.Responsable);
                 p.Add("@Correo", model.Correo);
 
@@ -83,7 +83,7 @@ namespace CZS_LaVictoria_Library.DataAccess
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
                 var p = new DynamicParameters();
-                p.Add("@Area", model.Area);
+                p.Add("@Area", model.Área);
                 p.Add("@Responsable", model.Responsable);
                 p.Add("@Correo", model.Correo);
                 p.Add("@Id", model.Id);

@@ -28,14 +28,14 @@ namespace CZS_LaVictoria.DatosPage
                 return;
             }
 
-            var model = new AreaModel { Area = AreaCombo.Text, Responsable = ResponsableText.Text, Correo = CorreoText.Text };
+            var model = new AreaModel { Área = AreaCombo.Text, Responsable = ResponsableText.Text, Correo = CorreoText.Text };
 
             var saveSuccess = GlobalConfig.Connection.Area_Create(model);
 
             if (saveSuccess)
             {
                 ClearForm();
-                MsgBox.Text = $"Área {model.Area} guardada con éxito.";
+                MsgBox.Text = $"Área {model.Área} guardada con éxito.";
                 MsgBox.IconColor = Color.DarkGreen;
             }
             else
@@ -67,7 +67,7 @@ namespace CZS_LaVictoria.DatosPage
                 AreaCombo.Items.Add(area);
             }
 
-            AreaCombo.DisplayMember = "Area";
+            AreaCombo.DisplayMember = "Área";
         }
 
         bool ValidateForm()
