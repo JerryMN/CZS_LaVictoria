@@ -57,7 +57,7 @@ namespace CZS_LaVictoria.PlásticosPage
             _materialEntrada.CantidadDisponible -= _cantidadEntrada;
             var saveEntrada = GlobalConfig.Connection.Material_Update(_materialEntrada);
             bool saveSalida;
-            if (_materialSalida.IdMaterial == 0)
+            if (_materialSalida.Id == 0)
             {
                 _materialSalida = new MaterialModel(SalidaCombo.Text, "Plásticos", "Molido", _cantidadSalida, 0);
                 saveSalida = GlobalConfig.Connection.Material_Create(_materialSalida);

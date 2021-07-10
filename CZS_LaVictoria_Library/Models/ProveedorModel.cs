@@ -2,7 +2,7 @@
 {
     public class ProveedorModel
     {
-        public int IdProvider { get; set; }
+        public int Id { get; set; }
         public string Nombre { get; set; }
         public string Teléfono { get; set; }
         public string Correo { get; set; }

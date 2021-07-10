@@ -44,7 +44,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             // Al seleccionar una orden, muestra todas las líneas de esa orden.
             else
             {
-                DataGrid.DataSource = GlobalConfig.Connection.PurchaseOrderLine_GetByNumOrden(NumOrdenText.Text);
+                DataGrid.DataSource = GlobalConfig.Connection.OrdenCompra_GetByNumOrden(NumOrdenText.Text);
                 _orden = new OrdenVentaModel(); // TODO - _GetByNumOrden(NumOrdenText.Text);
             }
 

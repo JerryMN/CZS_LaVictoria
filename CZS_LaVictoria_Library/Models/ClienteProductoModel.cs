@@ -2,11 +2,11 @@
 {
     public class ClienteProductoModel
     {
-        public int IdProduct { get; set; }
+        public int Id { get; set; }
         public string ProductoInterno { get; set; }
         public decimal PrecioUnitario { get; set; }
         public string Area { get; set; }
-        public int IdCliente { get; set; }
+        public int IdClient { get; set; }
         public string Cliente { get; set; }
 
         public ClienteProductoModel()

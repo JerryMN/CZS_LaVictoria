@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
+using System.Transactions;
 using CZS_LaVictoria_Library.Models;
 using Dapper;
 
@@ -14,6 +15,7 @@ namespace CZS_LaVictoria_Library.DataAccess
         const string ConnectionString = "Server=czsystems.database.windows.net;Database=escobaslavictoria;User Id=czsystems_escobaslavictoria;Password=Prye2uikg4;";
 
         #region Area
+
         public bool Area_Create(AreaModel model)
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
@@ -21,36 +23,16 @@ namespace CZS_LaVictoria_Library.DataAccess
                 var p = new DynamicParameters();
                 p.Add("@Area", model.Area);
                 p.Add("@Responsable", model.Responsable);
+                p.Add("@Correo", model.Correo);
 
                 try
                 {
                     connection.Execute("dbo.spAreas_Insert", p, commandType: CommandType.StoredProcedure);
                     return true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Debug.Assert(false);
-                    return false;
-                }
-            }
-        }
-
-        public bool Area_Update(AreaModel model)
-        {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
-            {
-                var p = new DynamicParameters();
-                p.Add("@Area", model.Area);
-                p.Add("@Responsable", model.Responsable);
-                p.Add("@idArea", model.IdArea);
-
-                try
-                {
-                    connection.Execute("dbo.spAreas_Update", p, commandType: CommandType.StoredProcedure);
-                    return true;
-                }
-                catch (Exception)
-                {
+                    Debug.Write(ex.ToString());
                     Debug.Assert(false);
                     return false;
                 }
@@ -66,30 +48,56 @@ namespace CZS_LaVictoria_Library.DataAccess
                     var output = connection.Query<AreaModel>("dbo.spAreas_GetAll").ToList();
                     return output;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Debug.Write(ex.ToString());
                     Debug.Assert(false);
                     return null;
                 }
             }
         }
 
-        public AreaModel Area_GetByArea(AreaModel model)
+        public List<AreaModel> Area_GetByArea(string area)
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@Area", area);
+
+                try
+                {
+                    var output = connection.Query<AreaModel>("dbo.spAreas_GetByArea").ToList();
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
+        }
+
+        public bool Area_Update(AreaModel model)
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Area", model.Area);
+                p.Add("@Responsable", model.Responsable);
+                p.Add("@Correo", model.Correo);
+                p.Add("@Id", model.Id);
 
                 try
                 {
-                    var output = connection.ExecuteScalar<AreaModel>("dbo.spAreas_GetByArea");
-                    return output;
+                    connection.Execute("dbo.spAreas_Update", p, commandType: CommandType.StoredProcedure);
+                    return true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Debug.Write(ex.ToString());
                     Debug.Assert(false);
-                    return null;
+                    return false;
                 }
             }
         }
@@ -99,15 +107,16 @@ namespace CZS_LaVictoria_Library.DataAccess
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
                 var p = new DynamicParameters();
-                p.Add("@IdArea", model.IdArea);
+                p.Add("@Id", model.Id);
 
                 try
                 {
                     connection.Execute("dbo.spAreas_Delete");
                     return true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Debug.Write(ex.ToString());
                     Debug.Assert(false);
                     return false;
                 }
@@ -129,15 +138,15 @@ namespace CZS_LaVictoria_Library.DataAccess
                 p.Add("@Dirección", model.Dirección);
                 p.Add("@Responsable", model.Responsable);
                 p.Add("@Condiciones", model.Condiciones);
-                p.Add("@id", 0, DbType.Int32, ParameterDirection.Output);
 
                 try
                 {
-                    connection.Execute("dbo.spProvider_Insert", p, commandType: CommandType.StoredProcedure);
+                    connection.Execute("dbo.spSupplier_Insert", p, commandType: CommandType.StoredProcedure);
                     return true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Debug.Write(ex.ToString());
                     Debug.Assert(false);
                     return false;
                 }
@@ -148,10 +157,10 @@ namespace CZS_LaVictoria_Library.DataAccess
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
-                List<ProveedorModel> output;
                 try
                 {
-                    output = connection.Query<ProveedorModel>("dbo.spProvider_GetAll").ToList();
+                    var output = connection.Query<ProveedorModel>("dbo.spSupplier_GetAll").ToList();
+                    return output;
                 }
                 catch (Exception ex)
                 {
@@ -159,8 +168,24 @@ namespace CZS_LaVictoria_Library.DataAccess
                     Debug.Assert(false);
                     return null;
                 }
+            }
+        }
 
-                return output;
+        public List<string> Proveedor_GetDistinctCondiciones()
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var output = connection.Query<string>("dbo.spSupplier_GetDistinctCondiciones").ToList();
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.ToString());
+                    Debug.Assert(false);
+                    return null;
+                }
             }
         }
 
@@ -175,15 +200,16 @@ namespace CZS_LaVictoria_Library.DataAccess
                 p.Add("@Dirección", model.Dirección);
                 p.Add("@Responsable", model.Responsable);
                 p.Add("@Condiciones", model.Condiciones);
-                p.Add("@id", model.IdProvider);
+                p.Add("@Id", model.Id);
 
                 try
                 {
-                    connection.Execute("dbo.spProvider_Update", p, commandType: CommandType.StoredProcedure);
+                    connection.Execute("dbo.spSupplier_Update", p, commandType: CommandType.StoredProcedure);
                     return true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Debug.Write(ex.ToString());
                     Debug.Assert(false);
                     return false;
                 }
@@ -195,34 +221,18 @@ namespace CZS_LaVictoria_Library.DataAccess
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
                 var p = new DynamicParameters();
-                p.Add("@id", model.IdProvider);
+                p.Add("@Id", model.Id);
 
                 try
                 {
-                    connection.Execute("dbo.spProvider_Delete", p, commandType: CommandType.StoredProcedure);
+                    connection.Execute("dbo.spSupplier_Delete", p, commandType: CommandType.StoredProcedure);
                     return true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Debug.Write(ex.ToString());
                     Debug.Assert(false);
                     return false;
-                }
-            }
-        }
-
-        public List<ProveedorCondicionesModel> ProveedorCondiciones_GetDistinct()
-        {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
-            {
-                try
-                {
-                    var output = connection.Query<ProveedorCondicionesModel>("dbo.spProvider_Condiciones_GetDistinct").ToList();
-                    return output;
-                }
-                catch (Exception)
-                {
-                    Debug.Assert(false);
-                    return null;
                 }
             }
         }
@@ -241,39 +251,17 @@ namespace CZS_LaVictoria_Library.DataAccess
                 p.Add("@PrecioUnitario", model.PrecioUnitario);
                 p.Add("@Area", model.Area);
                 p.Add("@Categoría", model.Categoría);
-                p.Add("@IdProveedor", proveedor.IdProvider);
+                p.Add("@IdProveedor", proveedor.Id);
                 p.Add("@Proveedor", proveedor.Nombre);
 
                 try
                 {
-                    connection.Execute("dbo.spProviderProduct_Insert", p, commandType: CommandType.StoredProcedure);
+                    connection.Execute("dbo.spSupplierProducts_Insert", p, commandType: CommandType.StoredProcedure);
                     return true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Debug.Assert(false);
-                    return false;
-                }
-            }
-        }
-
-        public bool ProveedorProducto_Update(ProveedorProductoModel model)
-        {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
-            {
-                var p = new DynamicParameters();
-                p.Add("@MaterialExterno", model.MaterialExterno);
-                p.Add("@MaterialInterno", model.MaterialInterno);
-                p.Add("@PrecioUnitario", model.PrecioUnitario);
-                p.Add("@IdProducto", model.IdProviderProduct);
-
-                try
-                {
-                    connection.Execute("dbo.spProviderProduct_Update", p, commandType: CommandType.StoredProcedure);
-                    return true;
-                }
-                catch (Exception)
-                {
+                    Debug.Write(ex.ToString());
                     Debug.Assert(false);
                     return false;
                 }
@@ -284,17 +272,17 @@ namespace CZS_LaVictoria_Library.DataAccess
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
-                List<ProveedorProductoModel> output;
                 try
                 {
-                    output = connection.Query<ProveedorProductoModel>("dbo.spProviderProduct_GetAll").ToList();
+                    var output = connection.Query<ProveedorProductoModel>("dbo.spSupplierProducts_GetAll").ToList();
+                    return output;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Debug.Write(ex.ToString());
                     Debug.Assert(false);
                     return null;
                 }
-                return output;
             }
         }
 
@@ -303,20 +291,21 @@ namespace CZS_LaVictoria_Library.DataAccess
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
                 var p = new DynamicParameters();
-                p.Add("@IdProvider", idProveedor);
+                p.Add("@IdProveedor", idProveedor);
                 p.Add("@Area", area);
 
-                List<ProveedorProductoModel> output;
                 try
                 {
-                    output = connection.Query<ProveedorProductoModel>("dbo.spProviderProduct_GetByProviderArea", p, commandType: CommandType.StoredProcedure).ToList();
+                    var output = connection.Query<ProveedorProductoModel>("dbo.spSupplierProducts_GetBySupplierArea", p,
+                        commandType: CommandType.StoredProcedure).ToList();
+                    return output;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Debug.Write(ex.ToString());
                     Debug.Assert(false);
                     return null;
                 }
-                return output;
             }
         }
 
@@ -331,7 +320,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
                 try
                 {
-                    var output = connection.QuerySingle<ProveedorProductoModel>("dbo.spProviderProduct_Find", p,
+                    var output = connection.QuerySingle<ProveedorProductoModel>("dbo.spSupplierProducts_Find", p,
                         commandType: CommandType.StoredProcedure);
                     return output;
                 }
@@ -344,20 +333,45 @@ namespace CZS_LaVictoria_Library.DataAccess
             }
         }
 
+        public bool ProveedorProducto_Update(ProveedorProductoModel model)
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@MaterialExterno", model.MaterialExterno);
+                p.Add("@MaterialInterno", model.MaterialInterno);
+                p.Add("@PrecioUnitario", model.PrecioUnitario);
+                p.Add("@Id", model.Id);
+
+                try
+                {
+                    connection.Execute("dbo.spSupplierProducts_Update", p, commandType: CommandType.StoredProcedure);
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return false;
+                }
+            }
+        }
+
         public bool ProveedorProducto_Delete(ProveedorProductoModel model)
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
                 var p = new DynamicParameters();
-                p.Add("@id", model.IdProviderProduct);
+                p.Add("@Id", model.Id);
 
                 try
                 {
-                    connection.Execute("dbo.spProviderProduct_Delete", p, commandType: CommandType.StoredProcedure);
+                    connection.Execute("dbo.spSupplierProducts_Delete", p, commandType: CommandType.StoredProcedure);
                     return true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Debug.Write(ex.ToString());
                     Debug.Assert(false);
                     return false;
                 }
@@ -386,9 +400,10 @@ namespace CZS_LaVictoria_Library.DataAccess
                     connection.Execute("dbo.spClient_Insert", p, commandType: CommandType.StoredProcedure);
                     return true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Debug.Assert(false);
+                    Debug.Write(ex.ToString()); 
+                    Debug.Assert(false); 
                     return false;
                 }
             }
@@ -398,18 +413,36 @@ namespace CZS_LaVictoria_Library.DataAccess
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
-                List<ClienteModel> output;
                 try
                 {
-                    output = connection.Query<ClienteModel>("dbo.spClient_GetAll").ToList();
+                    var output = connection.Query<ClienteModel>("dbo.spClient_GetAll").ToList();
+                    return output;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Debug.Assert(false);
+                    Debug.Write(ex.ToString()); 
+                    Debug.Assert(false); 
                     return null;
                 }
 
-                return output;
+            }
+        }
+
+        public List<string> Cliente_GetDistinctCiudades()
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var output = connection.Query<string>("spClient_GetDistinctCiudades").ToList();
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString()); 
+                    Debug.Assert(false); 
+                    return null;
+                }
             }
         }
 
@@ -425,16 +458,17 @@ namespace CZS_LaVictoria_Library.DataAccess
                 p.Add("@TeléfonoDos", model.TeléfonoDos);
                 p.Add("@Dirección", model.Dirección);
                 p.Add("@Ciudad", model.Ciudad);
-                p.Add("@id", model.IdClient);
+                p.Add("@Id", model.Id);
 
                 try
                 {
                     connection.Execute("dbo.spClient_Update", p, commandType: CommandType.StoredProcedure);
                     return true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Debug.Assert(false);
+                    Debug.Write(ex.ToString()); 
+                    Debug.Assert(false); 
                     return false;
                 }
             }
@@ -445,34 +479,18 @@ namespace CZS_LaVictoria_Library.DataAccess
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
                 var p = new DynamicParameters();
-                p.Add("@id", model.IdClient);
+                p.Add("@Id", model.Id);
 
                 try
                 {
                     connection.Execute("dbo.spClient_Delete", p, commandType: CommandType.StoredProcedure);
                     return true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Debug.Assert(false);
+                    Debug.Write(ex.ToString()); 
+                    Debug.Assert(false); 
                     return false;
-                }
-            }
-        }
-
-        public List<ClienteCiudadModel> ClienteCiudad_GetDistinct()
-        {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
-            {
-                try
-                {
-                    var output = connection.Query<ClienteCiudadModel>("spClient_Ciudad_GetDistinct").ToList();
-                    return output;
-                }
-                catch (Exception)
-                {
-                    Debug.Assert(false);
-                    return null;
                 }
             }
         }
@@ -489,61 +507,17 @@ namespace CZS_LaVictoria_Library.DataAccess
                 p.Add("@ProductoInterno", model.ProductoInterno);
                 p.Add("@PrecioUnitario", model.PrecioUnitario);
                 p.Add("@Area", model.Area);
-                p.Add("@IdCliente", cliente.IdClient);
-                p.Add("@Cliente", cliente.Nombre);
+                p.Add("@IdCliente", cliente?.Id);
+                p.Add("@Cliente", cliente?.Nombre);
 
                 try
                 {
-                    connection.Execute("dbo.spClientProduct_Insert", p, commandType: CommandType.StoredProcedure);
+                    connection.Execute("dbo.spClientProducts_Insert", p, commandType: CommandType.StoredProcedure);
                     return true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Debug.Assert(false);
-                    return false;
-                }
-            }
-        }
-
-        public bool ClienteProducto_Create(ClienteProductoModel model)
-        {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
-            {
-                var p = new DynamicParameters();
-                p.Add("@ProductoInterno", model.ProductoInterno);
-                p.Add("@PrecioUnitario", model.PrecioUnitario);
-                p.Add("@Area", model.Area);
-
-                try
-                {
-                    connection.Execute("dbo.spClientProduct_Insert", p, commandType: CommandType.StoredProcedure);
-                    return true;
-                }
-                catch (Exception)
-                {
-                    Debug.Assert(false);
-                    return false;
-                }
-            }
-        }
-
-        public bool ClienteProducto_Update(ClienteProductoModel model)
-        {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
-            {
-                var p = new DynamicParameters();
-                p.Add("@ProductoInterno", model.ProductoInterno);
-                p.Add("@PrecioUnitario", model.PrecioUnitario);
-                p.Add("@Area", model.Area);
-                p.Add("@IdProducto", model.IdProduct);
-
-                try
-                {
-                    connection.Execute("dbo.spClientProduct_Update", p, commandType: CommandType.StoredProcedure);
-                    return true;
-                }
-                catch (Exception)
-                {
+                    Debug.Write(ex.ToString());
                     Debug.Assert(false);
                     return false;
                 }
@@ -554,21 +528,21 @@ namespace CZS_LaVictoria_Library.DataAccess
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
-                List<ClienteProductoModel> output;
                 try
                 {
-                    output = connection.Query<ClienteProductoModel>("dbo.spClientProduct_GetAll").ToList();
+                    var output = connection.Query<ClienteProductoModel>("dbo.spClientProducts_GetAll").ToList();
+                    return output;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Debug.Write(ex.ToString());
                     Debug.Assert(false);
                     return null;
                 }
-                return output;
             }
         }
 
-        public List<ClienteProductoModel> ClienteProducto_GetByClienteArea(int idCliente, string area)
+        public List<ClienteProductoModel> ClienteProducto_GetByClienteArea(int? idCliente, string area)
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
@@ -579,14 +553,39 @@ namespace CZS_LaVictoria_Library.DataAccess
                 List<ClienteProductoModel> output;
                 try
                 {
-                    output = connection.Query<ClienteProductoModel>("dbo.spClientProduct_GetByProviderArea", p, commandType: CommandType.StoredProcedure).ToList();
+                    output = connection.Query<ClienteProductoModel>("dbo.spClientProducts_GetByClienteArea", p,
+                        commandType: CommandType.StoredProcedure).ToList();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Debug.Assert(false);
+                    Debug.Write(ex.ToString()); 
+                    Debug.Assert(false); 
                     return null;
                 }
                 return output;
+            }
+        }
+
+        public bool ClienteProducto_Update(ClienteProductoModel model)
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@ProductoInterno", model.ProductoInterno);
+                p.Add("@PrecioUnitario", model.PrecioUnitario);
+                p.Add("@Id", model.Id);
+
+                try
+                {
+                    connection.Execute("dbo.spClientProducts_Update", p, commandType: CommandType.StoredProcedure);
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return false;
+                }
             }
         }
 
@@ -595,15 +594,16 @@ namespace CZS_LaVictoria_Library.DataAccess
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
                 var p = new DynamicParameters();
-                p.Add("@IdProducto", model.IdProduct);
+                p.Add("@Id", model.Id);
 
                 try
                 {
-                    connection.Execute("dbo.spClientProduct_Delete", p, commandType: CommandType.StoredProcedure);
+                    connection.Execute("dbo.spClientProducts_Delete", p, commandType: CommandType.StoredProcedure);
                     return true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Debug.Write(ex.ToString());
                     Debug.Assert(false);
                     return false;
                 }
@@ -623,16 +623,17 @@ namespace CZS_LaVictoria_Library.DataAccess
                 p.Add("@Area", model.Area);
                 p.Add("@Categoría", model.Categoría);
                 p.Add("@CantidadDisponible", model.CantidadDisponible);
-                p.Add("@peso", model.Peso);
+                p.Add("@Peso", model.Peso);
 
                 try
                 {
                     connection.Execute("dbo.spStock_Insert", p, commandType: CommandType.StoredProcedure);
                     return true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Debug.Assert(false);
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false); 
                     return false;
                 }
             }
@@ -644,16 +645,15 @@ namespace CZS_LaVictoria_Library.DataAccess
             {
                 try
                 {
-                    var output = connection.Query<MaterialModel>("dbo.spStock_GetAll", commandType: CommandType.StoredProcedure).ToList();
+                    var output = connection
+                        .Query<MaterialModel>("dbo.spStock_GetAll", commandType: CommandType.StoredProcedure).ToList();
                     return output;
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    if (e.Message != "Sequence contains no elements")
-                    {
-                        Debug.Assert(false);
-                    }
-
+                    if (ex.Message == "Sequence contains no elements") return null;
+                    Debug.WriteLine(ex.ToString());
+                    Debug.Assert(false);
                     return null;
                 }
             }
@@ -667,39 +667,16 @@ namespace CZS_LaVictoria_Library.DataAccess
                 p.Add("@Area", area);
                 p.Add("@Categoría", categoría);
 
-                List<MaterialModel> output;
                 try
                 {
-                    output = connection.Query<MaterialModel>("dbo.spStock_GetByAreaCat", p, commandType: CommandType.StoredProcedure).ToList();
+                    var output = connection.Query<MaterialModel>("dbo.spStock_GetByAreaCat", p,
+                        commandType: CommandType.StoredProcedure).ToList();
+                    return output;
                 }
                 catch (Exception ex)
                 {
                     Debug.WriteLine(ex.ToString());
                     Debug.Assert(false);
-                    return null;
-                }
-                return output;
-            }
-        }
-
-        public MaterialModel Material_GetByNombreArea(string nombre, string area)
-        {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
-            {
-                try
-                {
-                    var output =
-                        connection.QuerySingle<MaterialModel>(
-                            $"SELECT * FROM Stock WHERE nombre = '{nombre}' AND area = '{area}'");
-                    return output;
-                }
-                catch (Exception e)
-                {
-                    if (e.Message != "Sequence contains no elements")
-                    {
-                        Debug.Assert(false);
-                    }
-
                     return null;
                 }
             }
@@ -712,17 +689,57 @@ namespace CZS_LaVictoria_Library.DataAccess
                 var p = new DynamicParameters();
                 p.Add("@Categoría", categoría);
 
-                List<MaterialModel> output;
                 try
                 {
-                    output = connection.Query<MaterialModel>("dbo.spStock_GetByCat", p, commandType: CommandType.StoredProcedure).ToList();
+                    var output = connection
+                        .Query<MaterialModel>("dbo.spStock_GetByCat", p, commandType: CommandType.StoredProcedure)
+                        .ToList();
+                    return output;
                 }
-                catch (Exception)
+                catch (Exception ex) { Debug.Write(ex.ToString()); Debug.Assert(false); return null; }
+            }
+        }
+
+        public MaterialModel Material_GetByNombreArea(string nombre, string area)
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@Nombre", nombre);
+                p.Add("@Area", area);
+
+                try
                 {
+                    var output =
+                        connection.QuerySingle<MaterialModel>("dbo.spStock_GetByNombreArea");
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    if (ex.Message == "Sequence contains no elements") return null;
+                    Debug.WriteLine(ex.ToString());
                     Debug.Assert(false);
                     return null;
                 }
-                return output;
+            }
+        }
+
+        public List<string> Material_GetDistinctCategorías()
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var output = connection.Query<string>("dbo.spStock_GetDistinctCategorías").ToList();
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    if (ex.Message == "Sequence contains no elements") return null;
+                    Debug.WriteLine(ex.ToString());
+                    Debug.Assert(false);
+                    return null;
+                }
             }
         }
 
@@ -731,40 +748,41 @@ namespace CZS_LaVictoria_Library.DataAccess
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
                 var p = new DynamicParameters();
-                p.Add("@idMaterial", model.IdMaterial);
                 p.Add("@CantidadDisponible", model.CantidadDisponible);
-                p.Add("@peso", model.Peso);
+                p.Add("@Peso", model.Peso);
+                p.Add("@Id", model.Id);
 
                 try
                 {
                     connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
                     return true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Debug.Write(ex.ToString());
                     Debug.Assert(false);
                     return false;
                 }
             }
         }
 
-        public List<string> Categorías_GetDistinct()
+        public bool Material_Delete(MaterialModel model)
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
+                var p = new DynamicParameters();
+                p.Add("@Id", model.Id);
+
                 try
                 {
-                    var output = connection.Query<string>("SELECT DISTINCT categoría FROM Stock").ToList();
-                    return output;
+                    connection.Execute("dbo.spStock_Delete", p, commandType: CommandType.StoredProcedure);
+                    return true;
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    if (e.Message != "Sequence contains no elements")
-                    {
-                        Debug.Assert(false);
-                    }
-
-                    return null;
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return false;
                 }
             }
         }
@@ -775,24 +793,25 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public bool Mezcla_Create(MezclaModel model)
         {
+            using (var scope = new TransactionScope())
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Nombre", model.Nombre);
                 p.Add("@Cantidad", model.CantidadMezcla);
-                p.Add("@IdMezcla", 0, direction: ParameterDirection.Output);
+                p.Add("@Id", 0, direction: ParameterDirection.Output);
 
                 try
                 {
                     connection.Execute("dbo.spMix_Insert", p, commandType: CommandType.StoredProcedure);
-                    model.IdMezcla = p.Get<int>("@IdMezcla");
+                    model.Id = p.Get<int>("@Id");
 
                     var index = 0;
                     foreach (var material in model.Materiales)
                     {
                         p = new DynamicParameters();
-                        p.Add("@IdMezcla", model.IdMezcla);
-                        p.Add("@IdMaterial", material.IdMaterial);
+                        p.Add("@IdMezcla", model.Id);
+                        p.Add("@IdMaterial", material.Id);
                         p.Add("@Cantidad", model.Cantidades[index]);
                         try
                         {
@@ -807,6 +826,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                         }
                     }
 
+                    scope.Complete();
                     return true;
                 }
                 catch (Exception ex)
@@ -822,18 +842,20 @@ namespace CZS_LaVictoria_Library.DataAccess
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
-                List<MezclaModel> output;
-
                 try
                 {
-                    output = connection.Query<MezclaModel>("dbo.spMix_GetAll", commandType: CommandType.StoredProcedure).ToList();
+                    var output = connection
+                        .Query<MezclaModel>("dbo.spMix_GetAll", commandType: CommandType.StoredProcedure).ToList();
 
                     foreach (var mezclaModel in output)
                     {
                         var p = new DynamicParameters();
-                        p.Add("@idMezcla", mezclaModel.IdMezcla);
-                        var idsMat = connection.Query<int>($"SELECT idMaterial FROM MixDetails WHERE idMezcla = {mezclaModel.IdMezcla}").ToList();
-                        var cants = connection.Query<double>($"SELECT cantidad FROM MixDetails WHERE idMezcla = {mezclaModel.IdMezcla}").ToList();
+                        p.Add("@idMezcla", mezclaModel.Id);
+
+                        var idsMat = connection
+                            .Query<int>("dbo.spMixDetails_GetIDs", commandType: CommandType.StoredProcedure).ToList();
+                        var cants = connection.Query<double>("dbo.spMixDetails_GetCantidades",
+                            commandType: CommandType.StoredProcedure).ToList();
 
                         foreach (var cant in cants)
                         {
@@ -844,10 +866,14 @@ namespace CZS_LaVictoria_Library.DataAccess
                         {
                             p = new DynamicParameters();
                             p.Add("@IdMaterial", id);
-                            var mats = connection.Query<MaterialModel>("dbo.spStock_GetById", p, commandType: CommandType.StoredProcedure).ToList();
-                            mezclaModel.Materiales.Add(mats[0]);
+
+                            var mats = connection.QuerySingle<MaterialModel>("dbo.spStock_GetById", p,
+                                commandType: CommandType.StoredProcedure);
+                            mezclaModel.Materiales.Add(mats);
                         }
                     }
+
+                    return output;
                 }
                 catch (Exception ex)
                 {
@@ -855,7 +881,6 @@ namespace CZS_LaVictoria_Library.DataAccess
                     Debug.Assert(false);
                     return null;
                 }
-                return output;
             }
         }
 
@@ -863,31 +888,9 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         #region Orden de Compra
 
-        public long PurchaseOrder_GetLastNumber()
+        public bool OrdenCompra_Create(OrdenCompraModel model)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
-            {
-                try
-                {
-                    var output =
-                        connection.ExecuteScalar("SELECT TOP 1 numOrden FROM PurchaseOrder ORDER BY numOrden DESC").ToString();
-                    return long.Parse(output);
-                }
-                catch (NullReferenceException)
-                {
-                    return 2100000;
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex.ToString());
-                    Debug.Assert(false);
-                    return 0;
-                }
-            }
-        }
-
-        public bool PurchaseOrder_Create(OrdenCompraModel model)
-        {
+            using (var scope = new TransactionScope())
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
                 var p = new DynamicParameters();
@@ -897,17 +900,17 @@ namespace CZS_LaVictoria_Library.DataAccess
                 p.Add("@Proveedor", model.Proveedor);
                 p.Add("@Condiciones", model.Condiciones);
                 p.Add("@FechaOrden", model.FechaOrden);
-                p.Add("@UniqueId", 0, direction: ParameterDirection.Output);
+                p.Add("@Id", 0, direction: ParameterDirection.Output);
 
                 try
                 {
-                    connection.Execute("dbo.spPurchaseOrder_Create", p, commandType: CommandType.StoredProcedure);
-                    model.UniqueIdOrder = p.Get<int>("@UniqueId");
+                    connection.Execute("dbo.spPurchaseOrder_Insert", p, commandType: CommandType.StoredProcedure);
+                    model.Id = p.Get<int>("@Id");
 
                     foreach (var line in model.Líneas)
                     {
                         p = new DynamicParameters();
-                        p.Add("@IdOrder", model.UniqueIdOrder);
+                        p.Add("@IdPurchaseOrder", model.Id);
                         p.Add("@NumLinea", line.NumLinea);
                         p.Add("@Producto", line.Producto);
                         p.Add("@CantidadOrden", line.CantidadOrden);
@@ -921,45 +924,75 @@ namespace CZS_LaVictoria_Library.DataAccess
 
                         try
                         {
-                            connection.Execute("dbo.spPurchaseOrderDetails_Insert", p, commandType: CommandType.StoredProcedure);
+                            connection.Execute("dbo.spPurchaseOrderDetails_Insert", p,
+                                commandType: CommandType.StoredProcedure);
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
+                            Debug.Write(ex.ToString());
                             Debug.Assert(false);
                             return false;
                         }
                     }
 
+                    scope.Complete();
                     return true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Debug.Assert(false);
+                    Debug.Write(ex.ToString()); 
+                    Debug.Assert(false); 
                     return false;
                 }
             }
         }
 
-        public OrdenCompraModel PurchaseOrder_GetByNumOrden(string numOrden)
+        public long OrdenCompra_GetLastNumOrden()
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var output = connection.ExecuteScalar("dbo.spPurchaseOrder_GetLastNumOrden").ToString();
+                    return long.Parse(output);
+                }
+                catch (NullReferenceException)
+                {
+                    var year = DateTime.Today.Year.ToString().Substring(2,3);
+                    return long.Parse(year + "00000");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.ToString());
+                    Debug.Assert(false);
+                    return 0;
+                }
+            }
+        }
+
+        public OrdenCompraModel OrdenCompra_GetByNumOrden(string numOrden)
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@NumOrden", numOrden);
+
                 try
                 {
-                    var output = connection.QuerySingle<OrdenCompraModel>("dbo.spPurchaseOrder_GetByNumOrden", p, commandType:CommandType.StoredProcedure);
+                    var output = connection.QuerySingle<OrdenCompraModel>("dbo.spPurchaseOrder_GetByNumOrden", p,
+                        commandType: CommandType.StoredProcedure);
                     return output;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Debug.Assert(false);
+                    Debug.Write(ex.ToString()); 
+                    Debug.Assert(false); 
                     return null;
                 }
             }
         }
 
-        public List<OrdenCompraLíneaModel> PurchaseOrderLine_GetByNumOrden(string numOrden)
+        public List<OrdenCompraLíneaModel> OrdenCompra_GetLineasByNumOrden(string numOrden)
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
@@ -971,15 +1004,16 @@ namespace CZS_LaVictoria_Library.DataAccess
                         commandType: CommandType.StoredProcedure).ToList();
                     return output;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Debug.Assert(false);
+                    Debug.Write(ex.ToString()); 
+                    Debug.Assert(false); 
                     return null;
                 }
             }
         }
 
-        public List<OrdenCompraLíneaModel> PurchaseOrderLine_GetPending()
+        public List<OrdenCompraLíneaModel> OrdenCompra_GetLineasPendientes()
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
@@ -989,15 +1023,16 @@ namespace CZS_LaVictoria_Library.DataAccess
                         commandType: CommandType.StoredProcedure).ToList();
                     return output;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Debug.Assert(false);
+                    Debug.Write(ex.ToString()); 
+                    Debug.Assert(false); 
                     return null;
                 }
             }
         }
 
-        public List<OrdenCompraLíneaModel> PurchaseOrderLine_GetAll()
+        public List<OrdenCompraLíneaModel> OrdenCompra_GetAllLineas()
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
@@ -1007,15 +1042,16 @@ namespace CZS_LaVictoria_Library.DataAccess
                         commandType: CommandType.StoredProcedure).ToList();
                     return output;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Debug.Assert(false);
+                    Debug.Write(ex.ToString()); 
+                    Debug.Assert(false); 
                     return null;
                 }
             }
         }
 
-        public bool PurchaseOrderLine_Update(long orderId, OrdenCompraLíneaModel model, string estatus)
+        public bool PurchaseOrderLine_Update(long orderId, OrdenCompraLíneaModel model)
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
@@ -1026,7 +1062,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                 p.Add("@CantidadPendiente", model.CantidadPendiente);
                 p.Add("@FechaUltRecepción", model.FechaUltRecepción);
                 p.Add("@FechaCancelación", model.FechaCancelación);
-                p.Add("@Estatus", estatus);
+                p.Add("@Estatus", model.Estatus);
 
                 try
                 {
@@ -1047,18 +1083,196 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         #region Orden de Venta
 
-        public string SaleOrder_GetLastNumber()
+        public bool OrdenVenta_Create(OrdenVentaModel model)
+        {
+            using (var scope = new TransactionScope())
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@NumOrden", model.NumOrden);
+                p.Add("@TipoOrden", model.TipoOrden);
+                p.Add("@Area", model.Area);
+                p.Add("@Cliente", model.Cliente);
+                p.Add("@Transporte", model.Transporte);
+                p.Add("@PuestoEn", model.PuestoEn);
+                p.Add("@Presentación", model.Presentación);
+                p.Add("@FechaOrden", model.FechaOrden);
+                p.Add("@Id", 0, direction: ParameterDirection.Output);
+
+                try
+                {
+                    connection.Execute("dbo.spSaleOrder_Insert", p, commandType: CommandType.StoredProcedure);
+                    model.Id = p.Get<int>("@Id");
+
+                    foreach (var line in model.Líneas)
+                    {
+                        p = new DynamicParameters();
+                        p.Add("@IdSaleOrder", model.Id);
+                        p.Add("@NumLinea", line.NumLinea);
+                        p.Add("@Producto", line.Producto);
+                        p.Add("@CantidadOrden", line.CantidadOrden);
+                        p.Add("@CantidadEntregada", line.CantidadEntregada);
+                        p.Add("@CantidadPendiente", line.CantidadPendiente);
+                        p.Add("@PrecioUnitario", line.PrecioUnitario);
+                        p.Add("@Iva", line.Iva);
+                        p.Add("@Subtotal", line.Subtotal);
+                        p.Add("@FechaEntrega", line.FechaEntrega);
+                        p.Add("@Estatus", "Abierta");
+
+                        try
+                        {
+                            connection.Execute("dbo.spSaleOrderDetails_Insert", p,
+                                commandType: CommandType.StoredProcedure);
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.Write(ex.ToString());
+                            Debug.Assert(false);
+                            return false;
+                        }
+                    }
+
+                    scope.Complete();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return false;
+                }
+            }
+        }
+
+        public long OrdenVenta_GetLastNumOrden()
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
                 try
                 {
-                    return connection.ExecuteScalar("SELECT TOP 1 numOrden FROM SaleOrder ORDER BY numOrden DESC").ToString();
+                    var output = connection.ExecuteScalar("dbo.spSaleOrder_GetLastNumOrden").ToString();
+                    return long.Parse(output);
                 }
-                catch (Exception)
+                catch (NullReferenceException)
                 {
+                    var year = DateTime.Today.Year.ToString().Substring(2, 3);
+                    return long.Parse(year + "00000");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.ToString());
                     Debug.Assert(false);
-                    return "2100001";
+                    return 0;
+                }
+            }
+        }
+
+        public OrdenVentaModel OrdenVenta_GetByNumOrden(string numOrden)
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@NumOrden", numOrden);
+
+                try
+                {
+                    var output = connection.QuerySingle<OrdenVentaModel>("dbo.spSaleOrder_GetByNumOrden", p,
+                        commandType: CommandType.StoredProcedure);
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
+        }
+
+        public List<OrdenVentaLíneaModel> OrdenVenta_GetLineasByNumOrden(string numOrden)
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@NumOrden", numOrden);
+
+                try
+                {
+                    var output = connection.Query<OrdenVentaLíneaModel>("dbo.spSaleOrderDetails_GetByNumOrden", p,
+                        commandType: CommandType.StoredProcedure).ToList();
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
+        }
+
+        public List<OrdenVentaLíneaModel> OrdenVenta_GetLineasPendientes()
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var output = connection.Query<OrdenVentaLíneaModel>("dbo.spSaleOrderDetails_GetAllPending",
+                        commandType: CommandType.StoredProcedure).ToList();
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
+        }
+
+        public List<OrdenVentaLíneaModel> OrdenVenta_GetAllLineas()
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var output = connection.Query<OrdenVentaLíneaModel>("dbo.spSaleOrderDetails_GetAll",
+                        commandType: CommandType.StoredProcedure).ToList();
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
+        }
+
+        public bool PurchaseOrderLine_Update(long orderId, OrdenVentaLíneaModel model)
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@IdOrden", orderId);
+                p.Add("@NumLinea", model.NumLinea);
+                p.Add("@CantidadEntregada", model.CantidadEntregada);
+                p.Add("@CantidadPendiente", model.CantidadPendiente);
+                p.Add("@FechaUltEntrega", model.FechaUltEntrega);
+                p.Add("@FechaCancelación", model.FechaCancelación);
+                p.Add("@Estatus", model.Estatus);
+
+                try
+                {
+                    connection.Execute("dbo.spSaleOrderDetails_Update", p,
+                        commandType: CommandType.StoredProcedure);
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.ToString());
+                    Debug.Assert(false);
+                    return false;
                 }
             }
         }
@@ -1067,12 +1281,12 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         #region Historial de Entregas
 
-        public bool Delivery_Create(string tipoOrden, long numOrden, OrdenCompraLíneaModel model, double quantity)
+        public bool Delivery_Create(long numOrden, OrdenCompraLíneaModel model, double quantity)
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
                 var p = new DynamicParameters();
-                p.Add("@TipoOrden", tipoOrden);
+                p.Add("@TipoOrden", "C");
                 p.Add("@NumOrden", numOrden);
                 p.Add("@NumLinea", model.NumLinea);
                 p.Add("@Producto", model.Producto);
@@ -1085,8 +1299,36 @@ namespace CZS_LaVictoria_Library.DataAccess
                         commandType: CommandType.StoredProcedure);
                     return true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Debug.Write(ex.ToString()); 
+                    Debug.Assert(false); 
+                    return false;
+                }
+            }
+        }
+
+        public bool Delivery_Create(long numOrden, OrdenVentaLíneaModel model, double quantity)
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@TipoOrden", "V");
+                p.Add("@NumOrden", numOrden);
+                p.Add("@NumLinea", model.NumLinea);
+                p.Add("@Producto", model.Producto);
+                p.Add("@Cantidad", quantity);
+                p.Add("@Fecha", model.FechaUltEntrega);
+
+                try
+                {
+                    connection.Execute("dbo.spDelivery_Insert", p,
+                        commandType: CommandType.StoredProcedure);
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
                     Debug.Assert(false);
                     return false;
                 }
@@ -1103,9 +1345,10 @@ namespace CZS_LaVictoria_Library.DataAccess
                         commandType: CommandType.StoredProcedure).ToList();
                     return output;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Debug.Assert(false);
+                    Debug.Write(ex.ToString()); 
+                    Debug.Assert(false); 
                     return null;
                 }
             }
@@ -1121,9 +1364,10 @@ namespace CZS_LaVictoria_Library.DataAccess
                         commandType: CommandType.StoredProcedure).ToList();
                     return output;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Debug.Assert(false);
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false); 
                     return null;
                 }
             }
@@ -1146,9 +1390,10 @@ namespace CZS_LaVictoria_Library.DataAccess
                     connection.Execute("dbo.spOperators_Insert", p, commandType: CommandType.StoredProcedure);
                     return true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Debug.Assert(false);
+                    Debug.Write(ex.ToString()); 
+                    Debug.Assert(false); 
                     return false;
                 }
             }
@@ -1164,9 +1409,10 @@ namespace CZS_LaVictoria_Library.DataAccess
                         commandType: CommandType.StoredProcedure).ToList();
                     return output;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Debug.Assert(false);
+                    Debug.Write(ex.ToString()); 
+                    Debug.Assert(false); 
                     return null;
                 }
             }
@@ -1185,9 +1431,10 @@ namespace CZS_LaVictoria_Library.DataAccess
                         commandType: CommandType.StoredProcedure).ToList();
                     return output;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Debug.Assert(false);
+                    Debug.Write(ex.ToString()); 
+                    Debug.Assert(false); 
                     return null;
                 }
             }
@@ -1207,9 +1454,10 @@ namespace CZS_LaVictoria_Library.DataAccess
                     connection.Execute("dbo.spOperators_Update", p, commandType: CommandType.StoredProcedure);
                     return true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Debug.Assert(false);
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false); 
                     return false;
                 }
             }
@@ -1227,9 +1475,10 @@ namespace CZS_LaVictoria_Library.DataAccess
                     connection.Execute("dbo.spOperators_Delete", p, commandType: CommandType.StoredProcedure);
                     return true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Debug.Assert(false);
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false); 
                     return false;
                 }
             }

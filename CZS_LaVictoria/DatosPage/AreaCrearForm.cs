@@ -27,7 +27,8 @@ namespace CZS_LaVictoria.DatosPage
                 return;
             }
 
-            var model = new AreaModel(AreaCombo.Text, ResponsableText.Text);
+            var model = new AreaModel { Area = AreaCombo.Text, Responsable = ResponsableText.Text, Correo = CorreoText.Text };
+
             var saveSuccess = GlobalConfig.Connection.Area_Create(model);
 
             if (saveSuccess)
@@ -69,6 +70,7 @@ namespace CZS_LaVictoria.DatosPage
 
         bool ValidateForm()
         {
+            // TODO - Validar correo.
             var output = true;
 
             if (AreaCombo.Text == "")

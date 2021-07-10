@@ -353,7 +353,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 order.Líneas.Add(data);
             }
 
-            var saveSuccess = GlobalConfig.Connection.PurchaseOrder_Create(order);
+            var saveSuccess = GlobalConfig.Connection.OrdenCompra_Create(order);
 
             if (saveSuccess)
             {
@@ -382,12 +382,19 @@ namespace CZS_LaVictoria.ÓrdenesPage
         #region Methods
 
         /// <summary>
-        /// Obtiene el número de la última orden, y le suma 1.
+        /// Obtiene el número de la última orden, y le suma 1. Si el año cambia, resetea el contador.
         /// </summary>
         /// <returns>El número consecutivo para la orden nueva.</returns>
         string GetNumOrden()
         {
-            var order = GlobalConfig.Connection.PurchaseOrder_GetLastNumber();
+            var order = GlobalConfig.Connection.OrdenCompra_GetLastNumOrden();
+            var lastOrderYear = order.ToString().Substring(0, 2);
+            var thisYear = DateTime.Today.Year.ToString().Substring(2, 2);
+            if (lastOrderYear != thisYear)
+            {
+                order = long.Parse(thisYear + "00000");
+            }
+
             order += 1;
             return order.ToString();
         }
@@ -430,7 +437,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
         void GetCondiciones()
         {
             CondicionesCombo.Items.Clear();
-            var condiciones = GlobalConfig.Connection.ProveedorCondiciones_GetDistinct();
+            var condiciones = GlobalConfig.Connection.Proveedor_GetDistinctCondiciones();
 
             foreach (var condición in condiciones)
             {
@@ -446,7 +453,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
         void GetProducts()
         {
             if (_selectedProveedor == null || AreaCombo.Text == "") return;
-            _productos = GlobalConfig.Connection.ProveedorProducto_GetByProveedorArea(_selectedProveedor.IdProvider, AreaCombo.Text);
+            _productos = GlobalConfig.Connection.ProveedorProducto_GetByProveedorArea(_selectedProveedor.Id, AreaCombo.Text);
             ((GridComboBoxColumn) DataGrid.Columns["Producto"]).DataSource = _productos;
             ((GridComboBoxColumn) DataGrid.Columns["Producto"]).DisplayMember = "MaterialExterno";
             ((GridComboBoxColumn) DataGrid.Columns["Producto"]).ValueMember = "MaterialExterno";

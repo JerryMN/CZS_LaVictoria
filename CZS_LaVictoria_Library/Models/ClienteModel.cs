@@ -2,7 +2,7 @@
 {
     public class ClienteModel
     {
-        public int IdClient { get; set; }
+        public int Id { get; set; }
         public string Nombre { get; set; }
         public string Atención { get; set; }
         public string Correo { get; set; }

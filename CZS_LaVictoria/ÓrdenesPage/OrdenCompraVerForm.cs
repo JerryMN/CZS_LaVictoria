@@ -35,17 +35,17 @@ namespace CZS_LaVictoria.ÓrdenesPage
             // Si no hay alguna orden seleccionada, muestra todas las líneas de todas las órdenes.
             if (NumOrdenText.Text == "" && PendientesCheck.CheckState == CheckState.Unchecked)
             {
-                DataGrid.DataSource = GlobalConfig.Connection.PurchaseOrderLine_GetAll();
+                DataGrid.DataSource = GlobalConfig.Connection.OrdenCompra_GetAllLineas();
             }
             else if (NumOrdenText.Text == "" && PendientesCheck.CheckState == CheckState.Checked)
             {
-                DataGrid.DataSource = GlobalConfig.Connection.PurchaseOrderLine_GetPending();
+                DataGrid.DataSource = GlobalConfig.Connection.OrdenCompra_GetLineasPendientes();
             }
             // Al seleccionar una orden, muestra todas las líneas de esa orden.
             else
             {
-                DataGrid.DataSource = GlobalConfig.Connection.PurchaseOrderLine_GetByNumOrden(NumOrdenText.Text);
-                _orden = GlobalConfig.Connection.PurchaseOrder_GetByNumOrden(NumOrdenText.Text);
+                DataGrid.DataSource = GlobalConfig.Connection.OrdenCompra_GetLineasByNumOrden(NumOrdenText.Text);
+                _orden = GlobalConfig.Connection.OrdenCompra_GetByNumOrden(NumOrdenText.Text);
             }
 
             // Ordenar tabla por Número de Orden.
@@ -155,13 +155,13 @@ namespace CZS_LaVictoria.ÓrdenesPage
         {
             if (e.RemovedItems.Count == 0) return;
             var línea = e.RemovedItems[0] as OrdenCompraLíneaModel;
-            _orden = GlobalConfig.Connection.PurchaseOrder_GetByNumOrden(línea?.NumOrden.ToString());
+            _orden = GlobalConfig.Connection.OrdenCompra_GetByNumOrden(línea?.NumOrden.ToString());
             if (línea?.CantidadPendiente == 0)
             {
                 línea.Estatus = "Entregada";
             }
 
-            UpdatePurchaseOrderLine(_orden, línea, línea?.Estatus);
+            UpdatePurchaseOrderLine(_orden, línea);
             UpdateStock(línea, _oldQty, _newQty);
             AddDelivery(línea);
             // Unhook para que este método sólo se ejecute después de Recibir Button.
@@ -217,11 +217,11 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 return;
             }
 
-            _orden = GlobalConfig.Connection.PurchaseOrder_GetByNumOrden(línea?.NumOrden.ToString());
+            _orden = GlobalConfig.Connection.OrdenCompra_GetByNumOrden(línea?.NumOrden.ToString());
             línea.CantidadPendiente = 0;
             línea.FechaCancelación = DateTime.Today;
             línea.Estatus = "Cancelada";
-            UpdatePurchaseOrderLine(_orden, línea, línea.Estatus);
+            UpdatePurchaseOrderLine(_orden, línea);
         }
 
         #endregion
@@ -283,9 +283,9 @@ namespace CZS_LaVictoria.ÓrdenesPage
         /// </summary>
         /// <param name="order">La orden a la que pertenece la línea</param>
         /// <param name="line">La línea a actualizar.</param>
-        void UpdatePurchaseOrderLine(OrdenCompraModel order, OrdenCompraLíneaModel line, string estatus)
+        void UpdatePurchaseOrderLine(OrdenCompraModel order, OrdenCompraLíneaModel line)
         {
-            GlobalConfig.Connection.PurchaseOrderLine_Update(order.UniqueIdOrder, line, estatus);
+            GlobalConfig.Connection.PurchaseOrderLine_Update(order.Id, line);
         }
 
         /// <summary>
@@ -319,7 +319,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
         void AddDelivery(OrdenCompraLíneaModel model)
         {
             var quantity = double.Parse(_newQtyString);
-            GlobalConfig.Connection.Delivery_Create("C", _orden.NumOrden, model, quantity);
+            GlobalConfig.Connection.Delivery_Create(_orden.NumOrden, model, quantity);
             // Reset para que el diálogo siempre aparezca vacío.
             _newQtyString = "";
         }

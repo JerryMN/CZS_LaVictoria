@@ -70,7 +70,7 @@ namespace CZS_LaVictoria.DatosPage
 
         void GetCiudad()
         {
-            var ciudades = GlobalConfig.Connection.ClienteCiudad_GetDistinct();
+            var ciudades = GlobalConfig.Connection.Cliente_GetDistinctCiudades();
 
             foreach (var ciudad in ciudades)
             {

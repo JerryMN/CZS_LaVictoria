@@ -36,6 +36,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,7 +49,6 @@
     <Compile Include="DataAccess\SqlConnector.cs" />
     <Compile Include="GlobalConfig.cs" />
     <Compile Include="Models\AreaModel.cs" />
-    <Compile Include="Models\ClienteCiudadModel.cs" />
     <Compile Include="Models\ClienteModel.cs" />
     <Compile Include="Models\ClienteProductoModel.cs" />
     <Compile Include="Models\HistorialModel.cs" />
@@ -58,7 +58,6 @@
     <Compile Include="Models\ProducciónPlásticosModel.cs" />
     <Compile Include="Models\OrdenCompraLíneaModel.cs" />
     <Compile Include="Models\OrdenCompraModel.cs" />
-    <Compile Include="Models\ProveedorCondicionesModel.cs" />
     <Compile Include="Models\ProveedorModel.cs" />
     <Compile Include="Models\ProveedorProductoModel.cs" />
     <Compile Include="Models\OrdenVentaLíneaModel.cs" />

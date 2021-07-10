@@ -38,6 +38,8 @@ namespace CZS_LaVictoria.DatosPage
             this.GuardarButton = new System.Windows.Forms.Button();
             this.MsgBoxTimer = new System.Windows.Forms.Timer(this.components);
             this.SubtitleLabel = new System.Windows.Forms.Label();
+            this.CorreoLabel = new System.Windows.Forms.Label();
+            this.CorreoText = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // AreaCombo
@@ -89,7 +91,7 @@ namespace CZS_LaVictoria.DatosPage
             this.MsgBox.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.MsgBox.IconSize = 32;
             this.MsgBox.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.MsgBox.Location = new System.Drawing.Point(50, 300);
+            this.MsgBox.Location = new System.Drawing.Point(50, 350);
             this.MsgBox.Name = "MsgBox";
             this.MsgBox.Size = new System.Drawing.Size(420, 157);
             this.MsgBox.TabIndex = 21;
@@ -102,7 +104,7 @@ namespace CZS_LaVictoria.DatosPage
             // 
             this.GuardarButton.AutoSize = true;
             this.GuardarButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GuardarButton.Location = new System.Drawing.Point(392, 250);
+            this.GuardarButton.Location = new System.Drawing.Point(392, 300);
             this.GuardarButton.Name = "GuardarButton";
             this.GuardarButton.Size = new System.Drawing.Size(78, 33);
             this.GuardarButton.TabIndex = 20;
@@ -125,6 +127,24 @@ namespace CZS_LaVictoria.DatosPage
             this.SubtitleLabel.TabIndex = 16;
             this.SubtitleLabel.Text = "Crear Área";
             // 
+            // CorreoLabel
+            // 
+            this.CorreoLabel.AutoSize = true;
+            this.CorreoLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CorreoLabel.Location = new System.Drawing.Point(50, 250);
+            this.CorreoLabel.Name = "CorreoLabel";
+            this.CorreoLabel.Size = new System.Drawing.Size(58, 21);
+            this.CorreoLabel.TabIndex = 18;
+            this.CorreoLabel.Text = "Correo";
+            // 
+            // CorreoText
+            // 
+            this.CorreoText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CorreoText.Location = new System.Drawing.Point(220, 247);
+            this.CorreoText.Name = "CorreoText";
+            this.CorreoText.Size = new System.Drawing.Size(250, 29);
+            this.CorreoText.TabIndex = 19;
+            // 
             // AreaCrearForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -132,7 +152,9 @@ namespace CZS_LaVictoria.DatosPage
             this.ClientSize = new System.Drawing.Size(1276, 839);
             this.Controls.Add(this.MsgBox);
             this.Controls.Add(this.GuardarButton);
+            this.Controls.Add(this.CorreoText);
             this.Controls.Add(this.ResponsableText);
+            this.Controls.Add(this.CorreoLabel);
             this.Controls.Add(this.ResponsableLabel);
             this.Controls.Add(this.AreaCombo);
             this.Controls.Add(this.SubtitleLabel);
@@ -157,5 +179,7 @@ namespace CZS_LaVictoria.DatosPage
         private System.Windows.Forms.Button GuardarButton;
         private System.Windows.Forms.Timer MsgBoxTimer;
         private System.Windows.Forms.Label SubtitleLabel;
+        private System.Windows.Forms.Label CorreoLabel;
+        private System.Windows.Forms.TextBox CorreoText;
     }
 }

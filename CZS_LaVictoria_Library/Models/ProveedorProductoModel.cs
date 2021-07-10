@@ -2,7 +2,7 @@
 {
     public class ProveedorProductoModel
     {
-        public int IdProviderProduct { get; set; }
+        public int Id { get; set; }
         public string MaterialExterno { get; set; }
         public string MaterialInterno { get; set; }
         public decimal PrecioUnitario { get; set; }

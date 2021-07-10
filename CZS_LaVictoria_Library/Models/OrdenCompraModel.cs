@@ -5,7 +5,7 @@ namespace CZS_LaVictoria_Library.Models
 {
     public class OrdenCompraModel
     {
-        public int UniqueIdOrder { get; set; }
+        public int Id { get; set; }
         public long NumOrden { get; set; }
         public string TipoOrden { get; set; }
         public string Area { get; set; }

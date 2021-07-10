@@ -60,7 +60,7 @@ namespace CZS_LaVictoria.DatosPage
 
         void GetCondiciones()
         {
-            var condiciones = GlobalConfig.Connection.ProveedorCondiciones_GetDistinct();
+            var condiciones = GlobalConfig.Connection.Proveedor_GetDistinctCondiciones();
 
             foreach (var condición in condiciones)
             {

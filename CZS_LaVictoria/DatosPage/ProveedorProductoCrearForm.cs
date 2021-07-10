@@ -84,7 +84,7 @@ namespace CZS_LaVictoria.DatosPage
 
         void GetCategorías()
         {
-            var categorías = GlobalConfig.Connection.Categorías_GetDistinct();
+            var categorías = GlobalConfig.Connection.Material_GetDistinctCategorías();
 
             foreach (var categoría in categorías)
             {

@@ -21,8 +21,6 @@ namespace CZS_LaVictoria.DatosPage
         void GuardarButton_Click(object sender, EventArgs e)
         {
             ClienteModel cliente;
-            bool saveClient = false;
-            bool saveNoClient = false;
             MsgBox.Visible = false;
 
             if (!ValidateForm())
@@ -42,22 +40,9 @@ namespace CZS_LaVictoria.DatosPage
                 cliente = null;
             }
 
-            if (cliente != null)
-            {
-                saveClient = GlobalConfig.Connection.ClienteProducto_Create(model, cliente);
-            }
-            else
-            {
-                saveNoClient = GlobalConfig.Connection.ClienteProducto_Create(model);
-            }
+            var saveSuccess = GlobalConfig.Connection.ClienteProducto_Create(model, cliente);
 
-            if (saveClient)
-            {
-                ClearForm();
-                MsgBox.Text = $"Producto {model.ProductoInterno} para cliente {cliente.Nombre} guardado con éxito.";
-                MsgBox.IconColor = Color.DarkGreen;
-            }
-            else if (saveNoClient)
+            if (saveSuccess)
             {
                 ClearForm();
                 MsgBox.Text = $"Producto {model.ProductoInterno} guardado con éxito.";
