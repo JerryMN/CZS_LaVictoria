@@ -149,11 +149,6 @@ namespace CZS_LaVictoria
             OpenChildForm(new OperadorCreateForm());
         }
 
-        void VerOperadoresButton_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            OpenChildForm(new OperadorVerForm());
-        }
-
         #endregion
 
         #region Plásticos

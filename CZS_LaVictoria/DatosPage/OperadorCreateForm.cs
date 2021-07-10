@@ -3,6 +3,11 @@ using System;
 using System.Collections;
 using System.Drawing;
 using System.Windows.Forms;
+using CZS_LaVictoria_Library.Models;
+using Syncfusion.WinForms.DataGrid.Enums;
+using Syncfusion.WinForms.DataGrid;
+using Syncfusion.WinForms.DataGrid.Events;
+using Syncfusion.WinForms.ListView.Enums;
 
 namespace CZS_LaVictoria.DatosPage
 {
@@ -11,10 +16,25 @@ namespace CZS_LaVictoria.DatosPage
         public OperadorCreateForm()
         {
             InitializeComponent();
-            GetAreas();
+            GetOperadores();
+            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.LastColumnFill;
         }
 
         #region Events
+
+        void DataGrid_AutoGeneratingColumn(object sender, AutoGeneratingColumnArgs e)
+        {
+            if (e.Column.MappingName == "Nombre")
+            {
+                e.Column.AutoSizeColumnsMode = AutoSizeColumnsMode.LastColumnFill;
+            }
+
+            if (e.Column.MappingName == "Area")
+            {
+                e.Column = new GridComboBoxColumn
+                    { MappingName = "Area", HeaderText = "Área", DropDownStyle = DropDownStyle.DropDownList };
+            }
+        }
 
         void GuardarButton_Click(object sender, EventArgs e)
         {
@@ -24,17 +44,82 @@ namespace CZS_LaVictoria.DatosPage
                 return;
             }
 
-            var saveSuccess = true; // TODO - Save.
+            var model = new OperadorModel {Nombre = OperadorText.Text, Area = AreaCombo.Text};
+
+            var saveSuccess = GlobalConfig.Connection.Operator_Create(model);
 
             if (saveSuccess)
             {
                 ClearForm();
-                MsgBox.Text = "Molido registrado con éxito.";
+                MsgBox.Text = $"Operador {model.Nombre} registrado con éxito.";
+                MsgBox.IconColor = Color.DarkGreen;
+                GetOperadores();
+            }
+            else
+            {
+                MsgBox.Text = $"Error al registrar operador {model.Nombre}.";
+                MsgBox.IconColor = Color.DarkRed;
+            }
+
+            MsgBox.Visible = true;
+            MsgBoxTimer.Start();
+        }
+
+        void EditarButton_Click(object sender, EventArgs e)
+        {
+            if (EditarButton.Text == "Editar")
+            {
+                DataGrid.AllowEditing = true;
+                DataGrid.Columns["Id"].AllowEditing = false;
+                EditarButton.Text = "Guardar";
+
+            }
+            else if (EditarButton.Text == "Guardar")
+            {
+
+                var model = (OperadorModel)DataGrid.SelectedItem;
+                var updateSuccess = GlobalConfig.Connection.Operator_Update(model);
+
+                if (updateSuccess)
+                {
+                    DataGrid.AllowEditing = false;
+                    EditarButton.Text = "Editar";
+                    MsgBox.Text = $"Operador {model.Nombre} actualizado con éxito.";
+                    MsgBox.IconColor = Color.DarkGreen;
+                }
+                else
+                {
+                    MsgBox.Text = $"Error al actualizar operador {model.Nombre}";
+                    MsgBox.IconColor = Color.DarkRed;
+                }
+
+                DataGrid.AllowEditing = false;
+                EditarButton.Text = "Editar";
+                MsgBox.Visible = true;
+                MsgBoxTimer.Start();
+            }
+        }
+
+        void BorrarButton_Click(object sender, EventArgs e)
+        {
+            var model = (OperadorModel)DataGrid.SelectedItem;
+
+            if (MessageBox.Show($"Estás seguro de eliminar al operador {model.Nombre}? Esta acción es irreversible.", "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            {
+                return;
+            }
+
+            var deleteSuccess = GlobalConfig.Connection.Operator_Delete(model);
+
+            if (deleteSuccess)
+            {
+                GetOperadores();
+                MsgBox.Text = $"Operador {model.Nombre} eliminado con éxito.";
                 MsgBox.IconColor = Color.DarkGreen;
             }
             else
             {
-                MsgBox.Text = "Error al registrar molido.";
+                MsgBox.Text = $"Error al eliminar operador {model.Nombre}.";
                 MsgBox.IconColor = Color.DarkRed;
             }
 
@@ -52,9 +137,16 @@ namespace CZS_LaVictoria.DatosPage
 
         #region Methods
 
+        void GetOperadores()
+        {
+            DataGrid.DataSource = GlobalConfig.Connection.Operador_GetAll();
+            GetAreas();
+        }
+
         void GetAreas()
         {
             var areas = GlobalConfig.Connection.Area_GetAll();
+            AreaCombo.Items.Clear();
 
             foreach (var area in areas)
             {
@@ -62,6 +154,10 @@ namespace CZS_LaVictoria.DatosPage
             }
 
             AreaCombo.DisplayMember = "Area";
+
+            ((GridComboBoxColumn)DataGrid.Columns["Area"]).DataSource = areas;
+            ((GridComboBoxColumn)DataGrid.Columns["Area"]).DisplayMember = "Area";
+            ((GridComboBoxColumn)DataGrid.Columns["Area"]).ValueMember = "Area";
         }
 
         bool ValidateForm()

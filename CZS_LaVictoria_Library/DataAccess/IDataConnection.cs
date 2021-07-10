@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.InteropServices.ComTypes;
 using CZS_LaVictoria_Library.Models;
 
 namespace CZS_LaVictoria_Library.DataAccess
@@ -137,6 +136,21 @@ namespace CZS_LaVictoria_Library.DataAccess
         List<HistorialModel> Delivery_GetCompra();
 
         List<HistorialModel> Delivery_GetVenta();
+
+        #endregion
+
+        #region Operadores
+
+        bool Operator_Create(OperadorModel model);
+
+        List<OperadorModel> Operador_GetAll();
+
+        List<OperadorModel> Operador_GetByArea(string area);
+
+        bool Operator_Update(OperadorModel model);
+
+        bool Operator_Delete(OperadorModel model);
+
 
         #endregion
     }

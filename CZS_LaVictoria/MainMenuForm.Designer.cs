@@ -57,6 +57,7 @@ namespace CZS_LaVictoria
             this.VerMezclasButton = new DevExpress.XtraBars.BarButtonItem();
             this.VerInventarioButton = new DevExpress.XtraBars.BarButtonItem();
             this.VerHistorialButton = new DevExpress.XtraBars.BarButtonItem();
+            this.CrearOperadorButton = new DevExpress.XtraBars.BarButtonItem();
             this.ÓrdenesTab = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.Órdenes_CompraGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Órdenes_VentaGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -73,10 +74,8 @@ namespace CZS_LaVictoria
             this.Datos_ClientesGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Datos_AreasGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Datos_MezclasGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.ChildPanel = new DevExpress.XtraEditors.PanelControl();
             this.Datos_PersonalGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.CrearOperadorButton = new DevExpress.XtraBars.BarButtonItem();
-            this.VerOperadoresButton = new DevExpress.XtraBars.BarButtonItem();
+            this.ChildPanel = new DevExpress.XtraEditors.PanelControl();
             ((System.ComponentModel.ISupportInitialize)(this.RibbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ChildPanel)).BeginInit();
             this.SuspendLayout();
@@ -114,8 +113,7 @@ namespace CZS_LaVictoria
             this.VerMezclasButton,
             this.VerInventarioButton,
             this.VerHistorialButton,
-            this.CrearOperadorButton,
-            this.VerOperadoresButton});
+            this.CrearOperadorButton});
             this.RibbonControl.Location = new System.Drawing.Point(0, 0);
             this.RibbonControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.RibbonControl.MaxItemId = 32;
@@ -335,6 +333,14 @@ namespace CZS_LaVictoria
             this.VerHistorialButton.Name = "VerHistorialButton";
             this.VerHistorialButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerHistorialButton_ItemClick);
             // 
+            // CrearOperadorButton
+            // 
+            this.CrearOperadorButton.Caption = "Crear Operador";
+            this.CrearOperadorButton.Id = 30;
+            this.CrearOperadorButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("CrearOperadorButton.ImageOptions.SvgImage")));
+            this.CrearOperadorButton.Name = "CrearOperadorButton";
+            this.CrearOperadorButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.CrearOperadorButton_ItemClick);
+            // 
             // ÓrdenesTab
             // 
             this.ÓrdenesTab.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F);
@@ -460,6 +466,12 @@ namespace CZS_LaVictoria
             this.Datos_MezclasGroup.Name = "Datos_MezclasGroup";
             this.Datos_MezclasGroup.Text = "Mezclas";
             // 
+            // Datos_PersonalGroup
+            // 
+            this.Datos_PersonalGroup.ItemLinks.Add(this.CrearOperadorButton);
+            this.Datos_PersonalGroup.Name = "Datos_PersonalGroup";
+            this.Datos_PersonalGroup.Text = "Personal";
+            // 
             // ChildPanel
             // 
             this.ChildPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -468,30 +480,6 @@ namespace CZS_LaVictoria
             this.ChildPanel.Name = "ChildPanel";
             this.ChildPanel.Size = new System.Drawing.Size(1278, 841);
             this.ChildPanel.TabIndex = 1;
-            // 
-            // Datos_PersonalGroup
-            // 
-            this.Datos_PersonalGroup.ItemLinks.Add(this.CrearOperadorButton);
-            this.Datos_PersonalGroup.ItemLinks.Add(this.VerOperadoresButton);
-            this.Datos_PersonalGroup.Name = "Datos_PersonalGroup";
-            this.Datos_PersonalGroup.Text = "Personal";
-            // 
-            // CrearOperadorButton
-            // 
-            this.CrearOperadorButton.Caption = "Crear Operador";
-            this.CrearOperadorButton.Id = 30;
-            this.CrearOperadorButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("CrearOperadorButton.ImageOptions.SvgImage")));
-            this.CrearOperadorButton.Name = "CrearOperadorButton";
-            this.CrearOperadorButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.CrearOperadorButton_ItemClick);
-            // 
-            // VerOperadoresButton
-            // 
-            this.VerOperadoresButton.Caption = "Ver Operadores";
-            this.VerOperadoresButton.Id = 31;
-            this.VerOperadoresButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("VerOperadoresButton.ImageOptions.Image")));
-            this.VerOperadoresButton.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("VerOperadoresButton.ImageOptions.LargeImage")));
-            this.VerOperadoresButton.Name = "VerOperadoresButton";
-            this.VerOperadoresButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerOperadoresButton_ItemClick);
             // 
             // MainMenuForm
             // 
@@ -564,7 +552,6 @@ namespace CZS_LaVictoria
         private DevExpress.XtraBars.BarButtonItem VerHistorialButton;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup Órdenes_HistorialGroup;
         private DevExpress.XtraBars.BarButtonItem CrearOperadorButton;
-        private DevExpress.XtraBars.BarButtonItem VerOperadoresButton;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup Datos_PersonalGroup;
     }
 }

@@ -4,7 +4,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
-using System.Net.NetworkInformation;
 using CZS_LaVictoria_Library.Models;
 using Dapper;
 
@@ -1126,6 +1125,112 @@ namespace CZS_LaVictoria_Library.DataAccess
                 {
                     Debug.Assert(false);
                     return null;
+                }
+            }
+        }
+
+        #endregion
+
+        #region Operadores
+
+        public bool Operator_Create(OperadorModel model)
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@Nombre", model.Nombre);
+                p.Add("@Area", model.Area);
+
+                try
+                {
+                    connection.Execute("dbo.spOperators_Insert", p, commandType: CommandType.StoredProcedure);
+                    return true;
+                }
+                catch (Exception)
+                {
+                    Debug.Assert(false);
+                    return false;
+                }
+            }
+        }
+
+        public List<OperadorModel> Operador_GetAll()
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var output = connection.Query<OperadorModel>("dbo.spOperators_GetAll",
+                        commandType: CommandType.StoredProcedure).ToList();
+                    return output;
+                }
+                catch (Exception)
+                {
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
+        }
+
+        public List<OperadorModel> Operador_GetByArea(string area)
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@Area", area);
+
+                try
+                {
+                    var output = connection.Query<OperadorModel>("dbo.spOperators_GetByArea",
+                        commandType: CommandType.StoredProcedure).ToList();
+                    return output;
+                }
+                catch (Exception)
+                {
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
+        }
+
+        public bool Operator_Update(OperadorModel model)
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@Nombre", model.Nombre);
+                p.Add("@Area", model.Area);
+                p.Add("@Id", model.Id);
+
+                try
+                {
+                    connection.Execute("dbo.spOperators_Update", p, commandType: CommandType.StoredProcedure);
+                    return true;
+                }
+                catch (Exception)
+                {
+                    Debug.Assert(false);
+                    return false;
+                }
+            }
+        }
+
+        public bool Operator_Delete(OperadorModel model)
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@Id", model.Id);
+
+                try
+                {
+                    connection.Execute("dbo.spOperators_Delete", p, commandType: CommandType.StoredProcedure);
+                    return true;
+                }
+                catch (Exception)
+                {
+                    Debug.Assert(false);
+                    return false;
                 }
             }
         }
