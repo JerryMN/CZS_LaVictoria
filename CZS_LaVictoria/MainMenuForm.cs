@@ -137,7 +137,7 @@ namespace CZS_LaVictoria
 
         void VerMezclasButton_ItemClick(object sender, ItemClickEventArgs e)
         {
-
+            OpenChildForm(new MezclaVerForm());
         }
 
         #endregion

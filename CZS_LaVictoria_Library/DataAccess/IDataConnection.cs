@@ -291,6 +291,13 @@ namespace CZS_LaVictoria_Library.DataAccess
         /// <returns>Una lista con los modelos de las mezclas.</returns>
         List<MezclaModel> Mezcla_GetAll();
 
+        /// <summary>
+        /// Elimina una mezcla de materiales.
+        /// </summary>
+        /// <param name="model">Un modelo con las propiedades de la mezcla.</param>
+        /// <returns>True, si se eliminó correctamente, falso si no.</returns>
+        bool Mezcla_Delete(MezclaModel model);
+
         #endregion
 
         #region Orden de Compra

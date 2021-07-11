@@ -868,11 +868,11 @@ namespace CZS_LaVictoria_Library.DataAccess
                     foreach (var mezclaModel in output)
                     {
                         var p = new DynamicParameters();
-                        p.Add("@idMezcla", mezclaModel.Id);
+                        p.Add("@IdMezcla", mezclaModel.Id);
 
                         var idsMat = connection
-                            .Query<int>("dbo.spMixDetails_GetIDs", commandType: CommandType.StoredProcedure).ToList();
-                        var cants = connection.Query<double>("dbo.spMixDetails_GetCantidades",
+                            .Query<int>("dbo.spMixDetails_GetIDs", p, commandType: CommandType.StoredProcedure).ToList();
+                        var cants = connection.Query<double>("dbo.spMixDetails_GetCantidades", p,
                             commandType: CommandType.StoredProcedure).ToList();
 
                         foreach (var cant in cants)
@@ -883,7 +883,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                         foreach (var id in idsMat)
                         {
                             p = new DynamicParameters();
-                            p.Add("@IdMaterial", id);
+                            p.Add("@Id", id);
 
                             var mats = connection.QuerySingle<MaterialModel>("dbo.spStock_GetById", p,
                                 commandType: CommandType.StoredProcedure);
@@ -898,6 +898,27 @@ namespace CZS_LaVictoria_Library.DataAccess
                     Debug.WriteLine(ex.ToString());
                     Debug.Assert(false);
                     return null;
+                }
+            }
+        }
+
+        public bool Mezcla_Delete(MezclaModel model)
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@Id", model.Id);
+
+                try
+                {
+                    connection.Execute("dbo.spMix_Delete", p, commandType: CommandType.StoredProcedure);
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.ToString());
+                    Debug.Assert(false);
+                    return false;
                 }
             }
         }
