@@ -393,7 +393,6 @@
     <EmbeddedResource Include="PlásticosPage\RegistrarMolidoForm.resx">
       <DependentUpon>RegistrarMolidoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="ÓrdenesPage\AgregarNotasForm.resx">
       <DependentUpon>AgregarNotasForm.cs</DependentUpon>
     </EmbeddedResource>

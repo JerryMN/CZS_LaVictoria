@@ -7,6 +7,7 @@ using CZS_LaVictoria_Library.Models;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid;
 using Syncfusion.WinForms.DataGrid.Events;
+using Syncfusion.WinForms.DataGrid.Styles;
 using Syncfusion.WinForms.ListView.Enums;
 
 namespace CZS_LaVictoria.DatosPage
@@ -17,22 +18,24 @@ namespace CZS_LaVictoria.DatosPage
         {
             InitializeComponent();
             GetOperadores();
-            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.LastColumnFill;
+            DataGrid.Style.CellStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
+            DataGrid.Style.HeaderStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
+            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.Fill;
         }
 
         #region Events
 
         void DataGrid_AutoGeneratingColumn(object sender, AutoGeneratingColumnArgs e)
         {
-            if (e.Column.MappingName == "Nombre")
+            switch (e.Column.MappingName)
             {
-                e.Column.AutoSizeColumnsMode = AutoSizeColumnsMode.LastColumnFill;
-            }
-
-            if (e.Column.MappingName == "Area")
-            {
-                e.Column = new GridComboBoxColumn
-                    { MappingName = "Area", HeaderText = "Área", DropDownStyle = DropDownStyle.DropDownList };
+                case "Id":
+                    e.Cancel = true;
+                    break;
+                case "Área":
+                    e.Column = new GridComboBoxColumn
+                        { MappingName = "Área", HeaderText = "Área", DropDownStyle = DropDownStyle.DropDownList };
+                    break;
             }
         }
 
@@ -44,7 +47,7 @@ namespace CZS_LaVictoria.DatosPage
                 return;
             }
 
-            var model = new OperadorModel {Nombre = OperadorText.Text, Area = AreaCombo.Text};
+            var model = new OperadorModel {Nombre = OperadorText.Text, Área = AreaCombo.Text};
 
             var saveSuccess = GlobalConfig.Connection.Operator_Create(model);
 
@@ -70,7 +73,6 @@ namespace CZS_LaVictoria.DatosPage
             if (EditarButton.Text == "Editar")
             {
                 DataGrid.AllowEditing = true;
-                DataGrid.Columns["Id"].AllowEditing = false;
                 EditarButton.Text = "Guardar";
 
             }
@@ -145,7 +147,7 @@ namespace CZS_LaVictoria.DatosPage
 
         void GetAreas()
         {
-            var areas = GlobalConfig.Connection.Area_GetAll();
+            var areas = GlobalConfig.Connection.Area_GetDistinct();
             AreaCombo.Items.Clear();
 
             foreach (var area in areas)
@@ -153,11 +155,7 @@ namespace CZS_LaVictoria.DatosPage
                 AreaCombo.Items.Add(area);
             }
 
-            AreaCombo.DisplayMember = "Area";
-
-            ((GridComboBoxColumn)DataGrid.Columns["Area"]).DataSource = areas;
-            ((GridComboBoxColumn)DataGrid.Columns["Area"]).DisplayMember = "Area";
-            ((GridComboBoxColumn)DataGrid.Columns["Area"]).ValueMember = "Area";
+            ((GridComboBoxColumn)DataGrid.Columns["Área"]).DataSource = areas;
         }
 
         bool ValidateForm()

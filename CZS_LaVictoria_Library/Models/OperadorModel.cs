@@ -10,6 +10,6 @@ namespace CZS_LaVictoria_Library.Models
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public string Area { get; set; }
+        public string Área { get; set; }
     }
 }

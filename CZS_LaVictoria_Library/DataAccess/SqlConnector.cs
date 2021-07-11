@@ -1401,7 +1401,7 @@ namespace CZS_LaVictoria_Library.DataAccess
             {
                 var p = new DynamicParameters();
                 p.Add("@Nombre", model.Nombre);
-                p.Add("@Area", model.Area);
+                p.Add("@Area", model.Área);
 
                 try
                 {
@@ -1464,7 +1464,7 @@ namespace CZS_LaVictoria_Library.DataAccess
             {
                 var p = new DynamicParameters();
                 p.Add("@Nombre", model.Nombre);
-                p.Add("@Area", model.Area);
+                p.Add("@Area", model.Área);
                 p.Add("@Id", model.Id);
 
                 try
