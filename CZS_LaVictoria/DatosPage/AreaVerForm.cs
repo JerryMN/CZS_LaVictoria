@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using CZS_LaVictoria_Library;
 using CZS_LaVictoria_Library.Models;
 using Syncfusion.WinForms.DataGrid.Enums;
+using Syncfusion.WinForms.DataGrid.Styles;
 
 namespace CZS_LaVictoria.DatosPage
 {
@@ -13,7 +15,9 @@ namespace CZS_LaVictoria.DatosPage
         {
             InitializeComponent();
             DataGrid.DataSource = GetAreas();
-            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.Fill;
+            DataGrid.Style.CellStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
+            DataGrid.Style.HeaderStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
+            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
         }
 
         #region Events

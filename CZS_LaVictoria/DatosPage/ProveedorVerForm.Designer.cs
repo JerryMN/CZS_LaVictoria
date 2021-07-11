@@ -87,6 +87,7 @@ namespace CZS_LaVictoria.DatosPage
             this.DataGrid.Size = new System.Drawing.Size(1276, 789);
             this.DataGrid.TabIndex = 2;
             this.DataGrid.Text = "sfDataGrid1";
+            this.DataGrid.AutoGeneratingColumn += new Syncfusion.WinForms.DataGrid.Events.AutoGeneratingColumnEventHandler(this.DataGrid_AutoGeneratingColumn);
             // 
             // ProveedorVerForm
             // 

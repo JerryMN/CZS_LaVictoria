@@ -5,7 +5,7 @@
         public int Id { get; set; }
         public string ProductoInterno { get; set; }
         public decimal PrecioUnitario { get; set; }
-        public string Area { get; set; }
+        public string Área { get; set; }
         public int IdClient { get; set; }
         public string Cliente { get; set; }
 
@@ -20,7 +20,7 @@
             decimal.TryParse(precioUnitario.Replace("$", "").Replace(",", "").Trim(), out var precioResult);
             PrecioUnitario = precioResult;
 
-            Area = area;
+            Área = area;
         }
     }
 }

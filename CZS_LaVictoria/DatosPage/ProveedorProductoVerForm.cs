@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using CZS_LaVictoria_Library;
 using CZS_LaVictoria_Library.Models;
+using Syncfusion.WinForms.DataGrid;
 using Syncfusion.WinForms.DataGrid.Enums;
+using Syncfusion.WinForms.DataGrid.Events;
+using Syncfusion.WinForms.DataGrid.Styles;
+using Syncfusion.WinForms.Input.Enums;
 
 namespace CZS_LaVictoria.DatosPage
 {
@@ -13,52 +18,58 @@ namespace CZS_LaVictoria.DatosPage
         {
             InitializeComponent();
             DataGrid.DataSource = GetProductos();
-            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.Fill;
-            DataGrid.Columns["IdProvider"].Visible = false;
+            DataGrid.QueryRowHeight += DataGridOnQueryRowHeight;
+            DataGrid.Style.CellStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
+            DataGrid.Style.HeaderStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
+            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
         }
 
         #region Events
 
+        void DataGridOnQueryRowHeight(object sender, QueryRowHeightEventArgs e)
+        {
+            if (DataGrid.AutoSizeController.GetAutoRowHeight(e.RowIndex, new RowAutoFitOptions(), out var autoHeight))
+            {
+                if (autoHeight > 24)
+                {
+                    e.Height = autoHeight;
+                    e.Handled = true;
+                }
+            }
+        }
+
         /// <summary>
         /// Renombrar las columnas de la tabla.
         /// </summary>
-        void DataGrid_AutoGeneratingColumn(object sender, Syncfusion.WinForms.DataGrid.Events.AutoGeneratingColumnArgs e)
+        void DataGrid_AutoGeneratingColumn(object sender, AutoGeneratingColumnArgs e)
         {
-            if (e.Column.HeaderText == "IdProviderProduct")
+            switch (e.Column.MappingName)
             {
-                e.Column.HeaderText = "Id Producto";
-                e.Column.AllowEditing = false;
-            }
-
-            if (e.Column.HeaderText == "Proveedor")
-            {
-                e.Column.AllowEditing = false;
-            }
-
-            if (e.Column.HeaderText == "MaterialExterno")
-            {
-                e.Column.HeaderText = "Material Externo";
-            }
-
-            if (e.Column.HeaderText == "MaterialInterno")
-            {
-                e.Column.HeaderText = "Material Interno";
-            }
-
-            if (e.Column.HeaderText == "PrecioUnitario")
-            {
-                e.Column.HeaderText = "Precio Unitario";
-            }
-
-            if (e.Column.HeaderText == "Area")
-            {
-                e.Column.HeaderText = "Área";
-                e.Column.AllowEditing = false;
-            }
-
-            if (e.Column.HeaderText == "Categoría")
-            {
-                e.Column.AllowEditing = false;
+                case "Id":
+                    e.Cancel = true;
+                    break;
+                case "Proveedor":
+                    e.Column.AllowEditing = false;
+                    break;
+                case "MaterialExterno":
+                    e.Column.HeaderText = "Nombre Proveedor";
+                    break;
+                case "MaterialInterno":
+                    e.Column.HeaderText = "Nombre Interno";
+                    break;
+                case "PrecioUnitario":
+                    e.Column = new GridNumericColumn
+                    {
+                        MappingName = "PrecioUnitario", HeaderText = "Precio Unitario", FormatMode = FormatMode.Currency
+                    };
+                    break;
+                case "Área":
+                case "Categoría":
+                    e.Column.AllowEditing = false;
+                    break;
+                case "IdSupplier":
+                    e.Cancel = true;
+                    break;
             }
         }
 
@@ -67,11 +78,10 @@ namespace CZS_LaVictoria.DatosPage
             if (EditarButton.Text == "Editar")
             {
                 DataGrid.AllowEditing = true;
-                DataGrid.Columns["IdProviderProduct"].AllowEditing = false;
                 DataGrid.Columns["Proveedor"].AllowEditing = false;
                 EditarButton.Text = "Guardar";
-
             }
+
             else if (EditarButton.Text == "Guardar")
             {
 
@@ -82,11 +92,13 @@ namespace CZS_LaVictoria.DatosPage
                 {
                     DataGrid.AllowEditing = false;
                     EditarButton.Text = "Editar";
-                    MessageBox.Show($"Material {model.MaterialExterno} del proveedor {model.Proveedor} actualizado con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Material {model.MaterialExterno} del proveedor {model.Proveedor} actualizado con éxito.", 
+                        "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    MessageBox.Show($"Error al actualizar material {model.MaterialExterno} del proveedor {model.Proveedor}.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Error al actualizar material {model.MaterialExterno} del proveedor {model.Proveedor}.", 
+                        "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 DataGrid.AllowEditing = false;
@@ -98,21 +110,21 @@ namespace CZS_LaVictoria.DatosPage
         {
             var model = (ProveedorProductoModel)DataGrid.SelectedItem;
 
-            if (MessageBox.Show($"Estás seguro de eliminar al producto {model.MaterialExterno} del proveedor {model.Proveedor}? Esta acción es irreversible.", null, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-            {
-                return;
-            }
+            if (MessageBox.Show($"Estás seguro de eliminar al producto {model.MaterialExterno} del proveedor {model.Proveedor}? Esta acción es irreversible.", 
+                null, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No) return;
 
             var deleteSuccess = GlobalConfig.Connection.ProveedorProducto_Delete(model);
 
             if (deleteSuccess)
             {
                 DataGrid.DataSource = GetProductos();
-                MessageBox.Show($"Material {model.MaterialExterno} del proveedor {model.Proveedor} eliminado con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Material {model.MaterialExterno} del proveedor {model.Proveedor} eliminado con éxito.", 
+                    "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show($"Error al eliminar material {model.MaterialExterno} del proveedor {model.Proveedor}.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Error al eliminar material {model.MaterialExterno} del proveedor {model.Proveedor}.", 
+                    "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

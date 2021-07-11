@@ -1,7 +1,7 @@
 ﻿
 namespace CZS_LaVictoria.DatosPage
 {
-    partial class OperadorCreateForm
+    partial class OperadorCrearForm
     {
         /// <summary>
         /// Required designer variable.

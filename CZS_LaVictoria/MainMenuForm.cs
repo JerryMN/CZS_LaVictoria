@@ -146,7 +146,7 @@ namespace CZS_LaVictoria
 
         void CrearOperadorButton_ItemClick(object sender, ItemClickEventArgs e)
         {
-            OpenChildForm(new OperadorCreateForm());
+            OpenChildForm(new OperadorCrearForm());
         }
 
         #endregion

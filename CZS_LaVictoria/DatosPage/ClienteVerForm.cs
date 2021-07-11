@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using CZS_LaVictoria_Library;
 using CZS_LaVictoria_Library.Models;
+using Syncfusion.WinForms.DataGrid;
 using Syncfusion.WinForms.DataGrid.Enums;
+using Syncfusion.WinForms.DataGrid.Events;
+using Syncfusion.WinForms.DataGrid.Styles;
 
 namespace CZS_LaVictoria.DatosPage
 {
@@ -13,16 +17,31 @@ namespace CZS_LaVictoria.DatosPage
         {
             InitializeComponent();
             DataGrid.DataSource = GetClientes();
-            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.Fill;
+            DataGrid.QueryRowHeight += DataGridOnQueryRowHeight;
+            DataGrid.Style.CellStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
+            DataGrid.Style.HeaderStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
+            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
         }
 
         #region Events
 
+        void DataGridOnQueryRowHeight(object sender, QueryRowHeightEventArgs e)
+        {
+            if (DataGrid.AutoSizeController.GetAutoRowHeight(e.RowIndex, new RowAutoFitOptions(), out var autoHeight))
+            {
+                if (autoHeight > 24)
+                {
+                    e.Height = autoHeight;
+                    e.Handled = true;
+                }
+            }
+        }
+
         void DataGrid_AutoGeneratingColumn(object sender, Syncfusion.WinForms.DataGrid.Events.AutoGeneratingColumnArgs e)
         {
-            if (e.Column.HeaderText == "IdClient")
+            if (e.Column.HeaderText == "Id")
             {
-                e.Column.HeaderText = "Id Cliente";
+                e.Cancel = true;
             }
 
             if (e.Column.HeaderText == "TeléfonoDos")
@@ -36,7 +55,6 @@ namespace CZS_LaVictoria.DatosPage
             if (EditarButton.Text == "Editar")
             {
                 DataGrid.AllowEditing = true;
-                DataGrid.Columns["IdClient"].AllowEditing = false;
                 EditarButton.Text = "Guardar";
 
             }

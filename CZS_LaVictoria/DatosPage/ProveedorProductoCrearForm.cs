@@ -18,6 +18,7 @@ namespace CZS_LaVictoria.DatosPage
         }
 
         #region Events
+
         void GuardarButton_Click(object sender, EventArgs e)
         {
             MsgBox.Visible = false;
@@ -72,14 +73,12 @@ namespace CZS_LaVictoria.DatosPage
 
         void GetAreas()
         {
-            var areas = GlobalConfig.Connection.Area_GetAll();
+            var areas = GlobalConfig.Connection.Area_GetDistinct();
 
             foreach (var area in areas)
             {
                 AreaCombo.Items.Add(area);
             }
-
-            AreaCombo.DisplayMember = "Area";
         }
 
         void GetCategorías()

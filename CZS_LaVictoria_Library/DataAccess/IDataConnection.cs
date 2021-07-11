@@ -21,6 +21,12 @@ namespace CZS_LaVictoria_Library.DataAccess
         List<AreaModel> Area_GetAll();
 
         /// <summary>
+        /// Obtiene todas las distintas áreas internas de la empresa.
+        /// </summary>
+        /// <returns>Una lista con los nombres de las áreas.</returns>
+        List<string> Area_GetDistinct();
+
+        /// <summary>
         /// Obtiene todas las filas de un área en específico, en caso de que
         /// haya mas de un responsable en dicha área.
         /// </summary>

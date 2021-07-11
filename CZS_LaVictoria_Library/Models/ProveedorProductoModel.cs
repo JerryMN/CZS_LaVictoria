@@ -6,9 +6,9 @@
         public string MaterialExterno { get; set; }
         public string MaterialInterno { get; set; }
         public decimal PrecioUnitario { get; set; }
-        public string Area { get; set; }
+        public string Área { get; set; }
         public string Categoría { get; set; }
-        public int IdProvider { get; set; }
+        public int IdSupplier { get; set; }
         public string Proveedor { get; set; }
 
         public ProveedorProductoModel()
@@ -23,7 +23,7 @@
             decimal.TryParse(precioUnitario.Replace("$", "").Replace(",", "").Trim(), out var precioResult);
             PrecioUnitario = precioResult;
 
-            Area = area;
+            Área = area;
             Categoría = categoría;
         }
     }

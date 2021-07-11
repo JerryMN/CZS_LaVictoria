@@ -82,14 +82,12 @@ namespace CZS_LaVictoria.DatosPage
 
         void GetAreas()
         {
-            var areas = GlobalConfig.Connection.Area_GetAll();
+            var areas = GlobalConfig.Connection.Area_GetDistinct();
 
             foreach (var area in areas)
             {
                 AreaCombo.Items.Add(area);
             }
-
-            AreaCombo.DisplayMember = "Area";
         }
 
         bool ValidateForm()
@@ -124,9 +122,10 @@ namespace CZS_LaVictoria.DatosPage
                 foreach (Control control in controls)
                     if (control is TextBox box)
                         box.Clear();
-                    else if (control is ComboBox cbox)
+                    else if (control is ComboBox comboBox)
                     {
-                        cbox.SelectedItem = null;
+                        comboBox.SelectedItem = null;
+                        comboBox.Text = "";
                     }
                     else
                         Func(control.Controls);

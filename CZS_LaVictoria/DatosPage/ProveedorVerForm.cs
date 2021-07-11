@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using CZS_LaVictoria_Library;
 using CZS_LaVictoria_Library.Models;
+using Syncfusion.WinForms.DataGrid;
 using Syncfusion.WinForms.DataGrid.Enums;
+using Syncfusion.WinForms.DataGrid.Events;
+using Syncfusion.WinForms.DataGrid.Styles;
 
 namespace CZS_LaVictoria.DatosPage
 {
@@ -13,16 +17,36 @@ namespace CZS_LaVictoria.DatosPage
         {
             InitializeComponent();
             DataGrid.DataSource = GetProveedores();
-            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.Fill;
+            DataGrid.QueryRowHeight += DataGridOnQueryRowHeight;
+            DataGrid.Style.CellStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
+            DataGrid.Style.HeaderStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
+            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
         }
 
         #region Events
 
-        void DataGrid_AutoGeneratingColumn(object sender, Syncfusion.WinForms.DataGrid.Events.AutoGeneratingColumnArgs e)
+        void DataGridOnQueryRowHeight(object sender, QueryRowHeightEventArgs e)
         {
-            if (e.Column.HeaderText == "IdProvider")
+            if (DataGrid.AutoSizeController.GetAutoRowHeight(e.RowIndex, new RowAutoFitOptions(), out var autoHeight))
             {
-                e.Column.HeaderText = "Id Proveedor";
+                if (autoHeight > 24)
+                {
+                    e.Height = autoHeight;
+                    e.Handled = true;
+                }
+            }
+        }
+
+        void DataGrid_AutoGeneratingColumn(object sender, AutoGeneratingColumnArgs e)
+        {
+            if (e.Column.MappingName == "Id")
+            {
+                e.Cancel = true;
+            }
+
+            if (e.Column.MappingName == "Dirección")
+            {
+                e.Column.AutoSizeColumnsMode = AutoSizeColumnsMode.LastColumnFill;
             }
         }
 
@@ -31,7 +55,6 @@ namespace CZS_LaVictoria.DatosPage
             if (EditarButton.Text == "Editar")
             {
                 DataGrid.AllowEditing = true;
-                DataGrid.Columns["IdProvider"].AllowEditing = false;
                 EditarButton.Text = "Guardar";
                 
             }

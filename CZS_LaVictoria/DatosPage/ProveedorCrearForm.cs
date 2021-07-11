@@ -2,6 +2,7 @@
 using System.Collections;
 using System.ComponentModel.DataAnnotations;
 using System.Drawing;
+using System.Net.Mail;
 using System.Windows.Forms;
 using CZS_LaVictoria_Library;
 using CZS_LaVictoria_Library.Models;
@@ -69,6 +70,7 @@ namespace CZS_LaVictoria.DatosPage
 
             CondicionesCombo.DisplayMember = "Condiciones";
         }
+
         bool ValidateForm()
         {
             var output = true;
@@ -85,10 +87,22 @@ namespace CZS_LaVictoria.DatosPage
                 MsgBox.Text += "Ingresa el teléfono del proveedor.\n";
             }
 
-            if (CorreoText.Text == "" || !IsValidEmailAddress(CorreoText.Text))
+            if (CorreoText.Text == "")
             {
                 output = false;
                 MsgBox.Text += "Ingresa el correo del proveedor.\n";
+            }
+            else
+            {
+                try
+                {
+                    var unused = new MailAddress(CorreoText.Text);
+                }
+                catch (Exception)
+                {
+                    output = false;
+                    MsgBox.Text += "Ingresa un correo válido.\n";
+                }
             }
 
             if (DirecciónText.Text == "")
@@ -105,8 +119,6 @@ namespace CZS_LaVictoria.DatosPage
 
             return output;
         }
-
-        static bool IsValidEmailAddress(string address) => address != null && new EmailAddressAttribute().IsValid(address);
 
         void ClearForm()
         {

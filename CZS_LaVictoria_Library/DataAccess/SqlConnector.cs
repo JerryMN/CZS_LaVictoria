@@ -57,6 +57,24 @@ namespace CZS_LaVictoria_Library.DataAccess
             }
         }
 
+        public List<string> Area_GetDistinct()
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var output = connection.Query<string>("dbo.spAreas_GetDistinct").ToList();
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
+        }
+
         public List<AreaModel> Area_GetByArea(string area)
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
@@ -249,7 +267,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                 p.Add("@MaterialExterno", model.MaterialExterno);
                 p.Add("@MaterialInterno", model.MaterialInterno);
                 p.Add("@PrecioUnitario", model.PrecioUnitario);
-                p.Add("@Area", model.Area);
+                p.Add("@Area", model.Área);
                 p.Add("@Categoría", model.Categoría);
                 p.Add("@IdProveedor", proveedor.Id);
                 p.Add("@Proveedor", proveedor.Nombre);
@@ -506,7 +524,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                 var p = new DynamicParameters();
                 p.Add("@ProductoInterno", model.ProductoInterno);
                 p.Add("@PrecioUnitario", model.PrecioUnitario);
-                p.Add("@Area", model.Area);
+                p.Add("@Area", model.Área);
                 p.Add("@IdCliente", cliente?.Id);
                 p.Add("@Cliente", cliente?.Nombre);
 

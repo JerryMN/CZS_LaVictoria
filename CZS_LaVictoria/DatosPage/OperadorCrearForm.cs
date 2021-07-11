@@ -11,9 +11,9 @@ using Syncfusion.WinForms.ListView.Enums;
 
 namespace CZS_LaVictoria.DatosPage
 {
-    public partial class OperadorCreateForm : Form
+    public partial class OperadorCrearForm : Form
     {
-        public OperadorCreateForm()
+        public OperadorCrearForm()
         {
             InitializeComponent();
             GetOperadores();

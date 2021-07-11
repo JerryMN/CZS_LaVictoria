@@ -214,11 +214,11 @@
     <Compile Include="DatosPage\MezclaCrearForm.Designer.cs">
       <DependentUpon>MezclaCrearForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DatosPage\OperadorCreateForm.cs">
+    <Compile Include="DatosPage\OperadorCrearForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DatosPage\OperadorCreateForm.Designer.cs">
-      <DependentUpon>OperadorCreateForm.cs</DependentUpon>
+    <Compile Include="DatosPage\OperadorCrearForm.Designer.cs">
+      <DependentUpon>OperadorCrearForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DatosPage\ProveedorProductoCrearForm.cs">
       <SubType>Form</SubType>
@@ -357,8 +357,8 @@
     <EmbeddedResource Include="DatosPage\MezclaCrearForm.resx">
       <DependentUpon>MezclaCrearForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DatosPage\OperadorCreateForm.resx">
-      <DependentUpon>OperadorCreateForm.cs</DependentUpon>
+    <EmbeddedResource Include="DatosPage\OperadorCrearForm.resx">
+      <DependentUpon>OperadorCrearForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DatosPage\ProveedorProductoCrearForm.resx">
       <DependentUpon>ProveedorProductoCrearForm.cs</DependentUpon>
