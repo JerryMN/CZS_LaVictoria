@@ -156,14 +156,11 @@ namespace CZS_LaVictoria.ÓrdenesPage
             if (e.RemovedItems.Count == 0) return;
             var línea = e.RemovedItems[0] as OrdenCompraLíneaModel;
             _orden = GlobalConfig.Connection.OrdenCompra_GetByNumOrden(línea?.NumOrden.ToString());
-            if (línea?.CantidadPendiente == 0)
-            {
-                línea.Estatus = "Entregada";
-            }
+            Debug.Assert(línea != null, nameof(línea) + " != null");
+            línea.Estatus = línea.CantidadPendiente == 0 ? "Entregada" : "Parcial";
+            var saveSuccess = GlobalConfig.Connection.PurchaseOrderLine_Update(_orden.Id, línea, _oldQty, _newQty);
+            MessageBox.Show(saveSuccess ? "Línea actualizada." : "Error al actualizar línea.");
 
-            UpdatePurchaseOrderLine(_orden, línea);
-            UpdateStock(línea, _oldQty, _newQty);
-            AddDelivery(línea);
             // Unhook para que este método sólo se ejecute después de Recibir Button.
             DataGrid.SelectionChanging -= DataGridOnSelectionChanging;
         }
@@ -173,7 +170,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
         /// </summary>
         void RecibirButton_Click(object sender, EventArgs e)
         {
-            DataGrid.SelectionChanging += DataGridOnSelectionChanging;
+            //DataGrid.SelectionChanging += DataGridOnSelectionChanging;
             if (DataGrid.SelectedIndex < 0)
             {
                 MessageBox.Show("Selecciona una línea.");
@@ -182,6 +179,11 @@ namespace CZS_LaVictoria.ÓrdenesPage
 
             var línea = DataGrid.SelectedItem as OrdenCompraLíneaModel;
             Debug.Assert(línea != null, nameof(línea) + " != null");
+            if (línea.Estatus == "Entregada" || línea.Estatus == "Cancelada")
+            {
+                MessageBox.Show("Esta línea ya está entregada o cancelada.");
+                return;
+            }
 
             // Obtener la cantidad recibida hasta el momento.
             _oldQty = línea.CantidadRecibida;
@@ -197,10 +199,18 @@ namespace CZS_LaVictoria.ÓrdenesPage
             línea.CantidadPendiente = pendiente < 0 ? 0 : pendiente;
 
             // Guardar la fecha de última recepción.
-            // TODO - Tabla de historial de recepciones?
             línea.FechaUltRecepción = DateTime.Today;
+
+            _orden = GlobalConfig.Connection.OrdenCompra_GetByNumOrden(línea.NumOrden.ToString());
+            Debug.Assert(línea != null, nameof(línea) + " != null");
+            línea.Estatus = línea.CantidadPendiente == 0 ? "Entregada" : "Parcial";
+            var saveSuccess = GlobalConfig.Connection.PurchaseOrderLine_Update(_orden.Id, línea, _oldQty, _newQty);
+            MessageBox.Show(saveSuccess ? "Línea actualizada." : "Error al actualizar línea.");
         }
 
+        /// <summary>
+        /// Marca una línea como cancelada.
+        /// </summary>
         void CancelarButton_Click(object sender, EventArgs e)
         {
             if (DataGrid.SelectedIndex < 0)
@@ -211,17 +221,18 @@ namespace CZS_LaVictoria.ÓrdenesPage
 
             var línea = DataGrid.SelectedItem as OrdenCompraLíneaModel;
             Debug.Assert(línea != null, nameof(línea) + " != null");
-            if (línea.Estatus == "Cancelada")
+            if (línea.Estatus == "Entregada" || línea.Estatus == "Cancelada")
             {
-                MessageBox.Show("Esta línea ya está cancelada.");
+                MessageBox.Show("Esta línea ya está entregada o cancelada.");
                 return;
             }
 
-            _orden = GlobalConfig.Connection.OrdenCompra_GetByNumOrden(línea?.NumOrden.ToString());
+            _orden = GlobalConfig.Connection.OrdenCompra_GetByNumOrden(línea.NumOrden.ToString());
             línea.CantidadPendiente = 0;
             línea.FechaCancelación = DateTime.Today;
             línea.Estatus = "Cancelada";
-            UpdatePurchaseOrderLine(_orden, línea);
+            var deleteSuccess = GlobalConfig.Connection.PurchaseOrderLine_Update(_orden.Id, línea, _oldQty, _newQty);
+            MessageBox.Show(deleteSuccess ? "Línea cancelada." : "Error al cancelar línea.");
         }
 
         #endregion
@@ -276,52 +287,6 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 return;
             }
             input = textBox.Text;
-        }
-
-        /// <summary>
-        /// Actualiza la cantidad entregada y pendiente en la tabla PurchaseOrderDetails en SQL.
-        /// </summary>
-        /// <param name="order">La orden a la que pertenece la línea</param>
-        /// <param name="line">La línea a actualizar.</param>
-        void UpdatePurchaseOrderLine(OrdenCompraModel order, OrdenCompraLíneaModel line)
-        {
-            GlobalConfig.Connection.PurchaseOrderLine_Update(order.Id, line);
-        }
-
-        /// <summary>
-        /// Crea o actualiza el material en la tabla Stock en SQL.
-        /// </summary>
-        /// <param name="model">La línea donde se encuentra el material.</param>
-        /// <param name="oldQty">La cantidad entregada anterior.</param>
-        /// <param name="newQty">La cantidad entregada actualizada.</param>
-        void UpdateStock(OrdenCompraLíneaModel model, double oldQty, double newQty)
-        {
-            // Obtener el modelo ProveedorProducto para obtener el nombre interno (que es el usado en Stock).
-            var producto = GlobalConfig.Connection.ProveedorProducto_Find(model?.Producto, model?.Proveedor, model?.Area);
-
-            // Averiguar si el material ya existe en la tabla Stock.
-            var material = GlobalConfig.Connection.Material_GetByNombreArea(producto.MaterialInterno, model?.Area);
-            if (material  == null)
-            {
-                // Si no existe se crea.
-                var newMaterial = new MaterialModel(producto.MaterialInterno, model?.Area, producto.Categoría, 
-                    model?.CantidadRecibida.ToString(CultureInfo.InvariantCulture), null);
-                GlobalConfig.Connection.Material_Create(newMaterial);
-            }
-            else
-            {
-                // Si existe, se actualiza la cantidad disponible.
-                material.CantidadDisponible += (newQty - oldQty);
-                GlobalConfig.Connection.Material_Update(material);
-            }
-        }
-
-        void AddDelivery(OrdenCompraLíneaModel model)
-        {
-            var quantity = double.Parse(_newQtyString);
-            GlobalConfig.Connection.Delivery_Create(_orden.NumOrden, model, quantity);
-            // Reset para que el diálogo siempre aparezca vacío.
-            _newQtyString = "";
         }
 
         #endregion

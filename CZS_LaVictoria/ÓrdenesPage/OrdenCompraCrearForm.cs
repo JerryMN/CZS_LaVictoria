@@ -117,87 +117,60 @@ namespace CZS_LaVictoria.ÓrdenesPage
         /// </summary>
         void DataGrid_AutoGeneratingColumn(object sender, AutoGeneratingColumnArgs e)
         {
-            if (e.Column.MappingName == "Proveedor")
+            switch (e.Column.MappingName)
             {
-                e.Cancel = true;
-            }
-
-            if (e.Column.MappingName == "Area")
-            {
-                e.Cancel = true;
-            }
-
-            if (e.Column.MappingName == "NumOrden")
-            {
-                e.Cancel = true;
-            }
-
-            if (e.Column.MappingName == "NumLinea")
-            {
-                e.Column.HeaderText = "Línea";
-                e.Column.Width = 100;
-                e.Column.AllowFiltering = false;
-            }
-
-            if (e.Column.MappingName == "Producto")
-            {
-                e.Column = new GridComboBoxColumn
-                {
-                    MappingName = "Producto", HeaderText = "Producto", DropDownStyle = DropDownStyle.DropDownList,
-                    AutoSizeColumnsMode = AutoSizeColumnsMode.LastColumnFill
-                };
-            }
-
-            if (e.Column.MappingName == "CantidadOrden")
-            {
-                e.Column.HeaderText = "Cantidad";
-                e.Column.AllowFiltering = false;
-            }
-
-            if (e.Column.MappingName == "CantidadRecibida")
-            {
-                e.Cancel = true;
-            }
-
-            if (e.Column.MappingName == "CantidadPendiente")
-            {
-                e.Cancel = true;
-            }
-
-            if (e.Column.MappingName == "PrecioUnitario")
-            {
-                e.Column = new GridNumericColumn
-                    { MappingName = "PrecioUnitario", HeaderText = "Precio Unitario", FormatMode = FormatMode.Currency, AllowFiltering = false};
-            }
-
-            if (e.Column.MappingName == "Iva")
-            {
-                e.Column = new GridCheckBoxColumn { MappingName = "Iva", HeaderText = "IVA" };
-            }
-
-            if (e.Column.MappingName == "Subtotal")
-            {
-                e.Column = new GridNumericColumn
-                    { MappingName = "Subtotal", HeaderText = "Subtotal", FormatMode = FormatMode.Currency, Width = 100, AllowFiltering = false};
-            }
-
-            if (e.Column.MappingName == "FechaEntrega")
-            {
-                Debug.Assert(FechaOrdenPicker.Value != null, "FechaOrdenPicker.Value != null");
-                e.Column = new GridDateTimeColumn
-                {
-                    MappingName = "FechaEntrega", HeaderText = "Fecha Entrega", MinDateTime = (DateTime) FechaOrdenPicker.Value
-                };
-            }
-
-            if (e.Column.MappingName == "FechaUltRecepción")
-            {
-                e.Cancel = true;
-            }
-
-            if (e.Column.MappingName == "FechaCancelación")
-            {
-                e.Cancel = true;
+                case "Proveedor":
+                case "Área":
+                case "NumOrden":
+                case "CantidadRecibida":
+                case "CantidadPendiente":
+                case "FechaUltRecepción":
+                case "FechaCancelación":
+                case "Estatus":
+                    e.Cancel = true;
+                    break;
+                case "NumLinea":
+                    e.Column.HeaderText = "Línea";
+                    e.Column.Width = 100;
+                    e.Column.AllowFiltering = false;
+                    break;
+                case "Producto":
+                    e.Column = new GridComboBoxColumn
+                    {
+                        MappingName = "Producto", HeaderText = "Producto", DropDownStyle = DropDownStyle.DropDownList,
+                        AutoSizeColumnsMode = AutoSizeColumnsMode.LastColumnFill
+                    };
+                    break;
+                case "CantidadOrden":
+                    e.Column.HeaderText = "Cantidad";
+                    e.Column.AllowFiltering = false;
+                    break;
+                case "PrecioUnitario":
+                    e.Column = new GridNumericColumn
+                    {
+                        MappingName = "PrecioUnitario", HeaderText = "Precio Unitario",
+                        FormatMode = FormatMode.Currency, AllowFiltering = false
+                    };
+                    break;
+                case "Iva":
+                    e.Column = new GridCheckBoxColumn {MappingName = "Iva", HeaderText = "IVA"};
+                    break;
+                case "Subtotal":
+                    e.Column = new GridNumericColumn
+                    {
+                        MappingName = "Subtotal", HeaderText = "Subtotal", FormatMode = FormatMode.Currency,
+                        Width = 100, AllowFiltering = false
+                    };
+                    break;
+                case "FechaEntrega":
+                    Debug.Assert(FechaOrdenPicker.Value != null, "FechaOrdenPicker.Value != null");
+                    e.Column = new GridDateTimeColumn
+                    {
+                        MappingName = "FechaEntrega",
+                        HeaderText = "Fecha Entrega",
+                        MinDateTime = (DateTime)FechaOrdenPicker.Value
+                    };
+                    break;
             }
         }
 
@@ -376,8 +349,8 @@ namespace CZS_LaVictoria.ÓrdenesPage
 
         void MsgBoxTimer_Tick(object sender, EventArgs e)
         {
-            MsgBox.Visible = false;
             MsgBoxTimer.Stop();
+            MsgBox.Visible = false;
         }
 
         #endregion
@@ -424,14 +397,14 @@ namespace CZS_LaVictoria.ÓrdenesPage
         void GetAreas()
         {
             AreaCombo.Items.Clear();
-            var areas = GlobalConfig.Connection.Area_GetAll();
+            var areas = GlobalConfig.Connection.Area_GetDistinct();
 
             foreach (var area in areas)
             {
                 AreaCombo.Items.Add(area);
             }
 
-            AreaCombo.DisplayMember = "Area";
+            AreaCombo.DisplayMember = "Área";
         }
 
         /// <summary>
@@ -523,7 +496,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             {
                 MessageBox.Show(ex.ToString());
             }
-            MsgBox.Text = "PDF guardado.";
+            MsgBox.Text = "PDF guardado.\n";
             MsgBox.IconColor = Color.DarkGreen;
             MsgBox.Visible = true;
             MsgBoxTimer.Start();
@@ -550,7 +523,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
                     mail.Body =
                         $"Estimado Proveedor {_selectedProveedor.Nombre} y {_selectedProveedor.Responsable}:" +
                         $"\nSe ha generado una nueva orden de compra #{NumOrdenText.Text} la cual encontrará anexa." +
-                        "\nFavor de confirmar de recibido. Gracias, \n \nEscobas La Victoria";
+                        "\nFavor de confirmar de recibido. \nGracias, \n \nEscobas La Victoria";
                     mail.Attachments.Add(new Attachment(_pdfPath));
                     smtpServer.Port = 587;
                     smtpServer.Credentials = new NetworkCredential(Properties.Settings.Default.emailAddress,
@@ -571,7 +544,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
                     }
                 }
 
-                MsgBox.Text = $"Mensaje enviado a {addresses}";
+                MsgBox.Text += $"Mensaje enviado a {addresses}.\n";
                 MsgBox.IconColor = Color.DarkGreen;
                 MsgBox.Visible = true;
                 MsgBoxTimer.Start();

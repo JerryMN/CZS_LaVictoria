@@ -345,9 +345,11 @@ namespace CZS_LaVictoria_Library.DataAccess
         /// Actualiza una línea de una orden de compra.
         /// </summary>
         /// <param name="orderId">El Id de la orden.</param>
-        /// <param name="model">El modelo de la línea a actualizar.</param>
+        /// <param name="línea">El modelo de la línea a actualizar.</param>
+        /// <param name="oldQty">La cantidad que se había entregado.</param>
+        /// <param name="newQty">La cantidad entregada contando esta entrega.</param>
         /// <returns>True, si se actualizó correctamente, falso si no.</returns>
-        bool PurchaseOrderLine_Update(long orderId, OrdenCompraLíneaModel model);
+        bool PurchaseOrderLine_Update(long orderId, OrdenCompraLíneaModel línea, double oldQty, double newQty);
 
         #endregion
 
@@ -407,22 +409,20 @@ namespace CZS_LaVictoria_Library.DataAccess
         /// <summary>
         /// Registra la recepción de una línea de una orden de compra.
         /// </summary>
-        /// <param name="numOrden">El número de orden.</param>
         /// <param name="model">Un modelo de línea de orden de compra del cual
         /// se hace la recepción.</param>
         /// <param name="quantity">La cantidad recibida.</param>
         /// <returns>True, si se creó correctamente, falso si no.</returns>
-        bool Delivery_Create(long numOrden, OrdenCompraLíneaModel model, double quantity);
+        bool Delivery_Create(OrdenCompraLíneaModel model, double quantity);
 
         /// <summary>
         /// Registra la entrega de una línea de una orden de venta.
         /// </summary>
-        /// <param name="numOrden">El número de orden.</param>
         /// <param name="model">Un modelo de línea de orden de venta del cual
         /// se hace la entrega.</param>
         /// <param name="quantity">La cantidad entregada.</param>
         /// <returns>True, si se creó correctamente, falso si no.</returns>
-        bool Delivery_Create(long numOrden, OrdenVentaLíneaModel model, double quantity);
+        bool Delivery_Create(OrdenVentaLíneaModel model, double quantity);
 
         /// <summary>
         /// Obtiene todos los registros de recepciones de órdenes de compra.

@@ -83,7 +83,6 @@ namespace CZS_LaVictoria.PlásticosPage
         void SalidaCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             _materialSalida = (MaterialModel)SalidaCombo.SelectedItem;
-            PesoPromText.Text = _materialSalida.Peso.ToString(CultureInfo.InvariantCulture);
         }
 
         void CalcularButton_Click(object sender, EventArgs e)
@@ -151,16 +150,14 @@ namespace CZS_LaVictoria.PlásticosPage
             if (_materialSalida.Nombre == null)
             {
                 _materialSalida.Nombre = SalidaCombo.Text;
-                _materialSalida.Area = "Plásticos";
+                _materialSalida.Área = "Plásticos";
                 _materialSalida.Categoría = "Bases";
                 _materialSalida.CantidadDisponible = _piezasBuenas;
-                _materialSalida.Peso = double.Parse(PesoPromText.Text);
                 saveSuccess = GlobalConfig.Connection.Material_Create(_materialSalida);
             }
             else
             {
                 _materialSalida.CantidadDisponible = _piezasBuenas;
-                _materialSalida.Peso = double.Parse(PesoPromText.Text);
                 saveSuccess = GlobalConfig.Connection.Material_Update(_materialSalida);
             }
 

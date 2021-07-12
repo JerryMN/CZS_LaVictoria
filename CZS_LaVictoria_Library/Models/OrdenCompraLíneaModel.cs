@@ -21,7 +21,7 @@ namespace CZS_LaVictoria_Library.Models
         string _estatus;
 
         public string Proveedor { get; set; }
-        public string Area { get; set; }
+        public string Área { get; set; }
         public long NumOrden { get; set;  }
 
         public int NumLinea
