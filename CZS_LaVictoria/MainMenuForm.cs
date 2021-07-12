@@ -32,6 +32,11 @@ namespace CZS_LaVictoria
             _currentChildForm = childForm;
         }
 
+        void OpcionesBarButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new OpcionesForm());
+        }
+
         #region Ordenes
 
         void CrearOrdenCompraButton_ItemClick(object sender, ItemClickEventArgs e)

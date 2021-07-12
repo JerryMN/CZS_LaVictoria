@@ -58,6 +58,7 @@ namespace CZS_LaVictoria
             this.VerInventarioButton = new DevExpress.XtraBars.BarButtonItem();
             this.VerHistorialButton = new DevExpress.XtraBars.BarButtonItem();
             this.CrearOperadorButton = new DevExpress.XtraBars.BarButtonItem();
+            this.OpcionesBarButton = new DevExpress.XtraBars.BarButtonItem();
             this.ÓrdenesTab = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.Órdenes_CompraGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Órdenes_VentaGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -113,16 +114,18 @@ namespace CZS_LaVictoria
             this.VerMezclasButton,
             this.VerInventarioButton,
             this.VerHistorialButton,
-            this.CrearOperadorButton});
+            this.CrearOperadorButton,
+            this.OpcionesBarButton});
             this.RibbonControl.Location = new System.Drawing.Point(0, 0);
             this.RibbonControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.RibbonControl.MaxItemId = 32;
+            this.RibbonControl.MaxItemId = 33;
             this.RibbonControl.Name = "RibbonControl";
             this.RibbonControl.OptionsMenuMinWidth = 495;
             this.RibbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ÓrdenesTab,
             this.PlásticosTab,
             this.DatosTab});
+            this.RibbonControl.QuickToolbarItemLinks.Add(this.OpcionesBarButton);
             this.RibbonControl.Size = new System.Drawing.Size(1278, 158);
             // 
             // CrearOrdenCompraButton
@@ -341,6 +344,14 @@ namespace CZS_LaVictoria
             this.CrearOperadorButton.Name = "CrearOperadorButton";
             this.CrearOperadorButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.CrearOperadorButton_ItemClick);
             // 
+            // OpcionesBarButton
+            // 
+            this.OpcionesBarButton.Caption = "Opciones";
+            this.OpcionesBarButton.Id = 32;
+            this.OpcionesBarButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("OpcionesBarButton.ImageOptions.SvgImage")));
+            this.OpcionesBarButton.Name = "OpcionesBarButton";
+            this.OpcionesBarButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OpcionesBarButton_ItemClick);
+            // 
             // ÓrdenesTab
             // 
             this.ÓrdenesTab.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F);
@@ -553,6 +564,7 @@ namespace CZS_LaVictoria
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup Órdenes_HistorialGroup;
         private DevExpress.XtraBars.BarButtonItem CrearOperadorButton;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup Datos_PersonalGroup;
+        private DevExpress.XtraBars.BarButtonItem OpcionesBarButton;
     }
 }
 
