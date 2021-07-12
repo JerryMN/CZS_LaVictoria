@@ -22,5 +22,41 @@ namespace CZS_LaVictoria.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("smtp.gmail.com")]
+        public string smtpServer {
+            get {
+                return ((string)(this["smtpServer"]));
+            }
+            set {
+                this["smtpServer"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("splend3ad@gmail.com")]
+        public string emailAddress {
+            get {
+                return ((string)(this["emailAddress"]));
+            }
+            set {
+                this["emailAddress"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("xggtroybzdniydta")]
+        public string emailPassword {
+            get {
+                return ((string)(this["emailPassword"]));
+            }
+            set {
+                this["emailPassword"] = value;
+            }
+        }
     }
 }

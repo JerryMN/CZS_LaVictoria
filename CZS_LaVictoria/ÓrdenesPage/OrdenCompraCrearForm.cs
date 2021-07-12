@@ -27,6 +27,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
     public partial class OrdenCompraCrearForm : Form
     {
         ProveedorModel _selectedProveedor;
+        List<AreaModel> _selectedArea;
         List<ProveedorProductoModel> _productos;
         readonly List<OrdenCompraLíneaModel> _orderLines = new List<OrdenCompraLíneaModel>();
         int _numLinea = 1;
@@ -106,6 +107,8 @@ namespace CZS_LaVictoria.ÓrdenesPage
         void AreaCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ProveedorCombo.Text == "") return;
+            var selectedArea = AreaCombo.Text;
+            _selectedArea = GlobalConfig.Connection.Area_GetByArea(selectedArea);
             GetProducts();
         }
 
@@ -534,12 +537,15 @@ namespace CZS_LaVictoria.ÓrdenesPage
             using (var mail = new MailMessage())
             {
                 var addresses = "";
-                using (var smtpServer = new SmtpClient("smtp.gmail.com"))
+                using (var smtpServer = new SmtpClient(Properties.Settings.Default.smtpServer))
                 {
-                    // TODO - Obtener la dirección del responsable de area.
-                    mail.From = new MailAddress("splend3ad@gmail.com");
+                    mail.From = new MailAddress(Properties.Settings.Default.emailAddress);
                     mail.To.Add("gerardo.mondragonb@hotmail.com");
-                    //mail.To.Add(CorreoText.Text);
+                    foreach (var area in _selectedArea)
+                    {
+                        mail.To.Add(area.Correo);
+                    }
+
                     mail.Subject = $"Orden de Compra #{NumOrdenText.Text} - Escobas La Victoria";
                     mail.Body =
                         $"Estimado Proveedor {_selectedProveedor.Nombre} y {_selectedProveedor.Responsable}:" +
@@ -547,7 +553,8 @@ namespace CZS_LaVictoria.ÓrdenesPage
                         "\nFavor de confirmar de recibido. Gracias, \n \nEscobas La Victoria";
                     mail.Attachments.Add(new Attachment(_pdfPath));
                     smtpServer.Port = 587;
-                    smtpServer.Credentials = new NetworkCredential("splend3ad@gmail.com", "xggtroybzdniydta");
+                    smtpServer.Credentials = new NetworkCredential(Properties.Settings.Default.emailAddress,
+                        Properties.Settings.Default.emailPassword);
                     smtpServer.EnableSsl = true;
                     smtpServer.Send(mail);
                 }
