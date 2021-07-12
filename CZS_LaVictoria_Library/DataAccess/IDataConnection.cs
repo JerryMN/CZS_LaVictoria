@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CZS_LaVictoria_Library.Models;
 
 namespace CZS_LaVictoria_Library.DataAccess
@@ -473,6 +474,40 @@ namespace CZS_LaVictoria_Library.DataAccess
         /// <param name="model">Un modelo con las propiedades del operador.</param>
         /// <returns>True, si se eliminó correctamente, falso si no.</returns>
         bool Operator_Delete(OperadorModel model);
+
+        #endregion
+
+        #region Producción Plásticos
+
+        /// <summary>
+        /// Crea un registro de una producción de molido.
+        /// </summary>
+        /// <param name="model">Un modelo con las propiedades de la producción.</param>
+        /// <param name="materialEntrada">Un modelo con las propiedades del material de entrada al proceso.</param>
+        /// <param name="materialSalida">Un modelo con las propiedades del material de salida del proceso.</param>
+        /// <returns>True, si se creó correctamente, falso si no.</returns>
+        bool PlasticProduction_CreateMolido(ProducciónPlásticosModel model, MaterialModel materialEntrada, MaterialModel materialSalida);
+
+        /// <summary>
+        /// Obtiene todos los registros de producciones de plásticos.
+        /// </summary>
+        /// <returns>Una lista con los modelos de las producciones.</returns>
+        List<ProducciónPlásticosModel> PlasticProduction_GetAll();
+
+        /// <summary>
+        /// Obtiene todos los registros de producciones de plásticos entre ciertas fechas.
+        /// </summary>
+        /// <param name="desde">La fecha de inicio.</param>
+        /// <param name="hasta">La fecha de final.</param>
+        /// <returns>Una lista con los modelos de las producciones.</returns>
+        List<ProducciónPlásticosModel> PlasticProduction_GetByDate(DateTime desde, DateTime hasta);
+
+        /// <summary>
+        /// Obtiene todos los registros de producciones de plásticos de cierto proceso.
+        /// </summary>
+        /// <param name="tipo">El proceso de producción (molido, insertado, etc.).</param>
+        /// <returns>Una lista con los modelos de las producciones.</returns>
+        List<ProducciónPlásticosModel> PlasticProduction_GetByProceso(string proceso);
 
         #endregion
     }

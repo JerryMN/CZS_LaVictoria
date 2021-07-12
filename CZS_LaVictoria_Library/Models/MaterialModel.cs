@@ -13,7 +13,7 @@
             
         }
 
-        public MaterialModel(string nombre, string area, string categoría, string cantidadDisponible, string peso)
+        public MaterialModel(string nombre, string area, string categoría, string cantidadDisponible)
         {
             Nombre = nombre;
             Área = area;
@@ -23,7 +23,7 @@
             CantidadDisponible = cantidadResult;
         }
 
-        public MaterialModel(string nombre, string area, string categoría, double cantidadDisponible, double peso)
+        public MaterialModel(string nombre, string area, string categoría, double cantidadDisponible)
         {
             Nombre = nombre;
             Área = area;

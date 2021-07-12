@@ -26,7 +26,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 return;
             }
 
-            var material = new MaterialModel(MaterialText.Text, AreaCombo.Text, CategoríaCombo.Text, CantidadText.Text, "0");
+            var material = new MaterialModel(MaterialText.Text, AreaCombo.Text, CategoríaCombo.Text, CantidadText.Text);
             var saveSuccess = GlobalConfig.Connection.Material_Create(material);
 
             if (saveSuccess)

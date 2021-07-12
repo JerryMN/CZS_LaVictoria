@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
@@ -55,18 +54,14 @@ namespace CZS_LaVictoria.PlásticosPage
             }
 
             _materialEntrada.CantidadDisponible -= _cantidadEntrada;
-            var saveEntrada = GlobalConfig.Connection.Material_Update(_materialEntrada);
-            bool saveSalida;
-            if (_materialSalida.Id == 0)
+            if (_materialSalida == null)
             {
-                _materialSalida = new MaterialModel(SalidaCombo.Text, "Plásticos", "Molido", _cantidadSalida, 0);
-                saveSalida = GlobalConfig.Connection.Material_Create(_materialSalida);
+                _materialSalida = new MaterialModel(SalidaCombo.Text, "Plásticos", "Molido", _cantidadSalida);
                 GetMateriales();
             }
             else
             {
                 _materialSalida.CantidadDisponible += _cantidadSalida;
-                saveSalida = GlobalConfig.Connection.Material_Update(_materialSalida);
             }
 
             var orden = new ProducciónPlásticosModel();
@@ -81,10 +76,12 @@ namespace CZS_LaVictoria.PlásticosPage
             orden.MaterialSale = _materialSalida.Nombre;
             orden.CantidadSale = double.Parse(CantidadSalidaText.Text);
             orden.MermaFinal = double.Parse(MermaText.Text);
-            // TODO - Guardar orden.
+
+            var saveSuccess =
+                GlobalConfig.Connection.PlasticProduction_CreateMolido(orden, _materialEntrada, _materialSalida);
             
 
-            if (saveEntrada && saveSalida)
+            if (saveSuccess)
             {
                 ClearForm();
                 MsgBox.Text = "Molido registrado con éxito.";
@@ -112,7 +109,7 @@ namespace CZS_LaVictoria.PlásticosPage
 
         void GetOperadores()
         {
-            var operadores = new List<OperadorModel>(); // TODO - Fill.
+            var operadores = GlobalConfig.Connection.Operador_GetByArea("Plásticos");
             foreach (var operador in operadores)
             {
                 OperadorCombo.Items.Add(operador);
