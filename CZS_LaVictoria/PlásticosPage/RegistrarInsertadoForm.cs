@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.Windows.Forms;
+using CZS_LaVictoria_Library;
 using CZS_LaVictoria_Library.Models;
 
 namespace CZS_LaVictoria.PlásticosPage
@@ -10,21 +13,25 @@ namespace CZS_LaVictoria.PlásticosPage
     public partial class RegistrarInsertadoForm : Form
     {
         MaterialModel _baseSeleccionada = new MaterialModel();
-        MaterialModel _fibraSeleccionada = new MaterialModel();
-        MaterialModel _productoSeleccionado = new MaterialModel();
         double _numBases;
+        MaterialModel _fibraSeleccionada = new MaterialModel();
         double _cantidadFibra;
+        MaterialModel _alambreSeleccionado = new MaterialModel();
         double _numRollos;
-        double _piezasBuenas;
-        double _piezasMalas;
-        double _basesMalas;
+        MaterialModel _productoSeleccionado = new MaterialModel();
+        int _piezasBuenas;
+        int _piezasMalas;
+        int _basesMalas;
         double _viruta;
         double _rebaba;
 
         public RegistrarInsertadoForm()
         {
             InitializeComponent();
-            GetBasesProductosFibras();
+            GetOperadores();
+            GetBasesFibrasAlambres();
+            GetProductos();
+            FechaPicker.Culture = new CultureInfo("es-MX");
         }
 
         #region Events
@@ -37,6 +44,11 @@ namespace CZS_LaVictoria.PlásticosPage
         void FibraCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             _fibraSeleccionada = (MaterialModel)FibraCombo.SelectedItem;
+        }
+
+        void TipoAlambreCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _alambreSeleccionado = (MaterialModel) TipoAlambreCombo.SelectedItem;
         }
 
         void SalidaCombo_SelectedIndexChanged(object sender, EventArgs e)
@@ -72,6 +84,13 @@ namespace CZS_LaVictoria.PlásticosPage
                 return;
             }
 
+            if (_numRollos > _alambreSeleccionado.CantidadDisponible)
+            {
+                MsgBox.Text = $"No hay suficientes rollos de alambre. Hay {_baseSeleccionada.CantidadDisponible}.";
+                MsgBox.Visible = true;
+                return;
+            }
+
             if (_piezasBuenas + _piezasMalas + _basesMalas > _numBases)
             {
                 MsgBox.Text = "No pueden salir más bases de las que entraron.";
@@ -90,9 +109,24 @@ namespace CZS_LaVictoria.PlásticosPage
 
         void GuardarButton_Click(object sender, EventArgs e)
         {
-            // TODO - Update cantidades de bases, fibra y rollos.
-            // TODO - Update cantidad de piezas buenas.
-            // TODO - Update cantidad de por moler.
+            var orden = new ProducciónPlásticosModel();
+            Debug.Assert(FechaPicker.Value != null, "FechaPicker.Value != null");
+            orden.Fecha = (DateTime)FechaPicker.Value;
+            orden.Proceso = "Insertado";
+            orden.Turno = int.Parse(TurnoText.Text);
+            orden.Máquina = int.Parse(MaquinaText.Text);
+            orden.Operador = OperadorCombo.Text;
+            orden.MaterialEntra = _baseSeleccionada.Nombre;
+            orden.CantidadEntra = double.Parse(CantidadBaseText.Text);
+            orden.FibraEntra = _fibraSeleccionada.Nombre;
+            orden.CantidadFibraEntra = double.Parse(CantidadFibraText.Text);
+            orden.PiezasBuenas = _piezasBuenas;
+            orden.PiezasMalas = _piezasMalas;
+            orden.BasesMalas = _basesMalas;
+            orden.Viruta = _viruta;
+            orden.Rebaba = _rebaba;
+
+            // TODO - Finish.
             var saveSuccess = true;
 
             if (saveSuccess)
@@ -121,35 +155,57 @@ namespace CZS_LaVictoria.PlásticosPage
 
         #region Methods
 
-        void GetBasesProductosFibras()
+        void GetOperadores()
         {
-            BaseCombo.Items.Clear();
-            SalidaCombo.Items.Clear();
-
-            // TODO - "SELECT * FROM Inventario WHERE Categoría = 'Bases'
-            var bases = new List<MaterialModel>();
-            // TODO - "SELECT * FROM Inventario WHERE Categoría = 'Producto Terminado'
-            var productos = new List<MaterialModel>();
-            // TODO - "SELECT * FROM Inventario WHERE Categoría = 'Fibra'
-            var fibras = new List<MaterialModel>();
-
-            foreach (var baseP in bases)
+            var operadores = GlobalConfig.Connection.Operador_GetByArea("Plásticos");
+            foreach (var operador in operadores)
             {
-                BaseCombo.Items.Add(baseP);
+                OperadorCombo.Items.Add(operador);
             }
 
+            OperadorCombo.DisplayMember = "Nombre";
+        }
+
+        void GetBasesFibrasAlambres()
+        {
+            BaseCombo.Items.Clear();
+            FibraCombo.Items.Clear();
+            TipoAlambreCombo.Items.Clear();
+
+            var bases = GlobalConfig.Connection.Material_GetByCat("Bases");
+            foreach (var @base in bases)
+            {
+                BaseCombo.Items.Add(@base);
+            }
+
+            var fibras = GlobalConfig.Connection.Material_GetByCat("Extruído");
             foreach (var fibra in fibras)
             {
                 FibraCombo.Items.Add(fibra);
             }
+
+            var alambres = GlobalConfig.Connection.Material_GetByCat("Alambre");
+            foreach (var alambre in alambres)
+            {
+                TipoAlambreCombo.Items.Add(alambre);
+            }
+
+            BaseCombo.DisplayMember = "Nombre";
+            FibraCombo.DisplayMember = "Nombre";
+            TipoAlambreCombo.DisplayMember = "Nombre";
+        }
+
+        void GetProductos()
+        {
+            SalidaCombo.Items.Clear();
+
+            var productos = GlobalConfig.Connection.Material_GetByCat("Producto Terminado");
 
             foreach (var producto in productos)
             {
                 SalidaCombo.Items.Add(producto);
             }
 
-            BaseCombo.DisplayMember = "Nombre";
-            FibraCombo.DisplayMember = "Nombre";
             SalidaCombo.DisplayMember = "Nombre";
         }
 
@@ -158,6 +214,24 @@ namespace CZS_LaVictoria.PlásticosPage
             var output = true;
             MsgBox.Text = "";
             MsgBox.IconColor = Color.DarkRed;
+
+            if (OperadorCombo.Text == "")
+            {
+                output = false;
+                MsgBox.Text += "Selecciona un operador.\n";
+            }
+
+            if (MaquinaText.Text == "")
+            {
+                output = false;
+                MsgBox.Text += "Selecciona una máquina.\n";
+            }
+
+            if (TurnoText.Text == "")
+            {
+                output = false;
+                MsgBox.Text += "Selecciona un turno.\n";
+            }
 
             if (BaseCombo.Text == "")
             {
@@ -183,9 +257,13 @@ namespace CZS_LaVictoria.PlásticosPage
                 MsgBox.Text += "Ingresa la cantidad de fibra.\n";
             }
 
-            if (CantidadRollosText.Text != "" || CantidadRollosText.Text != "0")
+            if (TipoAlambreCombo.Text != "")
             {
-                double.TryParse(CantidadRollosText.Text, out _numRollos);
+                if (CantidadRollosText.Text == "" || CantidadRollosText.Text == "0" || !double.TryParse(CantidadRollosText.Text, out _numRollos))
+                {
+                    output = false;
+                    MsgBox.Text += "Ingresa la cantidad de rollos.\n";
+                }
             }
 
             if (SalidaCombo.Text == "")
@@ -194,19 +272,19 @@ namespace CZS_LaVictoria.PlásticosPage
                 MsgBox.Text += "Selecciona una producto.\n";
             }
 
-            if (PiezasBuenasText.Text == "" || PiezasBuenasText.Text == "0" || !double.TryParse(PiezasBuenasText.Text, out _piezasBuenas))
+            if (PiezasBuenasText.Text == "" || PiezasBuenasText.Text == "0" || !int.TryParse(PiezasBuenasText.Text, out _piezasBuenas))
             {
                 output = false;
                 MsgBox.Text += "Ingresa el número de piezas buenas.\n";
             }
 
-            if (PiezasMalasText.Text == "" || !double.TryParse(PiezasMalasText.Text, out _piezasMalas))
+            if (PiezasMalasText.Text == "" || !int.TryParse(PiezasMalasText.Text, out _piezasMalas))
             {
                 output = false;
                 MsgBox.Text += "Ingresa el número de piezas malas.\n";
             }
 
-            if (BasesMalasText.Text == "" ||  !double.TryParse(BasesMalasText.Text, out _basesMalas))
+            if (BasesMalasText.Text == "" ||  !int.TryParse(BasesMalasText.Text, out _basesMalas))
             {
                 output = false;
                 MsgBox.Text += "Ingresa el número de bases malas.\n";
