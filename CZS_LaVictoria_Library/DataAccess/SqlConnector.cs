@@ -1934,6 +1934,199 @@ namespace CZS_LaVictoria_Library.DataAccess
             }
         }
 
+        public bool PlasticProduction_CreateInyección(ProducciónPlásticosModel model, MezclaModel mezcla,
+            MaterialModel materialSalida)
+        {
+            using (var scope = new TransactionScope())
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var p = new DynamicParameters();
+                    var materialPorMoler = new MaterialModel();
+                    foreach (var material in mezcla.Materiales)
+                    {
+                        p.Add("@CantidadDisponible", material.CantidadDisponible);
+                        p.Add("@Id", material.Id);
+                        connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                    }
+
+                    p = new DynamicParameters();
+                    if (materialSalida.Id == 0)
+                    {
+                        p = new DynamicParameters();
+                        p.Add("@Nombre", materialSalida.Nombre);
+                        p.Add("@Area", materialSalida.Área);
+                        p.Add("@Categoría", materialSalida.Categoría);
+                        p.Add("@CantidadDisponible", materialSalida.CantidadDisponible);
+                        connection.Execute("dbo.spStock_Insert", p, commandType: CommandType.StoredProcedure);
+                    }
+                    else
+                    {
+                        p.Add("@CantidadDisponible", materialSalida.CantidadDisponible);
+                        p.Add("@Id", materialSalida.Id);
+                        connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                    }
+
+                    p = new DynamicParameters();
+                    p.Add("@Fecha", model.Fecha);
+                    p.Add("@Proceso", "Inyección");
+                    p.Add("@Turno", model.Turno);
+                    p.Add("@Máquina", model.Máquina);
+                    p.Add("@Operador", model.Operador);
+                    p.Add("@MaterialEntra", model.MaterialEntra);
+                    p.Add("@CantidadEntra", model.CantidadEntra);
+                    p.Add("@MaterialSale", model.MaterialSale);
+                    p.Add("@CantidadSale", model.CantidadSale);
+                    p.Add("@PesoPromedio", model.PesoPromedio);
+                    p.Add("@MermaMoler", model.MermaMoler);
+                    p.Add("@MermaFinal", model.MermaFinal);
+                    connection.Execute("dbo.spPlasticProduction_Insert", p, commandType: CommandType.StoredProcedure);
+
+                    p = new DynamicParameters();
+                    p.Add("@Nombre", "Merma Por Moler");
+                    p.Add("@Area", "Plásticos");
+
+                    try
+                    {
+                        materialPorMoler = connection.QuerySingle<MaterialModel>("dbo.spStock_GetByNombreArea", p,
+                            commandType: CommandType.StoredProcedure);
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex.Message != "Sequence contains no elements")
+                        {
+                            Debug.WriteLine(ex.ToString());
+                            Debug.Assert(false);
+                        }
+                    }
+                    finally
+                    {
+                        if (materialPorMoler == null || materialPorMoler.Id == 0)
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@Nombre", "Merma Por Moler");
+                            p.Add("@Area", "Plásticos");
+                            p.Add("@Categoría", "Por Moler");
+                            p.Add("@CantidadDisponible", model.MermaMoler);
+                            connection.Execute("dbo.spStock_Insert", p, commandType: CommandType.StoredProcedure);
+                        }
+                        else
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@CantidadDisponible", materialPorMoler.CantidadDisponible + model.MermaMoler);
+                            p.Add("@Id", materialPorMoler.Id);
+                            connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return false;
+                }
+
+                scope.Complete();
+                return true;
+            }
+        }
+
+        public bool PlasticProduction_CreateInyección(ProducciónPlásticosModel model, MaterialModel materialEntrada,
+            MaterialModel materialSalida)
+        {
+            using (var scope = new TransactionScope())
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var p = new DynamicParameters();
+                    var materialPorMoler = new MaterialModel();
+                    p.Add("@CantidadDisponible", materialEntrada.CantidadDisponible);
+                    p.Add("@Id", materialEntrada.Id);
+                    connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+
+                    p = new DynamicParameters();
+                    if (materialSalida.Id == 0)
+                    {
+                        p = new DynamicParameters();
+                        p.Add("@Nombre", materialSalida.Nombre);
+                        p.Add("@Area", materialSalida.Área);
+                        p.Add("@Categoría", materialSalida.Categoría);
+                        p.Add("@CantidadDisponible", materialSalida.CantidadDisponible);
+                        connection.Execute("dbo.spStock_Insert", p, commandType: CommandType.StoredProcedure);
+                    }
+                    else
+                    {
+                        p.Add("@CantidadDisponible", materialSalida.CantidadDisponible);
+                        p.Add("@Id", materialSalida.Id);
+                        connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                    }
+
+                    p = new DynamicParameters();
+                    p.Add("@Fecha", model.Fecha);
+                    p.Add("@Proceso", "Inyección");
+                    p.Add("@Turno", model.Turno);
+                    p.Add("@Máquina", model.Máquina);
+                    p.Add("@Operador", model.Operador);
+                    p.Add("@MaterialEntra", model.MaterialEntra);
+                    p.Add("@CantidadEntra", model.CantidadEntra);
+                    p.Add("@MaterialSale", model.MaterialSale);
+                    p.Add("@CantidadSale", model.CantidadSale);
+                    p.Add("@PesoPromedio", model.PesoPromedio);
+                    p.Add("@MermaMoler", model.MermaMoler);
+                    p.Add("@MermaFinal", model.MermaFinal);
+                    connection.Execute("dbo.spPlasticProduction_Insert", p, commandType: CommandType.StoredProcedure);
+
+                    p = new DynamicParameters();
+                    p.Add("@Nombre", "Merma Por Moler");
+                    p.Add("@Area", "Plásticos");
+
+                    try
+                    {
+                        materialPorMoler = connection.QuerySingle<MaterialModel>("dbo.spStock_GetByNombreArea", p,
+                            commandType: CommandType.StoredProcedure);
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex.Message != "Sequence contains no elements")
+                        {
+                            Debug.WriteLine(ex.ToString());
+                            Debug.Assert(false);
+                        }
+                    }
+                    finally
+                    {
+                        if (materialPorMoler == null || materialPorMoler.Id == 0)
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@Nombre", "Merma Por Moler");
+                            p.Add("@Area", "Plásticos");
+                            p.Add("@Categoría", "Por Moler");
+                            p.Add("@CantidadDisponible", model.MermaMoler);
+                            connection.Execute("dbo.spStock_Insert", p, commandType: CommandType.StoredProcedure);
+                        }
+                        else
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@CantidadDisponible", materialPorMoler.CantidadDisponible + model.MermaMoler);
+                            p.Add("@Id", materialPorMoler.Id);
+                            connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return false;
+                }
+
+                scope.Complete();
+                return true;
+            }
+        }
+
         public List<ProducciónPlásticosModel> PlasticProduction_GetAll()
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))

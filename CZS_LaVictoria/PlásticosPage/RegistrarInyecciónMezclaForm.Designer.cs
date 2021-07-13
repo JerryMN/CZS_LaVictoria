@@ -33,7 +33,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.SubtitleLabel = new System.Windows.Forms.Label();
             this.MsgBox = new FontAwesome.Sharp.IconButton();
             this.GuardarButton = new System.Windows.Forms.Button();
-            this.MermaFinalText = new Syncfusion.WinForms.Input.SfNumericTextBox();
+            this.MermaRealText = new Syncfusion.WinForms.Input.SfNumericTextBox();
             this.CantidadSalidaText = new Syncfusion.WinForms.Input.SfNumericTextBox();
             this.SalidaCombo = new System.Windows.Forms.ComboBox();
             this.ArrowButton = new FontAwesome.Sharp.IconButton();
@@ -51,9 +51,20 @@ namespace CZS_LaVictoria.PlásticosPage
             this.MsgBoxTimer = new System.Windows.Forms.Timer(this.components);
             this.CantidadEntradaUnidad = new System.Windows.Forms.Label();
             this.CantidadEntradaText = new Syncfusion.WinForms.Input.SfNumericTextBox();
-            this.MezclaCombo = new System.Windows.Forms.ComboBox();
             this.CantidadEntradaLabel = new System.Windows.Forms.Label();
+            this.MaterialRadio = new System.Windows.Forms.RadioButton();
+            this.MezclaRadio = new System.Windows.Forms.RadioButton();
+            this.TurnoText = new System.Windows.Forms.NumericUpDown();
+            this.MaquinaText = new System.Windows.Forms.NumericUpDown();
+            this.FechaPicker = new Syncfusion.WinForms.Input.SfDateTimeEdit();
+            this.OperadorCombo = new System.Windows.Forms.ComboBox();
+            this.MaquinaLabel = new System.Windows.Forms.Label();
+            this.OperadorLabel = new System.Windows.Forms.Label();
+            this.FechaLabel = new System.Windows.Forms.Label();
+            this.EntradaCombo = new System.Windows.Forms.ComboBox();
             this.EntradaLabel = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.TurnoText)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MaquinaText)).BeginInit();
             this.SuspendLayout();
             // 
             // SubtitleLabel
@@ -98,19 +109,19 @@ namespace CZS_LaVictoria.PlásticosPage
             this.GuardarButton.UseVisualStyleBackColor = true;
             this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
             // 
-            // MermaFinalText
+            // MermaRealText
             // 
-            this.MermaFinalText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.MermaFinalText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MermaFinalText.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.MermaFinalText.Location = new System.Drawing.Point(720, 347);
-            this.MermaFinalText.MinValue = 0D;
-            this.MermaFinalText.Name = "MermaFinalText";
-            this.MermaFinalText.ReadOnly = true;
-            this.MermaFinalText.Size = new System.Drawing.Size(250, 29);
-            this.MermaFinalText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.MermaFinalText.TabIndex = 45;
-            this.MermaFinalText.WatermarkText = "Calculado automáticamente";
+            this.MermaRealText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.MermaRealText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MermaRealText.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.MermaRealText.Location = new System.Drawing.Point(720, 347);
+            this.MermaRealText.MinValue = 0D;
+            this.MermaRealText.Name = "MermaRealText";
+            this.MermaRealText.ReadOnly = true;
+            this.MermaRealText.Size = new System.Drawing.Size(250, 29);
+            this.MermaRealText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.MermaRealText.TabIndex = 45;
+            this.MermaRealText.WatermarkText = "Calculado automáticamente";
             // 
             // CantidadSalidaText
             // 
@@ -274,7 +285,7 @@ namespace CZS_LaVictoria.PlásticosPage
             // CantidadEntradaUnidad
             // 
             this.CantidadEntradaUnidad.AutoSize = true;
-            this.CantidadEntradaUnidad.Location = new System.Drawing.Point(449, 200);
+            this.CantidadEntradaUnidad.Location = new System.Drawing.Point(455, 400);
             this.CantidadEntradaUnidad.Name = "CantidadEntradaUnidad";
             this.CantidadEntradaUnidad.Size = new System.Drawing.Size(27, 21);
             this.CantidadEntradaUnidad.TabIndex = 54;
@@ -285,57 +296,179 @@ namespace CZS_LaVictoria.PlásticosPage
             this.CantidadEntradaText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.CantidadEntradaText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CantidadEntradaText.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.CantidadEntradaText.Location = new System.Drawing.Point(194, 197);
+            this.CantidadEntradaText.Location = new System.Drawing.Point(200, 397);
             this.CantidadEntradaText.MinValue = 0D;
             this.CantidadEntradaText.Name = "CantidadEntradaText";
             this.CantidadEntradaText.Size = new System.Drawing.Size(250, 29);
             this.CantidadEntradaText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.CantidadEntradaText.TabIndex = 53;
             this.CantidadEntradaText.WatermarkText = "Ingresa la cantidad";
-            // 
-            // MezclaCombo
-            // 
-            this.MezclaCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.MezclaCombo.FormattingEnabled = true;
-            this.MezclaCombo.Location = new System.Drawing.Point(194, 147);
-            this.MezclaCombo.Name = "MezclaCombo";
-            this.MezclaCombo.Size = new System.Drawing.Size(250, 29);
-            this.MezclaCombo.TabIndex = 52;
-            this.MezclaCombo.SelectedIndexChanged += new System.EventHandler(this.MezclaCombo_SelectedIndexChanged);
+            this.CantidadEntradaText.TextChanged += new System.EventHandler(this.InputOutputChanged);
             // 
             // CantidadEntradaLabel
             // 
             this.CantidadEntradaLabel.AutoSize = true;
-            this.CantidadEntradaLabel.Location = new System.Drawing.Point(50, 200);
+            this.CantidadEntradaLabel.Location = new System.Drawing.Point(51, 400);
             this.CantidadEntradaLabel.Name = "CantidadEntradaLabel";
             this.CantidadEntradaLabel.Size = new System.Drawing.Size(72, 21);
             this.CantidadEntradaLabel.TabIndex = 50;
             this.CantidadEntradaLabel.Text = "Cantidad";
             // 
+            // MaterialRadio
+            // 
+            this.MaterialRadio.AutoSize = true;
+            this.MaterialRadio.Location = new System.Drawing.Point(308, 300);
+            this.MaterialRadio.Name = "MaterialRadio";
+            this.MaterialRadio.Size = new System.Drawing.Size(143, 25);
+            this.MaterialRadio.TabIndex = 87;
+            this.MaterialRadio.TabStop = true;
+            this.MaterialRadio.Text = "Material Sencillo";
+            this.MaterialRadio.UseVisualStyleBackColor = true;
+            this.MaterialRadio.CheckedChanged += new System.EventHandler(this.RadioButton_Changed);
+            // 
+            // MezclaRadio
+            // 
+            this.MezclaRadio.AutoSize = true;
+            this.MezclaRadio.Location = new System.Drawing.Point(200, 300);
+            this.MezclaRadio.Name = "MezclaRadio";
+            this.MezclaRadio.Size = new System.Drawing.Size(76, 25);
+            this.MezclaRadio.TabIndex = 88;
+            this.MezclaRadio.TabStop = true;
+            this.MezclaRadio.Text = "Mezcla";
+            this.MezclaRadio.UseVisualStyleBackColor = true;
+            this.MezclaRadio.CheckedChanged += new System.EventHandler(this.RadioButton_Changed);
+            // 
+            // TurnoText
+            // 
+            this.TurnoText.Location = new System.Drawing.Point(330, 247);
+            this.TurnoText.Maximum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            this.TurnoText.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.TurnoText.Name = "TurnoText";
+            this.TurnoText.Size = new System.Drawing.Size(120, 29);
+            this.TurnoText.TabIndex = 85;
+            this.TurnoText.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // MaquinaText
+            // 
+            this.MaquinaText.Location = new System.Drawing.Point(200, 247);
+            this.MaquinaText.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.MaquinaText.Name = "MaquinaText";
+            this.MaquinaText.Size = new System.Drawing.Size(120, 29);
+            this.MaquinaText.TabIndex = 86;
+            this.MaquinaText.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // FechaPicker
+            // 
+            this.FechaPicker.AllowValueChangeOnMouseWheel = true;
+            this.FechaPicker.Location = new System.Drawing.Point(200, 147);
+            this.FechaPicker.Name = "FechaPicker";
+            this.FechaPicker.Size = new System.Drawing.Size(250, 33);
+            this.FechaPicker.TabIndex = 84;
+            // 
+            // OperadorCombo
+            // 
+            this.OperadorCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.OperadorCombo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OperadorCombo.FormattingEnabled = true;
+            this.OperadorCombo.Location = new System.Drawing.Point(200, 197);
+            this.OperadorCombo.Name = "OperadorCombo";
+            this.OperadorCombo.Size = new System.Drawing.Size(250, 29);
+            this.OperadorCombo.TabIndex = 83;
+            // 
+            // MaquinaLabel
+            // 
+            this.MaquinaLabel.AutoSize = true;
+            this.MaquinaLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MaquinaLabel.Location = new System.Drawing.Point(50, 250);
+            this.MaquinaLabel.Name = "MaquinaLabel";
+            this.MaquinaLabel.Size = new System.Drawing.Size(126, 21);
+            this.MaquinaLabel.TabIndex = 80;
+            this.MaquinaLabel.Text = "Máquina / Turno";
+            // 
+            // OperadorLabel
+            // 
+            this.OperadorLabel.AutoSize = true;
+            this.OperadorLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OperadorLabel.Location = new System.Drawing.Point(50, 200);
+            this.OperadorLabel.Name = "OperadorLabel";
+            this.OperadorLabel.Size = new System.Drawing.Size(77, 21);
+            this.OperadorLabel.TabIndex = 81;
+            this.OperadorLabel.Text = "Operador";
+            // 
+            // FechaLabel
+            // 
+            this.FechaLabel.AutoSize = true;
+            this.FechaLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FechaLabel.Location = new System.Drawing.Point(50, 150);
+            this.FechaLabel.Name = "FechaLabel";
+            this.FechaLabel.Size = new System.Drawing.Size(144, 21);
+            this.FechaLabel.TabIndex = 82;
+            this.FechaLabel.Text = "Fecha de operación";
+            // 
+            // EntradaCombo
+            // 
+            this.EntradaCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.EntradaCombo.FormattingEnabled = true;
+            this.EntradaCombo.Location = new System.Drawing.Point(200, 347);
+            this.EntradaCombo.Name = "EntradaCombo";
+            this.EntradaCombo.Size = new System.Drawing.Size(250, 29);
+            this.EntradaCombo.TabIndex = 79;
+            this.EntradaCombo.SelectedIndexChanged += new System.EventHandler(this.EntradaCombo_SelectedIndexChanged);
+            this.EntradaCombo.TextChanged += new System.EventHandler(this.InputOutputChanged);
+            // 
             // EntradaLabel
             // 
             this.EntradaLabel.AutoSize = true;
-            this.EntradaLabel.Location = new System.Drawing.Point(50, 150);
+            this.EntradaLabel.Location = new System.Drawing.Point(50, 350);
             this.EntradaLabel.Name = "EntradaLabel";
-            this.EntradaLabel.Size = new System.Drawing.Size(58, 21);
-            this.EntradaLabel.TabIndex = 51;
-            this.EntradaLabel.Text = "Mezcla";
+            this.EntradaLabel.Size = new System.Drawing.Size(132, 21);
+            this.EntradaLabel.TabIndex = 78;
+            this.EntradaLabel.Text = "Mezcla o Material";
             // 
             // RegistrarInyecciónMezclaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1276, 839);
+            this.Controls.Add(this.MaterialRadio);
+            this.Controls.Add(this.MezclaRadio);
+            this.Controls.Add(this.TurnoText);
+            this.Controls.Add(this.MaquinaText);
+            this.Controls.Add(this.FechaPicker);
+            this.Controls.Add(this.OperadorCombo);
+            this.Controls.Add(this.MaquinaLabel);
+            this.Controls.Add(this.OperadorLabel);
+            this.Controls.Add(this.FechaLabel);
+            this.Controls.Add(this.EntradaCombo);
+            this.Controls.Add(this.EntradaLabel);
             this.Controls.Add(this.CantidadEntradaUnidad);
             this.Controls.Add(this.CantidadEntradaText);
-            this.Controls.Add(this.MezclaCombo);
             this.Controls.Add(this.CantidadEntradaLabel);
-            this.Controls.Add(this.EntradaLabel);
             this.Controls.Add(this.MsgBox);
             this.Controls.Add(this.CalcularButton);
             this.Controls.Add(this.GuardarButton);
             this.Controls.Add(this.MermaMolerText);
-            this.Controls.Add(this.MermaFinalText);
+            this.Controls.Add(this.MermaRealText);
             this.Controls.Add(this.PesoPromText);
             this.Controls.Add(this.CantidadSalidaText);
             this.Controls.Add(this.SalidaCombo);
@@ -354,6 +487,8 @@ namespace CZS_LaVictoria.PlásticosPage
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "RegistrarInyecciónMezclaForm";
             this.Text = "RegistrarInyecciónForm";
+            ((System.ComponentModel.ISupportInitialize)(this.TurnoText)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MaquinaText)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -364,7 +499,7 @@ namespace CZS_LaVictoria.PlásticosPage
         private System.Windows.Forms.Label SubtitleLabel;
         private FontAwesome.Sharp.IconButton MsgBox;
         private System.Windows.Forms.Button GuardarButton;
-        private Syncfusion.WinForms.Input.SfNumericTextBox MermaFinalText;
+        private Syncfusion.WinForms.Input.SfNumericTextBox MermaRealText;
         private Syncfusion.WinForms.Input.SfNumericTextBox CantidadSalidaText;
         private System.Windows.Forms.ComboBox SalidaCombo;
         private FontAwesome.Sharp.IconButton ArrowButton;
@@ -382,8 +517,17 @@ namespace CZS_LaVictoria.PlásticosPage
         private System.Windows.Forms.Timer MsgBoxTimer;
         private System.Windows.Forms.Label CantidadEntradaUnidad;
         private Syncfusion.WinForms.Input.SfNumericTextBox CantidadEntradaText;
-        private System.Windows.Forms.ComboBox MezclaCombo;
         private System.Windows.Forms.Label CantidadEntradaLabel;
+        private System.Windows.Forms.RadioButton MaterialRadio;
+        private System.Windows.Forms.RadioButton MezclaRadio;
+        private System.Windows.Forms.NumericUpDown TurnoText;
+        private System.Windows.Forms.NumericUpDown MaquinaText;
+        private Syncfusion.WinForms.Input.SfDateTimeEdit FechaPicker;
+        private System.Windows.Forms.ComboBox OperadorCombo;
+        private System.Windows.Forms.Label MaquinaLabel;
+        private System.Windows.Forms.Label OperadorLabel;
+        private System.Windows.Forms.Label FechaLabel;
+        private System.Windows.Forms.ComboBox EntradaCombo;
         private System.Windows.Forms.Label EntradaLabel;
     }
 }
