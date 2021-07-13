@@ -489,6 +489,24 @@ namespace CZS_LaVictoria_Library.DataAccess
         bool PlasticProduction_CreateMolido(ProducciónPlásticosModel model, MaterialModel materialEntrada, MaterialModel materialSalida);
 
         /// <summary>
+        /// Crea un registro de una producción de extruído.
+        /// </summary>
+        /// <param name="model">Un modelo con las propiedades de la producción.</param>
+        /// <param name="mezcla">Un modelo con las propiedades de la mezcla de entrada al proceso.</param>
+        /// <param name="materialSalida">Un modelo con las propiedades del material de salida del proceso.</param>
+        /// <returns>True, si se creó correctamente, falso si no.</returns>
+        bool PlasticProduction_CreateExtruído(ProducciónPlásticosModel model, MezclaModel mezcla, MaterialModel materialSalida);
+
+        /// <summary>
+        /// Crea un registro de una producción de extruído.
+        /// </summary>
+        /// <param name="model">Un modelo con las propiedades de la producción.</param>
+        /// <param name="materialEntrada">Un modelo con las propiedades del material de entrada al proceso.</param>
+        /// <param name="materialSalida">Un modelo con las propiedades del material de salida del proceso.</param>
+        /// <returns>True, si se creó correctamente, falso si no.</returns>
+        bool PlasticProduction_CreateExtruído(ProducciónPlásticosModel model, MaterialModel materialEntrada, MaterialModel materialSalida);
+
+        /// <summary>
         /// Obtiene todos los registros de producciones de plásticos.
         /// </summary>
         /// <returns>Una lista con los modelos de las producciones.</returns>

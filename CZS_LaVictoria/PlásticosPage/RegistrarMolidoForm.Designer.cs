@@ -222,9 +222,19 @@ namespace CZS_LaVictoria.PlásticosPage
             // MaquinaText
             // 
             this.MaquinaText.Location = new System.Drawing.Point(200, 247);
+            this.MaquinaText.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.MaquinaText.Name = "MaquinaText";
             this.MaquinaText.Size = new System.Drawing.Size(120, 29);
             this.MaquinaText.TabIndex = 39;
+            this.MaquinaText.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // FechaLabel
             // 
@@ -259,9 +269,24 @@ namespace CZS_LaVictoria.PlásticosPage
             // TurnoText
             // 
             this.TurnoText.Location = new System.Drawing.Point(330, 247);
+            this.TurnoText.Maximum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            this.TurnoText.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.TurnoText.Name = "TurnoText";
             this.TurnoText.Size = new System.Drawing.Size(120, 29);
             this.TurnoText.TabIndex = 39;
+            this.TurnoText.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // GuardarButton
             // 

@@ -188,6 +188,11 @@ namespace CZS_LaVictoria
             OpenChildForm(new RegistrarInsertadoForm());
         }
 
+        void VerProduccionesButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new ProducciónVerForm());
+        }
+
         #endregion
     }
 }

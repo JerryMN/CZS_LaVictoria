@@ -144,6 +144,24 @@ namespace CZS_LaVictoria.PlásticosPage
             var output = true;
             MsgBox.Text = "";
 
+            if (OperadorCombo.Text == "")
+            {
+                output = false;
+                MsgBox.Text += "Selecciona un operador.\n";
+            }
+
+            if (MaquinaText.Text == "")
+            {
+                output = false;
+                MsgBox.Text += "Selecciona una máquina.\n";
+            }
+
+            if (TurnoText.Text == "")
+            {
+                output = false;
+                MsgBox.Text += "Selecciona un turno.\n";
+            }
+
             if (EntradaCombo.Text == "")
             {
                 output = false;

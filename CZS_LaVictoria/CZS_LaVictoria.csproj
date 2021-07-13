@@ -262,6 +262,12 @@
     <Compile Include="OpcionesForm.Designer.cs">
       <DependentUpon>OpcionesForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PlásticosPage\ProducciónVerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PlásticosPage\ProducciónVerForm.Designer.cs">
+      <DependentUpon>ProducciónVerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PlásticosPage\RegistrarCortadoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -392,6 +398,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OpcionesForm.resx">
       <DependentUpon>OpcionesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlásticosPage\ProducciónVerForm.resx">
+      <DependentUpon>ProducciónVerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PlásticosPage\RegistrarCortadoForm.resx">
       <DependentUpon>RegistrarCortadoForm.cs</DependentUpon>

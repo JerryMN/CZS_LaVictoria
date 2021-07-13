@@ -59,6 +59,7 @@ namespace CZS_LaVictoria
             this.VerHistorialButton = new DevExpress.XtraBars.BarButtonItem();
             this.CrearOperadorButton = new DevExpress.XtraBars.BarButtonItem();
             this.OpcionesBarButton = new DevExpress.XtraBars.BarButtonItem();
+            this.VerProduccionesButton = new DevExpress.XtraBars.BarButtonItem();
             this.ÓrdenesTab = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.Órdenes_CompraGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Órdenes_VentaGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -70,6 +71,7 @@ namespace CZS_LaVictoria
             this.Plásticos_CortadoGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Plásticos_InyecciónGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Plásticos_InsertadoGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.Plásticos_VerGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.DatosTab = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.Datos_ProveedoresGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Datos_ClientesGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -115,10 +117,11 @@ namespace CZS_LaVictoria
             this.VerInventarioButton,
             this.VerHistorialButton,
             this.CrearOperadorButton,
-            this.OpcionesBarButton});
+            this.OpcionesBarButton,
+            this.VerProduccionesButton});
             this.RibbonControl.Location = new System.Drawing.Point(0, 0);
             this.RibbonControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.RibbonControl.MaxItemId = 33;
+            this.RibbonControl.MaxItemId = 34;
             this.RibbonControl.Name = "RibbonControl";
             this.RibbonControl.OptionsMenuMinWidth = 495;
             this.RibbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -352,6 +355,14 @@ namespace CZS_LaVictoria
             this.OpcionesBarButton.Name = "OpcionesBarButton";
             this.OpcionesBarButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OpcionesBarButton_ItemClick);
             // 
+            // VerProduccionesButton
+            // 
+            this.VerProduccionesButton.Caption = "Ver Producciones";
+            this.VerProduccionesButton.Id = 33;
+            this.VerProduccionesButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("VerProduccionesButton.ImageOptions.SvgImage")));
+            this.VerProduccionesButton.Name = "VerProduccionesButton";
+            this.VerProduccionesButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerProduccionesButton_ItemClick);
+            // 
             // ÓrdenesTab
             // 
             this.ÓrdenesTab.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F);
@@ -382,12 +393,14 @@ namespace CZS_LaVictoria
             // 
             // Órdenes_InventarioGroup
             // 
+            this.Órdenes_InventarioGroup.AllowTextClipping = false;
             this.Órdenes_InventarioGroup.ItemLinks.Add(this.VerInventarioButton);
             this.Órdenes_InventarioGroup.Name = "Órdenes_InventarioGroup";
             this.Órdenes_InventarioGroup.Text = "Inventario";
             // 
             // Órdenes_HistorialGroup
             // 
+            this.Órdenes_HistorialGroup.AllowTextClipping = false;
             this.Órdenes_HistorialGroup.ItemLinks.Add(this.VerHistorialButton);
             this.Órdenes_HistorialGroup.Name = "Órdenes_HistorialGroup";
             this.Órdenes_HistorialGroup.Text = "Historial";
@@ -399,30 +412,35 @@ namespace CZS_LaVictoria
             this.Plásticos_ExtruídoGroup,
             this.Plásticos_CortadoGroup,
             this.Plásticos_InyecciónGroup,
-            this.Plásticos_InsertadoGroup});
+            this.Plásticos_InsertadoGroup,
+            this.Plásticos_VerGroup});
             this.PlásticosTab.Name = "PlásticosTab";
             this.PlásticosTab.Text = "Plásticos";
             // 
             // Plásticos_MolidoGroup
             // 
+            this.Plásticos_MolidoGroup.AllowTextClipping = false;
             this.Plásticos_MolidoGroup.ItemLinks.Add(this.RegistrarMolidoButton);
             this.Plásticos_MolidoGroup.Name = "Plásticos_MolidoGroup";
             this.Plásticos_MolidoGroup.Text = "Molido";
             // 
             // Plásticos_ExtruídoGroup
             // 
+            this.Plásticos_ExtruídoGroup.AllowTextClipping = false;
             this.Plásticos_ExtruídoGroup.ItemLinks.Add(this.RegistrarExtruídoButton);
             this.Plásticos_ExtruídoGroup.Name = "Plásticos_ExtruídoGroup";
             this.Plásticos_ExtruídoGroup.Text = "Extruído";
             // 
             // Plásticos_CortadoGroup
             // 
+            this.Plásticos_CortadoGroup.AllowTextClipping = false;
             this.Plásticos_CortadoGroup.ItemLinks.Add(this.RegistrarCortadoButton);
             this.Plásticos_CortadoGroup.Name = "Plásticos_CortadoGroup";
             this.Plásticos_CortadoGroup.Text = "Cortado";
             // 
             // Plásticos_InyecciónGroup
             // 
+            this.Plásticos_InyecciónGroup.AllowTextClipping = false;
             this.Plásticos_InyecciónGroup.ItemLinks.Add(this.RegistrarInyecciónMezclaButton);
             this.Plásticos_InyecciónGroup.ItemLinks.Add(this.RegistrarInyecciónButton);
             this.Plásticos_InyecciónGroup.Name = "Plásticos_InyecciónGroup";
@@ -430,9 +448,17 @@ namespace CZS_LaVictoria
             // 
             // Plásticos_InsertadoGroup
             // 
+            this.Plásticos_InsertadoGroup.AllowTextClipping = false;
             this.Plásticos_InsertadoGroup.ItemLinks.Add(this.RegistrarInsertadoButton);
             this.Plásticos_InsertadoGroup.Name = "Plásticos_InsertadoGroup";
             this.Plásticos_InsertadoGroup.Text = "Insertado";
+            // 
+            // Plásticos_VerGroup
+            // 
+            this.Plásticos_VerGroup.AllowTextClipping = false;
+            this.Plásticos_VerGroup.ItemLinks.Add(this.VerProduccionesButton);
+            this.Plásticos_VerGroup.Name = "Plásticos_VerGroup";
+            this.Plásticos_VerGroup.Text = "Producciones";
             // 
             // DatosTab
             // 
@@ -449,6 +475,7 @@ namespace CZS_LaVictoria
             // 
             // Datos_ProveedoresGroup
             // 
+            this.Datos_ProveedoresGroup.AllowTextClipping = false;
             this.Datos_ProveedoresGroup.ItemLinks.Add(this.CrearProveedorButton);
             this.Datos_ProveedoresGroup.ItemLinks.Add(this.VerProveedoresButton);
             this.Datos_ProveedoresGroup.ItemLinks.Add(this.Datos_ProveedoresMaterialesSubmenu);
@@ -457,6 +484,7 @@ namespace CZS_LaVictoria
             // 
             // Datos_ClientesGroup
             // 
+            this.Datos_ClientesGroup.AllowTextClipping = false;
             this.Datos_ClientesGroup.ItemLinks.Add(this.CrearClienteButton);
             this.Datos_ClientesGroup.ItemLinks.Add(this.VerClientesButton);
             this.Datos_ClientesGroup.ItemLinks.Add(this.Datos_ClientesProductosSubmenu);
@@ -465,6 +493,7 @@ namespace CZS_LaVictoria
             // 
             // Datos_AreasGroup
             // 
+            this.Datos_AreasGroup.AllowTextClipping = false;
             this.Datos_AreasGroup.ItemLinks.Add(this.CrearAreaButton);
             this.Datos_AreasGroup.ItemLinks.Add(this.VerAreasButton);
             this.Datos_AreasGroup.Name = "Datos_AreasGroup";
@@ -472,6 +501,7 @@ namespace CZS_LaVictoria
             // 
             // Datos_MezclasGroup
             // 
+            this.Datos_MezclasGroup.AllowTextClipping = false;
             this.Datos_MezclasGroup.ItemLinks.Add(this.CrearMezclaButton);
             this.Datos_MezclasGroup.ItemLinks.Add(this.VerMezclasButton);
             this.Datos_MezclasGroup.Name = "Datos_MezclasGroup";
@@ -479,6 +509,7 @@ namespace CZS_LaVictoria
             // 
             // Datos_PersonalGroup
             // 
+            this.Datos_PersonalGroup.AllowTextClipping = false;
             this.Datos_PersonalGroup.ItemLinks.Add(this.CrearOperadorButton);
             this.Datos_PersonalGroup.Name = "Datos_PersonalGroup";
             this.Datos_PersonalGroup.Text = "Personal";
@@ -565,6 +596,8 @@ namespace CZS_LaVictoria
         private DevExpress.XtraBars.BarButtonItem CrearOperadorButton;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup Datos_PersonalGroup;
         private DevExpress.XtraBars.BarButtonItem OpcionesBarButton;
+        private DevExpress.XtraBars.BarButtonItem VerProduccionesButton;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup Plásticos_VerGroup;
     }
 }
 
