@@ -130,7 +130,7 @@ namespace CZS_LaVictoria.PlásticosPage
             var orden = new ProducciónPlásticosModel();
             Debug.Assert(FechaPicker.Value != null, "FechaPicker.Value != null");
             orden.Fecha = (DateTime)FechaPicker.Value;
-            orden.Proceso = "Extruído";
+            orden.Proceso = "Inyección";
             orden.Turno = int.Parse(TurnoText.Text);
             orden.Máquina = int.Parse(MaquinaText.Text);
             orden.Operador = OperadorCombo.Text;
@@ -339,7 +339,7 @@ namespace CZS_LaVictoria.PlásticosPage
 
             Func(Controls);
 
-            CantidadEntradaText.Text = "0.00";
+            CantidadEntradaText.Text = "0";
             CantidadSalidaText.Text = "0";
             PesoPromText.Text = "0.00";
             MermaMolerText.Text = "0.00";

@@ -34,7 +34,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.CalcularButton = new System.Windows.Forms.Button();
             this.GuardarButton = new System.Windows.Forms.Button();
             this.MermaMolerText = new Syncfusion.WinForms.Input.SfNumericTextBox();
-            this.MermaFinalText = new Syncfusion.WinForms.Input.SfNumericTextBox();
+            this.MermaRealText = new Syncfusion.WinForms.Input.SfNumericTextBox();
             this.PesoPromText = new Syncfusion.WinForms.Input.SfNumericTextBox();
             this.CantidadSalidaText = new Syncfusion.WinForms.Input.SfNumericTextBox();
             this.SalidaCombo = new System.Windows.Forms.ComboBox();
@@ -58,6 +58,18 @@ namespace CZS_LaVictoria.PlásticosPage
             this.MaterialLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.MsgBoxTimer = new System.Windows.Forms.Timer(this.components);
+            this.TurnoText = new System.Windows.Forms.NumericUpDown();
+            this.MaquinaText = new System.Windows.Forms.NumericUpDown();
+            this.FechaPicker = new Syncfusion.WinForms.Input.SfDateTimeEdit();
+            this.OperadorCombo = new System.Windows.Forms.ComboBox();
+            this.MaquinaLabel = new System.Windows.Forms.Label();
+            this.OperadorLabel = new System.Windows.Forms.Label();
+            this.FechaLabel = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.CantidadEntradaLabel = new System.Windows.Forms.Label();
+            this.CantidadEntradaText = new Syncfusion.WinForms.Input.SfNumericTextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.TurnoText)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MaquinaText)).BeginInit();
             this.SuspendLayout();
             // 
             // MsgBox
@@ -118,19 +130,19 @@ namespace CZS_LaVictoria.PlásticosPage
             this.MermaMolerText.WatermarkText = "Calculado automáticamente";
             this.MermaMolerText.TextChanged += new System.EventHandler(this.InputOutputChanged);
             // 
-            // MermaFinalText
+            // MermaRealText
             // 
-            this.MermaFinalText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.MermaFinalText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MermaFinalText.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.MermaFinalText.Location = new System.Drawing.Point(720, 347);
-            this.MermaFinalText.MinValue = 0D;
-            this.MermaFinalText.Name = "MermaFinalText";
-            this.MermaFinalText.ReadOnly = true;
-            this.MermaFinalText.Size = new System.Drawing.Size(250, 29);
-            this.MermaFinalText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.MermaFinalText.TabIndex = 62;
-            this.MermaFinalText.WatermarkText = "Calculado automáticamente";
+            this.MermaRealText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.MermaRealText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MermaRealText.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.MermaRealText.Location = new System.Drawing.Point(720, 347);
+            this.MermaRealText.MinValue = 0D;
+            this.MermaRealText.Name = "MermaRealText";
+            this.MermaRealText.ReadOnly = true;
+            this.MermaRealText.Size = new System.Drawing.Size(250, 29);
+            this.MermaRealText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.MermaRealText.TabIndex = 62;
+            this.MermaRealText.WatermarkText = "Calculado automáticamente";
             // 
             // PesoPromText
             // 
@@ -274,7 +286,7 @@ namespace CZS_LaVictoria.PlásticosPage
             // 
             this.EliminarButton.AutoSize = true;
             this.EliminarButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EliminarButton.Location = new System.Drawing.Point(360, 500);
+            this.EliminarButton.Location = new System.Drawing.Point(366, 700);
             this.EliminarButton.Name = "EliminarButton";
             this.EliminarButton.Size = new System.Drawing.Size(84, 33);
             this.EliminarButton.TabIndex = 79;
@@ -286,7 +298,7 @@ namespace CZS_LaVictoria.PlásticosPage
             // 
             this.AgregarButton.AutoSize = true;
             this.AgregarButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AgregarButton.Location = new System.Drawing.Point(360, 250);
+            this.AgregarButton.Location = new System.Drawing.Point(366, 450);
             this.AgregarButton.Name = "AgregarButton";
             this.AgregarButton.Size = new System.Drawing.Size(84, 33);
             this.AgregarButton.TabIndex = 78;
@@ -298,7 +310,7 @@ namespace CZS_LaVictoria.PlásticosPage
             // 
             this.CantidadesListBox.FormattingEnabled = true;
             this.CantidadesListBox.ItemHeight = 21;
-            this.CantidadesListBox.Location = new System.Drawing.Point(360, 300);
+            this.CantidadesListBox.Location = new System.Drawing.Point(366, 500);
             this.CantidadesListBox.Name = "CantidadesListBox";
             this.CantidadesListBox.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.CantidadesListBox.Size = new System.Drawing.Size(84, 193);
@@ -308,7 +320,7 @@ namespace CZS_LaVictoria.PlásticosPage
             // 
             this.MaterialesListBox.FormattingEnabled = true;
             this.MaterialesListBox.ItemHeight = 21;
-            this.MaterialesListBox.Location = new System.Drawing.Point(50, 300);
+            this.MaterialesListBox.Location = new System.Drawing.Point(56, 500);
             this.MaterialesListBox.Name = "MaterialesListBox";
             this.MaterialesListBox.Size = new System.Drawing.Size(304, 193);
             this.MaterialesListBox.TabIndex = 77;
@@ -318,19 +330,20 @@ namespace CZS_LaVictoria.PlásticosPage
             this.CantidadText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.CantidadText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CantidadText.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.CantidadText.Location = new System.Drawing.Point(194, 197);
+            this.CantidadText.Location = new System.Drawing.Point(200, 397);
             this.CantidadText.MinValue = 0D;
             this.CantidadText.Name = "CantidadText";
             this.CantidadText.Size = new System.Drawing.Size(250, 29);
             this.CantidadText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.CantidadText.TabIndex = 75;
             this.CantidadText.WatermarkText = "Ingresa la cantidad";
+            this.CantidadText.TextChanged += new System.EventHandler(this.InputOutputChanged);
             // 
             // Cantidad
             // 
             this.Cantidad.AutoSize = true;
             this.Cantidad.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Cantidad.Location = new System.Drawing.Point(50, 200);
+            this.Cantidad.Location = new System.Drawing.Point(50, 400);
             this.Cantidad.Name = "Cantidad";
             this.Cantidad.Size = new System.Drawing.Size(72, 21);
             this.Cantidad.TabIndex = 74;
@@ -343,16 +356,17 @@ namespace CZS_LaVictoria.PlásticosPage
             this.MaterialCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.MaterialCombo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaterialCombo.FormattingEnabled = true;
-            this.MaterialCombo.Location = new System.Drawing.Point(194, 147);
+            this.MaterialCombo.Location = new System.Drawing.Point(200, 347);
             this.MaterialCombo.Name = "MaterialCombo";
             this.MaterialCombo.Size = new System.Drawing.Size(250, 29);
             this.MaterialCombo.TabIndex = 73;
+            this.MaterialCombo.TextChanged += new System.EventHandler(this.InputOutputChanged);
             // 
             // MaterialLabel
             // 
             this.MaterialLabel.AutoSize = true;
             this.MaterialLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MaterialLabel.Location = new System.Drawing.Point(50, 150);
+            this.MaterialLabel.Location = new System.Drawing.Point(50, 350);
             this.MaterialLabel.Name = "MaterialLabel";
             this.MaterialLabel.Size = new System.Drawing.Size(67, 21);
             this.MaterialLabel.TabIndex = 72;
@@ -361,7 +375,7 @@ namespace CZS_LaVictoria.PlásticosPage
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(449, 200);
+            this.label1.Location = new System.Drawing.Point(455, 400);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(27, 21);
             this.label1.TabIndex = 71;
@@ -372,25 +386,155 @@ namespace CZS_LaVictoria.PlásticosPage
             this.MsgBoxTimer.Interval = 3000;
             this.MsgBoxTimer.Tick += new System.EventHandler(this.MsgBoxTimer_Tick);
             // 
+            // TurnoText
+            // 
+            this.TurnoText.Location = new System.Drawing.Point(330, 247);
+            this.TurnoText.Maximum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            this.TurnoText.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.TurnoText.Name = "TurnoText";
+            this.TurnoText.Size = new System.Drawing.Size(120, 29);
+            this.TurnoText.TabIndex = 92;
+            this.TurnoText.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // MaquinaText
+            // 
+            this.MaquinaText.Location = new System.Drawing.Point(200, 247);
+            this.MaquinaText.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.MaquinaText.Name = "MaquinaText";
+            this.MaquinaText.Size = new System.Drawing.Size(120, 29);
+            this.MaquinaText.TabIndex = 93;
+            this.MaquinaText.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // FechaPicker
+            // 
+            this.FechaPicker.AllowValueChangeOnMouseWheel = true;
+            this.FechaPicker.Location = new System.Drawing.Point(200, 147);
+            this.FechaPicker.Name = "FechaPicker";
+            this.FechaPicker.Size = new System.Drawing.Size(250, 33);
+            this.FechaPicker.TabIndex = 91;
+            // 
+            // OperadorCombo
+            // 
+            this.OperadorCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.OperadorCombo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OperadorCombo.FormattingEnabled = true;
+            this.OperadorCombo.Location = new System.Drawing.Point(200, 197);
+            this.OperadorCombo.Name = "OperadorCombo";
+            this.OperadorCombo.Size = new System.Drawing.Size(250, 29);
+            this.OperadorCombo.TabIndex = 90;
+            // 
+            // MaquinaLabel
+            // 
+            this.MaquinaLabel.AutoSize = true;
+            this.MaquinaLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MaquinaLabel.Location = new System.Drawing.Point(50, 250);
+            this.MaquinaLabel.Name = "MaquinaLabel";
+            this.MaquinaLabel.Size = new System.Drawing.Size(126, 21);
+            this.MaquinaLabel.TabIndex = 87;
+            this.MaquinaLabel.Text = "Máquina / Turno";
+            // 
+            // OperadorLabel
+            // 
+            this.OperadorLabel.AutoSize = true;
+            this.OperadorLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OperadorLabel.Location = new System.Drawing.Point(50, 200);
+            this.OperadorLabel.Name = "OperadorLabel";
+            this.OperadorLabel.Size = new System.Drawing.Size(77, 21);
+            this.OperadorLabel.TabIndex = 88;
+            this.OperadorLabel.Text = "Operador";
+            // 
+            // FechaLabel
+            // 
+            this.FechaLabel.AutoSize = true;
+            this.FechaLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FechaLabel.Location = new System.Drawing.Point(50, 150);
+            this.FechaLabel.Name = "FechaLabel";
+            this.FechaLabel.Size = new System.Drawing.Size(144, 21);
+            this.FechaLabel.TabIndex = 89;
+            this.FechaLabel.Text = "Fecha de operación";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(455, 300);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(27, 21);
+            this.label2.TabIndex = 71;
+            this.label2.Text = "kg";
+            // 
+            // CantidadEntradaLabel
+            // 
+            this.CantidadEntradaLabel.AutoSize = true;
+            this.CantidadEntradaLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CantidadEntradaLabel.Location = new System.Drawing.Point(50, 300);
+            this.CantidadEntradaLabel.Name = "CantidadEntradaLabel";
+            this.CantidadEntradaLabel.Size = new System.Drawing.Size(115, 21);
+            this.CantidadEntradaLabel.TabIndex = 74;
+            this.CantidadEntradaLabel.Text = "Total de Mezcla";
+            // 
+            // CantidadEntradaText
+            // 
+            this.CantidadEntradaText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.CantidadEntradaText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CantidadEntradaText.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.CantidadEntradaText.Location = new System.Drawing.Point(200, 297);
+            this.CantidadEntradaText.MinValue = 0D;
+            this.CantidadEntradaText.Name = "CantidadEntradaText";
+            this.CantidadEntradaText.Size = new System.Drawing.Size(250, 29);
+            this.CantidadEntradaText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.CantidadEntradaText.TabIndex = 75;
+            this.CantidadEntradaText.WatermarkText = "Ingresa la cantidad";
+            this.CantidadEntradaText.TextChanged += new System.EventHandler(this.InputOutputChanged);
+            // 
             // RegistrarInyecciónForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1276, 839);
+            this.Controls.Add(this.TurnoText);
+            this.Controls.Add(this.MaquinaText);
+            this.Controls.Add(this.FechaPicker);
+            this.Controls.Add(this.OperadorCombo);
+            this.Controls.Add(this.MaquinaLabel);
+            this.Controls.Add(this.OperadorLabel);
+            this.Controls.Add(this.FechaLabel);
             this.Controls.Add(this.EliminarButton);
             this.Controls.Add(this.AgregarButton);
             this.Controls.Add(this.CantidadesListBox);
             this.Controls.Add(this.MaterialesListBox);
+            this.Controls.Add(this.CantidadEntradaText);
             this.Controls.Add(this.CantidadText);
+            this.Controls.Add(this.CantidadEntradaLabel);
             this.Controls.Add(this.Cantidad);
             this.Controls.Add(this.MaterialCombo);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.MaterialLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.MsgBox);
             this.Controls.Add(this.CalcularButton);
             this.Controls.Add(this.GuardarButton);
             this.Controls.Add(this.MermaMolerText);
-            this.Controls.Add(this.MermaFinalText);
+            this.Controls.Add(this.MermaRealText);
             this.Controls.Add(this.PesoPromText);
             this.Controls.Add(this.CantidadSalidaText);
             this.Controls.Add(this.SalidaCombo);
@@ -409,6 +553,8 @@ namespace CZS_LaVictoria.PlásticosPage
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "RegistrarInyecciónForm";
             this.Text = "RegistrarInyecciónForm";
+            ((System.ComponentModel.ISupportInitialize)(this.TurnoText)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MaquinaText)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -419,7 +565,7 @@ namespace CZS_LaVictoria.PlásticosPage
         private System.Windows.Forms.Button CalcularButton;
         private System.Windows.Forms.Button GuardarButton;
         private Syncfusion.WinForms.Input.SfNumericTextBox MermaMolerText;
-        private Syncfusion.WinForms.Input.SfNumericTextBox MermaFinalText;
+        private Syncfusion.WinForms.Input.SfNumericTextBox MermaRealText;
         private Syncfusion.WinForms.Input.SfNumericTextBox PesoPromText;
         private Syncfusion.WinForms.Input.SfNumericTextBox CantidadSalidaText;
         private System.Windows.Forms.ComboBox SalidaCombo;
@@ -443,5 +589,15 @@ namespace CZS_LaVictoria.PlásticosPage
         private System.Windows.Forms.Label MaterialLabel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Timer MsgBoxTimer;
+        private System.Windows.Forms.NumericUpDown TurnoText;
+        private System.Windows.Forms.NumericUpDown MaquinaText;
+        private Syncfusion.WinForms.Input.SfDateTimeEdit FechaPicker;
+        private System.Windows.Forms.ComboBox OperadorCombo;
+        private System.Windows.Forms.Label MaquinaLabel;
+        private System.Windows.Forms.Label OperadorLabel;
+        private System.Windows.Forms.Label FechaLabel;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label CantidadEntradaLabel;
+        private Syncfusion.WinForms.Input.SfNumericTextBox CantidadEntradaText;
     }
 }
