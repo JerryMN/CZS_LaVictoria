@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
@@ -17,7 +16,7 @@ namespace CZS_LaVictoria.PlásticosPage
         MaterialModel _fibraSeleccionada = new MaterialModel();
         double _cantidadFibra;
         MaterialModel _alambreSeleccionado = new MaterialModel();
-        double _numRollos;
+        int _numRollos;
         MaterialModel _productoSeleccionado = new MaterialModel();
         int _piezasBuenas;
         int _piezasMalas;
@@ -125,9 +124,20 @@ namespace CZS_LaVictoria.PlásticosPage
             orden.BasesMalas = _basesMalas;
             orden.Viruta = _viruta;
             orden.Rebaba = _rebaba;
+            orden.TipoAlambre = _alambreSeleccionado.Nombre;
+            orden.RollosAlambre = _numRollos;
 
-            // TODO - Finish.
-            var saveSuccess = true;
+            if (_productoSeleccionado == null || _productoSeleccionado.Id == 0)
+            {
+                _productoSeleccionado = new MaterialModel(SalidaCombo.Text, "Plásticos", "Producto Terminado", _piezasBuenas);
+            }
+            else
+            {
+                _productoSeleccionado.CantidadDisponible += _piezasBuenas;
+            }
+
+            var saveSuccess = GlobalConfig.Connection.PlasticProduction_CreateInsertado(orden, _baseSeleccionada,
+                _fibraSeleccionada, _alambreSeleccionado, _productoSeleccionado);
 
             if (saveSuccess)
             {
@@ -259,7 +269,7 @@ namespace CZS_LaVictoria.PlásticosPage
 
             if (TipoAlambreCombo.Text != "")
             {
-                if (CantidadRollosText.Text == "" || CantidadRollosText.Text == "0" || !double.TryParse(CantidadRollosText.Text, out _numRollos))
+                if (CantidadRollosText.Text == "" || CantidadRollosText.Text == "0" || !int.TryParse(CantidadRollosText.Text, out _numRollos))
                 {
                     output = false;
                     MsgBox.Text += "Ingresa la cantidad de rollos.\n";

@@ -12,7 +12,8 @@ namespace CZS_LaVictoria_Library.DataAccess
 {
     public class SqlConnector : IDataConnection
     {
-        const string ConnectionString = "Server=czsystems.database.windows.net;Database=escobaslavictoria;User Id=czsystems_escobaslavictoria;Password=Prye2uikg4;";
+        const string ConnectionString =
+            "Server=czsystems.database.windows.net;Database=escobaslavictoria;User Id=czsystems_escobaslavictoria;Password=Prye2uikg4;";
 
         #region Area
 
@@ -422,8 +423,8 @@ namespace CZS_LaVictoria_Library.DataAccess
                 }
                 catch (Exception ex)
                 {
-                    Debug.Write(ex.ToString()); 
-                    Debug.Assert(false); 
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
                     return false;
                 }
             }
@@ -440,8 +441,8 @@ namespace CZS_LaVictoria_Library.DataAccess
                 }
                 catch (Exception ex)
                 {
-                    Debug.Write(ex.ToString()); 
-                    Debug.Assert(false); 
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
                     return null;
                 }
 
@@ -459,8 +460,8 @@ namespace CZS_LaVictoria_Library.DataAccess
                 }
                 catch (Exception ex)
                 {
-                    Debug.Write(ex.ToString()); 
-                    Debug.Assert(false); 
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
                     return null;
                 }
             }
@@ -487,8 +488,8 @@ namespace CZS_LaVictoria_Library.DataAccess
                 }
                 catch (Exception ex)
                 {
-                    Debug.Write(ex.ToString()); 
-                    Debug.Assert(false); 
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
                     return false;
                 }
             }
@@ -508,8 +509,8 @@ namespace CZS_LaVictoria_Library.DataAccess
                 }
                 catch (Exception ex)
                 {
-                    Debug.Write(ex.ToString()); 
-                    Debug.Assert(false); 
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
                     return false;
                 }
             }
@@ -578,10 +579,11 @@ namespace CZS_LaVictoria_Library.DataAccess
                 }
                 catch (Exception ex)
                 {
-                    Debug.Write(ex.ToString()); 
-                    Debug.Assert(false); 
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
                     return null;
                 }
+
                 return output;
             }
         }
@@ -652,7 +654,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                 catch (Exception ex)
                 {
                     Debug.Write(ex.ToString());
-                    Debug.Assert(false); 
+                    Debug.Assert(false);
                     return false;
                 }
             }
@@ -715,7 +717,12 @@ namespace CZS_LaVictoria_Library.DataAccess
                         .ToList();
                     return output;
                 }
-                catch (Exception ex) { Debug.Write(ex.ToString()); Debug.Assert(false); return null; }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return null;
+                }
             }
         }
 
@@ -872,7 +879,8 @@ namespace CZS_LaVictoria_Library.DataAccess
                         p.Add("@IdMezcla", mezclaModel.Id);
 
                         var idsMat = connection
-                            .Query<int>("dbo.spMixDetails_GetIDs", p, commandType: CommandType.StoredProcedure).ToList();
+                            .Query<int>("dbo.spMixDetails_GetIDs", p, commandType: CommandType.StoredProcedure)
+                            .ToList();
                         var cants = connection.Query<double>("dbo.spMixDetails_GetCantidades", p,
                             commandType: CommandType.StoredProcedure).ToList();
 
@@ -980,8 +988,8 @@ namespace CZS_LaVictoria_Library.DataAccess
                 }
                 catch (Exception ex)
                 {
-                    Debug.Write(ex.ToString()); 
-                    Debug.Assert(false); 
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
                     return false;
                 }
             }
@@ -998,7 +1006,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                 }
                 catch (NullReferenceException)
                 {
-                    var year = DateTime.Today.Year.ToString().Substring(2,2);
+                    var year = DateTime.Today.Year.ToString().Substring(2, 2);
                     return long.Parse(year + "00000");
                 }
                 catch (Exception ex)
@@ -1025,8 +1033,8 @@ namespace CZS_LaVictoria_Library.DataAccess
                 }
                 catch (Exception ex)
                 {
-                    Debug.Write(ex.ToString()); 
-                    Debug.Assert(false); 
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
                     return null;
                 }
             }
@@ -1046,8 +1054,8 @@ namespace CZS_LaVictoria_Library.DataAccess
                 }
                 catch (Exception ex)
                 {
-                    Debug.Write(ex.ToString()); 
-                    Debug.Assert(false); 
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
                     return null;
                 }
             }
@@ -1065,8 +1073,8 @@ namespace CZS_LaVictoria_Library.DataAccess
                 }
                 catch (Exception ex)
                 {
-                    Debug.Write(ex.ToString()); 
-                    Debug.Assert(false); 
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
                     return null;
                 }
             }
@@ -1084,8 +1092,8 @@ namespace CZS_LaVictoria_Library.DataAccess
                 }
                 catch (Exception ex)
                 {
-                    Debug.Write(ex.ToString()); 
-                    Debug.Assert(false); 
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
                     return null;
                 }
             }
@@ -1407,8 +1415,8 @@ namespace CZS_LaVictoria_Library.DataAccess
                 }
                 catch (Exception ex)
                 {
-                    Debug.Write(ex.ToString()); 
-                    Debug.Assert(false); 
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
                     return false;
                 }
             }
@@ -1453,8 +1461,8 @@ namespace CZS_LaVictoria_Library.DataAccess
                 }
                 catch (Exception ex)
                 {
-                    Debug.Write(ex.ToString()); 
-                    Debug.Assert(false); 
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
                     return null;
                 }
             }
@@ -1473,7 +1481,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                 catch (Exception ex)
                 {
                     Debug.Write(ex.ToString());
-                    Debug.Assert(false); 
+                    Debug.Assert(false);
                     return null;
                 }
             }
@@ -1498,8 +1506,8 @@ namespace CZS_LaVictoria_Library.DataAccess
                 }
                 catch (Exception ex)
                 {
-                    Debug.Write(ex.ToString()); 
-                    Debug.Assert(false); 
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
                     return false;
                 }
             }
@@ -1517,8 +1525,8 @@ namespace CZS_LaVictoria_Library.DataAccess
                 }
                 catch (Exception ex)
                 {
-                    Debug.Write(ex.ToString()); 
-                    Debug.Assert(false); 
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
                     return null;
                 }
             }
@@ -1533,14 +1541,14 @@ namespace CZS_LaVictoria_Library.DataAccess
 
                 try
                 {
-                    var output = connection.Query<OperadorModel>("dbo.spOperators_GetByArea", p, 
+                    var output = connection.Query<OperadorModel>("dbo.spOperators_GetByArea", p,
                         commandType: CommandType.StoredProcedure).ToList();
                     return output;
                 }
                 catch (Exception ex)
                 {
-                    Debug.Write(ex.ToString()); 
-                    Debug.Assert(false); 
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
                     return null;
                 }
             }
@@ -1563,7 +1571,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                 catch (Exception ex)
                 {
                     Debug.Write(ex.ToString());
-                    Debug.Assert(false); 
+                    Debug.Assert(false);
                     return false;
                 }
             }
@@ -1584,7 +1592,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                 catch (Exception ex)
                 {
                     Debug.Write(ex.ToString());
-                    Debug.Assert(false); 
+                    Debug.Assert(false);
                     return false;
                 }
             }
@@ -1594,7 +1602,8 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         #region Producción Plásticos
 
-        public bool PlasticProduction_CreateMolido(ProducciónPlásticosModel model, MaterialModel materialEntrada, MaterialModel materialSalida)
+        public bool PlasticProduction_CreateMolido(ProducciónPlásticosModel model, MaterialModel materialEntrada,
+            MaterialModel materialSalida)
         {
             using (var scope = new TransactionScope())
             using (IDbConnection connection = new SqlConnection(ConnectionString))
@@ -1648,7 +1657,8 @@ namespace CZS_LaVictoria_Library.DataAccess
             }
         }
 
-        public bool PlasticProduction_CreateExtruído(ProducciónPlásticosModel model, MezclaModel mezcla, MaterialModel materialSalida)
+        public bool PlasticProduction_CreateExtruído(ProducciónPlásticosModel model, MezclaModel mezcla,
+            MaterialModel materialSalida)
         {
             using (var scope = new TransactionScope())
             using (IDbConnection connection = new SqlConnection(ConnectionString))
@@ -1661,7 +1671,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                     {
                         p.Add("@CantidadDisponible", material.CantidadDisponible);
                         p.Add("@Id", material.Id);
-                        connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure); 
+                        connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
                     }
 
                     p = new DynamicParameters();
@@ -1701,7 +1711,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                     p.Add("@Area", "Plásticos");
 
                     try
-                    { 
+                    {
                         materialPorMoler = connection.QuerySingle<MaterialModel>("dbo.spStock_GetByNombreArea", p,
                             commandType: CommandType.StoredProcedure);
                     }
@@ -2110,6 +2120,198 @@ namespace CZS_LaVictoria_Library.DataAccess
                         {
                             p = new DynamicParameters();
                             p.Add("@CantidadDisponible", materialPorMoler.CantidadDisponible + model.MermaMoler);
+                            p.Add("@Id", materialPorMoler.Id);
+                            connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return false;
+                }
+
+                scope.Complete();
+                return true;
+            }
+        }
+
+        public bool PlasticProduction_CreateInsertado(ProducciónPlásticosModel model, MaterialModel baseEntrada,
+            MaterialModel fibraEntrada, MaterialModel alambreEntrada, MaterialModel materialSalida)
+        {
+            using (var scope = new TransactionScope())
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@CantidadDisponible", baseEntrada.CantidadDisponible);
+                    p.Add("@Id", baseEntrada.Id);
+                    connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+
+                    p = new DynamicParameters();
+                    p.Add("@CantidadDisponible", fibraEntrada.CantidadDisponible);
+                    p.Add("@Id", fibraEntrada.Id);
+                    connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+
+                    if (alambreEntrada.Id != 0)
+                    {
+                        p = new DynamicParameters();
+                        p.Add("@CantidadDisponible", alambreEntrada.CantidadDisponible);
+                        p.Add("@Id", alambreEntrada.Id);
+                        connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                    }
+
+                    p = new DynamicParameters();
+                    if (materialSalida.Id == 0)
+                    {
+                        p.Add("@Nombre", materialSalida.Nombre);
+                        p.Add("@Area", materialSalida.Área);
+                        p.Add("@Categoría", materialSalida.Categoría);
+                        p.Add("@CantidadDisponible", materialSalida.CantidadDisponible);
+                        connection.Execute("dbo.spStock_Insert", p, commandType: CommandType.StoredProcedure);
+                    }
+                    else
+                    {
+                        p.Add("@CantidadDisponible", materialSalida.CantidadDisponible);
+                        p.Add("@Id", materialSalida.Id);
+                        connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                    }
+
+                    p = new DynamicParameters();
+                    p.Add("@Fecha", model.Fecha);
+                    p.Add("@Proceso", "Insertado");
+                    p.Add("@Turno", model.Turno);
+                    p.Add("@Máquina", model.Máquina);
+                    p.Add("@Operador", model.Operador);
+                    p.Add("@MaterialEntra", model.MaterialEntra);
+                    p.Add("@CantidadEntra", model.CantidadEntra);
+                    p.Add("@FibraEntra", model.FibraEntra);
+                    p.Add("@CantidadFibraEntra", model.CantidadFibraEntra);
+                    p.Add("@MaterialSale", model.MaterialSale);
+                    p.Add("@CantidadSale", model.CantidadSale);
+                    p.Add("@PiezasBuenas", model.PiezasBuenas);
+                    p.Add("@PiezasMalas", model.PiezasMalas);
+                    p.Add("@BasesMalas", model.BasesMalas);
+                    p.Add("@Viruta", model.Viruta);
+                    p.Add("@Rebaba", model.Rebaba);
+                    p.Add("@TipoAlambre", model.TipoAlambre);
+                    p.Add("@RollosAlambre", model.RollosAlambre);
+                    connection.Execute("dbo.spPlasticProduction_Insert", p, commandType: CommandType.StoredProcedure);
+
+                    var materialPorMoler = new MaterialModel();
+                    p = new DynamicParameters();
+                    p.Add("@Nombre", "Merma Por Moler");
+                    p.Add("@Area", "Plásticos");
+
+                    try
+                    {
+                        materialPorMoler = connection.QuerySingle<MaterialModel>("dbo.spStock_GetByNombreArea", p,
+                            commandType: CommandType.StoredProcedure);
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex.Message != "Sequence contains no elements")
+                        {
+                            Debug.WriteLine(ex.ToString());
+                            Debug.Assert(false);
+                        }
+                    }
+                    finally
+                    {
+                        if (materialPorMoler == null || materialPorMoler.Id == 0)
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@Nombre", "Merma Por Moler");
+                            p.Add("@Area", "Plásticos");
+                            p.Add("@Categoría", "Por Moler");
+                            p.Add("@CantidadDisponible", model.Viruta + model.Rebaba);
+                            connection.Execute("dbo.spStock_Insert", p, commandType: CommandType.StoredProcedure);
+                        }
+                        else
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@CantidadDisponible",
+                                materialPorMoler.CantidadDisponible + model.Viruta + model.Rebaba);
+                            p.Add("@Id", materialPorMoler.Id);
+                            connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                        }
+                    }
+
+                    materialPorMoler = new MaterialModel();
+                    p = new DynamicParameters();
+                    p.Add("@Nombre", $"{materialSalida.Nombre} Malas");
+                    p.Add("@Area", "Plásticos");
+
+                    try
+                    {
+                        materialPorMoler = connection.QuerySingle<MaterialModel>("dbo.spStock_GetByNombreArea", p,
+                            commandType: CommandType.StoredProcedure);
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex.Message != "Sequence contains no elements")
+                        {
+                            Debug.WriteLine(ex.ToString());
+                            Debug.Assert(false);
+                        }
+                    }
+                    finally
+                    {
+                        if (materialPorMoler == null || materialPorMoler.Id == 0)
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@Nombre", $"{materialSalida.Nombre} Malas");
+                            p.Add("@Area", "Plásticos");
+                            p.Add("@Categoría", "Piezas Malas");
+                            p.Add("@CantidadDisponible", model.PiezasMalas);
+                            connection.Execute("dbo.spStock_Insert", p, commandType: CommandType.StoredProcedure);
+                        }
+                        else
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@CantidadDisponible",
+                                materialPorMoler.CantidadDisponible + model.PiezasMalas);
+                            p.Add("@Id", materialPorMoler.Id);
+                            connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                        }
+                    }
+
+                    materialPorMoler = new MaterialModel();
+                    p = new DynamicParameters();
+                    p.Add("@Nombre", $"{baseEntrada.Nombre} Malas");
+                    p.Add("@Area", "Plásticos");
+
+                    try
+                    {
+                        materialPorMoler = connection.QuerySingle<MaterialModel>("dbo.spStock_GetByNombreArea", p,
+                            commandType: CommandType.StoredProcedure);
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex.Message != "Sequence contains no elements")
+                        {
+                            Debug.WriteLine(ex.ToString());
+                            Debug.Assert(false);
+                        }
+                    }
+                    finally
+                    {
+                        if (materialPorMoler == null || materialPorMoler.Id == 0)
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@Nombre", $"{baseEntrada.Nombre} Malas");
+                            p.Add("@Area", "Plásticos");
+                            p.Add("@Categoría", "Por Moler");
+                            p.Add("@CantidadDisponible", model.BasesMalas);
+                            connection.Execute("dbo.spStock_Insert", p, commandType: CommandType.StoredProcedure);
+                        }
+                        else
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@CantidadDisponible",
+                                materialPorMoler.CantidadDisponible + model.BasesMalas);
                             p.Add("@Id", materialPorMoler.Id);
                             connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
                         }

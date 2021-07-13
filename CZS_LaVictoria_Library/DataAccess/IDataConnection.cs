@@ -533,7 +533,7 @@ namespace CZS_LaVictoria_Library.DataAccess
         /// <returns>True, si se creó correctamente, falso si no.</returns>
         bool PlasticProduction_CreateInyección(ProducciónPlásticosModel model, MaterialModel materialEntrada, MaterialModel materialSalida);
 
-        //bool PlasticProduction_CreateInsertado(ProducciónPlásticosModel model, MaterialModel baseEntrada, MaterialModel fibraEntrada, MaterialModel alambreEntrada, MaterialModel materialSalida);
+        bool PlasticProduction_CreateInsertado(ProducciónPlásticosModel model, MaterialModel baseEntrada, MaterialModel fibraEntrada, MaterialModel alambreEntrada, MaterialModel materialSalida);
 
         /// <summary>
         /// Obtiene todos los registros de producciones de plásticos.
