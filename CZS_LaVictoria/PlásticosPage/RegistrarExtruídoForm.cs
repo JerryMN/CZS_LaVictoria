@@ -199,6 +199,12 @@ namespace CZS_LaVictoria.PlásticosPage
             MsgBoxTimer.Start();
         }
 
+        void MsgBoxTimer_Tick(object sender, EventArgs e)
+        {
+            MsgBox.Visible = false;
+            MsgBoxTimer.Stop();
+        }
+
         #endregion
 
         #region Methods

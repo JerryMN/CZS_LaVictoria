@@ -89,7 +89,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.MsgBox.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.MsgBox.Location = new System.Drawing.Point(550, 450);
             this.MsgBox.Name = "MsgBox";
-            this.MsgBox.Size = new System.Drawing.Size(420, 157);
+            this.MsgBox.Size = new System.Drawing.Size(420, 165);
             this.MsgBox.TabIndex = 69;
             this.MsgBox.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.MsgBox.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -103,7 +103,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.GuardarButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GuardarButton.Location = new System.Drawing.Point(892, 400);
             this.GuardarButton.Name = "GuardarButton";
-            this.GuardarButton.Size = new System.Drawing.Size(78, 35);
+            this.GuardarButton.Size = new System.Drawing.Size(78, 37);
             this.GuardarButton.TabIndex = 68;
             this.GuardarButton.Text = "Guardar";
             this.GuardarButton.UseVisualStyleBackColor = true;
@@ -169,10 +169,12 @@ namespace CZS_LaVictoria.PlásticosPage
             // 
             // SalidaCombo
             // 
+            this.SalidaCombo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.SalidaCombo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.SalidaCombo.FormattingEnabled = true;
             this.SalidaCombo.Location = new System.Drawing.Point(720, 147);
             this.SalidaCombo.Name = "SalidaCombo";
-            this.SalidaCombo.Size = new System.Drawing.Size(250, 28);
+            this.SalidaCombo.Size = new System.Drawing.Size(250, 29);
             this.SalidaCombo.TabIndex = 63;
             this.SalidaCombo.SelectedIndexChanged += new System.EventHandler(this.SalidaCombo_SelectedIndexChanged);
             this.SalidaCombo.TextChanged += new System.EventHandler(this.InputOutputChanged);
@@ -182,7 +184,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.MermaMolerLabel.AutoSize = true;
             this.MermaMolerLabel.Location = new System.Drawing.Point(600, 300);
             this.MermaMolerLabel.Name = "MermaMolerLabel";
-            this.MermaMolerLabel.Size = new System.Drawing.Size(114, 20);
+            this.MermaMolerLabel.Size = new System.Drawing.Size(117, 21);
             this.MermaMolerLabel.TabIndex = 53;
             this.MermaMolerLabel.Text = "Merma a Moler";
             // 
@@ -196,7 +198,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.ArrowButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.ArrowButton.Location = new System.Drawing.Point(500, 200);
             this.ArrowButton.Name = "ArrowButton";
-            this.ArrowButton.Size = new System.Drawing.Size(44, 34);
+            this.ArrowButton.Size = new System.Drawing.Size(44, 36);
             this.ArrowButton.TabIndex = 62;
             this.ArrowButton.UseVisualStyleBackColor = true;
             // 
@@ -205,7 +207,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.MermaRealLabel.AutoSize = true;
             this.MermaRealLabel.Location = new System.Drawing.Point(600, 350);
             this.MermaRealLabel.Name = "MermaRealLabel";
-            this.MermaRealLabel.Size = new System.Drawing.Size(95, 20);
+            this.MermaRealLabel.Size = new System.Drawing.Size(94, 21);
             this.MermaRealLabel.TabIndex = 54;
             this.MermaRealLabel.Text = "Merma Real";
             // 
@@ -214,7 +216,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.CantidadEntradaUnidad.AutoSize = true;
             this.CantidadEntradaUnidad.Location = new System.Drawing.Point(456, 400);
             this.CantidadEntradaUnidad.Name = "CantidadEntradaUnidad";
-            this.CantidadEntradaUnidad.Size = new System.Drawing.Size(26, 20);
+            this.CantidadEntradaUnidad.Size = new System.Drawing.Size(27, 21);
             this.CantidadEntradaUnidad.TabIndex = 60;
             this.CantidadEntradaUnidad.Text = "kg";
             // 
@@ -223,7 +225,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.MermaRealUnidad.AutoSize = true;
             this.MermaRealUnidad.Location = new System.Drawing.Point(976, 350);
             this.MermaRealUnidad.Name = "MermaRealUnidad";
-            this.MermaRealUnidad.Size = new System.Drawing.Size(26, 20);
+            this.MermaRealUnidad.Size = new System.Drawing.Size(27, 21);
             this.MermaRealUnidad.TabIndex = 59;
             this.MermaRealUnidad.Text = "kg";
             // 
@@ -232,7 +234,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.MermaMolerUnidad.AutoSize = true;
             this.MermaMolerUnidad.Location = new System.Drawing.Point(976, 300);
             this.MermaMolerUnidad.Name = "MermaMolerUnidad";
-            this.MermaMolerUnidad.Size = new System.Drawing.Size(26, 20);
+            this.MermaMolerUnidad.Size = new System.Drawing.Size(27, 21);
             this.MermaMolerUnidad.TabIndex = 58;
             this.MermaMolerUnidad.Text = "kg";
             // 
@@ -241,7 +243,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.PesoPromUnidad.AutoSize = true;
             this.PesoPromUnidad.Location = new System.Drawing.Point(976, 250);
             this.PesoPromUnidad.Name = "PesoPromUnidad";
-            this.PesoPromUnidad.Size = new System.Drawing.Size(26, 20);
+            this.PesoPromUnidad.Size = new System.Drawing.Size(27, 21);
             this.PesoPromUnidad.TabIndex = 57;
             this.PesoPromUnidad.Text = "kg";
             // 
@@ -250,7 +252,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.PesoPromLabel.AutoSize = true;
             this.PesoPromLabel.Location = new System.Drawing.Point(600, 250);
             this.PesoPromLabel.Name = "PesoPromLabel";
-            this.PesoPromLabel.Size = new System.Drawing.Size(90, 20);
+            this.PesoPromLabel.Size = new System.Drawing.Size(87, 21);
             this.PesoPromLabel.TabIndex = 56;
             this.PesoPromLabel.Text = "Peso Prom.";
             // 
@@ -259,7 +261,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.CantidadSalidaLabel.AutoSize = true;
             this.CantidadSalidaLabel.Location = new System.Drawing.Point(600, 200);
             this.CantidadSalidaLabel.Name = "CantidadSalidaLabel";
-            this.CantidadSalidaLabel.Size = new System.Drawing.Size(115, 20);
+            this.CantidadSalidaLabel.Size = new System.Drawing.Size(110, 21);
             this.CantidadSalidaLabel.TabIndex = 55;
             this.CantidadSalidaLabel.Text = "Mazos Buenos";
             // 
@@ -268,7 +270,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.SalidaLabel.AutoSize = true;
             this.SalidaLabel.Location = new System.Drawing.Point(600, 150);
             this.SalidaLabel.Name = "SalidaLabel";
-            this.SalidaLabel.Size = new System.Drawing.Size(48, 20);
+            this.SalidaLabel.Size = new System.Drawing.Size(48, 21);
             this.SalidaLabel.TabIndex = 61;
             this.SalidaLabel.Text = "Mazo";
             // 
@@ -292,7 +294,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.EntradaCombo.FormattingEnabled = true;
             this.EntradaCombo.Location = new System.Drawing.Point(200, 347);
             this.EntradaCombo.Name = "EntradaCombo";
-            this.EntradaCombo.Size = new System.Drawing.Size(250, 28);
+            this.EntradaCombo.Size = new System.Drawing.Size(250, 29);
             this.EntradaCombo.TabIndex = 51;
             this.EntradaCombo.SelectedIndexChanged += new System.EventHandler(this.EntradaCombo_SelectedIndexChanged);
             this.EntradaCombo.TextChanged += new System.EventHandler(this.InputOutputChanged);
@@ -302,7 +304,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.CantidadEntradaLabel.AutoSize = true;
             this.CantidadEntradaLabel.Location = new System.Drawing.Point(50, 400);
             this.CantidadEntradaLabel.Name = "CantidadEntradaLabel";
-            this.CantidadEntradaLabel.Size = new System.Drawing.Size(73, 20);
+            this.CantidadEntradaLabel.Size = new System.Drawing.Size(72, 21);
             this.CantidadEntradaLabel.TabIndex = 49;
             this.CantidadEntradaLabel.Text = "Cantidad";
             // 
@@ -311,7 +313,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.EntradaLabel.AutoSize = true;
             this.EntradaLabel.Location = new System.Drawing.Point(50, 350);
             this.EntradaLabel.Name = "EntradaLabel";
-            this.EntradaLabel.Size = new System.Drawing.Size(132, 20);
+            this.EntradaLabel.Size = new System.Drawing.Size(132, 21);
             this.EntradaLabel.TabIndex = 50;
             this.EntradaLabel.Text = "Mezcla o Material";
             // 
@@ -329,7 +331,7 @@ namespace CZS_LaVictoria.PlásticosPage
             0,
             0});
             this.TurnoText.Name = "TurnoText";
-            this.TurnoText.Size = new System.Drawing.Size(120, 26);
+            this.TurnoText.Size = new System.Drawing.Size(120, 29);
             this.TurnoText.TabIndex = 75;
             this.TurnoText.Value = new decimal(new int[] {
             1,
@@ -346,7 +348,7 @@ namespace CZS_LaVictoria.PlásticosPage
             0,
             0});
             this.MaquinaText.Name = "MaquinaText";
-            this.MaquinaText.Size = new System.Drawing.Size(120, 26);
+            this.MaquinaText.Size = new System.Drawing.Size(120, 29);
             this.MaquinaText.TabIndex = 76;
             this.MaquinaText.Value = new decimal(new int[] {
             1,
@@ -359,7 +361,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.FechaPicker.AllowValueChangeOnMouseWheel = true;
             this.FechaPicker.Location = new System.Drawing.Point(200, 147);
             this.FechaPicker.Name = "FechaPicker";
-            this.FechaPicker.Size = new System.Drawing.Size(250, 31);
+            this.FechaPicker.Size = new System.Drawing.Size(250, 33);
             this.FechaPicker.TabIndex = 74;
             // 
             // OperadorCombo
@@ -407,7 +409,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.MezclaRadio.AutoSize = true;
             this.MezclaRadio.Location = new System.Drawing.Point(200, 300);
             this.MezclaRadio.Name = "MezclaRadio";
-            this.MezclaRadio.Size = new System.Drawing.Size(77, 24);
+            this.MezclaRadio.Size = new System.Drawing.Size(76, 25);
             this.MezclaRadio.TabIndex = 77;
             this.MezclaRadio.TabStop = true;
             this.MezclaRadio.Text = "Mezcla";
@@ -419,7 +421,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.MaterialRadio.AutoSize = true;
             this.MaterialRadio.Location = new System.Drawing.Point(308, 300);
             this.MaterialRadio.Name = "MaterialRadio";
-            this.MaterialRadio.Size = new System.Drawing.Size(142, 24);
+            this.MaterialRadio.Size = new System.Drawing.Size(143, 25);
             this.MaterialRadio.TabIndex = 77;
             this.MaterialRadio.TabStop = true;
             this.MaterialRadio.Text = "Material Sencillo";
@@ -432,7 +434,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.CalcularButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CalcularButton.Location = new System.Drawing.Point(808, 400);
             this.CalcularButton.Name = "CalcularButton";
-            this.CalcularButton.Size = new System.Drawing.Size(78, 35);
+            this.CalcularButton.Size = new System.Drawing.Size(78, 37);
             this.CalcularButton.TabIndex = 78;
             this.CalcularButton.Text = "Calcular";
             this.CalcularButton.UseVisualStyleBackColor = true;
@@ -441,10 +443,11 @@ namespace CZS_LaVictoria.PlásticosPage
             // MsgBoxTimer
             // 
             this.MsgBoxTimer.Interval = 3000;
+            this.MsgBoxTimer.Tick += new System.EventHandler(this.MsgBoxTimer_Tick);
             // 
             // RegistrarExtruídoForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1276, 839);
             this.Controls.Add(this.CalcularButton);
@@ -479,7 +482,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.Controls.Add(this.CantidadEntradaLabel);
             this.Controls.Add(this.EntradaLabel);
             this.Controls.Add(this.SubtitleLabel);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "RegistrarExtruídoForm";
