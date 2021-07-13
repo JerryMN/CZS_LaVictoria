@@ -79,6 +79,7 @@ namespace CZS_LaVictoria
             this.Datos_MezclasGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Datos_PersonalGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ChildPanel = new DevExpress.XtraEditors.PanelControl();
+            this.VerPiezasMalasButton = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.RibbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ChildPanel)).BeginInit();
             this.SuspendLayout();
@@ -118,10 +119,11 @@ namespace CZS_LaVictoria
             this.VerHistorialButton,
             this.CrearOperadorButton,
             this.OpcionesBarButton,
-            this.VerProduccionesButton});
+            this.VerProduccionesButton,
+            this.VerPiezasMalasButton});
             this.RibbonControl.Location = new System.Drawing.Point(0, 0);
             this.RibbonControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.RibbonControl.MaxItemId = 34;
+            this.RibbonControl.MaxItemId = 35;
             this.RibbonControl.Name = "RibbonControl";
             this.RibbonControl.OptionsMenuMinWidth = 495;
             this.RibbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -457,8 +459,9 @@ namespace CZS_LaVictoria
             // 
             this.Plásticos_VerGroup.AllowTextClipping = false;
             this.Plásticos_VerGroup.ItemLinks.Add(this.VerProduccionesButton);
+            this.Plásticos_VerGroup.ItemLinks.Add(this.VerPiezasMalasButton);
             this.Plásticos_VerGroup.Name = "Plásticos_VerGroup";
-            this.Plásticos_VerGroup.Text = "Producciones";
+            this.Plásticos_VerGroup.Text = "Ver";
             // 
             // DatosTab
             // 
@@ -522,6 +525,14 @@ namespace CZS_LaVictoria
             this.ChildPanel.Name = "ChildPanel";
             this.ChildPanel.Size = new System.Drawing.Size(1278, 841);
             this.ChildPanel.TabIndex = 1;
+            // 
+            // VerPiezasMalasButton
+            // 
+            this.VerPiezasMalasButton.Caption = "Ver Piezas Malas";
+            this.VerPiezasMalasButton.Id = 34;
+            this.VerPiezasMalasButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("VerPiezasMalasButton.ImageOptions.SvgImage")));
+            this.VerPiezasMalasButton.Name = "VerPiezasMalasButton";
+            this.VerPiezasMalasButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerPiezasMalasButton_ItemClick);
             // 
             // MainMenuForm
             // 
@@ -598,6 +609,7 @@ namespace CZS_LaVictoria
         private DevExpress.XtraBars.BarButtonItem OpcionesBarButton;
         private DevExpress.XtraBars.BarButtonItem VerProduccionesButton;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup Plásticos_VerGroup;
+        private DevExpress.XtraBars.BarButtonItem VerPiezasMalasButton;
     }
 }
 

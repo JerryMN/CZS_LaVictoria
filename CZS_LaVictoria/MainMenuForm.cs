@@ -193,6 +193,11 @@ namespace CZS_LaVictoria
             OpenChildForm(new ProducciónVerForm());
         }
 
+        void VerPiezasMalasButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new PiezasMalasVerForm());
+        }
+
         #endregion
     }
 }

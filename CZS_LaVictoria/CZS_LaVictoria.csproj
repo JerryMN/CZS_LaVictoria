@@ -262,6 +262,12 @@
     <Compile Include="OpcionesForm.Designer.cs">
       <DependentUpon>OpcionesForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PlásticosPage\PiezasMalasVerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PlásticosPage\PiezasMalasVerForm.Designer.cs">
+      <DependentUpon>PiezasMalasVerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PlásticosPage\ProducciónVerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -398,6 +404,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="OpcionesForm.resx">
       <DependentUpon>OpcionesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlásticosPage\PiezasMalasVerForm.resx">
+      <DependentUpon>PiezasMalasVerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PlásticosPage\ProducciónVerForm.resx">
       <DependentUpon>ProducciónVerForm.cs</DependentUpon>
