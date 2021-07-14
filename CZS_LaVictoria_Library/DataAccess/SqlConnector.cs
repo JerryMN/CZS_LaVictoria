@@ -2450,5 +2450,54 @@ namespace CZS_LaVictoria_Library.DataAccess
         }
 
         #endregion
+
+        #region Producción Algodón
+
+        public bool WoolProduction_CreateEscalera(ProducciónAlgodónModel model, MaterialModel materialEntrada)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool WoolProduction_CreateCardas(ProducciónAlgodónModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool WoolProduction_CreateEstirado(ProducciónAlgodónModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool WoolProduction_CreateOpenEnd(ProducciónAlgodónModel model, MaterialModel materialSalida)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool WoolProduction_CreateTorcedura(ProducciónAlgodónModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool WoolProduction_CreateEnrollado(ProducciónAlgodónModel model, MaterialModel materialSalida)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<ProducciónAlgodónModel> WoolProduction_GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<ProducciónAlgodónModel> WoolProduction_GetByDate(DateTime desde, DateTime hasta)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<ProducciónAlgodónModel> WoolProduction_GetByProceso(string proceso)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

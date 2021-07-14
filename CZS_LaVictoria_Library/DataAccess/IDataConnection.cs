@@ -543,6 +543,15 @@ namespace CZS_LaVictoria_Library.DataAccess
         /// <returns>True, si se creó correctamente, falso si no.</returns>
         bool PlasticProduction_CreateInyección(ProducciónPlásticosModel model, MaterialModel materialEntrada, MaterialModel materialSalida);
 
+        /// <summary>
+        /// Crea un registro de una producción de insertado.
+        /// </summary>
+        /// <param name="model">Un modelo con las propiedades de la producción.</param>
+        /// <param name="baseEntrada">Un modelo con las propiedades de la base de entrada al proceso.</param>
+        /// <param name="fibraEntrada">Un modelo con las propiedades de la fibra de entrada al proceso.</param>
+        /// <param name="alambreEntrada">Un modelo con las propiedades del alambre de entrada al proceso.</param>
+        /// <param name="materialSalida">Un modelo con las propiedades del material de salida del proceso.</param>
+        /// <returns>True, si se creó correctamente, falso si no.</returns>
         bool PlasticProduction_CreateInsertado(ProducciónPlásticosModel model, MaterialModel baseEntrada, MaterialModel fibraEntrada, MaterialModel alambreEntrada, MaterialModel materialSalida);
 
         /// <summary>
@@ -562,9 +571,79 @@ namespace CZS_LaVictoria_Library.DataAccess
         /// <summary>
         /// Obtiene todos los registros de producciones de plásticos de cierto proceso.
         /// </summary>
-        /// <param name="tipo">El proceso de producción (molido, insertado, etc.).</param>
+        /// <param name="proceso">El proceso de producción (molido, insertado, etc.).</param>
         /// <returns>Una lista con los modelos de las producciones.</returns>
         List<ProducciónPlásticosModel> PlasticProduction_GetByProceso(string proceso);
+
+        #endregion
+
+        #region Producción Algodón
+
+        /// <summary>
+        /// Crea un registro de una producción de escalera.
+        /// </summary>
+        /// <param name="model">Un modelo con las propiedades de la producción.</param>
+        /// <param name="materialEntrada">Un modelo con las propiedades del material de entrada al proceso.</param>
+        /// <returns>True, si se creó correctamente, falso si no.</returns>
+        bool WoolProduction_CreateEscalera(ProducciónAlgodónModel model, MaterialModel materialEntrada);
+
+        /// <summary>
+        /// Crea un registro de una producción de cardas.
+        /// </summary>
+        /// <param name="model">Un modelo con las propiedades de la producción.</param>
+        /// <returns>True, si se creó correctamente, falso si no.</returns>
+        bool WoolProduction_CreateCardas(ProducciónAlgodónModel model);
+
+        /// <summary>
+        /// Crea un registro de una producción de estirado.
+        /// </summary>
+        /// <param name="model">Un modelo con las propiedades de la producción.</param>
+        /// <returns>True, si se creó correctamente, falso si no.</returns>
+        bool WoolProduction_CreateEstirado(ProducciónAlgodónModel model);
+
+        /// <summary>
+        /// Crea un registro de una producción de open end.
+        /// </summary>
+        /// <param name="model">Un modelo con las propiedades de la producción.</param>
+        /// <param name="materialSalida">Un modelo con las propiedades del material de salida del proceso.</param>
+        /// <returns>True, si se creó correctamente, falso si no.</returns>
+        bool WoolProduction_CreateOpenEnd(ProducciónAlgodónModel model, MaterialModel materialSalida);
+
+        /// <summary>
+        /// Crea un registro de una producción de torcedura.
+        /// </summary>
+        /// <param name="model">Un modelo con las propiedades de la producción.</param>
+        /// <returns>True, si se creó correctamente, falso si no.</returns>
+        bool WoolProduction_CreateTorcedura(ProducciónAlgodónModel model);
+
+        /// <summary>
+        /// Crea un registro de una producción de enrollado.
+        /// </summary>
+        /// <param name="model">Un modelo con las propiedades de la producción.</param>
+        /// <param name="materialSalida">Un modelo con las propiedades del material de salida del proceso.</param>
+        /// <returns>True, si se creó correctamente, falso si no.</returns>
+        bool WoolProduction_CreateEnrollado(ProducciónAlgodónModel model, MaterialModel materialSalida);
+
+        /// <summary>
+        /// Obtiene todos los registros de producciones de algodón.
+        /// </summary>
+        /// <returns>Una lista con los modelos de las producciones.</returns>
+        List<ProducciónAlgodónModel> WoolProduction_GetAll();
+
+        /// <summary>
+        /// Obtiene todos los registros de producciones de algodón entre ciertas fechas.
+        /// </summary>
+        /// <param name="desde">La fecha de inicio.</param>
+        /// <param name="hasta">La fecha de final.</param>
+        /// <returns>Una lista con los modelos de las producciones.</returns>
+        List<ProducciónAlgodónModel> WoolProduction_GetByDate(DateTime desde, DateTime hasta);
+
+        /// <summary>
+        /// Obtiene todos los registros de producciones de algodón de cierto proceso.
+        /// </summary>
+        /// <param name="proceso">El proceso de producción (escalera, cardas, etc.).</param>
+        /// <returns>Una lista con los modelos de las producciones.</returns>
+        List<ProducciónAlgodónModel> WoolProduction_GetByProceso(string proceso);
 
         #endregion
     }

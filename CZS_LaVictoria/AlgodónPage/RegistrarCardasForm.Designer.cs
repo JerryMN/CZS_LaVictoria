@@ -29,6 +29,7 @@ namespace CZS_LaVictoria.AlgodónPage
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.SubtitleLabel = new System.Windows.Forms.Label();
             this.MsgBox = new FontAwesome.Sharp.IconButton();
             this.GuardarButton = new System.Windows.Forms.Button();
@@ -45,6 +46,7 @@ namespace CZS_LaVictoria.AlgodónPage
             this.MaquinaLabel = new System.Windows.Forms.Label();
             this.OperadorLabel = new System.Windows.Forms.Label();
             this.FechaLabel = new System.Windows.Forms.Label();
+            this.MsgBoxTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.TurnoText)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MaquinaText)).BeginInit();
             this.SuspendLayout();
@@ -88,6 +90,7 @@ namespace CZS_LaVictoria.AlgodónPage
             this.GuardarButton.TabIndex = 124;
             this.GuardarButton.Text = "Guardar";
             this.GuardarButton.UseVisualStyleBackColor = true;
+            this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
             // 
             // CantidadSalidaText
             // 
@@ -244,6 +247,11 @@ namespace CZS_LaVictoria.AlgodónPage
             this.FechaLabel.TabIndex = 107;
             this.FechaLabel.Text = "Fecha de operación";
             // 
+            // MsgBoxTimer
+            // 
+            this.MsgBoxTimer.Interval = 3000;
+            this.MsgBoxTimer.Tick += new System.EventHandler(this.MsgBoxTimer_Tick);
+            // 
             // RegistrarCardasForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -295,5 +303,6 @@ namespace CZS_LaVictoria.AlgodónPage
         private System.Windows.Forms.Label MaquinaLabel;
         private System.Windows.Forms.Label OperadorLabel;
         private System.Windows.Forms.Label FechaLabel;
+        private System.Windows.Forms.Timer MsgBoxTimer;
     }
 }

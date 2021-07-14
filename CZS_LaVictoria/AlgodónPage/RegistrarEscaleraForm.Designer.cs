@@ -29,6 +29,7 @@ namespace CZS_LaVictoria.AlgodónPage
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.SubtitleLabel = new System.Windows.Forms.Label();
             this.TurnoText = new System.Windows.Forms.NumericUpDown();
             this.MaquinaText = new System.Windows.Forms.NumericUpDown();
@@ -48,6 +49,7 @@ namespace CZS_LaVictoria.AlgodónPage
             this.CantidadSalidaText = new Syncfusion.WinForms.Input.SfNumericTextBox();
             this.SalidaLabel = new System.Windows.Forms.Label();
             this.CantidadSalidaUnidad = new System.Windows.Forms.Label();
+            this.MsgBoxTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.TurnoText)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MaquinaText)).BeginInit();
             this.SuspendLayout();
@@ -157,6 +159,7 @@ namespace CZS_LaVictoria.AlgodónPage
             this.EntradaCombo.Name = "EntradaCombo";
             this.EntradaCombo.Size = new System.Drawing.Size(250, 29);
             this.EntradaCombo.TabIndex = 95;
+            this.EntradaCombo.SelectedIndexChanged += new System.EventHandler(this.EntradaCombo_SelectedIndexChanged);
             // 
             // EntradaLabel
             // 
@@ -241,6 +244,7 @@ namespace CZS_LaVictoria.AlgodónPage
             this.GuardarButton.TabIndex = 103;
             this.GuardarButton.Text = "Guardar";
             this.GuardarButton.UseVisualStyleBackColor = true;
+            this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
             // 
             // CantidadSalidaText
             // 
@@ -273,6 +277,11 @@ namespace CZS_LaVictoria.AlgodónPage
             this.CantidadSalidaUnidad.Size = new System.Drawing.Size(27, 21);
             this.CantidadSalidaUnidad.TabIndex = 93;
             this.CantidadSalidaUnidad.Text = "kg";
+            // 
+            // MsgBoxTimer
+            // 
+            this.MsgBoxTimer.Interval = 3000;
+            this.MsgBoxTimer.Tick += new System.EventHandler(this.MsgBoxTimer_Tick);
             // 
             // RegistrarEscaleraForm
             // 
@@ -331,5 +340,6 @@ namespace CZS_LaVictoria.AlgodónPage
         private Syncfusion.WinForms.Input.SfNumericTextBox CantidadSalidaText;
         private System.Windows.Forms.Label SalidaLabel;
         private System.Windows.Forms.Label CantidadSalidaUnidad;
+        private System.Windows.Forms.Timer MsgBoxTimer;
     }
 }

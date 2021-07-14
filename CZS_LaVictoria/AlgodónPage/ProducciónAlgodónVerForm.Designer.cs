@@ -45,6 +45,7 @@ namespace CZS_LaVictoria.AlgodónPage
             this.DataGrid.Size = new System.Drawing.Size(1276, 839);
             this.DataGrid.TabIndex = 4;
             this.DataGrid.Text = "sfDataGrid1";
+            this.DataGrid.AutoGeneratingColumn += new Syncfusion.WinForms.DataGrid.Events.AutoGeneratingColumnEventHandler(this.DataGrid_AutoGeneratingColumn);
             // 
             // ProducciónAlgodónVerForm
             // 
