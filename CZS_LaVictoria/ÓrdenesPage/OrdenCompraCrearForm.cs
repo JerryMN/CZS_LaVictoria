@@ -20,6 +20,7 @@ using Syncfusion.WinForms.ListView.Enums;
 using System.Collections;
 using System.Diagnostics;
 using Syncfusion.WinForms.DataGrid.Interactivity;
+using Syncfusion.WinForms.DataGrid.Styles;
 using Syncfusion.WinForms.Input.Events;
 
 namespace CZS_LaVictoria.ÓrdenesPage
@@ -45,6 +46,9 @@ namespace CZS_LaVictoria.ÓrdenesPage
             DataGrid.Columns["NumLinea"].AllowEditing = false;
             DataGrid.LiveDataUpdateMode = LiveDataUpdateMode.AllowDataShaping;
             DataGrid.CellComboBoxSelectionChanged += DataGridOnCellComboBoxSelectionChanged;
+            DataGrid.Style.CellStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
+            DataGrid.Style.HeaderStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
+            DataGrid.Style.TableSummaryRowStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
 
             var tableSummary = new GridTableSummaryRow
             {
@@ -131,7 +135,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
                     break;
                 case "NumLinea":
                     e.Column.HeaderText = "Línea";
-                    e.Column.Width = 100;
+                    e.Column.Width = 120;
                     e.Column.AllowFiltering = false;
                     break;
                 case "Producto":
@@ -159,7 +163,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
                     e.Column = new GridNumericColumn
                     {
                         MappingName = "Subtotal", HeaderText = "Subtotal", FormatMode = FormatMode.Currency,
-                        Width = 100, AllowFiltering = false
+                        Width = 175, AllowFiltering = false
                     };
                     break;
                 case "FechaEntrega":

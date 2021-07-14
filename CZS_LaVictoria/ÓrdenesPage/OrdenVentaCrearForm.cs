@@ -21,6 +21,7 @@ using Syncfusion.WinForms.DataGrid.Interactivity;
 using System.Collections;
 using System.Net.Mail;
 using System.Net;
+using Syncfusion.WinForms.DataGrid.Styles;
 
 namespace CZS_LaVictoria.ÓrdenesPage
 {
@@ -47,6 +48,9 @@ namespace CZS_LaVictoria.ÓrdenesPage
             DataGrid.CellComboBoxSelectionChanged += DataGridOnCellComboBoxSelectionChanged;
             TransporteCombo.Items.AddRange(new object[]{"Cliente", "Propio"});
             PuestoCombo.Items.AddRange(new object[]{"Cliente", "Planta"});
+            DataGrid.Style.CellStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
+            DataGrid.Style.HeaderStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
+            DataGrid.Style.TableSummaryRowStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
 
             var tableSummary = new GridTableSummaryRow
             {
@@ -128,7 +132,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
                     break;
                 case "NumLinea":
                     e.Column.HeaderText = "Línea";
-                    e.Column.Width = 100;
+                    e.Column.Width = 120;
                     e.Column.AllowFiltering = false;
                     break;
                 case "Producto":
@@ -162,7 +166,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
                         MappingName = "Subtotal",
                         HeaderText = "Subtotal",
                         FormatMode = FormatMode.Currency,
-                        Width = 100,
+                        Width = 175,
                         AllowFiltering = false
                     };
                     break;
