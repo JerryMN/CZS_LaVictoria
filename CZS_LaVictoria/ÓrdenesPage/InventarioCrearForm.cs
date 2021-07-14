@@ -57,14 +57,14 @@ namespace CZS_LaVictoria.ÓrdenesPage
 
         void GetAreas()
         {
-            var areas = GlobalConfig.Connection.Area_GetAll();
+            var areas = GlobalConfig.Connection.Area_GetDistinct();
 
             foreach (var area in areas)
             {
                 AreaCombo.Items.Add(area);
             }
 
-            AreaCombo.DisplayMember = "Area";
+            AreaCombo.DisplayMember = "Área";
         }
 
         void GetCategorías()
