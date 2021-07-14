@@ -55,6 +55,7 @@
     <Compile Include="Models\MaterialModel.cs" />
     <Compile Include="Models\MezclaModel.cs" />
     <Compile Include="Models\OperadorModel.cs" />
+    <Compile Include="Models\ProducciónAlgodónModel.cs" />
     <Compile Include="Models\ProducciónPlásticosModel.cs" />
     <Compile Include="Models\OrdenCompraLíneaModel.cs" />
     <Compile Include="Models\OrdenCompraModel.cs" />
