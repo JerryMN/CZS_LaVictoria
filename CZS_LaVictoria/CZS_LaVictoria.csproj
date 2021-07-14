@@ -172,6 +172,48 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlgodónPage\ProducciónAlgodónVerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AlgodónPage\ProducciónAlgodónVerForm.Designer.cs">
+      <DependentUpon>ProducciónAlgodónVerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AlgodónPage\RegistrarCardasForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AlgodónPage\RegistrarCardasForm.Designer.cs">
+      <DependentUpon>RegistrarCardasForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AlgodónPage\RegistrarEnrolladoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AlgodónPage\RegistrarEnrolladoForm.Designer.cs">
+      <DependentUpon>RegistrarEnrolladoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AlgodónPage\RegistrarEscaleraForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AlgodónPage\RegistrarEscaleraForm.Designer.cs">
+      <DependentUpon>RegistrarEscaleraForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AlgodónPage\RegistrarEstiradoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AlgodónPage\RegistrarEstiradoForm.Designer.cs">
+      <DependentUpon>RegistrarEstiradoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AlgodónPage\RegistrarOpenEndForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AlgodónPage\RegistrarOpenEndForm.Designer.cs">
+      <DependentUpon>RegistrarOpenEndForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AlgodónPage\RegistrarTorceduraForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AlgodónPage\RegistrarTorceduraForm.Designer.cs">
+      <DependentUpon>RegistrarTorceduraForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DatosPage\AreaCrearForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -268,11 +310,11 @@
     <Compile Include="PlásticosPage\PiezasMalasVerForm.Designer.cs">
       <DependentUpon>PiezasMalasVerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PlásticosPage\ProducciónVerForm.cs">
+    <Compile Include="PlásticosPage\ProducciónPlásticosVerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PlásticosPage\ProducciónVerForm.Designer.cs">
-      <DependentUpon>ProducciónVerForm.cs</DependentUpon>
+    <Compile Include="PlásticosPage\ProducciónPlásticosVerForm.Designer.cs">
+      <DependentUpon>ProducciónPlásticosVerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PlásticosPage\RegistrarCortadoForm.cs">
       <SubType>Form</SubType>
@@ -360,6 +402,27 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AlgodónPage\ProducciónAlgodónVerForm.resx">
+      <DependentUpon>ProducciónAlgodónVerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AlgodónPage\RegistrarCardasForm.resx">
+      <DependentUpon>RegistrarCardasForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AlgodónPage\RegistrarEnrolladoForm.resx">
+      <DependentUpon>RegistrarEnrolladoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AlgodónPage\RegistrarEscaleraForm.resx">
+      <DependentUpon>RegistrarEscaleraForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AlgodónPage\RegistrarEstiradoForm.resx">
+      <DependentUpon>RegistrarEstiradoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AlgodónPage\RegistrarOpenEndForm.resx">
+      <DependentUpon>RegistrarOpenEndForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AlgodónPage\RegistrarTorceduraForm.resx">
+      <DependentUpon>RegistrarTorceduraForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DatosPage\AreaCrearForm.resx">
       <DependentUpon>AreaCrearForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -408,8 +471,8 @@
     <EmbeddedResource Include="PlásticosPage\PiezasMalasVerForm.resx">
       <DependentUpon>PiezasMalasVerForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PlásticosPage\ProducciónVerForm.resx">
-      <DependentUpon>ProducciónVerForm.cs</DependentUpon>
+    <EmbeddedResource Include="PlásticosPage\ProducciónPlásticosVerForm.resx">
+      <DependentUpon>ProducciónPlásticosVerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PlásticosPage\RegistrarCortadoForm.resx">
       <DependentUpon>RegistrarCortadoForm.cs</DependentUpon>

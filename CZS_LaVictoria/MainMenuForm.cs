@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using CZS_LaVictoria.AlgodónPage;
 using CZS_LaVictoria.DatosPage;
 using CZS_LaVictoria.ÓrdenesPage;
 using CZS_LaVictoria.PlásticosPage;
@@ -190,12 +191,51 @@ namespace CZS_LaVictoria
 
         void VerProduccionesButton_ItemClick(object sender, ItemClickEventArgs e)
         {
-            OpenChildForm(new ProducciónVerForm());
+            OpenChildForm(new ProducciónPlásticosVerForm());
         }
 
         void VerPiezasMalasButton_ItemClick(object sender, ItemClickEventArgs e)
         {
             OpenChildForm(new PiezasMalasVerForm());
+        }
+
+        #endregion
+
+        #region Algodón
+
+        void RegistrarEscaleraButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new RegistrarEscaleraForm());
+        }
+
+        void RegistrarCardasButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new RegistrarCardasForm());
+        }
+
+        void RegistrarEstiradoButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new RegistrarEstiradoForm());
+        }
+
+        void RegistrarOpenEndButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new RegistrarOpenEndForm());
+        }
+
+        void RegistrarTorceduraButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new RegistrarTorceduraForm());
+        }
+
+        void RegistrarEnrolladoButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new RegistrarEnrolladoForm());
+        }
+
+        void VerProduccionesAlgodónButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new ProducciónAlgodónVerForm());
         }
 
         #endregion
