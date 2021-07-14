@@ -242,7 +242,7 @@ namespace CZS_LaVictoria.PlásticosPage
         {
             MaterialCombo.Items.Clear();
 
-            var materiales = GlobalConfig.Connection.Material_GetByCat("Molido");
+            var materiales = GlobalConfig.Connection.Material_GetByAreaCat("Plásticos", "Molido");
             foreach (var material in materiales)
             {
                 MaterialCombo.Items.Add(material);
@@ -255,7 +255,7 @@ namespace CZS_LaVictoria.PlásticosPage
         {
             SalidaCombo.Items.Clear();
 
-            var materiales = GlobalConfig.Connection.Material_GetByCat("Bases");
+            var materiales = GlobalConfig.Connection.Material_GetByAreaCat("Plásticos", "Bases");
             foreach (var material in materiales)
             {
                 SalidaCombo.Items.Add(material);

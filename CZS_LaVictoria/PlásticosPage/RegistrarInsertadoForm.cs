@@ -183,13 +183,13 @@ namespace CZS_LaVictoria.PlásticosPage
             FibraCombo.Items.Clear();
             TipoAlambreCombo.Items.Clear();
 
-            var bases = GlobalConfig.Connection.Material_GetByCat("Bases");
+            var bases = GlobalConfig.Connection.Material_GetByAreaCat("Plásticos", "Bases");
             foreach (var @base in bases)
             {
                 BaseCombo.Items.Add(@base);
             }
 
-            var fibras = GlobalConfig.Connection.Material_GetByCat("Cortado");
+            var fibras = GlobalConfig.Connection.Material_GetByAreaCat("Plásticos", "Cortado");
             foreach (var fibra in fibras)
             {
                 FibraCombo.Items.Add(fibra);
@@ -210,7 +210,7 @@ namespace CZS_LaVictoria.PlásticosPage
         {
             SalidaCombo.Items.Clear();
 
-            var productos = GlobalConfig.Connection.Material_GetByCat("Producto Terminado");
+            var productos = GlobalConfig.Connection.Material_GetByAreaCat("Plásticos", "Producto Terminado");
 
             foreach (var producto in productos)
             {

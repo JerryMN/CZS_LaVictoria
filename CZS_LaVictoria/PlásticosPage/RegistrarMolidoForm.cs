@@ -123,13 +123,13 @@ namespace CZS_LaVictoria.PlásticosPage
             EntradaCombo.Items.Clear();
             SalidaCombo.Items.Clear();
 
-            var materiales = GlobalConfig.Connection.Material_GetByCat("Por Moler");
+            var materiales = GlobalConfig.Connection.Material_GetByAreaCat("Plásticos", "Por Moler");
             foreach (var material in materiales)
             {
                 EntradaCombo.Items.Add(material);
             }
 
-            materiales = GlobalConfig.Connection.Material_GetByCat("Molido");
+            materiales = GlobalConfig.Connection.Material_GetByAreaCat("Plásticos", "Molido");
             foreach (var material in materiales)
             {
                 SalidaCombo.Items.Add(material);

@@ -152,7 +152,7 @@ namespace CZS_LaVictoria.PlásticosPage
         {
             EntradaCombo.Items.Clear();
 
-            var materiales = GlobalConfig.Connection.Material_GetByCat("Extruído");
+            var materiales = GlobalConfig.Connection.Material_GetByAreaCat("Plásticos", "Extruído");
             foreach (var material in materiales)
             {
                 EntradaCombo.Items.Add(material);
@@ -165,7 +165,7 @@ namespace CZS_LaVictoria.PlásticosPage
         {
             SalidaCombo.Items.Clear();
 
-            var materiales = GlobalConfig.Connection.Material_GetByCat("Cortado");
+            var materiales = GlobalConfig.Connection.Material_GetByAreaCat("Plásticos", "Cortado");
             foreach (var material in materiales)
             {
                 SalidaCombo.Items.Add(material);

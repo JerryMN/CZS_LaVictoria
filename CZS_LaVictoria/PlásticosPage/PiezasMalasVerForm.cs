@@ -47,7 +47,7 @@ namespace CZS_LaVictoria.PlásticosPage
 
         static List<MaterialModel> LoadPiezas()
         {
-            return GlobalConfig.Connection.Material_GetByCat("Piezas Malas");
+            return GlobalConfig.Connection.Material_GetByAreaCat("Plásticos", "Piezas Malas");
         }
     }
 }
