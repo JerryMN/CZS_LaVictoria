@@ -1,7 +1,7 @@
 ﻿
 namespace CZS_LaVictoria.PlásticosPage
 {
-    partial class ProducciónVerForm
+    partial class ProducciónPlásticosVerForm
     {
         /// <summary>
         /// Required designer variable.

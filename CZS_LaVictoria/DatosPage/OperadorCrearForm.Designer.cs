@@ -57,10 +57,10 @@ namespace CZS_LaVictoria.DatosPage
             // SubtitleLabel
             // 
             this.SubtitleLabel.AutoSize = true;
-            this.SubtitleLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SubtitleLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SubtitleLabel.Location = new System.Drawing.Point(50, 25);
             this.SubtitleLabel.Name = "SubtitleLabel";
-            this.SubtitleLabel.Size = new System.Drawing.Size(249, 32);
+            this.SubtitleLabel.Size = new System.Drawing.Size(278, 37);
             this.SubtitleLabel.TabIndex = 39;
             this.SubtitleLabel.Text = "Registro de Operador";
             // 
@@ -180,7 +180,7 @@ namespace CZS_LaVictoria.DatosPage
             this.DataGrid.Text = "sfDataGrid1";
             this.DataGrid.AutoGeneratingColumn += new Syncfusion.WinForms.DataGrid.Events.AutoGeneratingColumnEventHandler(this.DataGrid_AutoGeneratingColumn);
             // 
-            // OperadorCreateForm
+            // OperadorCrearForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -198,7 +198,7 @@ namespace CZS_LaVictoria.DatosPage
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "OperadorCreateForm";
+            this.Name = "OperadorCrearForm";
             this.Text = "OperadorCreateForm";
             ((System.ComponentModel.ISupportInitialize)(this.DataGrid)).EndInit();
             this.ResumeLayout(false);

@@ -11,9 +11,9 @@ using Syncfusion.WinForms.Input.Enums;
 
 namespace CZS_LaVictoria.PlásticosPage
 {
-    public partial class ProducciónVerForm : Form
+    public partial class ProducciónPlásticosVerForm : Form
     {
-        public ProducciónVerForm()
+        public ProducciónPlásticosVerForm()
         {
             InitializeComponent();
             DataGrid.DataSource = LoadTable();
