@@ -38,8 +38,6 @@ namespace CZS_LaVictoria.AlgodónPage
                 return;
             }
 
-            _materialEntrada.CantidadDisponible -= _cantidadEntrada;
-            
             var orden = new ProducciónAlgodónModel();
             Debug.Assert(FechaPicker.Value != null, "FechaPicker.Value != null");
             orden.Fecha = (DateTime)FechaPicker.Value;

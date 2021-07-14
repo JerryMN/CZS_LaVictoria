@@ -2455,47 +2455,337 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public bool WoolProduction_CreateEscalera(ProducciónAlgodónModel model, MaterialModel materialEntrada)
         {
-            throw new NotImplementedException();
+            using (var scope = new TransactionScope())
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@CantidadDisponible", materialEntrada.CantidadDisponible - model.CantidadEntra);
+                    p.Add("@Id", materialEntrada.Id);
+                    connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+
+                    p = new DynamicParameters();
+                    p.Add("@Fecha", model.Fecha);
+                    p.Add("@Proceso", model.Proceso);
+                    p.Add("@Turno", model.Turno);
+                    p.Add("@Máquina", model.Máquina);
+                    p.Add("@Operador", model.Operador);
+                    p.Add("@MaterialEntra", model.MaterialEntra);
+                    p.Add("@CantidadEntra", model.CantidadEntra);
+                    p.Add("@MaterialSale", model.MaterialSale);
+                    p.Add("@CantidadSale", model.CantidadSale);
+                    connection.Execute("dbo.spWoolProduction_Insert", p, commandType: CommandType.StoredProcedure);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return false;
+                }
+
+                scope.Complete();
+                return true;
+            }
         }
 
         public bool WoolProduction_CreateCardas(ProducciónAlgodónModel model)
         {
-            throw new NotImplementedException();
+            using (var scope = new TransactionScope())
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@Fecha", model.Fecha);
+                    p.Add("@Proceso", model.Proceso);
+                    p.Add("@Turno", model.Turno);
+                    p.Add("@Máquina", model.Máquina);
+                    p.Add("@Operador", model.Operador);
+                    p.Add("@MaterialEntra", model.MaterialEntra);
+                    p.Add("@CantidadEntra", model.CantidadEntra);
+                    p.Add("@MaterialSale", model.MaterialSale);
+                    p.Add("@CantidadSale", model.CantidadSale);
+                    connection.Execute("dbo.spWoolProduction_Insert", p, commandType: CommandType.StoredProcedure);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return false;
+                }
+
+                scope.Complete();
+                return true;
+            }
         }
 
         public bool WoolProduction_CreateEstirado(ProducciónAlgodónModel model)
         {
-            throw new NotImplementedException();
+            using (var scope = new TransactionScope())
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@Fecha", model.Fecha);
+                    p.Add("@Proceso", model.Proceso);
+                    p.Add("@Turno", model.Turno);
+                    p.Add("@Máquina", model.Máquina);
+                    p.Add("@Operador", model.Operador);
+                    p.Add("@MaterialEntra", model.MaterialEntra);
+                    p.Add("@CantidadEntra", model.CantidadEntra);
+                    p.Add("@MaterialSale", model.MaterialSale);
+                    p.Add("@CantidadSale", model.CantidadSale);
+                    connection.Execute("dbo.spWoolProduction_Insert", p, commandType: CommandType.StoredProcedure);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return false;
+                }
+
+                scope.Complete();
+                return true;
+            }
         }
 
         public bool WoolProduction_CreateOpenEnd(ProducciónAlgodónModel model, MaterialModel materialSalida)
         {
-            throw new NotImplementedException();
+            using (var scope = new TransactionScope())
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@Fecha", model.Fecha);
+                    p.Add("@Proceso", model.Proceso);
+                    p.Add("@Turno", model.Turno);
+                    p.Add("@Máquina", model.Máquina);
+                    p.Add("@Operador", model.Operador);
+                    p.Add("@MaterialEntra", model.MaterialEntra);
+                    p.Add("@CantidadEntra", model.CantidadEntra);
+                    p.Add("@MaterialSale", model.MaterialSale);
+                    p.Add("@CantidadSale", model.CantidadSale);
+                    connection.Execute("dbo.spWoolProduction_Insert", p, commandType: CommandType.StoredProcedure);
+
+                    var hilo = new MaterialModel();
+                    p = new DynamicParameters();
+                    p.Add("@Nombre", "Hilo");
+                    p.Add("@Area", "Algodón");
+
+                    try
+                    {
+                        hilo = connection.QuerySingle<MaterialModel>("dbo.spStock_GetByNombreArea", p,
+                            commandType: CommandType.StoredProcedure);
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex.Message != "Sequence contains no elements")
+                        {
+                            Debug.WriteLine(ex.ToString());
+                            Debug.Assert(false);
+                        }
+                    }
+                    finally
+                    {
+                        if (hilo == null || hilo.Id == 0)
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@Nombre", "Hilo");
+                            p.Add("@Area", "Algodón");
+                            p.Add("@Categoría", "Hilo");
+                            p.Add("@CantidadDisponible", model.CantidadSale);
+                            connection.Execute("dbo.spStock_Insert", p, commandType: CommandType.StoredProcedure);
+                        }
+                        else
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@CantidadDisponible", hilo.CantidadDisponible + model.CantidadSale);
+                            p.Add("@Id", hilo.Id);
+                            connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return false;
+                }
+
+                scope.Complete();
+                return true;
+            }
         }
 
         public bool WoolProduction_CreateTorcedura(ProducciónAlgodónModel model)
         {
-            throw new NotImplementedException();
+            using (var scope = new TransactionScope())
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@Fecha", model.Fecha);
+                    p.Add("@Proceso", model.Proceso);
+                    p.Add("@Turno", model.Turno);
+                    p.Add("@Máquina", model.Máquina);
+                    p.Add("@Operador", model.Operador);
+                    p.Add("@MaterialEntra", model.MaterialEntra);
+                    p.Add("@CantidadEntra", model.CantidadEntra);
+                    p.Add("@MaterialSale", model.MaterialSale);
+                    p.Add("@CantidadSale", model.CantidadSale);
+                    connection.Execute("dbo.spWoolProduction_Insert", p, commandType: CommandType.StoredProcedure);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return false;
+                }
+
+                scope.Complete();
+                return true;
+            }
         }
 
         public bool WoolProduction_CreateEnrollado(ProducciónAlgodónModel model, MaterialModel materialSalida)
         {
-            throw new NotImplementedException();
+            using (var scope = new TransactionScope())
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@CantidadDisponible", materialSalida.CantidadDisponible + model.CantidadSale);
+                    p.Add("@Id", materialSalida.Id);
+                    connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+
+                    p = new DynamicParameters();
+                    p.Add("@Fecha", model.Fecha);
+                    p.Add("@Proceso", model.Proceso);
+                    p.Add("@Turno", model.Turno);
+                    p.Add("@Máquina", model.Máquina);
+                    p.Add("@Operador", model.Operador);
+                    p.Add("@MaterialEntra", model.MaterialEntra);
+                    p.Add("@CantidadEntra", model.CantidadEntra);
+                    p.Add("@MaterialSale", model.MaterialSale);
+                    p.Add("@CantidadSale", model.CantidadSale);
+                    connection.Execute("dbo.spWoolProduction_Insert", p, commandType: CommandType.StoredProcedure);
+
+                    var enrollado = new MaterialModel();
+                    p = new DynamicParameters();
+                    p.Add("@Nombre", "Enrollado");
+                    p.Add("@Area", "Algodón");
+
+                    try
+                    {
+                        enrollado = connection.QuerySingle<MaterialModel>("dbo.spStock_GetByNombreArea", p,
+                            commandType: CommandType.StoredProcedure);
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex.Message != "Sequence contains no elements")
+                        {
+                            Debug.WriteLine(ex.ToString());
+                            Debug.Assert(false);
+                        }
+                    }
+                    finally
+                    {
+                        if (enrollado == null || enrollado.Id == 0)
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@Nombre", "Enrollado");
+                            p.Add("@Area", "Algodón");
+                            p.Add("@Categoría", "Enrollado");
+                            p.Add("@CantidadDisponible", model.CantidadSale);
+                            connection.Execute("dbo.spStock_Insert", p, commandType: CommandType.StoredProcedure);
+                        }
+                        else
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@CantidadDisponible", enrollado.CantidadDisponible + model.CantidadSale);
+                            p.Add("@Id", enrollado.Id);
+                            connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return false;
+                }
+
+                scope.Complete();
+                return true;
+            }
         }
 
         public List<ProducciónAlgodónModel> WoolProduction_GetAll()
         {
-            throw new NotImplementedException();
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var output = connection.Query<ProducciónAlgodónModel>("dbo.spWoolProduction_GetAll").ToList();
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
         }
 
         public List<ProducciónAlgodónModel> WoolProduction_GetByDate(DateTime desde, DateTime hasta)
         {
-            throw new NotImplementedException();
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@Desde", desde);
+                p.Add("@Hasta", hasta);
+
+                try
+                {
+                    var output = connection.Query<ProducciónAlgodónModel>("dbo.spWoolProduction_GetByDate", p,
+                        commandType: CommandType.StoredProcedure).ToList();
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
         }
 
         public List<ProducciónAlgodónModel> WoolProduction_GetByProceso(string proceso)
         {
-            throw new NotImplementedException();
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@Proceso", proceso);
+
+                try
+                {
+                    var output = connection.Query<ProducciónAlgodónModel>("dbo.spWoolProduction_GetByProceso", p,
+                        commandType: CommandType.StoredProcedure).ToList();
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
         }
 
         #endregion

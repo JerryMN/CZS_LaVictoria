@@ -48,7 +48,7 @@ namespace CZS_LaVictoria.AlgodónPage
             if (saveSuccess)
             {
                 ClearForm();
-                MsgBox.Text = "Estirado registrada con éxito.";
+                MsgBox.Text = "Estirado registrado con éxito.";
                 MsgBox.IconColor = Color.DarkGreen;
             }
             else
