@@ -295,7 +295,8 @@ namespace CZS_LaVictoria.ÓrdenesPage
             var width = e.PdfPage.GetClientSize().Width;
             var header = new PdfPageTemplateElement(width, 80);
 
-            header.Graphics.DrawString($"Escobas La Victoria — Orden de Compra {NumOrdenText.Text}", font, brush, 0, 10);
+            header.Graphics.DrawImage(PdfImage.FromFile(@"..\..\Resources\Logo.png"), width - 70, 0, 70, 70);
+            header.Graphics.DrawString($"Escobas La Victoria — Orden de Compra {NumOrdenText.Text}", font, brush, 0, 0);
             header.Graphics.DrawString($"Fecha Orden: {FechaOrdenPicker.Value.ToString().Substring(0, 11)}  |   " +
                                        $"Área: {AreaCombo.Text}", smallFont, brush, 0, 30);
             header.Graphics.DrawString($"Proveedor: {_selectedProveedor.Nombre}  |  Atención: {AtencionText.Text}", smallFont, brush, 0, 45);
@@ -499,7 +500,6 @@ namespace CZS_LaVictoria.ÓrdenesPage
             MsgBox.Text = "PDF guardado.\n";
             MsgBox.IconColor = Color.DarkGreen;
             MsgBox.Visible = true;
-            MsgBoxTimer.Start();
         }
 
         /// <summary>
@@ -513,6 +513,8 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 using (var smtpServer = new SmtpClient(Properties.Settings.Default.smtpServer))
                 {
                     mail.From = new MailAddress(Properties.Settings.Default.emailAddress);
+                    // TODO - Uncomment next line.
+                    //mail.To.Add(_selectedProveedor.Correo);
                     mail.To.Add("gerardo.mondragonb@hotmail.com");
                     foreach (var area in _selectedArea)
                     {
