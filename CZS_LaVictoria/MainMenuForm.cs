@@ -3,6 +3,7 @@ using CZS_LaVictoria.AlgodónPage;
 using CZS_LaVictoria.DatosPage;
 using CZS_LaVictoria.ÓrdenesPage;
 using CZS_LaVictoria.PlásticosPage;
+using CZS_LaVictoria.TrapeadoresPage;
 using DevExpress.XtraBars;
 
 namespace CZS_LaVictoria
@@ -236,6 +237,20 @@ namespace CZS_LaVictoria
         void VerProduccionesAlgodónButton_ItemClick(object sender, ItemClickEventArgs e)
         {
             OpenChildForm(new ProducciónAlgodónVerForm());
+        }
+
+        #endregion
+
+        #region Trapeadores
+
+        void RegistrarTrapeadoresButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new RegistrarTrapeadoresForm());
+        }
+
+        void VerProduccionesTrapeadoresButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new ProducciónTrapeadoresVerForm());
         }
 
         #endregion

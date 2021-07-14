@@ -352,6 +352,18 @@
     <Compile Include="PlásticosPage\RegistrarMolidoForm.Designer.cs">
       <DependentUpon>RegistrarMolidoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TrapeadoresPage\ProducciónTrapeadoresVerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TrapeadoresPage\ProducciónTrapeadoresVerForm.Designer.cs">
+      <DependentUpon>ProducciónTrapeadoresVerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TrapeadoresPage\RegistrarTrapeadoresForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TrapeadoresPage\RegistrarTrapeadoresForm.Designer.cs">
+      <DependentUpon>RegistrarTrapeadoresForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ÓrdenesPage\AgregarNotasForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -491,6 +503,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PlásticosPage\RegistrarMolidoForm.resx">
       <DependentUpon>RegistrarMolidoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrapeadoresPage\ProducciónTrapeadoresVerForm.resx">
+      <DependentUpon>ProducciónTrapeadoresVerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrapeadoresPage\RegistrarTrapeadoresForm.resx">
+      <DependentUpon>RegistrarTrapeadoresForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ÓrdenesPage\AgregarNotasForm.resx">
       <DependentUpon>AgregarNotasForm.cs</DependentUpon>

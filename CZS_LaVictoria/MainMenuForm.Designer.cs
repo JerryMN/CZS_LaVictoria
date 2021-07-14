@@ -61,18 +61,24 @@ namespace CZS_LaVictoria
             this.OpcionesBarButton = new DevExpress.XtraBars.BarButtonItem();
             this.VerProduccionesButton = new DevExpress.XtraBars.BarButtonItem();
             this.VerPiezasMalasButton = new DevExpress.XtraBars.BarButtonItem();
+            this.RegistrarEscaleraButton = new DevExpress.XtraBars.BarButtonItem();
+            this.RegistrarCardasButton = new DevExpress.XtraBars.BarButtonItem();
+            this.RegistrarEstiradoButton = new DevExpress.XtraBars.BarButtonItem();
+            this.RegistrarOpenEndButton = new DevExpress.XtraBars.BarButtonItem();
+            this.RegistrarTorceduraButton = new DevExpress.XtraBars.BarButtonItem();
+            this.RegistrarEnrolladoButton = new DevExpress.XtraBars.BarButtonItem();
+            this.VerProduccionesAlgodónButton = new DevExpress.XtraBars.BarButtonItem();
             this.ÓrdenesTab = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.Órdenes_CompraGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Órdenes_VentaGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Órdenes_InventarioGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Órdenes_HistorialGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.PlásticosTab = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.Plásticos_MolidoGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.Plásticos_ExtruídoGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.Plásticos_CortadoGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.Plásticos_InyecciónGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.Plásticos_InsertadoGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.Plásticos_RegistroGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Plásticos_VerGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.AlgodónTab = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.Algodón_RegistroGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.Algodón_VerGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.DatosTab = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.Datos_ProveedoresGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Datos_ClientesGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -80,21 +86,11 @@ namespace CZS_LaVictoria
             this.Datos_MezclasGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Datos_PersonalGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ChildPanel = new DevExpress.XtraEditors.PanelControl();
-            this.AlgodónTab = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.Algodón_EscaleraGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.Algodón_CardasGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.Algodón_EstiradoGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.Algodón_OpenEndGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.Algodón_TorceduraGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.Algodón_EnrolladoGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.RegistrarEscaleraButton = new DevExpress.XtraBars.BarButtonItem();
-            this.RegistrarCardasButton = new DevExpress.XtraBars.BarButtonItem();
-            this.RegistrarEstiradoButton = new DevExpress.XtraBars.BarButtonItem();
-            this.RegistrarOpenEndButton = new DevExpress.XtraBars.BarButtonItem();
-            this.RegistrarTorceduraButton = new DevExpress.XtraBars.BarButtonItem();
-            this.RegistrarEnrolladoButton = new DevExpress.XtraBars.BarButtonItem();
-            this.Algodón_VerGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.VerProduccionesAlgodónButton = new DevExpress.XtraBars.BarButtonItem();
+            this.TrapeadoresTab = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.Trapeadores_RegistrarGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.RegistrarTrapeadoresButton = new DevExpress.XtraBars.BarButtonItem();
+            this.Trapeadores_VerGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.VerProduccionesTrapeadoresButton = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.RibbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ChildPanel)).BeginInit();
             this.SuspendLayout();
@@ -142,16 +138,19 @@ namespace CZS_LaVictoria
             this.RegistrarOpenEndButton,
             this.RegistrarTorceduraButton,
             this.RegistrarEnrolladoButton,
-            this.VerProduccionesAlgodónButton});
+            this.VerProduccionesAlgodónButton,
+            this.RegistrarTrapeadoresButton,
+            this.VerProduccionesTrapeadoresButton});
             this.RibbonControl.Location = new System.Drawing.Point(0, 0);
             this.RibbonControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.RibbonControl.MaxItemId = 42;
+            this.RibbonControl.MaxItemId = 44;
             this.RibbonControl.Name = "RibbonControl";
             this.RibbonControl.OptionsMenuMinWidth = 495;
             this.RibbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ÓrdenesTab,
             this.PlásticosTab,
             this.AlgodónTab,
+            this.TrapeadoresTab,
             this.DatosTab});
             this.RibbonControl.QuickToolbarItemLinks.Add(this.OpcionesBarButton);
             this.RibbonControl.Size = new System.Drawing.Size(1278, 158);
@@ -403,6 +402,68 @@ namespace CZS_LaVictoria
             this.VerPiezasMalasButton.Name = "VerPiezasMalasButton";
             this.VerPiezasMalasButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerPiezasMalasButton_ItemClick);
             // 
+            // RegistrarEscaleraButton
+            // 
+            this.RegistrarEscaleraButton.Caption = "Registrar Escalera";
+            this.RegistrarEscaleraButton.Id = 35;
+            this.RegistrarEscaleraButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("RegistrarEscaleraButton.ImageOptions.Image")));
+            this.RegistrarEscaleraButton.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("RegistrarEscaleraButton.ImageOptions.LargeImage")));
+            this.RegistrarEscaleraButton.Name = "RegistrarEscaleraButton";
+            this.RegistrarEscaleraButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.RegistrarEscaleraButton_ItemClick);
+            // 
+            // RegistrarCardasButton
+            // 
+            this.RegistrarCardasButton.Caption = "Registrar Cardas";
+            this.RegistrarCardasButton.Id = 36;
+            this.RegistrarCardasButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("RegistrarCardasButton.ImageOptions.Image")));
+            this.RegistrarCardasButton.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("RegistrarCardasButton.ImageOptions.LargeImage")));
+            this.RegistrarCardasButton.Name = "RegistrarCardasButton";
+            this.RegistrarCardasButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.RegistrarCardasButton_ItemClick);
+            // 
+            // RegistrarEstiradoButton
+            // 
+            this.RegistrarEstiradoButton.Caption = "Registrar Estirado";
+            this.RegistrarEstiradoButton.Id = 37;
+            this.RegistrarEstiradoButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("RegistrarEstiradoButton.ImageOptions.Image")));
+            this.RegistrarEstiradoButton.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("RegistrarEstiradoButton.ImageOptions.LargeImage")));
+            this.RegistrarEstiradoButton.Name = "RegistrarEstiradoButton";
+            this.RegistrarEstiradoButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.RegistrarEstiradoButton_ItemClick);
+            // 
+            // RegistrarOpenEndButton
+            // 
+            this.RegistrarOpenEndButton.Caption = "Registrar Open End";
+            this.RegistrarOpenEndButton.Id = 38;
+            this.RegistrarOpenEndButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("RegistrarOpenEndButton.ImageOptions.Image")));
+            this.RegistrarOpenEndButton.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("RegistrarOpenEndButton.ImageOptions.LargeImage")));
+            this.RegistrarOpenEndButton.Name = "RegistrarOpenEndButton";
+            this.RegistrarOpenEndButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.RegistrarOpenEndButton_ItemClick);
+            // 
+            // RegistrarTorceduraButton
+            // 
+            this.RegistrarTorceduraButton.Caption = "Registrar Torcedura";
+            this.RegistrarTorceduraButton.Id = 39;
+            this.RegistrarTorceduraButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("RegistrarTorceduraButton.ImageOptions.Image")));
+            this.RegistrarTorceduraButton.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("RegistrarTorceduraButton.ImageOptions.LargeImage")));
+            this.RegistrarTorceduraButton.Name = "RegistrarTorceduraButton";
+            this.RegistrarTorceduraButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.RegistrarTorceduraButton_ItemClick);
+            // 
+            // RegistrarEnrolladoButton
+            // 
+            this.RegistrarEnrolladoButton.Caption = "Registrar Enrollado";
+            this.RegistrarEnrolladoButton.Id = 40;
+            this.RegistrarEnrolladoButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("RegistrarEnrolladoButton.ImageOptions.Image")));
+            this.RegistrarEnrolladoButton.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("RegistrarEnrolladoButton.ImageOptions.LargeImage")));
+            this.RegistrarEnrolladoButton.Name = "RegistrarEnrolladoButton";
+            this.RegistrarEnrolladoButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.RegistrarEnrolladoButton_ItemClick);
+            // 
+            // VerProduccionesAlgodónButton
+            // 
+            this.VerProduccionesAlgodónButton.Caption = "Ver Producciones";
+            this.VerProduccionesAlgodónButton.Id = 41;
+            this.VerProduccionesAlgodónButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("VerProduccionesAlgodónButton.ImageOptions.SvgImage")));
+            this.VerProduccionesAlgodónButton.Name = "VerProduccionesAlgodónButton";
+            this.VerProduccionesAlgodónButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerProduccionesAlgodónButton_ItemClick);
+            // 
             // ÓrdenesTab
             // 
             this.ÓrdenesTab.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F);
@@ -448,50 +509,22 @@ namespace CZS_LaVictoria
             // PlásticosTab
             // 
             this.PlásticosTab.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.Plásticos_MolidoGroup,
-            this.Plásticos_ExtruídoGroup,
-            this.Plásticos_CortadoGroup,
-            this.Plásticos_InyecciónGroup,
-            this.Plásticos_InsertadoGroup,
+            this.Plásticos_RegistroGroup,
             this.Plásticos_VerGroup});
             this.PlásticosTab.Name = "PlásticosTab";
             this.PlásticosTab.Text = "Plásticos";
             // 
-            // Plásticos_MolidoGroup
+            // Plásticos_RegistroGroup
             // 
-            this.Plásticos_MolidoGroup.AllowTextClipping = false;
-            this.Plásticos_MolidoGroup.ItemLinks.Add(this.RegistrarMolidoButton);
-            this.Plásticos_MolidoGroup.Name = "Plásticos_MolidoGroup";
-            this.Plásticos_MolidoGroup.Text = "Molido";
-            // 
-            // Plásticos_ExtruídoGroup
-            // 
-            this.Plásticos_ExtruídoGroup.AllowTextClipping = false;
-            this.Plásticos_ExtruídoGroup.ItemLinks.Add(this.RegistrarExtruídoButton);
-            this.Plásticos_ExtruídoGroup.Name = "Plásticos_ExtruídoGroup";
-            this.Plásticos_ExtruídoGroup.Text = "Extruído";
-            // 
-            // Plásticos_CortadoGroup
-            // 
-            this.Plásticos_CortadoGroup.AllowTextClipping = false;
-            this.Plásticos_CortadoGroup.ItemLinks.Add(this.RegistrarCortadoButton);
-            this.Plásticos_CortadoGroup.Name = "Plásticos_CortadoGroup";
-            this.Plásticos_CortadoGroup.Text = "Cortado";
-            // 
-            // Plásticos_InyecciónGroup
-            // 
-            this.Plásticos_InyecciónGroup.AllowTextClipping = false;
-            this.Plásticos_InyecciónGroup.ItemLinks.Add(this.RegistrarInyecciónMezclaButton);
-            this.Plásticos_InyecciónGroup.ItemLinks.Add(this.RegistrarInyecciónButton);
-            this.Plásticos_InyecciónGroup.Name = "Plásticos_InyecciónGroup";
-            this.Plásticos_InyecciónGroup.Text = "Inyección";
-            // 
-            // Plásticos_InsertadoGroup
-            // 
-            this.Plásticos_InsertadoGroup.AllowTextClipping = false;
-            this.Plásticos_InsertadoGroup.ItemLinks.Add(this.RegistrarInsertadoButton);
-            this.Plásticos_InsertadoGroup.Name = "Plásticos_InsertadoGroup";
-            this.Plásticos_InsertadoGroup.Text = "Insertado";
+            this.Plásticos_RegistroGroup.AllowTextClipping = false;
+            this.Plásticos_RegistroGroup.ItemLinks.Add(this.RegistrarMolidoButton);
+            this.Plásticos_RegistroGroup.ItemLinks.Add(this.RegistrarExtruídoButton);
+            this.Plásticos_RegistroGroup.ItemLinks.Add(this.RegistrarCortadoButton);
+            this.Plásticos_RegistroGroup.ItemLinks.Add(this.RegistrarInyecciónMezclaButton);
+            this.Plásticos_RegistroGroup.ItemLinks.Add(this.RegistrarInyecciónButton);
+            this.Plásticos_RegistroGroup.ItemLinks.Add(this.RegistrarInsertadoButton);
+            this.Plásticos_RegistroGroup.Name = "Plásticos_RegistroGroup";
+            this.Plásticos_RegistroGroup.Text = "Registro";
             // 
             // Plásticos_VerGroup
             // 
@@ -500,6 +533,33 @@ namespace CZS_LaVictoria
             this.Plásticos_VerGroup.ItemLinks.Add(this.VerPiezasMalasButton);
             this.Plásticos_VerGroup.Name = "Plásticos_VerGroup";
             this.Plásticos_VerGroup.Text = "Ver";
+            // 
+            // AlgodónTab
+            // 
+            this.AlgodónTab.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.Algodón_RegistroGroup,
+            this.Algodón_VerGroup});
+            this.AlgodónTab.Name = "AlgodónTab";
+            this.AlgodónTab.Text = "Algodón";
+            // 
+            // Algodón_RegistroGroup
+            // 
+            this.Algodón_RegistroGroup.AllowTextClipping = false;
+            this.Algodón_RegistroGroup.ItemLinks.Add(this.RegistrarEscaleraButton);
+            this.Algodón_RegistroGroup.ItemLinks.Add(this.RegistrarCardasButton);
+            this.Algodón_RegistroGroup.ItemLinks.Add(this.RegistrarEstiradoButton);
+            this.Algodón_RegistroGroup.ItemLinks.Add(this.RegistrarOpenEndButton);
+            this.Algodón_RegistroGroup.ItemLinks.Add(this.RegistrarTorceduraButton);
+            this.Algodón_RegistroGroup.ItemLinks.Add(this.RegistrarEnrolladoButton);
+            this.Algodón_RegistroGroup.Name = "Algodón_RegistroGroup";
+            this.Algodón_RegistroGroup.Text = "Registro";
+            // 
+            // Algodón_VerGroup
+            // 
+            this.Algodón_VerGroup.AllowTextClipping = false;
+            this.Algodón_VerGroup.ItemLinks.Add(this.VerProduccionesAlgodónButton);
+            this.Algodón_VerGroup.Name = "Algodón_VerGroup";
+            this.Algodón_VerGroup.Text = "Ver";
             // 
             // DatosTab
             // 
@@ -564,129 +624,44 @@ namespace CZS_LaVictoria
             this.ChildPanel.Size = new System.Drawing.Size(1278, 841);
             this.ChildPanel.TabIndex = 1;
             // 
-            // AlgodónTab
+            // TrapeadoresTab
             // 
-            this.AlgodónTab.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.Algodón_EscaleraGroup,
-            this.Algodón_CardasGroup,
-            this.Algodón_EstiradoGroup,
-            this.Algodón_OpenEndGroup,
-            this.Algodón_TorceduraGroup,
-            this.Algodón_EnrolladoGroup,
-            this.Algodón_VerGroup});
-            this.AlgodónTab.Name = "AlgodónTab";
-            this.AlgodónTab.Text = "Algodón";
+            this.TrapeadoresTab.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.Trapeadores_RegistrarGroup,
+            this.Trapeadores_VerGroup});
+            this.TrapeadoresTab.Name = "TrapeadoresTab";
+            this.TrapeadoresTab.Text = "Trapeadores";
             // 
-            // Algodón_EscaleraGroup
+            // Trapeadores_RegistrarGroup
             // 
-            this.Algodón_EscaleraGroup.AllowTextClipping = false;
-            this.Algodón_EscaleraGroup.ItemLinks.Add(this.RegistrarEscaleraButton);
-            this.Algodón_EscaleraGroup.Name = "Algodón_EscaleraGroup";
-            this.Algodón_EscaleraGroup.Text = "Escalera";
+            this.Trapeadores_RegistrarGroup.AllowTextClipping = false;
+            this.Trapeadores_RegistrarGroup.ItemLinks.Add(this.RegistrarTrapeadoresButton);
+            this.Trapeadores_RegistrarGroup.Name = "Trapeadores_RegistrarGroup";
+            this.Trapeadores_RegistrarGroup.Text = "Registro";
             // 
-            // Algodón_CardasGroup
+            // RegistrarTrapeadoresButton
             // 
-            this.Algodón_CardasGroup.AllowTextClipping = false;
-            this.Algodón_CardasGroup.ItemLinks.Add(this.RegistrarCardasButton);
-            this.Algodón_CardasGroup.Name = "Algodón_CardasGroup";
-            this.Algodón_CardasGroup.Text = "Cardas";
+            this.RegistrarTrapeadoresButton.Caption = "Registrar Producción";
+            this.RegistrarTrapeadoresButton.Id = 42;
+            this.RegistrarTrapeadoresButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("RegistrarTrapeadoresButton.ImageOptions.Image")));
+            this.RegistrarTrapeadoresButton.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("RegistrarTrapeadoresButton.ImageOptions.LargeImage")));
+            this.RegistrarTrapeadoresButton.Name = "RegistrarTrapeadoresButton";
+            this.RegistrarTrapeadoresButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.RegistrarTrapeadoresButton_ItemClick);
             // 
-            // Algodón_EstiradoGroup
+            // Trapeadores_VerGroup
             // 
-            this.Algodón_EstiradoGroup.AllowTextClipping = false;
-            this.Algodón_EstiradoGroup.ItemLinks.Add(this.RegistrarEstiradoButton);
-            this.Algodón_EstiradoGroup.Name = "Algodón_EstiradoGroup";
-            this.Algodón_EstiradoGroup.Text = "Estirado";
+            this.Trapeadores_VerGroup.AllowTextClipping = false;
+            this.Trapeadores_VerGroup.ItemLinks.Add(this.VerProduccionesTrapeadoresButton);
+            this.Trapeadores_VerGroup.Name = "Trapeadores_VerGroup";
+            this.Trapeadores_VerGroup.Text = "Ver";
             // 
-            // Algodón_OpenEndGroup
+            // VerProduccionesTrapeadoresButton
             // 
-            this.Algodón_OpenEndGroup.AllowTextClipping = false;
-            this.Algodón_OpenEndGroup.ItemLinks.Add(this.RegistrarOpenEndButton);
-            this.Algodón_OpenEndGroup.Name = "Algodón_OpenEndGroup";
-            this.Algodón_OpenEndGroup.Text = "Open End";
-            // 
-            // Algodón_TorceduraGroup
-            // 
-            this.Algodón_TorceduraGroup.AllowTextClipping = false;
-            this.Algodón_TorceduraGroup.ItemLinks.Add(this.RegistrarTorceduraButton);
-            this.Algodón_TorceduraGroup.Name = "Algodón_TorceduraGroup";
-            this.Algodón_TorceduraGroup.Text = "Torcedura";
-            // 
-            // Algodón_EnrolladoGroup
-            // 
-            this.Algodón_EnrolladoGroup.AllowTextClipping = false;
-            this.Algodón_EnrolladoGroup.ItemLinks.Add(this.RegistrarEnrolladoButton);
-            this.Algodón_EnrolladoGroup.Name = "Algodón_EnrolladoGroup";
-            this.Algodón_EnrolladoGroup.Text = "Enrollado";
-            // 
-            // RegistrarEscaleraButton
-            // 
-            this.RegistrarEscaleraButton.Caption = "Registrar Escalera";
-            this.RegistrarEscaleraButton.Id = 35;
-            this.RegistrarEscaleraButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("RegistrarEscaleraButton.ImageOptions.Image")));
-            this.RegistrarEscaleraButton.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("RegistrarEscaleraButton.ImageOptions.LargeImage")));
-            this.RegistrarEscaleraButton.Name = "RegistrarEscaleraButton";
-            this.RegistrarEscaleraButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.RegistrarEscaleraButton_ItemClick);
-            // 
-            // RegistrarCardasButton
-            // 
-            this.RegistrarCardasButton.Caption = "Registrar Cardas";
-            this.RegistrarCardasButton.Id = 36;
-            this.RegistrarCardasButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("RegistrarCardasButton.ImageOptions.Image")));
-            this.RegistrarCardasButton.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("RegistrarCardasButton.ImageOptions.LargeImage")));
-            this.RegistrarCardasButton.Name = "RegistrarCardasButton";
-            this.RegistrarCardasButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.RegistrarCardasButton_ItemClick);
-            // 
-            // RegistrarEstiradoButton
-            // 
-            this.RegistrarEstiradoButton.Caption = "Registrar Estirado";
-            this.RegistrarEstiradoButton.Id = 37;
-            this.RegistrarEstiradoButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("RegistrarEstiradoButton.ImageOptions.Image")));
-            this.RegistrarEstiradoButton.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("RegistrarEstiradoButton.ImageOptions.LargeImage")));
-            this.RegistrarEstiradoButton.Name = "RegistrarEstiradoButton";
-            this.RegistrarEstiradoButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.RegistrarEstiradoButton_ItemClick);
-            // 
-            // RegistrarOpenEndButton
-            // 
-            this.RegistrarOpenEndButton.Caption = "Registrar Open End";
-            this.RegistrarOpenEndButton.Id = 38;
-            this.RegistrarOpenEndButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("RegistrarOpenEndButton.ImageOptions.Image")));
-            this.RegistrarOpenEndButton.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("RegistrarOpenEndButton.ImageOptions.LargeImage")));
-            this.RegistrarOpenEndButton.Name = "RegistrarOpenEndButton";
-            this.RegistrarOpenEndButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.RegistrarOpenEndButton_ItemClick);
-            // 
-            // RegistrarTorceduraButton
-            // 
-            this.RegistrarTorceduraButton.Caption = "Registrar Torcedura";
-            this.RegistrarTorceduraButton.Id = 39;
-            this.RegistrarTorceduraButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("RegistrarTorceduraButton.ImageOptions.Image")));
-            this.RegistrarTorceduraButton.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("RegistrarTorceduraButton.ImageOptions.LargeImage")));
-            this.RegistrarTorceduraButton.Name = "RegistrarTorceduraButton";
-            this.RegistrarTorceduraButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.RegistrarTorceduraButton_ItemClick);
-            // 
-            // RegistrarEnrolladoButton
-            // 
-            this.RegistrarEnrolladoButton.Caption = "Registrar Enrollado";
-            this.RegistrarEnrolladoButton.Id = 40;
-            this.RegistrarEnrolladoButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("RegistrarEnrolladoButton.ImageOptions.Image")));
-            this.RegistrarEnrolladoButton.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("RegistrarEnrolladoButton.ImageOptions.LargeImage")));
-            this.RegistrarEnrolladoButton.Name = "RegistrarEnrolladoButton";
-            this.RegistrarEnrolladoButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.RegistrarEnrolladoButton_ItemClick);
-            // 
-            // Algodón_VerGroup
-            // 
-            this.Algodón_VerGroup.AllowTextClipping = false;
-            this.Algodón_VerGroup.ItemLinks.Add(this.VerProduccionesAlgodónButton);
-            this.Algodón_VerGroup.Name = "Algodón_VerGroup";
-            this.Algodón_VerGroup.Text = "Ver";
-            // 
-            // VerProduccionesAlgodónButton
-            // 
-            this.VerProduccionesAlgodónButton.Caption = "Ver Producciones";
-            this.VerProduccionesAlgodónButton.Id = 41;
-            this.VerProduccionesAlgodónButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("VerProduccionesAlgodonButton.ImageOptions.SvgImage")));
-            this.VerProduccionesAlgodónButton.Name = "VerProduccionesAlgodónButton";
-            this.VerProduccionesAlgodónButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerProduccionesAlgodónButton_ItemClick);
+            this.VerProduccionesTrapeadoresButton.Caption = "Ver Producciones";
+            this.VerProduccionesTrapeadoresButton.Id = 43;
+            this.VerProduccionesTrapeadoresButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("VerProduccionesTrapeadoresButton.ImageOptions.SvgImage")));
+            this.VerProduccionesTrapeadoresButton.Name = "VerProduccionesTrapeadoresButton";
+            this.VerProduccionesTrapeadoresButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerProduccionesTrapeadoresButton_ItemClick);
             // 
             // MainMenuForm
             // 
@@ -735,11 +710,7 @@ namespace CZS_LaVictoria
         private DevExpress.XtraBars.BarButtonItem RegistrarInyecciónButton;
         private DevExpress.XtraBars.BarButtonItem RegistrarInsertadoButton;
         private DevExpress.XtraBars.Ribbon.RibbonPage PlásticosTab;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup Plásticos_MolidoGroup;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup Plásticos_ExtruídoGroup;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup Plásticos_CortadoGroup;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup Plásticos_InyecciónGroup;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup Plásticos_InsertadoGroup;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup Plásticos_RegistroGroup;
         private DevExpress.XtraBars.BarSubItem Datos_ProveedoresMaterialesSubmenu;
         private DevExpress.XtraBars.BarButtonItem VerMaterialesButton;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup Datos_ClientesGroup;
@@ -771,14 +742,14 @@ namespace CZS_LaVictoria
         private DevExpress.XtraBars.BarButtonItem RegistrarTorceduraButton;
         private DevExpress.XtraBars.BarButtonItem RegistrarEnrolladoButton;
         private DevExpress.XtraBars.Ribbon.RibbonPage AlgodónTab;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup Algodón_EscaleraGroup;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup Algodón_CardasGroup;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup Algodón_EstiradoGroup;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup Algodón_OpenEndGroup;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup Algodón_TorceduraGroup;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup Algodón_EnrolladoGroup;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup Algodón_RegistroGroup;
         private DevExpress.XtraBars.BarButtonItem VerProduccionesAlgodónButton;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup Algodón_VerGroup;
+        private DevExpress.XtraBars.Ribbon.RibbonPage TrapeadoresTab;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup Trapeadores_RegistrarGroup;
+        private DevExpress.XtraBars.BarButtonItem RegistrarTrapeadoresButton;
+        private DevExpress.XtraBars.BarButtonItem VerProduccionesTrapeadoresButton;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup Trapeadores_VerGroup;
     }
 }
 
