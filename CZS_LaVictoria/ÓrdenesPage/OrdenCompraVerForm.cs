@@ -44,8 +44,8 @@ namespace CZS_LaVictoria.ÓrdenesPage
             // Al seleccionar una orden, muestra todas las líneas de esa orden.
             else
             {
-                DataGrid.DataSource = GlobalConfig.Connection.OrdenCompra_GetLineasByNumOrden(NumOrdenText.Text);
                 _orden = GlobalConfig.Connection.OrdenCompra_GetByNumOrden(NumOrdenText.Text);
+                DataGrid.DataSource = _orden;
             }
 
             // Ordenar tabla por Número de Orden.
@@ -62,11 +62,6 @@ namespace CZS_LaVictoria.ÓrdenesPage
         /// </summary>
         void DataGrid_AutoGeneratingColumn(object sender, AutoGeneratingColumnArgs e)
         {
-            if (e.Column.MappingName == "Area")
-            {
-                e.Column.HeaderText = "Área";
-            }
-
             if (e.Column.MappingName == "NumOrden")
             {
                 var nfi = new NumberFormatInfo { NumberDecimalDigits = 0, NumberGroupSizes = new int[] { } };
@@ -158,7 +153,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             _orden = GlobalConfig.Connection.OrdenCompra_GetByNumOrden(línea?.NumOrden.ToString());
             Debug.Assert(línea != null, nameof(línea) + " != null");
             línea.Estatus = línea.CantidadPendiente == 0 ? "Entregada" : "Parcial";
-            var saveSuccess = GlobalConfig.Connection.PurchaseOrderLine_Update(_orden.Id, línea, _oldQty, _newQty);
+            var saveSuccess = GlobalConfig.Connection.OrdenCompra_UpdateLinea(_orden.Id, línea, _oldQty, _newQty);
             MessageBox.Show(saveSuccess ? "Línea actualizada." : "Error al actualizar línea.");
 
             // Unhook para que este método sólo se ejecute después de Recibir Button.
@@ -170,7 +165,6 @@ namespace CZS_LaVictoria.ÓrdenesPage
         /// </summary>
         void RecibirButton_Click(object sender, EventArgs e)
         {
-            //DataGrid.SelectionChanging += DataGridOnSelectionChanging;
             if (DataGrid.SelectedIndex < 0)
             {
                 MessageBox.Show("Selecciona una línea.");
@@ -179,9 +173,9 @@ namespace CZS_LaVictoria.ÓrdenesPage
 
             var línea = DataGrid.SelectedItem as OrdenCompraLíneaModel;
             Debug.Assert(línea != null, nameof(línea) + " != null");
-            if (línea.Estatus == "Entregada" || línea.Estatus == "Cancelada")
+            if (línea.Estatus == "Entregada" || línea.Estatus == "Cancelada" || línea.Estatus == "Cerrada")
             {
-                MessageBox.Show("Esta línea ya está entregada o cancelada.");
+                MessageBox.Show("Esta línea no se puede recibir.");
                 return;
             }
 
@@ -204,7 +198,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             _orden = GlobalConfig.Connection.OrdenCompra_GetByNumOrden(línea.NumOrden.ToString());
             Debug.Assert(línea != null, nameof(línea) + " != null");
             línea.Estatus = línea.CantidadPendiente == 0 ? "Entregada" : "Parcial";
-            var saveSuccess = GlobalConfig.Connection.PurchaseOrderLine_Update(_orden.Id, línea, _oldQty, _newQty);
+            var saveSuccess = GlobalConfig.Connection.OrdenCompra_UpdateLinea(_orden.Id, línea, _oldQty, _newQty);
             MessageBox.Show(saveSuccess ? "Línea actualizada." : "Error al actualizar línea.");
         }
 
@@ -221,17 +215,17 @@ namespace CZS_LaVictoria.ÓrdenesPage
 
             var línea = DataGrid.SelectedItem as OrdenCompraLíneaModel;
             Debug.Assert(línea != null, nameof(línea) + " != null");
-            if (línea.Estatus == "Entregada" || línea.Estatus == "Cancelada")
+            if (línea.Estatus == "Entregada" || línea.Estatus == "Cancelada" || línea.Estatus == "Cerrada")
             {
-                MessageBox.Show("Esta línea ya está entregada o cancelada.");
+                MessageBox.Show("Esta línea ya no se puede cerrar o cancelar.");
                 return;
             }
 
             _orden = GlobalConfig.Connection.OrdenCompra_GetByNumOrden(línea.NumOrden.ToString());
             línea.CantidadPendiente = 0;
             línea.FechaCancelación = DateTime.Today;
-            línea.Estatus = "Cancelada";
-            var deleteSuccess = GlobalConfig.Connection.PurchaseOrderLine_Update(_orden.Id, línea, _oldQty, _newQty);
+            línea.Estatus = línea.CantidadRecibida == 0 ? "Cancelada" : "Cerrada";
+            var deleteSuccess = GlobalConfig.Connection.OrdenCompra_UpdateLinea(_orden.Id, línea, 0, 0);
             MessageBox.Show(deleteSuccess ? "Línea cancelada." : "Error al cancelar línea.");
         }
 
