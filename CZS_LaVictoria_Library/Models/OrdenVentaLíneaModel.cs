@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
+// ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable UnusedMember.Global
 
 namespace CZS_LaVictoria_Library.Models
 {
@@ -19,7 +21,7 @@ namespace CZS_LaVictoria_Library.Models
         string _estatus;
 
         public string Cliente { get; set; }
-        public string Area { get; set; }
+        public string Área { get; set; }
         public long NumOrden { get; set; }
 
         public int NumLinea

@@ -313,7 +313,6 @@ namespace CZS_LaVictoria.ÓrdenesPage
         void GuardarButton_Click(object sender, EventArgs e)
         {
             CreatePdf();
-            return;
             SendMail();
 
             Debug.Assert(FechaOrdenPicker.Value != null, "FechaOrdenPicker.Value != null");
@@ -321,7 +320,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             {
                 NumOrden = long.Parse(NumOrdenText.Text),
                 TipoOrden = "V",
-                Area = AreaCombo.Text,
+                Área = AreaCombo.Text,
                 Cliente = _selectedClient.Nombre,
                 Transporte = TransporteCombo.Text,
                 PuestoEn = PuestoCombo.Text,

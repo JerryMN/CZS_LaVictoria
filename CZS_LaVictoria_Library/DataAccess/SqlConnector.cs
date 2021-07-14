@@ -967,7 +967,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                 var p = new DynamicParameters();
                 p.Add("@NumOrden", model.NumOrden);
                 p.Add("@TipoOrden", model.TipoOrden);
-                p.Add("@Area", model.Area);
+                p.Add("@Area", model.Área);
                 p.Add("@Proveedor", model.Proveedor);
                 p.Add("@Condiciones", model.Condiciones);
                 p.Add("@FechaOrden", model.FechaOrden);
@@ -1228,7 +1228,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                 var p = new DynamicParameters();
                 p.Add("@NumOrden", model.NumOrden);
                 p.Add("@TipoOrden", model.TipoOrden);
-                p.Add("@Area", model.Area);
+                p.Add("@Area", model.Área);
                 p.Add("@Cliente", model.Cliente);
                 p.Add("@Transporte", model.Transporte);
                 p.Add("@PuestoEn", model.PuestoEn);

@@ -316,7 +316,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             {
                 NumOrden = long.Parse(NumOrdenText.Text),
                 TipoOrden = "C",
-                Area = AreaCombo.Text,
+                Área = AreaCombo.Text,
                 Proveedor = _selectedProveedor.Nombre,
                 Condiciones = CondicionesCombo.Text,
                 FechaOrden = (DateTime) FechaOrdenPicker.Value,
