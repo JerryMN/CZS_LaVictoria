@@ -2203,19 +2203,19 @@ namespace CZS_LaVictoria_Library.DataAccess
                 try
                 {
                     var p = new DynamicParameters();
-                    p.Add("@CantidadDisponible", baseEntrada.CantidadDisponible);
+                    p.Add("@CantidadDisponible", baseEntrada.CantidadDisponible - model.CantidadEntra);
                     p.Add("@Id", baseEntrada.Id);
                     connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
 
                     p = new DynamicParameters();
-                    p.Add("@CantidadDisponible", fibraEntrada.CantidadDisponible);
+                    p.Add("@CantidadDisponible", fibraEntrada.CantidadDisponible - model.CantidadFibraEntra);
                     p.Add("@Id", fibraEntrada.Id);
                     connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
 
                     if (alambreEntrada.Id != 0)
                     {
                         p = new DynamicParameters();
-                        p.Add("@CantidadDisponible", alambreEntrada.CantidadDisponible);
+                        p.Add("@CantidadDisponible", alambreEntrada.CantidadDisponible - model.RollosAlambre);
                         p.Add("@Id", alambreEntrada.Id);
                         connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
                     }

@@ -136,6 +136,7 @@ namespace CZS_LaVictoria.PlásticosPage
                 _productoSeleccionado.CantidadDisponible += _piezasBuenas;
             }
 
+            orden.MaterialSale = _productoSeleccionado.Nombre;
             var saveSuccess = GlobalConfig.Connection.PlasticProduction_CreateInsertado(orden, _baseSeleccionada,
                 _fibraSeleccionada, _alambreSeleccionado, _productoSeleccionado);
 
@@ -188,7 +189,7 @@ namespace CZS_LaVictoria.PlásticosPage
                 BaseCombo.Items.Add(@base);
             }
 
-            var fibras = GlobalConfig.Connection.Material_GetByCat("Extruído");
+            var fibras = GlobalConfig.Connection.Material_GetByCat("Cortado");
             foreach (var fibra in fibras)
             {
                 FibraCombo.Items.Add(fibra);

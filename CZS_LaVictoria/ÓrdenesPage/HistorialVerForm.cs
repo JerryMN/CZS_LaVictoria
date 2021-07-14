@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using CZS_LaVictoria_Library;
 using Syncfusion.WinForms.DataGrid;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid.Events;
+using Syncfusion.WinForms.DataGrid.Styles;
 using Syncfusion.WinForms.Input.Enums;
 
 namespace CZS_LaVictoria.ÓrdenesPage
@@ -13,6 +15,9 @@ namespace CZS_LaVictoria.ÓrdenesPage
         public HistorialVerForm()
         {
             InitializeComponent();
+            DataGrid.Style.CellStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
+            DataGrid.Style.HeaderStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
+            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
         }
 
         #region Events

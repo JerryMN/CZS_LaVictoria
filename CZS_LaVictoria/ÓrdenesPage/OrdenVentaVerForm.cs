@@ -9,6 +9,9 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using Syncfusion.WinForms.DataGrid.Enums;
+using Syncfusion.WinForms.DataGrid.Styles;
+
 // ReSharper disable UseObjectOrCollectionInitializer
 
 namespace CZS_LaVictoria.ÓrdenesPage
@@ -23,6 +26,9 @@ namespace CZS_LaVictoria.ÓrdenesPage
         public OrdenVentaVerForm()
         {
             InitializeComponent();
+            DataGrid.Style.CellStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
+            DataGrid.Style.HeaderStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
+            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
         }
 
         #region Events
@@ -78,6 +84,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             if (e.Column.MappingName == "Producto")
             {
                 e.Column.HeaderText = "Producto";
+                e.Column.AutoSizeColumnsMode = AutoSizeColumnsMode.LastColumnFill;
             }
 
             if (e.Column.MappingName == "CantidadOrden")
