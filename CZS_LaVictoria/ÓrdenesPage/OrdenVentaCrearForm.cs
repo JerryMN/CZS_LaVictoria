@@ -27,6 +27,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
     public partial class OrdenVentaCrearForm : Form
     {
         ClienteModel _selectedClient;
+        List<AreaModel> _selectedArea;
         List<ClienteProductoModel> _productos;
         readonly List<OrdenVentaLíneaModel> _orderLines = new List<OrdenVentaLíneaModel>();
         int _numLinea = 1;
@@ -102,6 +103,9 @@ namespace CZS_LaVictoria.ÓrdenesPage
         /// </summary>
         void AreaCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (ClienteCombo.Text == "") return;
+            var selectedArea = AreaCombo.Text;
+            _selectedArea = GlobalConfig.Connection.Area_GetByArea(selectedArea);
             GetProducts();
         }
 
@@ -110,91 +114,67 @@ namespace CZS_LaVictoria.ÓrdenesPage
         /// </summary>
         void DataGrid_AutoGeneratingColumn(object sender, AutoGeneratingColumnArgs e)
         {
-            if (e.Column.MappingName == "Cliente")
+            switch (e.Column.MappingName)
             {
-                e.Cancel = true;
-            }
-
-            if (e.Column.MappingName == "Area")
-            {
-                e.Cancel = true;
-            }
-
-            if (e.Column.MappingName == "NumOrden")
-            {
-                e.Cancel = true;
-            }
-
-            if (e.Column.MappingName == "NumLinea")
-            {
-                e.Column.HeaderText = "Línea";
-                e.Column.Width = 100;
-                e.Column.AllowFiltering = false;
-            }
-
-            if (e.Column.MappingName == "Producto")
-            {
-                e.Column = new GridComboBoxColumn
-                {
-                    MappingName = "Producto",
-                    HeaderText = "Producto",
-                    DropDownStyle = DropDownStyle.DropDownList,
-                    AutoSizeColumnsMode = AutoSizeColumnsMode.LastColumnFill
-                };
-            }
-
-            if (e.Column.MappingName == "CantidadOrden")
-            {
-                e.Column.HeaderText = "Cantidad";
-                e.Column.AllowFiltering = false;
-            }
-
-            if (e.Column.MappingName == "CantidadEntregada")
-            {
-                e.Cancel = true;
-            }
-
-            if (e.Column.MappingName == "CantidadPendiente")
-            {
-                e.Cancel = true;
-            }
-
-            if (e.Column.MappingName == "PrecioUnitario")
-            {
-                e.Column = new GridNumericColumn
-                { MappingName = "PrecioUnitario", HeaderText = "Precio Unitario", FormatMode = FormatMode.Currency, AllowFiltering = false };
-            }
-
-            if (e.Column.MappingName == "Iva")
-            {
-                e.Column = new GridCheckBoxColumn { MappingName = "Iva", HeaderText = "IVA" };
-            }
-
-            if (e.Column.MappingName == "Subtotal")
-            {
-                e.Column = new GridNumericColumn
-                { MappingName = "Subtotal", HeaderText = "Subtotal", FormatMode = FormatMode.Currency, Width = 100, AllowFiltering = false };
-            }
-
-            if (e.Column.MappingName == "FechaEntrega")
-            {
-                Debug.Assert(FechaOrdenPicker.Value != null, "FechaOrdenPicker.Value != null");
-                e.Column = new GridDateTimeColumn
-                {
-                    MappingName = "FechaEntrega",
-                    HeaderText = "Fecha Entrega",
-                    MinDateTime = (DateTime)FechaOrdenPicker.Value
-                };
-            }
-
-            if (e.Column.MappingName == "FechaUltEntrega")
-            {
-                e.Cancel = true;
-            }
-
-            if (e.Column.MappingName == "FechaCancelación")
-            {
-                e.Cancel = true;
+                case "Cliente":
+                case "Área":
+                case "NumOrden":
+                case "CantidadEntregada":
+                case "CantidadPendiente":
+                case "FechaUltEntrega":
+                case "FechaCancelación":
+                case "Estatus":
+                    e.Cancel = true;
+                    break;
+                case "NumLinea":
+                    e.Column.HeaderText = "Línea";
+                    e.Column.Width = 100;
+                    e.Column.AllowFiltering = false;
+                    break;
+                case "Producto":
+                    e.Column = new GridComboBoxColumn
+                    {
+                        MappingName = "Producto",
+                        HeaderText = "Producto",
+                        DropDownStyle = DropDownStyle.DropDownList,
+                        AutoSizeColumnsMode = AutoSizeColumnsMode.LastColumnFill
+                    };
+                    break;
+                case "CantidadOrden":
+                    e.Column.HeaderText = "Cantidad";
+                    e.Column.AllowFiltering = false;
+                    break;
+                case "PrecioUnitario":
+                    e.Column = new GridNumericColumn
+                    {
+                        MappingName = "PrecioUnitario",
+                        HeaderText = "Precio Unitario",
+                        FormatMode = FormatMode.Currency,
+                        AllowFiltering = false
+                    };
+                    break;
+                case "Iva":
+                    e.Column = new GridCheckBoxColumn { MappingName = "Iva", HeaderText = "IVA" };
+                    break;
+                case "Subtotal":
+                    e.Column = new GridNumericColumn
+                    {
+                        MappingName = "Subtotal",
+                        HeaderText = "Subtotal",
+                        FormatMode = FormatMode.Currency,
+                        Width = 100,
+                        AllowFiltering = false
+                    };
+                    break;
+                case "FechaEntrega":
+                    Debug.Assert(FechaOrdenPicker.Value != null, "FechaOrdenPicker.Value != null");
+                    e.Column = new GridDateTimeColumn
+                    {
+                        MappingName = "FechaEntrega",
+                        HeaderText = "Fecha Entrega",
+                        MinDateTime = (DateTime)FechaOrdenPicker.Value
+                    };
+                    break;
             }
         }
 
@@ -319,7 +299,8 @@ namespace CZS_LaVictoria.ÓrdenesPage
             var width = e.PdfPage.GetClientSize().Width;
             var header = new PdfPageTemplateElement(width, 80);
 
-            header.Graphics.DrawString($"Escobas La Victoria — Orden de Venta {NumOrdenText.Text}", font, brush, 0, 10);
+            header.Graphics.DrawImage(PdfImage.FromFile(@"..\..\Resources\Logo.png"), width - 70, 0, 70, 70);
+            header.Graphics.DrawString($"Escobas La Victoria — Orden de Venta {NumOrdenText.Text}", font, brush, 0, 0);
             header.Graphics.DrawString($"Fecha Orden: {FechaOrdenPicker.Value.ToString().Substring(0, 11)}  |   " +
                                        $"Área: {AreaCombo.Text}", smallFont, brush, 0, 30);
             header.Graphics.DrawString($"Cliente: {_selectedClient.Nombre}  |  Atención: {_selectedClient.Atención}", smallFont, brush, 0, 45);
@@ -332,6 +313,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
         void GuardarButton_Click(object sender, EventArgs e)
         {
             CreatePdf();
+            return;
             SendMail();
 
             Debug.Assert(FechaOrdenPicker.Value != null, "FechaOrdenPicker.Value != null");
@@ -341,6 +323,9 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 TipoOrden = "V",
                 Area = AreaCombo.Text,
                 Cliente = _selectedClient.Nombre,
+                Transporte = TransporteCombo.Text,
+                PuestoEn = PuestoCombo.Text,
+                Presentación = PresentaciónCombo.Text,
                 FechaOrden = (DateTime)FechaOrdenPicker.Value,
             };
 
@@ -352,7 +337,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 order.Líneas.Add(data);
             }
 
-            var saveSuccess = true; // TODO - Save order.
+            var saveSuccess = GlobalConfig.Connection.OrdenVenta_Create(order);
 
             if (saveSuccess)
             {
@@ -386,7 +371,14 @@ namespace CZS_LaVictoria.ÓrdenesPage
         /// <returns>El número consecutivo para la orden nueva.</returns>
         string GetNumOrden()
         {
-            var order = 2100000; // TODO - Get.
+            var order = GlobalConfig.Connection.OrdenVenta_GetLastNumOrden();
+            var lastOrderYear = order.ToString().Substring(0, 2);
+            var thisYear = DateTime.Today.Year.ToString().Substring(2, 2);
+            if (lastOrderYear != thisYear)
+            {
+                order = long.Parse(thisYear + "00000");
+            }
+
             order += 1;
             return order.ToString();
         }
@@ -413,7 +405,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
         void GetAreas()
         {
             AreaCombo.Items.Clear();
-            var areas = GlobalConfig.Connection.Area_GetAll();
+            var areas = GlobalConfig.Connection.Area_GetDistinct();
 
             foreach (var area in areas)
             {
@@ -426,7 +418,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
         void GetProducts()
         {
             if (_selectedClient == null || AreaCombo.Text == "") return;
-            // TODO - Get _productos.
+            _productos = GlobalConfig.Connection.ClienteProducto_GetAll();
             ((GridComboBoxColumn)DataGrid.Columns["Producto"]).DataSource = _productos;
             ((GridComboBoxColumn)DataGrid.Columns["Producto"]).DisplayMember = "ProductoInterno";
             ((GridComboBoxColumn)DataGrid.Columns["Producto"]).ValueMember = "ProductoInterno";
@@ -493,10 +485,9 @@ namespace CZS_LaVictoria.ÓrdenesPage
             {
                 MessageBox.Show(ex.ToString());
             }
-            MsgBox.Text = "PDF guardado.";
+            MsgBox.Text = "PDF guardado.\n";
             MsgBox.IconColor = Color.DarkGreen;
             MsgBox.Visible = true;
-            MsgBoxTimer.Start();
         }
 
         /// <summary>
@@ -507,21 +498,27 @@ namespace CZS_LaVictoria.ÓrdenesPage
             using (var mail = new MailMessage())
             {
                 var addresses = "";
-                using (var smtpServer = new SmtpClient("smtp.gmail.com"))
+                using (var smtpServer = new SmtpClient(Properties.Settings.Default.smtpServer))
                 {
-                    // TODO - Obtener la dirección del responsable de area.
-                    mail.From = new MailAddress("splend3ad@gmail.com");
+                    mail.From = new MailAddress(Properties.Settings.Default.emailAddress);
+                    // TODO - Uncomment next line.
+                    //mail.To.Add(_selectedClient.Correo);
                     mail.To.Add("gerardo.mondragonb@hotmail.com");
-                    //mail.To.Add(CorreoText.Text);
+                    foreach (var area in _selectedArea)
+                    {
+                        mail.To.Add(area.Correo);
+                    }
+
                     mail.Subject = $"Orden de Venta #{NumOrdenText.Text} - Escobas La Victoria";
-                    // TODO - Cambiar texto.
                     mail.Body =
-                        $"Estimado Proveedor {_selectedClient.Nombre} y {_selectedClient.Atención}:" +
-                        $"\nSe ha generado una nueva orden de venta #{NumOrdenText.Text} la cual encontrará anexa." +
-                        "\nFavor de confirmar de recibido. Gracias, \n \nEscobas La Victoria";
+                        "Atención:" +
+                        $"\nSe ha generado una nueva orden de venta para el cliente {_selectedClient.Nombre}. " +
+                        $"\nEl PDF de la orden #{NumOrdenText.Text} está anexo." +
+                        "\nFavor de surtir. \nGracias, \n \nEscobas La Victoria";
                     mail.Attachments.Add(new Attachment(_pdfPath));
                     smtpServer.Port = 587;
-                    smtpServer.Credentials = new NetworkCredential("splend3ad@gmail.com", "xggtroybzdniydta");
+                    smtpServer.Credentials = new NetworkCredential(Properties.Settings.Default.emailAddress,
+                        Properties.Settings.Default.emailPassword);
                     smtpServer.EnableSsl = true;
                     smtpServer.Send(mail);
                 }
@@ -538,10 +535,9 @@ namespace CZS_LaVictoria.ÓrdenesPage
                     }
                 }
 
-                MsgBox.Text = $"Mensaje enviado a {addresses}";
+                MsgBox.Text += $"Mensaje enviado a {addresses}.\n";
                 MsgBox.IconColor = Color.DarkGreen;
                 MsgBox.Visible = true;
-                MsgBoxTimer.Start();
             }
         }
 

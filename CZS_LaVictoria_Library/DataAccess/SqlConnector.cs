@@ -588,6 +588,29 @@ namespace CZS_LaVictoria_Library.DataAccess
             }
         }
 
+        public ClienteProductoModel ClienteProducto_Find(string nombreInterno, string area)
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@NombreInterno", nombreInterno);
+                p.Add("@Area", area);
+
+                try
+                {
+                    var output = connection.QuerySingle<ClienteProductoModel>("dbo.spClientProducts_Find", p,
+                        commandType: CommandType.StoredProcedure);
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.ToString());
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
+        }
+
         public bool ClienteProducto_Update(ClienteProductoModel model)
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
@@ -1099,7 +1122,7 @@ namespace CZS_LaVictoria_Library.DataAccess
             }
         }
 
-        public bool PurchaseOrderLine_Update(long orderId, OrdenCompraLíneaModel línea, double oldQty, double newQty)
+        public bool OrdenCompra_UpdateLinea(long orderId, OrdenCompraLíneaModel línea, double oldQty, double newQty)
         {
             using (var scope = new TransactionScope())
             using (IDbConnection connection = new SqlConnection(ConnectionString))
@@ -1121,7 +1144,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                 {
                     connection.Execute("dbo.spPurchaseOrderDetails_Update", p,
                         commandType: CommandType.StoredProcedure);
-                    if (línea.Estatus == "Cancelada")
+                    if (línea.Estatus == "Cancelada" || línea.Estatus == "Cerrada")
                     {
                         scope.Complete();
                         return true;
@@ -1269,7 +1292,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                 }
                 catch (NullReferenceException)
                 {
-                    var year = DateTime.Today.Year.ToString().Substring(2, 3);
+                    var year = DateTime.Today.Year.ToString().Substring(2, 2);
                     return long.Parse(year + "00000");
                 }
                 catch (Exception ex)
@@ -1363,24 +1386,55 @@ namespace CZS_LaVictoria_Library.DataAccess
             }
         }
 
-        public bool PurchaseOrderLine_Update(long orderId, OrdenVentaLíneaModel model)
+        public bool OrdenVenta_UpdateLinea(long orderId, OrdenVentaLíneaModel línea, double oldQty, double newQty)
         {
+            using (var scope = new TransactionScope())
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
+                Debug.Assert(línea != null, nameof(línea) + " != null");
+                var producto = ClienteProducto_Find(línea.Producto, línea.Área);
+                var material = Material_GetByNombreArea(producto.ProductoInterno, línea.Área);
+
                 var p = new DynamicParameters();
                 p.Add("@IdOrden", orderId);
-                p.Add("@NumLinea", model.NumLinea);
-                p.Add("@CantidadEntregada", model.CantidadEntregada);
-                p.Add("@CantidadPendiente", model.CantidadPendiente);
-                p.Add("@FechaUltEntrega", model.FechaUltEntrega);
-                p.Add("@FechaCancelación", model.FechaCancelación);
-                p.Add("@Estatus", model.Estatus);
+                p.Add("@NumLinea", línea.NumLinea);
+                p.Add("@CantidadEntregada", línea.CantidadEntregada);
+                p.Add("@CantidadPendiente", línea.CantidadPendiente);
+                p.Add("@FechaUltEntrega", línea.FechaUltEntrega);
+                p.Add("@FechaCancelación", línea.FechaCancelación);
+                p.Add("@Estatus", línea.Estatus);
 
                 try
                 {
                     connection.Execute("dbo.spSaleOrderDetails_Update", p,
                         commandType: CommandType.StoredProcedure);
-                    return true;
+                    if (línea.Estatus == "Cancelada" || línea.Estatus == "Cerrada")
+                    {
+                        scope.Complete();
+                        return true;
+                    }
+
+                    if (material == null)
+                    {
+                        // Material no existe en inventario.
+                        return false;
+                    }
+
+                    p = new DynamicParameters();
+                    p.Add("@CantidadDisponible", material.CantidadDisponible - newQty + oldQty);
+                    p.Add("@Id", material.Id);
+
+                    connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                    
+                    p = new DynamicParameters();
+                    p.Add("@TipoOrden", "V");
+                    p.Add("@NumOrden", línea.NumOrden);
+                    p.Add("@NumLinea", línea.NumLinea);
+                    p.Add("@Producto", línea.Producto);
+                    p.Add("@Cantidad", - newQty + oldQty);
+                    p.Add("@Fecha", línea.FechaUltEntrega);
+
+                    connection.Execute("dbo.spDelivery_Insert", p, commandType: CommandType.StoredProcedure);
                 }
                 catch (Exception ex)
                 {
@@ -1388,6 +1442,9 @@ namespace CZS_LaVictoria_Library.DataAccess
                     Debug.Assert(false);
                     return false;
                 }
+
+                scope.Complete();
+                return true;
             }
         }
 

@@ -6,10 +6,10 @@ using Syncfusion.WinForms.Input.Enums;
 using System.Diagnostics;
 using System.Globalization;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+// ReSharper disable UseObjectOrCollectionInitializer
 
 namespace CZS_LaVictoria.ÓrdenesPage
 {
@@ -35,17 +35,17 @@ namespace CZS_LaVictoria.ÓrdenesPage
             // Si no hay alguna orden seleccionada, muestra todas las líneas de todas las órdenes.
             if (NumOrdenText.Text == "" && PendientesCheck.CheckState == CheckState.Unchecked)
             {
-                DataGrid.DataSource = new List<OrdenVentaLíneaModel>();  // TODO GetAll();
+                DataGrid.DataSource = GlobalConfig.Connection.OrdenVenta_GetAllLineas();
             }
             else if (NumOrdenText.Text == "" && PendientesCheck.CheckState == CheckState.Checked)
             {
-                DataGrid.DataSource = new List<OrdenVentaLíneaModel>(); // TODO GetPending();
+                DataGrid.DataSource = GlobalConfig.Connection.OrdenVenta_GetLineasPendientes();
             }
             // Al seleccionar una orden, muestra todas las líneas de esa orden.
             else
             {
-                DataGrid.DataSource = GlobalConfig.Connection.OrdenCompra_GetByNumOrden(NumOrdenText.Text);
-                _orden = new OrdenVentaModel(); // TODO - _GetByNumOrden(NumOrdenText.Text);
+                _orden = GlobalConfig.Connection.OrdenVenta_GetByNumOrden(NumOrdenText.Text);
+                DataGrid.DataSource = _orden;
             }
 
             // Ordenar tabla por Número de Orden.
@@ -62,11 +62,6 @@ namespace CZS_LaVictoria.ÓrdenesPage
         /// </summary>
         void DataGrid_AutoGeneratingColumn(object sender, AutoGeneratingColumnArgs e)
         {
-            if (e.Column.MappingName == "Area")
-            {
-                e.Column.HeaderText = "Área";
-            }
-
             if (e.Column.MappingName == "NumOrden")
             {
                 var nfi = new NumberFormatInfo { NumberDecimalDigits = 0, NumberGroupSizes = new int[] { } };
@@ -155,16 +150,13 @@ namespace CZS_LaVictoria.ÓrdenesPage
         {
             if (e.RemovedItems.Count == 0) return;
             var línea = e.RemovedItems[0] as OrdenVentaLíneaModel;
-            _orden = new OrdenVentaModel(); // TODO - GetByNumOrden(línea?.NumOrden.ToString());
-            if (línea?.CantidadPendiente == 0)
-            {
-                línea.Estatus = "Entregada";
-            }
+            _orden = GlobalConfig.Connection.OrdenVenta_GetByNumOrden(línea?.NumOrden.ToString());
+            Debug.Assert(línea != null, nameof(línea) + " != null");
+            línea.Estatus = línea.CantidadPendiente == 0 ? "Entregada" : "Parcial";
+            var saveSuccess = GlobalConfig.Connection.OrdenVenta_UpdateLinea(_orden.Id, línea, _oldQty, _newQty);
+            MessageBox.Show(saveSuccess ? "Línea actualizada." : "Error al actualizar línea.");
 
-            UpdateSaleOrderLine(_orden, línea, línea?.Estatus);
-            UpdateStock(línea, _oldQty, _newQty);
-            AddDelivery(línea);
-            // Unhook para que este método sólo se ejecute después de Entregar Button.
+            // Unhook para que este método sólo se ejecute después de Recibir Button.
             DataGrid.SelectionChanging -= DataGridOnSelectionChanging;
         }
 
@@ -173,7 +165,6 @@ namespace CZS_LaVictoria.ÓrdenesPage
         /// </summary>
         void EntregarButton_Click(object sender, EventArgs e)
         {
-            DataGrid.SelectionChanging += DataGridOnSelectionChanging;
             if (DataGrid.SelectedIndex < 0)
             {
                 MessageBox.Show("Selecciona una línea.");
@@ -182,8 +173,13 @@ namespace CZS_LaVictoria.ÓrdenesPage
 
             var línea = DataGrid.SelectedItem as OrdenVentaLíneaModel;
             Debug.Assert(línea != null, nameof(línea) + " != null");
+            if (línea.Estatus == "Entregada" || línea.Estatus == "Cancelada" || línea.Estatus == "Cerrada")
+            {
+                MessageBox.Show("Esta línea no se puede recibir.");
+                return;
+            }
 
-            // Obtener la cantidad recibida hasta el momento.
+            // Obtener la cantidad entregada hasta el momento.
             _oldQty = línea.CantidadEntregada;
             // Preguntar la cantidad que se entregó. (No es cantidad acumulada).
             // De esta manera, la nueva cantidad es la recibida hasta el momento
@@ -196,9 +192,14 @@ namespace CZS_LaVictoria.ÓrdenesPage
             var pendiente = línea.CantidadOrden - _newQty;
             línea.CantidadPendiente = pendiente < 0 ? 0 : pendiente;
 
-            // Guardar la fecha de última recepción.
-            // TODO - Tabla de historial de recepciones?
+            // Guardar la fecha de última entrega.
             línea.FechaUltEntrega = DateTime.Today;
+
+            _orden = GlobalConfig.Connection.OrdenVenta_GetByNumOrden(línea.NumOrden.ToString());
+            Debug.Assert(línea != null, nameof(línea) + " != null");
+            línea.Estatus = línea.CantidadPendiente == 0 ? "Entregada" : "Parcial";
+            var saveSuccess = GlobalConfig.Connection.OrdenVenta_UpdateLinea(_orden.Id, línea, _oldQty, _newQty);
+            MessageBox.Show(saveSuccess ? "Línea actualizada." : "Error al actualizar línea.");
         }
 
         void CancelarButton_Click(object sender, EventArgs e)
@@ -211,17 +212,18 @@ namespace CZS_LaVictoria.ÓrdenesPage
 
             var línea = DataGrid.SelectedItem as OrdenVentaLíneaModel;
             Debug.Assert(línea != null, nameof(línea) + " != null");
-            if (línea.Estatus == "Cancelada")
+            if (línea.Estatus == "Entregada" || línea.Estatus == "Cancelada" || línea.Estatus == "Cerrada")
             {
-                MessageBox.Show("Esta línea ya está cancelada.");
+                MessageBox.Show("Esta línea ya no se puede cerrar o cancelar.");
                 return;
             }
 
-            _orden = new OrdenVentaModel(); // TODO - GetByNumOrden(línea?.NumOrden.ToString());
+            _orden = GlobalConfig.Connection.OrdenVenta_GetByNumOrden(línea.NumOrden.ToString());
             línea.CantidadPendiente = 0;
             línea.FechaCancelación = DateTime.Today;
-            línea.Estatus = "Cancelada";
-            UpdateSaleOrderLine(_orden, línea, línea.Estatus);
+            línea.Estatus = línea.CantidadEntregada == 0 ? "Cancelada" : "Cerrada";
+            var deleteSuccess = GlobalConfig.Connection.OrdenVenta_UpdateLinea(_orden.Id, línea, 0, 0);
+            MessageBox.Show(deleteSuccess ? "Línea cancelada." : "Error al cancelar línea.");
         }
 
         #endregion
@@ -276,42 +278,6 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 return;
             }
             input = textBox.Text;
-        }
-
-        /// <summary>
-        /// Actualiza la cantidad entregada y pendiente en la tabla SaleOrderDetails en SQL.
-        /// </summary>
-        /// <param name="order">La orden a la que pertenece la línea</param>
-        /// <param name="line">La línea a actualizar.</param>
-        void UpdateSaleOrderLine(OrdenVentaModel order, OrdenVentaLíneaModel line, string estatus)
-        {
-            // TODO - Update(order.UniqueIdOrder, line, estatus);
-        }
-
-        /// <summary>
-        /// Crea o actualiza el material en la tabla Stock en SQL.
-        /// </summary>
-        /// <param name="model">La línea donde se encuentra el material.</param>
-        /// <param name="oldQty">La cantidad entregada anterior.</param>
-        /// <param name="newQty">La cantidad entregada actualizada.</param>
-        void UpdateStock(OrdenVentaLíneaModel model, double oldQty, double newQty)
-        {
-            // Obtener el modelo ProveedorProducto para obtener el nombre interno (que es el usado en Stock).
-            var producto = new ClienteProductoModel(); // TODO - ClienteProducto_Find(model?.Producto, model?.Proveedor, model?.Area);
-
-            // Averiguar si el material ya existe en la tabla Stock.
-            var material = GlobalConfig.Connection.Material_GetByNombreArea(producto.ProductoInterno, model?.Area);
-            // Si existe, se actualiza la cantidad disponible.
-            material.CantidadDisponible -= (newQty - oldQty);
-            GlobalConfig.Connection.Material_Update(material);
-        }
-
-        void AddDelivery(OrdenVentaLíneaModel model)
-        {
-            var quantity = double.Parse(_newQtyString);
-            //TODO - Delivery_Create("V", _orden.NumOrden, model, quantity);
-            // Reset para que el diálogo siempre aparezca vacío.
-            _newQtyString = "";
         }
 
         #endregion

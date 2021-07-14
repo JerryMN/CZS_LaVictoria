@@ -199,6 +199,14 @@ namespace CZS_LaVictoria_Library.DataAccess
         List<ClienteProductoModel> ClienteProducto_GetByClienteArea(int? idCliente, string area);
 
         /// <summary>
+        /// Obtiene un producto con cierto nombre, y de cierta área.
+        /// </summary>
+        /// <param name="nombreInterno">El nombre externo del producto.</param>
+        /// <param name="area">El área interna de la empresa.</param>
+        /// <returns>Un modelo de un producto.</returns>
+        ClienteProductoModel ClienteProducto_Find(string nombreInterno, string area);
+
+        /// <summary>
         /// Actualiza un producto a comercializar.
         /// </summary>
         /// <param name="model">Un modelo con las propiedades del producto.</param>
@@ -350,7 +358,7 @@ namespace CZS_LaVictoria_Library.DataAccess
         /// <param name="oldQty">La cantidad que se había entregado.</param>
         /// <param name="newQty">La cantidad entregada contando esta entrega.</param>
         /// <returns>True, si se actualizó correctamente, falso si no.</returns>
-        bool PurchaseOrderLine_Update(long orderId, OrdenCompraLíneaModel línea, double oldQty, double newQty);
+        bool OrdenCompra_UpdateLinea(long orderId, OrdenCompraLíneaModel línea, double oldQty, double newQty);
 
         #endregion
 
@@ -399,9 +407,11 @@ namespace CZS_LaVictoria_Library.DataAccess
         /// Actualiza una línea de una orden de venta.
         /// </summary>
         /// <param name="orderId">El Id de la orden.</param>
-        /// <param name="model">El modelo de la línea a actualizar.</param>
+        /// <param name="línea">El modelo de la línea a actualizar.</param>
+        /// <param name="oldQty">La cantidad que se había entregado.</param>
+        /// <param name="newQty">La cantidad entregada contando esta entrega.</param>
         /// <returns>True, si se actualizó correctamente, falso si no.</returns>
-        bool PurchaseOrderLine_Update(long orderId, OrdenVentaLíneaModel model);
+        bool OrdenVenta_UpdateLinea(long orderId, OrdenVentaLíneaModel línea, double oldQty, double newQty);
 
         #endregion
 
