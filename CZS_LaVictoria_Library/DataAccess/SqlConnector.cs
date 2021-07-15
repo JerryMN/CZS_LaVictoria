@@ -961,17 +961,116 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public bool Kit_Create(KitModel model)
         {
-            throw new NotImplementedException();
+            using (var scope = new TransactionScope())
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@Nombre", model.Nombre);
+                p.Add("@Id", 0, direction: ParameterDirection.Output);
+
+                try
+                {
+                    connection.Execute("dbo.spKit_Insert", p, commandType: CommandType.StoredProcedure);
+                    model.Id = p.Get<int>("@Id");
+
+                    var index = 0;
+                    foreach (var material in model.Materiales)
+                    {
+                        p = new DynamicParameters();
+                        p.Add("@IdKit", model.Id);
+                        p.Add("@IdMaterial", material.Id);
+                        p.Add("@Cantidad", model.Cantidades[index]);
+                        try
+                        {
+                            connection.Execute("dbo.spKitDetails_Insert", p, commandType: CommandType.StoredProcedure);
+                            index += 1;
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.WriteLine(ex.ToString());
+                            Debug.Assert(false);
+                            return false;
+                        }
+                    }
+
+                    scope.Complete();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.ToString());
+                    Debug.Assert(false);
+                    return false;
+                }
+            }
         }
 
         public List<KitModel> Kit_GetAll()
         {
-            throw new NotImplementedException();
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var output = connection
+                        .Query<KitModel>("dbo.spKit_GetAll", commandType: CommandType.StoredProcedure).ToList();
+
+                    foreach (var kitModel in output)
+                    {
+                        var p = new DynamicParameters();
+                        p.Add("@IdKit", kitModel.Id);
+
+                        var idsMat = connection
+                            .Query<int>("dbo.spKitDetails_GetIDs", p, commandType: CommandType.StoredProcedure)
+                            .ToList();
+                        var cants = connection.Query<double>("dbo.spKitDetails_GetCantidades", p,
+                            commandType: CommandType.StoredProcedure).ToList();
+
+                        foreach (var cant in cants)
+                        {
+                            kitModel.Cantidades.Add(cant);
+                        }
+
+                        foreach (var id in idsMat)
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@Id", id);
+
+                            var mats = connection.QuerySingle<MaterialModel>("dbo.spStock_GetById", p,
+                                commandType: CommandType.StoredProcedure);
+                            kitModel.Materiales.Add(mats);
+                        }
+                    }
+
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.ToString());
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
         }
 
         public bool Kit_Delete(KitModel model)
         {
-            throw new NotImplementedException();
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@Id", model.Id);
+
+                try
+                {
+                    connection.Execute("dbo.spKit_Delete", p, commandType: CommandType.StoredProcedure);
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.ToString());
+                    Debug.Assert(false);
+                    return false;
+                }
+            }
         }
 
         #endregion
