@@ -309,6 +309,30 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         #endregion
 
+        #region Kits
+
+        /// <summary>
+        /// Crea una kit de trapeadores.
+        /// </summary>
+        /// <param name="model">Un modelo con las propiedades del kit.</param>
+        /// <returns>True, si se creó correctamente, falso si no.</returns>
+        bool Kit_Create(KitModel model);
+
+        /// <summary>
+        /// Obtiene todos los kits registrados.
+        /// </summary>
+        /// <returns>Una lista con los modelos de los kits.</returns>
+        List<KitModel> Kit_GetAll();
+
+        /// <summary>
+        /// Elimina un kit de trapeadores.
+        /// </summary>
+        /// <param name="model">Un modelo con las propiedades del kit.</param>
+        /// <returns>True, si se eliminó correctamente, falso si no.</returns>
+        bool Kit_Delete(KitModel model);
+
+        #endregion
+
         #region Orden de Compra
 
         /// <summary>
@@ -644,6 +668,38 @@ namespace CZS_LaVictoria_Library.DataAccess
         /// <param name="proceso">El proceso de producción (escalera, cardas, etc.).</param>
         /// <returns>Una lista con los modelos de las producciones.</returns>
         List<ProducciónAlgodónModel> WoolProduction_GetByProceso(string proceso);
+
+        #endregion
+
+        #region Producción Trapeadores
+
+        /// <summary>
+        /// Crea un registro de una producción de trapeadores.
+        /// </summary>
+        /// <param name="model">Un modelo con las propiedades de la producción.</param>
+        /// <param name="bastón">Un modelo con las propiedades del bastón de entrada al proceso.</param>
+        /// <param name="alambre">Un modelo con las propiedades del alambre de entrada al proceso.</param>
+        /// <param name="bolsa">Un modelo con las propiedades de la bolsa de entrada al proceso.</param>
+        /// <param name="mecha">Un modelo con las propiedades de la mecha de entrada al proceso.</param>
+        /// <param name="etiqueta">Un modelo con las propiedades de la etiqueta de entrada al proceso.</param>
+        /// <param name="kit">Un modelo con las propiedades del kit de salida del proceso.</param>
+        /// <returns></returns>
+        bool MopProduction_Create(ProducciónTrapeadoresModel model, MaterialModel bastón, MaterialModel alambre,
+            MaterialModel bolsa, MaterialModel mecha, MaterialModel etiqueta, KitModel kit);
+
+        /// <summary>
+        /// Obtiene todos los registros de producciones de trapeadores.
+        /// </summary>
+        /// <returns>Una lista con los modelos de las producciones.</returns>
+        List<ProducciónTrapeadoresModel> MopProduction_GetAll();
+
+        /// <summary>
+        /// Obtiene todos los registros de producciones de trapeadores entre ciertas fechas.
+        /// </summary>
+        /// <param name="desde">La fecha de inicio.</param>
+        /// <param name="hasta">La fecha de final.</param>
+        /// <returns>Una lista con los modelos de las producciones.</returns>
+        List<ProducciónTrapeadoresModel> MopProduction_GetByDate(DateTime desde, DateTime hasta);
 
         #endregion
     }

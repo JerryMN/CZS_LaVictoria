@@ -957,6 +957,25 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         #endregion
 
+        #region Kits
+
+        public bool Kit_Create(KitModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<KitModel> Kit_GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Kit_Delete(KitModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
         #region Orden de Compra
 
         public bool OrdenCompra_Create(OrdenCompraModel model)
@@ -2786,6 +2805,26 @@ namespace CZS_LaVictoria_Library.DataAccess
                     return null;
                 }
             }
+        }
+
+        #endregion
+
+        #region Producción Trapeadores
+
+        public bool MopProduction_Create(ProducciónTrapeadoresModel model, MaterialModel bastón, MaterialModel alambre,
+            MaterialModel bolsa, MaterialModel mecha, MaterialModel etiqueta, KitModel kit)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<ProducciónTrapeadoresModel> MopProduction_GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<ProducciónTrapeadoresModel> MopProduction_GetByDate(DateTime desde, DateTime hasta)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
