@@ -1,7 +1,7 @@
 ﻿
 namespace CZS_LaVictoria.DatosPage
 {
-    partial class MezclaVerForm
+    partial class KitCrearForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,17 +30,28 @@ namespace CZS_LaVictoria.DatosPage
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            this.NombreText = new System.Windows.Forms.TextBox();
             this.CantidadesListBox = new System.Windows.Forms.ListBox();
             this.MaterialesListBox = new System.Windows.Forms.ListBox();
             this.MsgBox = new FontAwesome.Sharp.IconButton();
+            this.AgregarButton = new System.Windows.Forms.Button();
             this.EliminarButton = new System.Windows.Forms.Button();
-            this.NombreCombo = new System.Windows.Forms.ComboBox();
-            this.NombreLabel = new System.Windows.Forms.Label();
-            this.SubtitleLabel = new System.Windows.Forms.Label();
-            this.CantidadLabel = new System.Windows.Forms.Label();
+            this.GuardarButton = new System.Windows.Forms.Button();
             this.CantidadText = new Syncfusion.WinForms.Input.SfNumericTextBox();
+            this.Cantidad = new System.Windows.Forms.Label();
+            this.MaterialCombo = new System.Windows.Forms.ComboBox();
+            this.NombreLabel = new System.Windows.Forms.Label();
+            this.MaterialLabel = new System.Windows.Forms.Label();
+            this.SubtitleLabel = new System.Windows.Forms.Label();
             this.MsgBoxTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
+            // 
+            // NombreText
+            // 
+            this.NombreText.Location = new System.Drawing.Point(220, 147);
+            this.NombreText.Name = "NombreText";
+            this.NombreText.Size = new System.Drawing.Size(250, 29);
+            this.NombreText.TabIndex = 53;
             // 
             // CantidadesListBox
             // 
@@ -58,7 +69,6 @@ namespace CZS_LaVictoria.DatosPage
             this.MaterialesListBox.ItemHeight = 21;
             this.MaterialesListBox.Location = new System.Drawing.Point(520, 147);
             this.MaterialesListBox.Name = "MaterialesListBox";
-            this.MaterialesListBox.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.MaterialesListBox.Size = new System.Drawing.Size(200, 193);
             this.MaterialesListBox.TabIndex = 52;
             // 
@@ -81,11 +91,23 @@ namespace CZS_LaVictoria.DatosPage
             this.MsgBox.UseVisualStyleBackColor = true;
             this.MsgBox.Visible = false;
             // 
+            // AgregarButton
+            // 
+            this.AgregarButton.AutoSize = true;
+            this.AgregarButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AgregarButton.Location = new System.Drawing.Point(392, 300);
+            this.AgregarButton.Name = "AgregarButton";
+            this.AgregarButton.Size = new System.Drawing.Size(78, 33);
+            this.AgregarButton.TabIndex = 47;
+            this.AgregarButton.Text = "Agregar";
+            this.AgregarButton.UseVisualStyleBackColor = true;
+            this.AgregarButton.Click += new System.EventHandler(this.AgregarButton_Click);
+            // 
             // EliminarButton
             // 
             this.EliminarButton.AutoSize = true;
             this.EliminarButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EliminarButton.Location = new System.Drawing.Point(392, 250);
+            this.EliminarButton.Location = new System.Drawing.Point(764, 350);
             this.EliminarButton.Name = "EliminarButton";
             this.EliminarButton.Size = new System.Drawing.Size(78, 33);
             this.EliminarButton.TabIndex = 48;
@@ -93,18 +115,52 @@ namespace CZS_LaVictoria.DatosPage
             this.EliminarButton.UseVisualStyleBackColor = true;
             this.EliminarButton.Click += new System.EventHandler(this.EliminarButton_Click);
             // 
-            // NombreCombo
+            // GuardarButton
             // 
-            this.NombreCombo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.NombreCombo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.NombreCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.NombreCombo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NombreCombo.FormattingEnabled = true;
-            this.NombreCombo.Location = new System.Drawing.Point(220, 147);
-            this.NombreCombo.Name = "NombreCombo";
-            this.NombreCombo.Size = new System.Drawing.Size(250, 29);
-            this.NombreCombo.TabIndex = 44;
-            this.NombreCombo.SelectedIndexChanged += new System.EventHandler(this.NombreCombo_SelectedIndexChanged);
+            this.GuardarButton.AutoSize = true;
+            this.GuardarButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GuardarButton.Location = new System.Drawing.Point(848, 350);
+            this.GuardarButton.Name = "GuardarButton";
+            this.GuardarButton.Size = new System.Drawing.Size(78, 33);
+            this.GuardarButton.TabIndex = 49;
+            this.GuardarButton.Text = "Guardar";
+            this.GuardarButton.UseVisualStyleBackColor = true;
+            this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
+            // 
+            // CantidadText
+            // 
+            this.CantidadText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.CantidadText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CantidadText.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.CantidadText.Location = new System.Drawing.Point(220, 250);
+            this.CantidadText.MinValue = 0D;
+            this.CantidadText.Name = "CantidadText";
+            this.CantidadText.Size = new System.Drawing.Size(250, 29);
+            this.CantidadText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.CantidadText.TabIndex = 46;
+            this.CantidadText.WatermarkText = "Ingresa la cantidad";
+            // 
+            // Cantidad
+            // 
+            this.Cantidad.AutoSize = true;
+            this.Cantidad.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Cantidad.Location = new System.Drawing.Point(50, 250);
+            this.Cantidad.Name = "Cantidad";
+            this.Cantidad.Size = new System.Drawing.Size(72, 21);
+            this.Cantidad.TabIndex = 45;
+            this.Cantidad.Text = "Cantidad";
+            // 
+            // MaterialCombo
+            // 
+            this.MaterialCombo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.MaterialCombo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.MaterialCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.MaterialCombo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MaterialCombo.FormattingEnabled = true;
+            this.MaterialCombo.Location = new System.Drawing.Point(220, 197);
+            this.MaterialCombo.Name = "MaterialCombo";
+            this.MaterialCombo.Size = new System.Drawing.Size(250, 29);
+            this.MaterialCombo.TabIndex = 44;
             // 
             // NombreLabel
             // 
@@ -116,76 +172,74 @@ namespace CZS_LaVictoria.DatosPage
             this.NombreLabel.TabIndex = 42;
             this.NombreLabel.Text = "Nombre";
             // 
+            // MaterialLabel
+            // 
+            this.MaterialLabel.AutoSize = true;
+            this.MaterialLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MaterialLabel.Location = new System.Drawing.Point(50, 200);
+            this.MaterialLabel.Name = "MaterialLabel";
+            this.MaterialLabel.Size = new System.Drawing.Size(67, 21);
+            this.MaterialLabel.TabIndex = 43;
+            this.MaterialLabel.Text = "Material";
+            // 
             // SubtitleLabel
             // 
             this.SubtitleLabel.AutoSize = true;
             this.SubtitleLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SubtitleLabel.Location = new System.Drawing.Point(50, 25);
             this.SubtitleLabel.Name = "SubtitleLabel";
-            this.SubtitleLabel.Size = new System.Drawing.Size(161, 37);
+            this.SubtitleLabel.Size = new System.Drawing.Size(123, 37);
             this.SubtitleLabel.TabIndex = 41;
-            this.SubtitleLabel.Text = "Ver Mezclas";
-            // 
-            // CantidadLabel
-            // 
-            this.CantidadLabel.AutoSize = true;
-            this.CantidadLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CantidadLabel.Location = new System.Drawing.Point(50, 200);
-            this.CantidadLabel.Name = "CantidadLabel";
-            this.CantidadLabel.Size = new System.Drawing.Size(124, 21);
-            this.CantidadLabel.TabIndex = 42;
-            this.CantidadLabel.Text = "Cantidad Mezcla";
-            // 
-            // CantidadText
-            // 
-            this.CantidadText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.CantidadText.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.CantidadText.Location = new System.Drawing.Point(220, 197);
-            this.CantidadText.MinValue = 0D;
-            this.CantidadText.Name = "CantidadText";
-            this.CantidadText.Size = new System.Drawing.Size(250, 29);
-            this.CantidadText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.CantidadText.TabIndex = 53;
+            this.SubtitleLabel.Text = "Crear Kit";
             // 
             // MsgBoxTimer
             // 
             this.MsgBoxTimer.Interval = 3000;
             this.MsgBoxTimer.Tick += new System.EventHandler(this.MsgBoxTimer_Tick);
             // 
-            // MezclaVerForm
+            // KitCrearForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1276, 839);
-            this.Controls.Add(this.CantidadText);
+            this.Controls.Add(this.NombreText);
             this.Controls.Add(this.CantidadesListBox);
             this.Controls.Add(this.MaterialesListBox);
             this.Controls.Add(this.MsgBox);
+            this.Controls.Add(this.AgregarButton);
             this.Controls.Add(this.EliminarButton);
-            this.Controls.Add(this.CantidadLabel);
-            this.Controls.Add(this.NombreCombo);
+            this.Controls.Add(this.GuardarButton);
+            this.Controls.Add(this.CantidadText);
+            this.Controls.Add(this.Cantidad);
+            this.Controls.Add(this.MaterialCombo);
             this.Controls.Add(this.NombreLabel);
+            this.Controls.Add(this.MaterialLabel);
             this.Controls.Add(this.SubtitleLabel);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "MezclaVerForm";
-            this.Text = "MezclaVerForm";
+            this.Name = "KitCrearForm";
+            this.Text = "KitCrearForm";
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.TextBox NombreText;
         private System.Windows.Forms.ListBox CantidadesListBox;
         private System.Windows.Forms.ListBox MaterialesListBox;
         private FontAwesome.Sharp.IconButton MsgBox;
+        private System.Windows.Forms.Button AgregarButton;
         private System.Windows.Forms.Button EliminarButton;
-        private System.Windows.Forms.ComboBox NombreCombo;
-        private System.Windows.Forms.Label NombreLabel;
-        private System.Windows.Forms.Label SubtitleLabel;
-        private System.Windows.Forms.Label CantidadLabel;
+        private System.Windows.Forms.Button GuardarButton;
         private Syncfusion.WinForms.Input.SfNumericTextBox CantidadText;
+        private System.Windows.Forms.Label Cantidad;
+        private System.Windows.Forms.ComboBox MaterialCombo;
+        private System.Windows.Forms.Label NombreLabel;
+        private System.Windows.Forms.Label MaterialLabel;
+        private System.Windows.Forms.Label SubtitleLabel;
         private System.Windows.Forms.Timer MsgBoxTimer;
     }
 }

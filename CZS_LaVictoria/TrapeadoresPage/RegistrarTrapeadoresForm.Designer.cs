@@ -38,26 +38,10 @@ namespace CZS_LaVictoria.TrapeadoresPage
             this.MaquinaLabel = new System.Windows.Forms.Label();
             this.OperadorLabel = new System.Windows.Forms.Label();
             this.FechaLabel = new System.Windows.Forms.Label();
-            this.CantidadBastónText = new Syncfusion.WinForms.Input.SfNumericTextBox();
-            this.BastónCombo = new System.Windows.Forms.ComboBox();
-            this.CantidadBastónLabel = new System.Windows.Forms.Label();
-            this.BastónLabel = new System.Windows.Forms.Label();
             this.AlambreLabel = new System.Windows.Forms.Label();
             this.CantidadAlambreLabel = new System.Windows.Forms.Label();
             this.AlambreCombo = new System.Windows.Forms.ComboBox();
             this.CantidadAlambreText = new Syncfusion.WinForms.Input.SfNumericTextBox();
-            this.BolsaLabel = new System.Windows.Forms.Label();
-            this.MechaLabel = new System.Windows.Forms.Label();
-            this.CantidadBolsaLabel = new System.Windows.Forms.Label();
-            this.CantidadMechaLabel = new System.Windows.Forms.Label();
-            this.BolsaCombo = new System.Windows.Forms.ComboBox();
-            this.MechaCombo = new System.Windows.Forms.ComboBox();
-            this.CantidadBolsaText = new Syncfusion.WinForms.Input.SfNumericTextBox();
-            this.CantidadMechaText = new Syncfusion.WinForms.Input.SfNumericTextBox();
-            this.EtiquetaLabel = new System.Windows.Forms.Label();
-            this.CantidadEtiquetaLabel = new System.Windows.Forms.Label();
-            this.EtiquetaCombo = new System.Windows.Forms.ComboBox();
-            this.CantidadEtiquetaText = new Syncfusion.WinForms.Input.SfNumericTextBox();
             this.ArrowButton = new FontAwesome.Sharp.IconButton();
             this.MsgBox = new FontAwesome.Sharp.IconButton();
             this.GuardarButton = new System.Windows.Forms.Button();
@@ -66,6 +50,7 @@ namespace CZS_LaVictoria.TrapeadoresPage
             this.CantidadSalidaLabel = new System.Windows.Forms.Label();
             this.SalidaLabel = new System.Windows.Forms.Label();
             this.MsgBoxTimer = new System.Windows.Forms.Timer(this.components);
+            this.CalcularButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.TurnoText)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MaquinaText)).BeginInit();
             this.SuspendLayout();
@@ -167,52 +152,10 @@ namespace CZS_LaVictoria.TrapeadoresPage
             this.FechaLabel.TabIndex = 86;
             this.FechaLabel.Text = "Fecha de operación";
             // 
-            // CantidadBastónText
-            // 
-            this.CantidadBastónText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.CantidadBastónText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CantidadBastónText.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.CantidadBastónText.HideTrailingZeros = true;
-            this.CantidadBastónText.Location = new System.Drawing.Point(200, 347);
-            this.CantidadBastónText.MinValue = 0D;
-            this.CantidadBastónText.Name = "CantidadBastónText";
-            this.CantidadBastónText.Size = new System.Drawing.Size(250, 29);
-            this.CantidadBastónText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.CantidadBastónText.TabIndex = 94;
-            this.CantidadBastónText.Text = "0";
-            this.CantidadBastónText.WatermarkText = "Ingresa la cantidad";
-            // 
-            // BastónCombo
-            // 
-            this.BastónCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.BastónCombo.FormattingEnabled = true;
-            this.BastónCombo.Location = new System.Drawing.Point(200, 297);
-            this.BastónCombo.Name = "BastónCombo";
-            this.BastónCombo.Size = new System.Drawing.Size(250, 29);
-            this.BastónCombo.TabIndex = 93;
-            // 
-            // CantidadBastónLabel
-            // 
-            this.CantidadBastónLabel.AutoSize = true;
-            this.CantidadBastónLabel.Location = new System.Drawing.Point(50, 350);
-            this.CantidadBastónLabel.Name = "CantidadBastónLabel";
-            this.CantidadBastónLabel.Size = new System.Drawing.Size(72, 21);
-            this.CantidadBastónLabel.TabIndex = 91;
-            this.CantidadBastónLabel.Text = "Cantidad";
-            // 
-            // BastónLabel
-            // 
-            this.BastónLabel.AutoSize = true;
-            this.BastónLabel.Location = new System.Drawing.Point(50, 300);
-            this.BastónLabel.Name = "BastónLabel";
-            this.BastónLabel.Size = new System.Drawing.Size(57, 21);
-            this.BastónLabel.TabIndex = 92;
-            this.BastónLabel.Text = "Bastón";
-            // 
             // AlambreLabel
             // 
             this.AlambreLabel.AutoSize = true;
-            this.AlambreLabel.Location = new System.Drawing.Point(50, 400);
+            this.AlambreLabel.Location = new System.Drawing.Point(50, 300);
             this.AlambreLabel.Name = "AlambreLabel";
             this.AlambreLabel.Size = new System.Drawing.Size(130, 21);
             this.AlambreLabel.TabIndex = 92;
@@ -221,7 +164,7 @@ namespace CZS_LaVictoria.TrapeadoresPage
             // CantidadAlambreLabel
             // 
             this.CantidadAlambreLabel.AutoSize = true;
-            this.CantidadAlambreLabel.Location = new System.Drawing.Point(50, 450);
+            this.CantidadAlambreLabel.Location = new System.Drawing.Point(50, 350);
             this.CantidadAlambreLabel.Name = "CantidadAlambreLabel";
             this.CantidadAlambreLabel.Size = new System.Drawing.Size(72, 21);
             this.CantidadAlambreLabel.TabIndex = 91;
@@ -231,10 +174,12 @@ namespace CZS_LaVictoria.TrapeadoresPage
             // 
             this.AlambreCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.AlambreCombo.FormattingEnabled = true;
-            this.AlambreCombo.Location = new System.Drawing.Point(200, 397);
+            this.AlambreCombo.Location = new System.Drawing.Point(200, 297);
             this.AlambreCombo.Name = "AlambreCombo";
             this.AlambreCombo.Size = new System.Drawing.Size(250, 29);
             this.AlambreCombo.TabIndex = 93;
+            this.AlambreCombo.SelectedIndexChanged += new System.EventHandler(this.AlambreCombo_SelectedIndexChanged);
+            this.AlambreCombo.TextChanged += new System.EventHandler(this.InputOutputChanged);
             // 
             // CantidadAlambreText
             // 
@@ -242,7 +187,7 @@ namespace CZS_LaVictoria.TrapeadoresPage
             this.CantidadAlambreText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CantidadAlambreText.ForeColor = System.Drawing.SystemColors.WindowText;
             this.CantidadAlambreText.HideTrailingZeros = true;
-            this.CantidadAlambreText.Location = new System.Drawing.Point(200, 447);
+            this.CantidadAlambreText.Location = new System.Drawing.Point(200, 347);
             this.CantidadAlambreText.MinValue = 0D;
             this.CantidadAlambreText.Name = "CantidadAlambreText";
             this.CantidadAlambreText.Size = new System.Drawing.Size(250, 29);
@@ -250,132 +195,7 @@ namespace CZS_LaVictoria.TrapeadoresPage
             this.CantidadAlambreText.TabIndex = 94;
             this.CantidadAlambreText.Text = "0";
             this.CantidadAlambreText.WatermarkText = "Ingresa la cantidad";
-            // 
-            // BolsaLabel
-            // 
-            this.BolsaLabel.AutoSize = true;
-            this.BolsaLabel.Location = new System.Drawing.Point(50, 500);
-            this.BolsaLabel.Name = "BolsaLabel";
-            this.BolsaLabel.Size = new System.Drawing.Size(47, 21);
-            this.BolsaLabel.TabIndex = 92;
-            this.BolsaLabel.Text = "Bolsa";
-            // 
-            // MechaLabel
-            // 
-            this.MechaLabel.AutoSize = true;
-            this.MechaLabel.Location = new System.Drawing.Point(50, 600);
-            this.MechaLabel.Name = "MechaLabel";
-            this.MechaLabel.Size = new System.Drawing.Size(56, 21);
-            this.MechaLabel.TabIndex = 92;
-            this.MechaLabel.Text = "Mecha";
-            // 
-            // CantidadBolsaLabel
-            // 
-            this.CantidadBolsaLabel.AutoSize = true;
-            this.CantidadBolsaLabel.Location = new System.Drawing.Point(50, 550);
-            this.CantidadBolsaLabel.Name = "CantidadBolsaLabel";
-            this.CantidadBolsaLabel.Size = new System.Drawing.Size(72, 21);
-            this.CantidadBolsaLabel.TabIndex = 91;
-            this.CantidadBolsaLabel.Text = "Cantidad";
-            // 
-            // CantidadMechaLabel
-            // 
-            this.CantidadMechaLabel.AutoSize = true;
-            this.CantidadMechaLabel.Location = new System.Drawing.Point(50, 650);
-            this.CantidadMechaLabel.Name = "CantidadMechaLabel";
-            this.CantidadMechaLabel.Size = new System.Drawing.Size(72, 21);
-            this.CantidadMechaLabel.TabIndex = 91;
-            this.CantidadMechaLabel.Text = "Cantidad";
-            // 
-            // BolsaCombo
-            // 
-            this.BolsaCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.BolsaCombo.FormattingEnabled = true;
-            this.BolsaCombo.Location = new System.Drawing.Point(200, 497);
-            this.BolsaCombo.Name = "BolsaCombo";
-            this.BolsaCombo.Size = new System.Drawing.Size(250, 29);
-            this.BolsaCombo.TabIndex = 93;
-            // 
-            // MechaCombo
-            // 
-            this.MechaCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.MechaCombo.FormattingEnabled = true;
-            this.MechaCombo.Location = new System.Drawing.Point(200, 597);
-            this.MechaCombo.Name = "MechaCombo";
-            this.MechaCombo.Size = new System.Drawing.Size(250, 29);
-            this.MechaCombo.TabIndex = 93;
-            // 
-            // CantidadBolsaText
-            // 
-            this.CantidadBolsaText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.CantidadBolsaText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CantidadBolsaText.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.CantidadBolsaText.HideTrailingZeros = true;
-            this.CantidadBolsaText.Location = new System.Drawing.Point(200, 547);
-            this.CantidadBolsaText.MinValue = 0D;
-            this.CantidadBolsaText.Name = "CantidadBolsaText";
-            this.CantidadBolsaText.Size = new System.Drawing.Size(250, 29);
-            this.CantidadBolsaText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.CantidadBolsaText.TabIndex = 94;
-            this.CantidadBolsaText.Text = "0";
-            this.CantidadBolsaText.WatermarkText = "Ingresa la cantidad";
-            // 
-            // CantidadMechaText
-            // 
-            this.CantidadMechaText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.CantidadMechaText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CantidadMechaText.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.CantidadMechaText.HideTrailingZeros = true;
-            this.CantidadMechaText.Location = new System.Drawing.Point(200, 647);
-            this.CantidadMechaText.MinValue = 0D;
-            this.CantidadMechaText.Name = "CantidadMechaText";
-            this.CantidadMechaText.Size = new System.Drawing.Size(250, 29);
-            this.CantidadMechaText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.CantidadMechaText.TabIndex = 94;
-            this.CantidadMechaText.Text = "0";
-            this.CantidadMechaText.WatermarkText = "Ingresa la cantidad";
-            // 
-            // EtiquetaLabel
-            // 
-            this.EtiquetaLabel.AutoSize = true;
-            this.EtiquetaLabel.Location = new System.Drawing.Point(50, 700);
-            this.EtiquetaLabel.Name = "EtiquetaLabel";
-            this.EtiquetaLabel.Size = new System.Drawing.Size(66, 21);
-            this.EtiquetaLabel.TabIndex = 92;
-            this.EtiquetaLabel.Text = "Etiqueta";
-            // 
-            // CantidadEtiquetaLabel
-            // 
-            this.CantidadEtiquetaLabel.AutoSize = true;
-            this.CantidadEtiquetaLabel.Location = new System.Drawing.Point(50, 750);
-            this.CantidadEtiquetaLabel.Name = "CantidadEtiquetaLabel";
-            this.CantidadEtiquetaLabel.Size = new System.Drawing.Size(72, 21);
-            this.CantidadEtiquetaLabel.TabIndex = 91;
-            this.CantidadEtiquetaLabel.Text = "Cantidad";
-            // 
-            // EtiquetaCombo
-            // 
-            this.EtiquetaCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.EtiquetaCombo.FormattingEnabled = true;
-            this.EtiquetaCombo.Location = new System.Drawing.Point(200, 697);
-            this.EtiquetaCombo.Name = "EtiquetaCombo";
-            this.EtiquetaCombo.Size = new System.Drawing.Size(250, 29);
-            this.EtiquetaCombo.TabIndex = 93;
-            // 
-            // CantidadEtiquetaText
-            // 
-            this.CantidadEtiquetaText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.CantidadEtiquetaText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CantidadEtiquetaText.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.CantidadEtiquetaText.HideTrailingZeros = true;
-            this.CantidadEtiquetaText.Location = new System.Drawing.Point(200, 747);
-            this.CantidadEtiquetaText.MinValue = 0D;
-            this.CantidadEtiquetaText.Name = "CantidadEtiquetaText";
-            this.CantidadEtiquetaText.Size = new System.Drawing.Size(250, 29);
-            this.CantidadEtiquetaText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.CantidadEtiquetaText.TabIndex = 94;
-            this.CantidadEtiquetaText.Text = "0";
-            this.CantidadEtiquetaText.WatermarkText = "Ingresa la cantidad";
+            this.CantidadAlambreText.TextChanged += new System.EventHandler(this.InputOutputChanged);
             // 
             // ArrowButton
             // 
@@ -413,6 +233,7 @@ namespace CZS_LaVictoria.TrapeadoresPage
             // GuardarButton
             // 
             this.GuardarButton.AutoSize = true;
+            this.GuardarButton.Enabled = false;
             this.GuardarButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GuardarButton.Location = new System.Drawing.Point(892, 250);
             this.GuardarButton.Name = "GuardarButton";
@@ -436,6 +257,7 @@ namespace CZS_LaVictoria.TrapeadoresPage
             this.CantidadSalidaText.TabIndex = 106;
             this.CantidadSalidaText.Text = "0";
             this.CantidadSalidaText.WatermarkText = "Ingresa la cantidad";
+            this.CantidadSalidaText.TextChanged += new System.EventHandler(this.InputOutputChanged);
             // 
             // SalidaCombo
             // 
@@ -445,6 +267,7 @@ namespace CZS_LaVictoria.TrapeadoresPage
             this.SalidaCombo.Name = "SalidaCombo";
             this.SalidaCombo.Size = new System.Drawing.Size(250, 29);
             this.SalidaCombo.TabIndex = 103;
+            this.SalidaCombo.TextChanged += new System.EventHandler(this.InputOutputChanged);
             // 
             // CantidadSalidaLabel
             // 
@@ -469,11 +292,24 @@ namespace CZS_LaVictoria.TrapeadoresPage
             this.MsgBoxTimer.Interval = 3000;
             this.MsgBoxTimer.Tick += new System.EventHandler(this.MsgBoxTimer_Tick);
             // 
+            // CalcularButton
+            // 
+            this.CalcularButton.AutoSize = true;
+            this.CalcularButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CalcularButton.Location = new System.Drawing.Point(808, 250);
+            this.CalcularButton.Name = "CalcularButton";
+            this.CalcularButton.Size = new System.Drawing.Size(78, 37);
+            this.CalcularButton.TabIndex = 109;
+            this.CalcularButton.Text = "Calcular";
+            this.CalcularButton.UseVisualStyleBackColor = true;
+            this.CalcularButton.Click += new System.EventHandler(this.CalcularButton_Click);
+            // 
             // RegistrarTrapeadoresForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1276, 839);
+            this.Controls.Add(this.CalcularButton);
             this.Controls.Add(this.MsgBox);
             this.Controls.Add(this.GuardarButton);
             this.Controls.Add(this.CantidadSalidaText);
@@ -481,26 +317,10 @@ namespace CZS_LaVictoria.TrapeadoresPage
             this.Controls.Add(this.CantidadSalidaLabel);
             this.Controls.Add(this.SalidaLabel);
             this.Controls.Add(this.ArrowButton);
-            this.Controls.Add(this.CantidadEtiquetaText);
-            this.Controls.Add(this.CantidadMechaText);
             this.Controls.Add(this.CantidadAlambreText);
-            this.Controls.Add(this.CantidadBolsaText);
-            this.Controls.Add(this.CantidadBastónText);
-            this.Controls.Add(this.EtiquetaCombo);
-            this.Controls.Add(this.MechaCombo);
             this.Controls.Add(this.AlambreCombo);
-            this.Controls.Add(this.BolsaCombo);
-            this.Controls.Add(this.BastónCombo);
-            this.Controls.Add(this.CantidadEtiquetaLabel);
-            this.Controls.Add(this.CantidadMechaLabel);
             this.Controls.Add(this.CantidadAlambreLabel);
-            this.Controls.Add(this.CantidadBolsaLabel);
-            this.Controls.Add(this.CantidadBastónLabel);
-            this.Controls.Add(this.EtiquetaLabel);
-            this.Controls.Add(this.MechaLabel);
             this.Controls.Add(this.AlambreLabel);
-            this.Controls.Add(this.BolsaLabel);
-            this.Controls.Add(this.BastónLabel);
             this.Controls.Add(this.TurnoText);
             this.Controls.Add(this.MaquinaText);
             this.Controls.Add(this.FechaPicker);
@@ -531,26 +351,10 @@ namespace CZS_LaVictoria.TrapeadoresPage
         private System.Windows.Forms.Label MaquinaLabel;
         private System.Windows.Forms.Label OperadorLabel;
         private System.Windows.Forms.Label FechaLabel;
-        private Syncfusion.WinForms.Input.SfNumericTextBox CantidadBastónText;
-        private System.Windows.Forms.ComboBox BastónCombo;
-        private System.Windows.Forms.Label CantidadBastónLabel;
-        private System.Windows.Forms.Label BastónLabel;
         private System.Windows.Forms.Label AlambreLabel;
         private System.Windows.Forms.Label CantidadAlambreLabel;
         private System.Windows.Forms.ComboBox AlambreCombo;
         private Syncfusion.WinForms.Input.SfNumericTextBox CantidadAlambreText;
-        private System.Windows.Forms.Label BolsaLabel;
-        private System.Windows.Forms.Label MechaLabel;
-        private System.Windows.Forms.Label CantidadBolsaLabel;
-        private System.Windows.Forms.Label CantidadMechaLabel;
-        private System.Windows.Forms.ComboBox BolsaCombo;
-        private System.Windows.Forms.ComboBox MechaCombo;
-        private Syncfusion.WinForms.Input.SfNumericTextBox CantidadBolsaText;
-        private Syncfusion.WinForms.Input.SfNumericTextBox CantidadMechaText;
-        private System.Windows.Forms.Label EtiquetaLabel;
-        private System.Windows.Forms.Label CantidadEtiquetaLabel;
-        private System.Windows.Forms.ComboBox EtiquetaCombo;
-        private Syncfusion.WinForms.Input.SfNumericTextBox CantidadEtiquetaText;
         private FontAwesome.Sharp.IconButton ArrowButton;
         private FontAwesome.Sharp.IconButton MsgBox;
         private System.Windows.Forms.Button GuardarButton;
@@ -559,5 +363,6 @@ namespace CZS_LaVictoria.TrapeadoresPage
         private System.Windows.Forms.Label CantidadSalidaLabel;
         private System.Windows.Forms.Label SalidaLabel;
         private System.Windows.Forms.Timer MsgBoxTimer;
+        private System.Windows.Forms.Button CalcularButton;
     }
 }

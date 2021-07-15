@@ -119,7 +119,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.GuardarButton.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GuardarButton.Appearance.Options.UseFont = true;
             this.GuardarButton.AutoSize = true;
-            this.GuardarButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton1.ImageOptions.SvgImage")));
+            this.GuardarButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("GuardarButton.ImageOptions.SvgImage")));
             this.GuardarButton.Location = new System.Drawing.Point(404, 232);
             this.GuardarButton.Name = "GuardarButton";
             this.GuardarButton.Size = new System.Drawing.Size(38, 36);
@@ -176,6 +176,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "InventarioCrearForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Añadir material a inventario";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -726,6 +726,28 @@ namespace CZS_LaVictoria_Library.DataAccess
             }
         }
 
+        public List<MaterialModel> Material_GetByArea(string area)
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@Area", area);
+
+                try
+                {
+                    var output = connection.Query<MaterialModel>("dbo.spStock_GetByArea", p,
+                        commandType: CommandType.StoredProcedure).ToList();
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.ToString());
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
+        }
+
         public List<MaterialModel> Material_GetByCat(string categoría)
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
@@ -2910,20 +2932,128 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         #region Producción Trapeadores
 
-        public bool MopProduction_Create(ProducciónTrapeadoresModel model, MaterialModel bastón, MaterialModel alambre,
-            MaterialModel bolsa, MaterialModel mecha, MaterialModel etiqueta, KitModel kit)
+        public bool MopProduction_Create(ProducciónTrapeadoresModel model, MaterialModel alambre, KitModel kit)
         {
-            throw new NotImplementedException();
+            using (var scope = new TransactionScope())
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var p = new DynamicParameters();
+                    var kitSalida = new MaterialModel();
+                    var index = 0;
+                    foreach (var material in kit.Materiales)
+                    {
+                        p.Add("@CantidadDisponible", material.CantidadDisponible - model.CantidadKit * kit.Cantidades[index]);
+                        p.Add("@Id", material.Id);
+                        connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                        index += 1;
+                    }
+
+                    p = new DynamicParameters();
+                    p.Add("@CantidadDisponible", alambre.CantidadDisponible - model.CantidadAlambre);
+                    p.Add("@Id", alambre.Id);
+                    connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+
+                    p = new DynamicParameters();
+                    p.Add("@Nombre", kit.Nombre);
+                    p.Add("@Area", "Trapeadores");
+
+                    try
+                    {
+                        kitSalida = connection.QuerySingle<MaterialModel>("dbo.spStock_GetByNombreArea", p,
+                            commandType: CommandType.StoredProcedure);
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex.Message != "Sequence contains no elements")
+                        {
+                            Debug.WriteLine(ex.ToString());
+                            Debug.Assert(false);
+                        }
+                    }
+                    finally
+                    {
+                        if (kitSalida == null || kitSalida.Id == 0)
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@Nombre", kit.Nombre);
+                            p.Add("@Area", "Trapeadores");
+                            p.Add("@Categoría", "Kits");
+                            p.Add("@CantidadDisponible", model.CantidadKit);
+                            connection.Execute("dbo.spStock_Insert", p, commandType: CommandType.StoredProcedure);
+                        }
+                        else
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@CantidadDisponible", kitSalida.CantidadDisponible + model.CantidadKit);
+                            p.Add("@Id", kitSalida.Id);
+                            connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                        }
+                    }
+
+                    p = new DynamicParameters();
+                    p.Add("@Fecha", model.Fecha);
+                    p.Add("@Turno", model.Turno);
+                    p.Add("@Máquina", model.Máquina);
+                    p.Add("@Operador", model.Operador);
+                    p.Add("@Alambre", model.Alambre);
+                    p.Add("@CantidadAlambre", model.CantidadAlambre);
+                    p.Add("@Kit", kit.Nombre);
+                    p.Add("@CantidadKit", model.CantidadKit);
+                    connection.Execute("dbo.spMopProduction_Insert", p, commandType: CommandType.StoredProcedure);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return false;
+                }
+
+                scope.Complete();
+                return true;
+            }
         }
 
         public List<ProducciónTrapeadoresModel> MopProduction_GetAll()
         {
-            throw new NotImplementedException();
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var output = connection.Query<ProducciónTrapeadoresModel>("dbo.spMopProduction_GetAll").ToList();
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
         }
 
         public List<ProducciónTrapeadoresModel> MopProduction_GetByDate(DateTime desde, DateTime hasta)
         {
-            throw new NotImplementedException();
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@Desde", desde);
+                p.Add("@Hasta", hasta);
+
+                try
+                {
+                    var output = connection.Query<ProducciónTrapeadoresModel>("dbo.spMopProduction_GetByDate", p,
+                        commandType: CommandType.StoredProcedure).ToList();
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
         }
 
         #endregion

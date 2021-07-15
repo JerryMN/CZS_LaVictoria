@@ -11,17 +11,9 @@ namespace CZS_LaVictoria.TrapeadoresPage
 {
     public partial class RegistrarTrapeadoresForm : Form
     {
-        MaterialModel _selectedBastón = new MaterialModel();
         MaterialModel _selectedAlambre = new MaterialModel();
-        MaterialModel _selectedBolsa = new MaterialModel();
-        MaterialModel _selectedMecha = new MaterialModel();
-        MaterialModel _selectedEtiqueta = new MaterialModel();
         KitModel _selectedKit = new KitModel();
-        double _cantidadBastón;
         double _cantidadAlambre;
-        double _cantidadBolsa;
-        double _cantidadMecha;
-        double _cantidadEtiqueta;
         int _cantidadKit;
 
 
@@ -35,7 +27,18 @@ namespace CZS_LaVictoria.TrapeadoresPage
 
         #region Events
 
-        void GuardarButton_Click(object sender, EventArgs e)
+        void AlambreCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _selectedAlambre = (MaterialModel)AlambreCombo.SelectedItem;
+        }
+
+        void InputOutputChanged(object sender, EventArgs e)
+        {
+            GuardarButton.Enabled = false;
+            CalcularButton.Enabled = true;
+        }
+
+        void CalcularButton_Click(object sender, EventArgs e)
         {
             MsgBox.IconColor = Color.DarkRed;
             if (!ValidateForm())
@@ -44,44 +47,65 @@ namespace CZS_LaVictoria.TrapeadoresPage
                 return;
             }
 
-            _selectedBastón = (MaterialModel) BastónCombo.SelectedItem;
-            _selectedAlambre = (MaterialModel) AlambreCombo.SelectedItem;
-            _selectedBolsa = (MaterialModel) BolsaCombo.SelectedItem;
-            _selectedMecha = (MaterialModel) MechaCombo.SelectedItem;
-            _selectedEtiqueta = (MaterialModel) EtiquetaCombo.SelectedItem;
-            _selectedKit = (KitModel) SalidaCombo.SelectedItem;
+            if (_selectedAlambre.Id != 0)
+            {
+                if (_cantidadAlambre > _selectedAlambre.CantidadDisponible)
+                {
+                    MsgBox.Text =
+                        $"El alambre no se puede seleccionar. Cantidad disponible: {_selectedAlambre.CantidadDisponible:N}.";
+                    MsgBox.Visible = true;
+                    return;
+                }
+            }
 
+            _selectedKit = (KitModel)SalidaCombo.SelectedItem;
+
+            for (var i = 0; i < _selectedKit.Materiales.Count; i++)
+            {
+                var material = _selectedKit.Materiales[i];
+                var cantidadRequerida = _selectedKit.Cantidades[i] * _cantidadKit;
+                if (cantidadRequerida > material.CantidadDisponible)
+                {
+                    MsgBox.Text =
+                        $"El kit \"{_selectedKit.Nombre}\" no se puede seleccionar. Necesita más material \"{material.Nombre}\".";
+                    MsgBox.Visible = true;
+                    GuardarButton.Enabled = false;
+                    return;
+                }
+            }
+
+            MsgBox.Text = "Cantidades válidas.";
+            MsgBox.IconColor = Color.DarkGreen;
+            MsgBox.Visible = true;
+            MsgBoxTimer.Start();
+            GuardarButton.Enabled = true;
+            CalcularButton.Enabled = false;
+        }
+
+        void GuardarButton_Click(object sender, EventArgs e)
+        {
             var orden = new ProducciónTrapeadoresModel();
             Debug.Assert(FechaPicker.Value != null, "FechaPicker.Value != null");
-            orden.Fecha = (DateTime)FechaPicker.Value;
+            orden.Fecha = (DateTime) FechaPicker.Value;
             orden.Turno = int.Parse(TurnoText.Text);
             orden.Máquina = int.Parse(MaquinaText.Text);
             orden.Operador = OperadorCombo.Text;
-            orden.Bastón = _selectedBastón.Nombre;
-            orden.CantidadBastón = _cantidadBastón;
             orden.Alambre = _selectedAlambre.Nombre;
             orden.CantidadAlambre = _cantidadAlambre;
-            orden.Bolsa = _selectedBolsa.Nombre;
-            orden.CantidadBolsa = _cantidadBolsa;
-            orden.Mecha = _selectedMecha.Nombre;
-            orden.CantidadMecha = _cantidadMecha;
-            orden.Etiqueta = _selectedEtiqueta.Nombre;
-            orden.CantidadEtiqueta = _cantidadEtiqueta;
             orden.Kit = _selectedKit.Nombre;
             orden.CantidadKit = _cantidadKit;
 
-            var saveSuccess = GlobalConfig.Connection.MopProduction_Create(orden, _selectedBastón, _selectedAlambre,
-                _selectedBolsa, _selectedMecha, _selectedEtiqueta, _selectedKit);
+            var saveSuccess = GlobalConfig.Connection.MopProduction_Create(orden, _selectedAlambre, _selectedKit);
 
             if (saveSuccess)
             {
                 ClearForm();
-                MsgBox.Text = "Cortado registrado con éxito.";
+                MsgBox.Text = "Producción registrada con éxito.";
                 MsgBox.IconColor = Color.DarkGreen;
             }
             else
             {
-                MsgBox.Text = "Error al registrar cortado.";
+                MsgBox.Text = "Error al registrar producción.";
                 MsgBox.IconColor = Color.DarkRed;
             }
 
@@ -112,47 +136,21 @@ namespace CZS_LaVictoria.TrapeadoresPage
 
         void FillComboBoxes()
         {
-            BastónCombo.Items.Clear(); 
             AlambreCombo.Items.Clear();
-            BolsaCombo.Items.Clear();
-            MechaCombo.Items.Clear();
-            EtiquetaCombo.Items.Clear();
-
-            BastónCombo.DisplayMember = "Nombre";
+            SalidaCombo.Items.Clear();
             AlambreCombo.DisplayMember = "Nombre";
-            BolsaCombo.DisplayMember = "Nombre";
-            MechaCombo.DisplayMember = "Nombre";
-            EtiquetaCombo.DisplayMember = "Nombre";
-
-            var bastones = GlobalConfig.Connection.Material_GetByAreaCat("Trapeadores", "Bastón");
-            foreach (var bastón in bastones)
-            {
-                BastónCombo.Items.Add(bastón);
-            }
-
+            SalidaCombo.DisplayMember = "Nombre";
 
             var alambres = GlobalConfig.Connection.Material_GetByCat("Alambre");
             foreach (var alambre in alambres)
             {
-                BastónCombo.Items.Add(alambre);
+                AlambreCombo.Items.Add(alambre);
             }
 
-            var bolsas = GlobalConfig.Connection.Material_GetByAreaCat("Trapeadores", "Bolsa");
-            foreach (var bolsa in bolsas)
+            var kits = GlobalConfig.Connection.Kit_GetAll();
+            foreach (var kit in kits)
             {
-                BastónCombo.Items.Add(bolsa);
-            }
-
-            var mechas = GlobalConfig.Connection.Material_GetByAreaCat("Trapeadores", "Enrollado");
-            foreach (var mecha in mechas)
-            {
-                BastónCombo.Items.Add(mecha);
-            }
-
-            var etiquetas = GlobalConfig.Connection.Material_GetByAreaCat("Trapeadores", "Etiqueta");
-            foreach (var etiqueta in etiquetas)
-            {
-                BastónCombo.Items.Add(etiqueta);
+                SalidaCombo.Items.Add(kit);
             }
         }
 
@@ -179,64 +177,13 @@ namespace CZS_LaVictoria.TrapeadoresPage
                 MsgBox.Text += "Selecciona un turno.\n";
             }
 
-            if (BastónCombo.Text == "")
+            if (AlambreCombo.Text != "")
             {
-                output = false;
-                MsgBox.Text += "Selecciona un bastón.\n";
-            }
-
-            if (CantidadBastónText.Text == "0" || !double.TryParse(CantidadBastónText.Text, out _cantidadBastón))
-            {
-                output = false;
-                MsgBox.Text += "Ingresa la cantidad de bastones.\n";
-            }
-
-            if (AlambreCombo.Text == "")
-            {
-                output = false;
-                MsgBox.Text += "Selecciona un alambre.\n";
-            }
-
-            if (CantidadAlambreText.Text == "0" || !double.TryParse(CantidadAlambreText.Text, out _cantidadAlambre))
-            {
-                output = false;
-                MsgBox.Text += "Ingresa la cantidad de rollos de alambre.\n";
-            }
-
-            if (BolsaCombo.Text == "")
-            {
-                output = false;
-                MsgBox.Text += "Selecciona una bolsa.\n";
-            }
-
-            if (CantidadBolsaText.Text == "0" || !double.TryParse(CantidadBolsaText.Text, out _cantidadBolsa))
-            {
-                output = false;
-                MsgBox.Text += "Ingresa la cantidad de bolsas.\n";
-            }
-
-            if (MechaCombo.Text == "")
-            {
-                output = false;
-                MsgBox.Text += "Selecciona una mecha.\n";
-            }
-
-            if (CantidadMechaText.Text == "0" || !double.TryParse(CantidadMechaText.Text, out _cantidadMecha))
-            {
-                output = false;
-                MsgBox.Text += "Ingresa la cantidad de mecha.\n";
-            }
-
-            if (EtiquetaCombo.Text == "")
-            {
-                output = false;
-                MsgBox.Text += "Selecciona una etiqueta.\n";
-            }
-
-            if (CantidadEtiquetaText.Text == "0" || !double.TryParse(CantidadEtiquetaText.Text, out _cantidadEtiqueta))
-            {
-                output = false;
-                MsgBox.Text += "Ingresa la cantidad de etiquetas.\n";
+                if (CantidadAlambreText.Text == "0" || !double.TryParse(CantidadAlambreText.Text, out _cantidadAlambre))
+                {
+                    output = false;
+                    MsgBox.Text += "Ingresa la cantidad de rollos de alambre.\n";
+                }
             }
 
             if (SalidaCombo.Text == "")
@@ -245,7 +192,7 @@ namespace CZS_LaVictoria.TrapeadoresPage
                 MsgBox.Text += "Selecciona un kit.\n";
             }
 
-            if (CantidadSalidaText.Text == "0" || !int.TryParse(CantidadSalidaText.Text, out _cantidadKit))
+            if (CantidadSalidaText.Text == "0" || !int.TryParse(CantidadSalidaText.Text.Replace(",",""), out _cantidadKit))
             {
                 output = false;
                 MsgBox.Text += "Ingresa la cantidad de kits.\n";
@@ -272,11 +219,7 @@ namespace CZS_LaVictoria.TrapeadoresPage
 
             Func(Controls);
 
-            CantidadBastónText.Text = "0";
             CantidadAlambreText.Text = "0";
-            CantidadBolsaText.Text = "0";
-            CantidadMechaText.Text = "0";
-            CantidadEtiquetaText.Text = "0";
             CantidadSalidaText.Text = "0";
         }
 

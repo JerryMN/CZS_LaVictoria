@@ -135,6 +135,20 @@ namespace CZS_LaVictoria
 
         #endregion
 
+        #region Datos - Kits
+
+        void CrearKitButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new KitCrearForm());
+        }
+
+        void VerKitsButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new KitVerForm());
+        }
+
+        #endregion
+
         #region Datos - Mezclas
 
         void CrearMezclaButton_ItemClick(object sender, ItemClickEventArgs e)

@@ -248,6 +248,14 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         /// <summary>
         /// Obtiene todos los materiales o productos en el inventario que se encuentran
+        /// en una área especificada.
+        /// </summary>
+        /// <param name="area">El área de los materiales o productos.</param>
+        /// <returns>Una lista con los modelos de los materiales o productos.</returns>
+        List<MaterialModel> Material_GetByArea(string area);
+
+        /// <summary>
+        /// Obtiene todos los materiales o productos en el inventario que se encuentran
         /// en una categoría especificada.
         /// </summary>
         /// <param name="categoría">La categoría de los materiales o productos.</param>
@@ -677,15 +685,10 @@ namespace CZS_LaVictoria_Library.DataAccess
         /// Crea un registro de una producción de trapeadores.
         /// </summary>
         /// <param name="model">Un modelo con las propiedades de la producción.</param>
-        /// <param name="bastón">Un modelo con las propiedades del bastón de entrada al proceso.</param>
         /// <param name="alambre">Un modelo con las propiedades del alambre de entrada al proceso.</param>
-        /// <param name="bolsa">Un modelo con las propiedades de la bolsa de entrada al proceso.</param>
-        /// <param name="mecha">Un modelo con las propiedades de la mecha de entrada al proceso.</param>
-        /// <param name="etiqueta">Un modelo con las propiedades de la etiqueta de entrada al proceso.</param>
         /// <param name="kit">Un modelo con las propiedades del kit de salida del proceso.</param>
         /// <returns></returns>
-        bool MopProduction_Create(ProducciónTrapeadoresModel model, MaterialModel bastón, MaterialModel alambre,
-            MaterialModel bolsa, MaterialModel mecha, MaterialModel etiqueta, KitModel kit);
+        bool MopProduction_Create(ProducciónTrapeadoresModel model, MaterialModel alambre, KitModel kit);
 
         /// <summary>
         /// Obtiene todos los registros de producciones de trapeadores.

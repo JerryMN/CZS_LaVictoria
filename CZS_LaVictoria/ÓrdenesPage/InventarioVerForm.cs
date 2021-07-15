@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using CZS_LaVictoria_Library;
@@ -51,6 +52,12 @@ namespace CZS_LaVictoria.ÓrdenesPage
         {
             var newForm = new InventarioCrearForm();
             newForm.Show();
+            DataGrid.DataSource = GetStock();
+            newForm.Disposed += NewFormOnDisposed;
+        }
+
+        void NewFormOnDisposed(object sender, EventArgs e)
+        {
             DataGrid.DataSource = GetStock();
         }
 

@@ -250,6 +250,18 @@
     <Compile Include="DatosPage\ClienteVerForm.Designer.cs">
       <DependentUpon>ClienteVerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DatosPage\KitCrearForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DatosPage\KitCrearForm.Designer.cs">
+      <DependentUpon>KitCrearForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DatosPage\KitVerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DatosPage\KitVerForm.Designer.cs">
+      <DependentUpon>KitVerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DatosPage\MezclaCrearForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -452,6 +464,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DatosPage\ClienteVerForm.resx">
       <DependentUpon>ClienteVerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatosPage\KitCrearForm.resx">
+      <DependentUpon>KitCrearForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DatosPage\KitVerForm.resx">
+      <DependentUpon>KitVerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DatosPage\MezclaCrearForm.resx">
       <DependentUpon>MezclaCrearForm.cs</DependentUpon>
