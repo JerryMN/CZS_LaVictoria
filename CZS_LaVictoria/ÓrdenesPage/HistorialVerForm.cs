@@ -52,6 +52,12 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 e.Column = new GridNumericColumn
                     {MappingName = "Cantidad", HeaderText = "Cantidad", FormatMode = FormatMode.Numeric};
             }
+
+            if (e.Column.MappingName == "Precio")
+            {
+                e.Column = new GridNumericColumn
+                    { MappingName = "Precio", HeaderText = "Precio", FormatMode = FormatMode.Numeric };
+            }
         }
 
         /// <summary>

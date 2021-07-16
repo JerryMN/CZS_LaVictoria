@@ -1331,6 +1331,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                     p.Add("@NumLinea", línea.NumLinea);
                     p.Add("@Producto", línea.Producto);
                     p.Add("@Cantidad", newQty - oldQty);
+                    p.Add("@Precio", línea.PrecioUnitario);
                     p.Add("@Fecha", línea.FechaUltRecepción);
 
                     try
