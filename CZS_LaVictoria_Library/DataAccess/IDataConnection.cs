@@ -6,6 +6,12 @@ namespace CZS_LaVictoria_Library.DataAccess
 {
     public interface IDataConnection
     {
+        #region Licencia
+
+        bool CZS_GetLicencia();
+
+        #endregion
+
         #region Áreas
 
         /// <summary>

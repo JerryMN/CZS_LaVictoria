@@ -1,20 +1,50 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Drawing;
+using System.Windows.Forms;
 using CZS_LaVictoria.AlgodónPage;
 using CZS_LaVictoria.DatosPage;
 using CZS_LaVictoria.ÓrdenesPage;
 using CZS_LaVictoria.PlásticosPage;
 using CZS_LaVictoria.TrapeadoresPage;
+using CZS_LaVictoria_Library;
 using DevExpress.XtraBars;
+using DevExpress.XtraBars.Ribbon;
+using DevExpress.XtraSplashScreen;
 
 namespace CZS_LaVictoria
 {
-    public partial class MainMenuForm : DevExpress.XtraBars.Ribbon.RibbonForm
+    public partial class MainMenuForm : RibbonForm
     {
         Form _currentChildForm;
+        bool _validLicense;
 
         public MainMenuForm()
         {
             InitializeComponent();
+        }
+
+        void MainMenuForm_Load(object sender, EventArgs e)
+        {
+            _validLicense = GlobalConfig.Connection.CZS_GetLicencia();
+            var op = new FluentSplashScreenOptions
+            {
+                Title = "Escobas La Victoria",
+                Subtitle = "Por CZ Systems",
+                RightFooter = "Iniciando...",
+                LeftFooter = "Copyright © 2020 - 2021 CZ Systems \nTodos los derechos reservados.",
+                LoadingIndicatorType = FluentLoadingIndicatorType.Dots,
+                Opacity = 30,
+                OpacityColor = Color.DarkRed
+            };
+
+            SplashScreenManager.ShowFluentSplashScreen(op, parentForm: this, useFadeIn: true, useFadeOut: true);
+            System.Threading.Thread.Sleep(5000);
+            SplashScreenManager.CloseForm();
+
+            if (_validLicense) return;
+            MessageBox.Show("Licencia no válida o vencida.", "Error de licencia", MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
+            Application.Exit();
         }
 
         /// <summary>

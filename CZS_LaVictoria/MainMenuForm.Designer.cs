@@ -70,6 +70,8 @@ namespace CZS_LaVictoria
             this.VerProduccionesAlgodónButton = new DevExpress.XtraBars.BarButtonItem();
             this.RegistrarTrapeadoresButton = new DevExpress.XtraBars.BarButtonItem();
             this.VerProduccionesTrapeadoresButton = new DevExpress.XtraBars.BarButtonItem();
+            this.CrearKitButton = new DevExpress.XtraBars.BarButtonItem();
+            this.VerKitsButton = new DevExpress.XtraBars.BarButtonItem();
             this.ÓrdenesTab = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.Órdenes_CompraGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Órdenes_VentaGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -88,12 +90,10 @@ namespace CZS_LaVictoria
             this.Datos_ProveedoresGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Datos_ClientesGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Datos_AreasGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.Datos_KitsGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Datos_MezclasGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Datos_PersonalGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ChildPanel = new DevExpress.XtraEditors.PanelControl();
-            this.Datos_KitsGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.CrearKitButton = new DevExpress.XtraBars.BarButtonItem();
-            this.VerKitsButton = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.RibbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ChildPanel)).BeginInit();
             this.SuspendLayout();
@@ -486,6 +486,21 @@ namespace CZS_LaVictoria
             this.VerProduccionesTrapeadoresButton.Name = "VerProduccionesTrapeadoresButton";
             this.VerProduccionesTrapeadoresButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerProduccionesTrapeadoresButton_ItemClick);
             // 
+            // CrearKitButton
+            // 
+            this.CrearKitButton.Caption = "Crear Kit";
+            this.CrearKitButton.Id = 44;
+            this.CrearKitButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("CrearKitButton.ImageOptions.SvgImage")));
+            this.CrearKitButton.Name = "CrearKitButton";
+            this.CrearKitButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.CrearKitButton_ItemClick);
+            // 
+            // VerKitsButton
+            // 
+            this.VerKitsButton.Caption = "Ver / Editar";
+            this.VerKitsButton.Id = 45;
+            this.VerKitsButton.Name = "VerKitsButton";
+            this.VerKitsButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerKitsButton_ItemClick);
+            // 
             // ÓrdenesTab
             // 
             this.ÓrdenesTab.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F);
@@ -645,6 +660,14 @@ namespace CZS_LaVictoria
             this.Datos_AreasGroup.Name = "Datos_AreasGroup";
             this.Datos_AreasGroup.Text = "Áreas";
             // 
+            // Datos_KitsGroup
+            // 
+            this.Datos_KitsGroup.AllowTextClipping = false;
+            this.Datos_KitsGroup.ItemLinks.Add(this.CrearKitButton);
+            this.Datos_KitsGroup.ItemLinks.Add(this.VerKitsButton);
+            this.Datos_KitsGroup.Name = "Datos_KitsGroup";
+            this.Datos_KitsGroup.Text = "Kits";
+            // 
             // Datos_MezclasGroup
             // 
             this.Datos_MezclasGroup.AllowTextClipping = false;
@@ -669,29 +692,6 @@ namespace CZS_LaVictoria
             this.ChildPanel.Size = new System.Drawing.Size(1278, 841);
             this.ChildPanel.TabIndex = 1;
             // 
-            // Datos_KitsGroup
-            // 
-            this.Datos_KitsGroup.AllowTextClipping = false;
-            this.Datos_KitsGroup.ItemLinks.Add(this.CrearKitButton);
-            this.Datos_KitsGroup.ItemLinks.Add(this.VerKitsButton);
-            this.Datos_KitsGroup.Name = "Datos_KitsGroup";
-            this.Datos_KitsGroup.Text = "Kits";
-            // 
-            // CrearKitButton
-            // 
-            this.CrearKitButton.Caption = "Crear Kit";
-            this.CrearKitButton.Id = 44;
-            this.CrearKitButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("CrearKitButton.ImageOptions.SvgImage")));
-            this.CrearKitButton.Name = "CrearKitButton";
-            this.CrearKitButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.CrearKitButton_ItemClick);
-            // 
-            // VerKitsButton
-            // 
-            this.VerKitsButton.Caption = "Ver / Editar";
-            this.VerKitsButton.Id = 45;
-            this.VerKitsButton.Name = "VerKitsButton";
-            this.VerKitsButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerKitsButton_ItemClick);
-            // 
             // MainMenuForm
             // 
             this.Appearance.BackColor = System.Drawing.SystemColors.Control;
@@ -709,6 +709,7 @@ namespace CZS_LaVictoria
             this.Ribbon = this.RibbonControl;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CZ Systems - La Victoria";
+            this.Load += new System.EventHandler(this.MainMenuForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.RibbonControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ChildPanel)).EndInit();
             this.ResumeLayout(false);

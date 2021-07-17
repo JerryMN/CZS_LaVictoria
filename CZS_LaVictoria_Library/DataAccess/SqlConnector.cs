@@ -15,6 +15,26 @@ namespace CZS_LaVictoria_Library.DataAccess
         const string ConnectionString =
             "Server=czsystems.database.windows.net;Database=escobaslavictoria;User Id=czsystems_escobaslavictoria;Password=Prye2uikg4;";
 
+        const string MasterString =
+            "Server=czsystems.database.windows.net;Database=czsystems_master;User Id=czsystems_escobaslavictoria;Password=Prye2uikg4;";
+
+
+        #region Licencia
+
+        public bool CZS_GetLicencia()
+        {
+            using (IDbConnection connection = new SqlConnection(MasterString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@Empresa", "Escobas La Victoria");
+                p.Add("@Habilitado", 0, DbType.Boolean, ParameterDirection.Output);
+
+                return connection.QuerySingle<bool>("dbo.spLicencias_Consulta", p, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        #endregion
+
         #region Area
 
         public bool Area_Create(AreaModel model)
