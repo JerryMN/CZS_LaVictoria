@@ -45,14 +45,13 @@ namespace CZS_LaVictoria.PlásticosPage
             this.MsgBoxTimer = new System.Windows.Forms.Timer(this.components);
             this.FechaPicker = new Syncfusion.WinForms.Input.SfDateTimeEdit();
             this.OperadorCombo = new System.Windows.Forms.ComboBox();
-            this.MaquinaText = new System.Windows.Forms.NumericUpDown();
             this.FechaLabel = new System.Windows.Forms.Label();
             this.OperadorLabel = new System.Windows.Forms.Label();
             this.MaquinaLabel = new System.Windows.Forms.Label();
             this.TurnoText = new System.Windows.Forms.NumericUpDown();
             this.GuardarButton = new System.Windows.Forms.Button();
             this.MsgBox = new FontAwesome.Sharp.IconButton();
-            ((System.ComponentModel.ISupportInitialize)(this.MaquinaText)).BeginInit();
+            this.MáquinaCombo = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.TurnoText)).BeginInit();
             this.SuspendLayout();
             // 
@@ -219,23 +218,6 @@ namespace CZS_LaVictoria.PlásticosPage
             this.OperadorCombo.TabIndex = 34;
             this.OperadorCombo.SelectedIndexChanged += new System.EventHandler(this.EntradaCombo_SelectedIndexChanged);
             // 
-            // MaquinaText
-            // 
-            this.MaquinaText.Location = new System.Drawing.Point(200, 247);
-            this.MaquinaText.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.MaquinaText.Name = "MaquinaText";
-            this.MaquinaText.Size = new System.Drawing.Size(120, 29);
-            this.MaquinaText.TabIndex = 39;
-            this.MaquinaText.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
             // FechaLabel
             // 
             this.FechaLabel.AutoSize = true;
@@ -319,13 +301,23 @@ namespace CZS_LaVictoria.PlásticosPage
             this.MsgBox.UseVisualStyleBackColor = true;
             this.MsgBox.Visible = false;
             // 
+            // MáquinaCombo
+            // 
+            this.MáquinaCombo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.MáquinaCombo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.MáquinaCombo.FormattingEnabled = true;
+            this.MáquinaCombo.Location = new System.Drawing.Point(200, 247);
+            this.MáquinaCombo.Name = "MáquinaCombo";
+            this.MáquinaCombo.Size = new System.Drawing.Size(124, 29);
+            this.MáquinaCombo.TabIndex = 86;
+            // 
             // RegistrarMolidoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1276, 839);
+            this.Controls.Add(this.MáquinaCombo);
             this.Controls.Add(this.TurnoText);
-            this.Controls.Add(this.MaquinaText);
             this.Controls.Add(this.FechaPicker);
             this.Controls.Add(this.MsgBox);
             this.Controls.Add(this.GuardarButton);
@@ -350,7 +342,6 @@ namespace CZS_LaVictoria.PlásticosPage
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "RegistrarMolidoForm";
             this.Text = "RegistrarMolidoButton";
-            ((System.ComponentModel.ISupportInitialize)(this.MaquinaText)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TurnoText)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -374,12 +365,12 @@ namespace CZS_LaVictoria.PlásticosPage
         private System.Windows.Forms.Timer MsgBoxTimer;
         private Syncfusion.WinForms.Input.SfDateTimeEdit FechaPicker;
         private System.Windows.Forms.ComboBox OperadorCombo;
-        private System.Windows.Forms.NumericUpDown MaquinaText;
         private System.Windows.Forms.Label FechaLabel;
         private System.Windows.Forms.Label OperadorLabel;
         private System.Windows.Forms.Label MaquinaLabel;
         private System.Windows.Forms.NumericUpDown TurnoText;
         private System.Windows.Forms.Button GuardarButton;
         private FontAwesome.Sharp.IconButton MsgBox;
+        private System.Windows.Forms.ComboBox MáquinaCombo;
     }
 }

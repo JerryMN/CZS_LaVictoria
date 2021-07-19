@@ -59,7 +59,6 @@ namespace CZS_LaVictoria.PlásticosPage
             this.label1 = new System.Windows.Forms.Label();
             this.MsgBoxTimer = new System.Windows.Forms.Timer(this.components);
             this.TurnoText = new System.Windows.Forms.NumericUpDown();
-            this.MaquinaText = new System.Windows.Forms.NumericUpDown();
             this.FechaPicker = new Syncfusion.WinForms.Input.SfDateTimeEdit();
             this.OperadorCombo = new System.Windows.Forms.ComboBox();
             this.MaquinaLabel = new System.Windows.Forms.Label();
@@ -68,8 +67,8 @@ namespace CZS_LaVictoria.PlásticosPage
             this.label2 = new System.Windows.Forms.Label();
             this.CantidadEntradaLabel = new System.Windows.Forms.Label();
             this.CantidadEntradaText = new Syncfusion.WinForms.Input.SfNumericTextBox();
+            this.MáquinaCombo = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.TurnoText)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.MaquinaText)).BeginInit();
             this.SuspendLayout();
             // 
             // MsgBox
@@ -408,23 +407,6 @@ namespace CZS_LaVictoria.PlásticosPage
             0,
             0});
             // 
-            // MaquinaText
-            // 
-            this.MaquinaText.Location = new System.Drawing.Point(200, 247);
-            this.MaquinaText.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.MaquinaText.Name = "MaquinaText";
-            this.MaquinaText.Size = new System.Drawing.Size(120, 29);
-            this.MaquinaText.TabIndex = 93;
-            this.MaquinaText.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
             // FechaPicker
             // 
             this.FechaPicker.AllowValueChangeOnMouseWheel = true;
@@ -506,13 +488,23 @@ namespace CZS_LaVictoria.PlásticosPage
             this.CantidadEntradaText.WatermarkText = "Ingresa la cantidad";
             this.CantidadEntradaText.TextChanged += new System.EventHandler(this.InputOutputChanged);
             // 
+            // MáquinaCombo
+            // 
+            this.MáquinaCombo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.MáquinaCombo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.MáquinaCombo.FormattingEnabled = true;
+            this.MáquinaCombo.Location = new System.Drawing.Point(200, 247);
+            this.MáquinaCombo.Name = "MáquinaCombo";
+            this.MáquinaCombo.Size = new System.Drawing.Size(124, 29);
+            this.MáquinaCombo.TabIndex = 93;
+            // 
             // RegistrarInyecciónForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1276, 839);
+            this.Controls.Add(this.MáquinaCombo);
             this.Controls.Add(this.TurnoText);
-            this.Controls.Add(this.MaquinaText);
             this.Controls.Add(this.FechaPicker);
             this.Controls.Add(this.OperadorCombo);
             this.Controls.Add(this.MaquinaLabel);
@@ -554,7 +546,6 @@ namespace CZS_LaVictoria.PlásticosPage
             this.Name = "RegistrarInyecciónForm";
             this.Text = "RegistrarInyecciónForm";
             ((System.ComponentModel.ISupportInitialize)(this.TurnoText)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.MaquinaText)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -590,7 +581,6 @@ namespace CZS_LaVictoria.PlásticosPage
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Timer MsgBoxTimer;
         private System.Windows.Forms.NumericUpDown TurnoText;
-        private System.Windows.Forms.NumericUpDown MaquinaText;
         private Syncfusion.WinForms.Input.SfDateTimeEdit FechaPicker;
         private System.Windows.Forms.ComboBox OperadorCombo;
         private System.Windows.Forms.Label MaquinaLabel;
@@ -599,5 +589,6 @@ namespace CZS_LaVictoria.PlásticosPage
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label CantidadEntradaLabel;
         private Syncfusion.WinForms.Input.SfNumericTextBox CantidadEntradaText;
+        private System.Windows.Forms.ComboBox MáquinaCombo;
     }
 }

@@ -53,7 +53,6 @@ namespace CZS_LaVictoria.PlásticosPage
             this.CantidadEntradaLabel = new System.Windows.Forms.Label();
             this.EntradaLabel = new System.Windows.Forms.Label();
             this.TurnoText = new System.Windows.Forms.NumericUpDown();
-            this.MaquinaText = new System.Windows.Forms.NumericUpDown();
             this.FechaPicker = new Syncfusion.WinForms.Input.SfDateTimeEdit();
             this.OperadorCombo = new System.Windows.Forms.ComboBox();
             this.MaquinaLabel = new System.Windows.Forms.Label();
@@ -63,8 +62,8 @@ namespace CZS_LaVictoria.PlásticosPage
             this.MaterialRadio = new System.Windows.Forms.RadioButton();
             this.CalcularButton = new System.Windows.Forms.Button();
             this.MsgBoxTimer = new System.Windows.Forms.Timer(this.components);
+            this.MáquinaCombo = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.TurnoText)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.MaquinaText)).BeginInit();
             this.SuspendLayout();
             // 
             // SubtitleLabel
@@ -339,23 +338,6 @@ namespace CZS_LaVictoria.PlásticosPage
             0,
             0});
             // 
-            // MaquinaText
-            // 
-            this.MaquinaText.Location = new System.Drawing.Point(200, 247);
-            this.MaquinaText.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.MaquinaText.Name = "MaquinaText";
-            this.MaquinaText.Size = new System.Drawing.Size(120, 29);
-            this.MaquinaText.TabIndex = 76;
-            this.MaquinaText.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
             // FechaPicker
             // 
             this.FechaPicker.AllowValueChangeOnMouseWheel = true;
@@ -445,16 +427,26 @@ namespace CZS_LaVictoria.PlásticosPage
             this.MsgBoxTimer.Interval = 3000;
             this.MsgBoxTimer.Tick += new System.EventHandler(this.MsgBoxTimer_Tick);
             // 
+            // MáquinaCombo
+            // 
+            this.MáquinaCombo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.MáquinaCombo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.MáquinaCombo.FormattingEnabled = true;
+            this.MáquinaCombo.Location = new System.Drawing.Point(200, 246);
+            this.MáquinaCombo.Name = "MáquinaCombo";
+            this.MáquinaCombo.Size = new System.Drawing.Size(124, 29);
+            this.MáquinaCombo.TabIndex = 79;
+            // 
             // RegistrarExtruídoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1276, 839);
+            this.Controls.Add(this.MáquinaCombo);
             this.Controls.Add(this.CalcularButton);
             this.Controls.Add(this.MaterialRadio);
             this.Controls.Add(this.MezclaRadio);
             this.Controls.Add(this.TurnoText);
-            this.Controls.Add(this.MaquinaText);
             this.Controls.Add(this.FechaPicker);
             this.Controls.Add(this.OperadorCombo);
             this.Controls.Add(this.MaquinaLabel);
@@ -488,7 +480,6 @@ namespace CZS_LaVictoria.PlásticosPage
             this.Name = "RegistrarExtruídoForm";
             this.Text = "RegistrarExtrusiónForm";
             ((System.ComponentModel.ISupportInitialize)(this.TurnoText)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.MaquinaText)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -519,7 +510,6 @@ namespace CZS_LaVictoria.PlásticosPage
         private System.Windows.Forms.Label CantidadEntradaLabel;
         private System.Windows.Forms.Label EntradaLabel;
         private System.Windows.Forms.NumericUpDown TurnoText;
-        private System.Windows.Forms.NumericUpDown MaquinaText;
         private Syncfusion.WinForms.Input.SfDateTimeEdit FechaPicker;
         private System.Windows.Forms.ComboBox OperadorCombo;
         private System.Windows.Forms.Label MaquinaLabel;
@@ -529,5 +519,6 @@ namespace CZS_LaVictoria.PlásticosPage
         private System.Windows.Forms.RadioButton MaterialRadio;
         private System.Windows.Forms.Button CalcularButton;
         private System.Windows.Forms.Timer MsgBoxTimer;
+        private System.Windows.Forms.ComboBox MáquinaCombo;
     }
 }

@@ -20,6 +20,7 @@ namespace CZS_LaVictoria.PlásticosPage
         {
             InitializeComponent();
             GetOperadores();
+            GetMáquinas();
             GetMateriales();
             FechaPicker.Culture = new CultureInfo("es-MX");
         }
@@ -69,7 +70,7 @@ namespace CZS_LaVictoria.PlásticosPage
             orden.Fecha = (DateTime) FechaPicker.Value;
             orden.Proceso = "Molido";
             orden.Turno = int.Parse(TurnoText.Text);
-            orden.Máquina = int.Parse(MaquinaText.Text);
+            orden.Máquina = MáquinaCombo.Text;
             orden.Operador = OperadorCombo.Text;
             orden.MaterialEntra = _materialEntrada.Nombre;
             orden.CantidadEntra = double.Parse(CantidadEntradaText.Text);
@@ -118,6 +119,17 @@ namespace CZS_LaVictoria.PlásticosPage
             OperadorCombo.DisplayMember = "Nombre";
         }
 
+        void GetMáquinas()
+        {
+            MáquinaCombo.Items.Clear();
+
+            var máquinas = GlobalConfig.Connection.PlasticProduction_GetMáquinas();
+            foreach (var máquina in máquinas)
+            {
+                MáquinaCombo.Items.Add(máquina);
+            }
+        }
+
         void GetMateriales()
         {
             EntradaCombo.Items.Clear();
@@ -150,7 +162,7 @@ namespace CZS_LaVictoria.PlásticosPage
                 MsgBox.Text += "Selecciona un operador.\n";
             }
 
-            if (MaquinaText.Text == "")
+            if (MáquinaCombo.Text == "")
             {
                 output = false;
                 MsgBox.Text += "Selecciona una máquina.\n";
@@ -220,6 +232,10 @@ namespace CZS_LaVictoria.PlásticosPage
             }
 
             Func(Controls);
+
+            TurnoText.Text = "1";
+            CantidadEntradaText.Text = "0.00";
+            CantidadSalidaText.Text = "0.00";
         }
 
         #endregion
