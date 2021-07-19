@@ -11,6 +11,7 @@ namespace CZS_LaVictoria.AlgodónPage
 {
     public partial class RegistrarTorceduraForm : Form
     {
+        readonly MaterialModel _materialEntrada = GlobalConfig.Connection.Material_GetByNombreArea("Hilo", "Algodón");
         double _cantidadEntrada;
         double _cantidadSalida;
 
@@ -18,6 +19,7 @@ namespace CZS_LaVictoria.AlgodónPage
         {
             InitializeComponent();
             GetOperadores();
+            GetMáquinas();
             FechaPicker.Culture = new CultureInfo("es-MX");
         }
 
@@ -36,9 +38,9 @@ namespace CZS_LaVictoria.AlgodónPage
             orden.Fecha = (DateTime)FechaPicker.Value;
             orden.Proceso = "Torcedura";
             orden.Turno = int.Parse(TurnoText.Text);
-            orden.Máquina = int.Parse(MaquinaText.Text);
+            orden.Máquina = MáquinaCombo.Text;
             orden.Operador = OperadorCombo.Text;
-            orden.MaterialEntra = "Bobinas de Hilo";
+            orden.MaterialEntra = "Hilo";
             orden.CantidadEntra = _cantidadEntrada;
             orden.MaterialSale = "Carretes";
             orden.CantidadSale = _cantidadSalida;
@@ -82,6 +84,17 @@ namespace CZS_LaVictoria.AlgodónPage
             OperadorCombo.DisplayMember = "Nombre";
         }
 
+        void GetMáquinas()
+        {
+            MáquinaCombo.Items.Clear();
+
+            var máquinas = GlobalConfig.Connection.PlasticProduction_GetMáquinas();
+            foreach (var máquina in máquinas)
+            {
+                MáquinaCombo.Items.Add(máquina);
+            }
+        }
+
         bool ValidateForm()
         {
             var output = true;
@@ -93,7 +106,7 @@ namespace CZS_LaVictoria.AlgodónPage
                 MsgBox.Text += "Selecciona un operador.\n";
             }
 
-            if (MaquinaText.Text == "")
+            if (MáquinaCombo.Text == "")
             {
                 output = false;
                 MsgBox.Text += "Selecciona una máquina.\n";
@@ -108,7 +121,12 @@ namespace CZS_LaVictoria.AlgodónPage
             if (CantidadEntradaText.Text == "" || CantidadEntradaText.Text == "0.00" || !double.TryParse(CantidadEntradaText.Text, out _cantidadEntrada))
             {
                 output = false;
-                MsgBox.Text += "Ingresa la cantidad de bobinas de hilo.\n";
+                MsgBox.Text += "Ingresa los kg de hilo.\n";
+            }
+            else if (_cantidadEntrada > _materialEntrada.CantidadDisponible)    
+            {
+                output = false;
+                MsgBox.Text += $"Cantidad de entrada excede el disponible ({_materialEntrada.CantidadDisponible:N}).\n";
             }
 
             if (CantidadSalidaText.Text == "" || CantidadSalidaText.Text == "0.00" || !double.TryParse(CantidadSalidaText.Text, out _cantidadSalida))

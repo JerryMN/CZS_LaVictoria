@@ -19,6 +19,7 @@ namespace CZS_LaVictoria.AlgodónPage
         {
             InitializeComponent();
             GetOperadores();
+            GetMáquinas();
             GetAlgodones();
             FechaPicker.Culture = new CultureInfo("es-MX");
         }
@@ -43,12 +44,11 @@ namespace CZS_LaVictoria.AlgodónPage
             orden.Fecha = (DateTime)FechaPicker.Value;
             orden.Proceso = "Escalera";
             orden.Turno = int.Parse(TurnoText.Text);
-            orden.Máquina = int.Parse(MaquinaText.Text);
+            orden.Máquina = MáquinaCombo.Text;
             orden.Operador = OperadorCombo.Text;
             orden.MaterialEntra = _materialEntrada.Nombre;
             orden.CantidadEntra = _cantidadEntrada;
-            orden.MaterialSale = "Algodón Limpio";
-            orden.CantidadSale = _cantidadSalida;
+            orden.Merma = _cantidadSalida;
 
             var saveSuccess = GlobalConfig.Connection.WoolProduction_CreateEscalera(orden, _materialEntrada);
 
@@ -89,6 +89,17 @@ namespace CZS_LaVictoria.AlgodónPage
             OperadorCombo.DisplayMember = "Nombre";
         }
 
+        void GetMáquinas()
+        {
+            MáquinaCombo.Items.Clear();
+
+            var máquinas = GlobalConfig.Connection.PlasticProduction_GetMáquinas();
+            foreach (var máquina in máquinas)
+            {
+                MáquinaCombo.Items.Add(máquina);
+            }
+        }
+
         void GetAlgodones()
         {
             EntradaCombo.Items.Clear();
@@ -113,7 +124,7 @@ namespace CZS_LaVictoria.AlgodónPage
                 MsgBox.Text += "Selecciona un operador.\n";
             }
 
-            if (MaquinaText.Text == "")
+            if (MáquinaCombo.Text == "")
             {
                 output = false;
                 MsgBox.Text += "Selecciona una máquina.\n";
@@ -139,13 +150,13 @@ namespace CZS_LaVictoria.AlgodónPage
             else if (_cantidadEntrada > _materialEntrada.CantidadDisponible)
             {
                 output = false;
-                MsgBox.Text += $"Cantidad de entrada excede el disponible ({_materialEntrada.CantidadDisponible}).\n";
+                MsgBox.Text += $"Cantidad de entrada excede el disponible ({_materialEntrada.CantidadDisponible:N}).\n";
             }
 
-            if (CantidadSalidaText.Text == "" || CantidadSalidaText.Text == "0.00" || !double.TryParse(CantidadSalidaText.Text, out _cantidadSalida))
+            if (MermaEscaleraText.Text == "" || !double.TryParse(MermaEscaleraText.Text, out _cantidadSalida))
             {
                 output = false;
-                MsgBox.Text += "Ingresa la cantidad de algodón limpio.\n";
+                MsgBox.Text += "Ingresa la cantidad de merma.\n";
             }
 
             if (_cantidadSalida > _cantidadEntrada)
@@ -160,7 +171,7 @@ namespace CZS_LaVictoria.AlgodónPage
         void ClearForm()
         {
             CantidadEntradaText.Text = "0.00";
-            CantidadSalidaText.Text = "0.00";
+            MermaEscaleraText.Text = "0.00";
             
             void Func(IEnumerable controls)
             {
@@ -177,6 +188,10 @@ namespace CZS_LaVictoria.AlgodónPage
             }
 
             Func(Controls);
+
+            TurnoText.Text = "1";
+            CantidadEntradaText.Text = "0.00";
+            MermaEscaleraText.Text = "0.00";
         }
 
         #endregion

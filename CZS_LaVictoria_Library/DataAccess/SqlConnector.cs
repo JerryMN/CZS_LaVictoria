@@ -2632,6 +2632,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                     p.Add("@CantidadEntra", model.CantidadEntra);
                     p.Add("@MaterialSale", model.MaterialSale);
                     p.Add("@CantidadSale", model.CantidadSale);
+                    p.Add("@Merma", model.Merma);
                     connection.Execute("dbo.spWoolProduction_Insert", p, commandType: CommandType.StoredProcedure);
                 }
                 catch (Exception ex)
@@ -2795,6 +2796,12 @@ namespace CZS_LaVictoria_Library.DataAccess
                     p.Add("@MaterialSale", model.MaterialSale);
                     p.Add("@CantidadSale", model.CantidadSale);
                     connection.Execute("dbo.spWoolProduction_Insert", p, commandType: CommandType.StoredProcedure);
+
+                    var hilo = Material_GetByNombreArea(model.MaterialEntra, "Algodón");
+                    p = new DynamicParameters();
+                    p.Add("@CantidadDisponible", hilo.CantidadDisponible - model.CantidadEntra);
+                    p.Add("@Id", hilo.Id);
+                    connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
                 }
                 catch (Exception ex)
                 {
@@ -2934,6 +2941,24 @@ namespace CZS_LaVictoria_Library.DataAccess
                 {
                     var output = connection.Query<ProducciónAlgodónModel>("dbo.spWoolProduction_GetByProceso", p,
                         commandType: CommandType.StoredProcedure).ToList();
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
+        }
+
+        public List<string> WoolProduction_GetMáquinas()
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var output = connection.Query<string>("dbo.spWoolProduction_GetMáquinas").ToList();
                     return output;
                 }
                 catch (Exception ex)

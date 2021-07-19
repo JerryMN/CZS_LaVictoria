@@ -11,13 +11,13 @@ namespace CZS_LaVictoria.AlgodónPage
 {
     public partial class RegistrarEnrolladoForm : Form
     {
-        double _cantidadEntrada;
         double _cantidadSalida;
 
         public RegistrarEnrolladoForm()
         {
             InitializeComponent();
             GetOperadores();
+            GetMáquinas();
             FechaPicker.Culture = new CultureInfo("es-MX");
         }
 
@@ -36,10 +36,9 @@ namespace CZS_LaVictoria.AlgodónPage
             orden.Fecha = (DateTime)FechaPicker.Value;
             orden.Proceso = "Enrollado";
             orden.Turno = int.Parse(TurnoText.Text);
-            orden.Máquina = int.Parse(MaquinaText.Text);
+            orden.Máquina = MáquinaCombo.Text;
             orden.Operador = OperadorCombo.Text;
             orden.MaterialEntra = "Carretes";
-            orden.CantidadEntra = _cantidadEntrada;
             orden.MaterialSale = "Enrollado";
             orden.CantidadSale = _cantidadSalida;
 
@@ -82,6 +81,17 @@ namespace CZS_LaVictoria.AlgodónPage
             OperadorCombo.DisplayMember = "Nombre";
         }
 
+        void GetMáquinas()
+        {
+            MáquinaCombo.Items.Clear();
+
+            var máquinas = GlobalConfig.Connection.PlasticProduction_GetMáquinas();
+            foreach (var máquina in máquinas)
+            {
+                MáquinaCombo.Items.Add(máquina);
+            }
+        }
+
         bool ValidateForm()
         {
             var output = true;
@@ -93,7 +103,7 @@ namespace CZS_LaVictoria.AlgodónPage
                 MsgBox.Text += "Selecciona un operador.\n";
             }
 
-            if (MaquinaText.Text == "")
+            if (MáquinaCombo.Text == "")
             {
                 output = false;
                 MsgBox.Text += "Selecciona una máquina.\n";
@@ -103,12 +113,6 @@ namespace CZS_LaVictoria.AlgodónPage
             {
                 output = false;
                 MsgBox.Text += "Selecciona un turno.\n";
-            }
-
-            if (CantidadEntradaText.Text == "" || CantidadEntradaText.Text == "0.00" || !double.TryParse(CantidadEntradaText.Text, out _cantidadEntrada))
-            {
-                output = false;
-                MsgBox.Text += "Ingresa la cantidad de carretes.\n";
             }
 
             if (CantidadSalidaText.Text == "" || CantidadSalidaText.Text == "0.00" || !double.TryParse(CantidadSalidaText.Text, out _cantidadSalida))
@@ -122,9 +126,6 @@ namespace CZS_LaVictoria.AlgodónPage
 
         void ClearForm()
         {
-            CantidadEntradaText.Text = "0.00";
-            CantidadSalidaText.Text = "0.00";
-
             void Func(IEnumerable controls)
             {
                 foreach (Control control in controls)
@@ -140,6 +141,9 @@ namespace CZS_LaVictoria.AlgodónPage
             }
 
             Func(Controls);
+
+            TurnoText.Text = "1";
+            CantidadSalidaText.Text = "0.00";
         }
 
         #endregion

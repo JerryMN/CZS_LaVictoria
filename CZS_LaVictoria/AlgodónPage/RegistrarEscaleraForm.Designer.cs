@@ -32,7 +32,6 @@ namespace CZS_LaVictoria.AlgodónPage
             this.components = new System.ComponentModel.Container();
             this.SubtitleLabel = new System.Windows.Forms.Label();
             this.TurnoText = new System.Windows.Forms.NumericUpDown();
-            this.MaquinaText = new System.Windows.Forms.NumericUpDown();
             this.FechaPicker = new Syncfusion.WinForms.Input.SfDateTimeEdit();
             this.OperadorCombo = new System.Windows.Forms.ComboBox();
             this.MaquinaLabel = new System.Windows.Forms.Label();
@@ -46,12 +45,12 @@ namespace CZS_LaVictoria.AlgodónPage
             this.ArrowButton = new FontAwesome.Sharp.IconButton();
             this.MsgBox = new FontAwesome.Sharp.IconButton();
             this.GuardarButton = new System.Windows.Forms.Button();
-            this.CantidadSalidaText = new Syncfusion.WinForms.Input.SfNumericTextBox();
+            this.MermaEscaleraText = new Syncfusion.WinForms.Input.SfNumericTextBox();
             this.SalidaLabel = new System.Windows.Forms.Label();
             this.CantidadSalidaUnidad = new System.Windows.Forms.Label();
             this.MsgBoxTimer = new System.Windows.Forms.Timer(this.components);
+            this.MáquinaCombo = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.TurnoText)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.MaquinaText)).BeginInit();
             this.SuspendLayout();
             // 
             // SubtitleLabel
@@ -81,23 +80,6 @@ namespace CZS_LaVictoria.AlgodónPage
             this.TurnoText.Size = new System.Drawing.Size(120, 29);
             this.TurnoText.TabIndex = 89;
             this.TurnoText.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // MaquinaText
-            // 
-            this.MaquinaText.Location = new System.Drawing.Point(200, 247);
-            this.MaquinaText.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.MaquinaText.Name = "MaquinaText";
-            this.MaquinaText.Size = new System.Drawing.Size(120, 29);
-            this.MaquinaText.TabIndex = 90;
-            this.MaquinaText.Value = new decimal(new int[] {
             1,
             0,
             0,
@@ -246,18 +228,18 @@ namespace CZS_LaVictoria.AlgodónPage
             this.GuardarButton.UseVisualStyleBackColor = true;
             this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
             // 
-            // CantidadSalidaText
+            // MermaEscaleraText
             // 
-            this.CantidadSalidaText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.CantidadSalidaText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CantidadSalidaText.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.CantidadSalidaText.Location = new System.Drawing.Point(750, 147);
-            this.CantidadSalidaText.MinValue = 0D;
-            this.CantidadSalidaText.Name = "CantidadSalidaText";
-            this.CantidadSalidaText.Size = new System.Drawing.Size(250, 29);
-            this.CantidadSalidaText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.CantidadSalidaText.TabIndex = 102;
-            this.CantidadSalidaText.WatermarkText = "Ingresa la cantidad";
+            this.MermaEscaleraText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.MermaEscaleraText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MermaEscaleraText.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.MermaEscaleraText.Location = new System.Drawing.Point(750, 147);
+            this.MermaEscaleraText.MinValue = 0D;
+            this.MermaEscaleraText.Name = "MermaEscaleraText";
+            this.MermaEscaleraText.Size = new System.Drawing.Size(250, 29);
+            this.MermaEscaleraText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.MermaEscaleraText.TabIndex = 102;
+            this.MermaEscaleraText.WatermarkText = "Ingresa la cantidad";
             // 
             // SalidaLabel
             // 
@@ -265,9 +247,9 @@ namespace CZS_LaVictoria.AlgodónPage
             this.SalidaLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SalidaLabel.Location = new System.Drawing.Point(600, 150);
             this.SalidaLabel.Name = "SalidaLabel";
-            this.SalidaLabel.Size = new System.Drawing.Size(121, 21);
+            this.SalidaLabel.Size = new System.Drawing.Size(120, 21);
             this.SalidaLabel.TabIndex = 99;
-            this.SalidaLabel.Text = "Algodón Limpio";
+            this.SalidaLabel.Text = "Merma Escalera";
             // 
             // CantidadSalidaUnidad
             // 
@@ -283,14 +265,25 @@ namespace CZS_LaVictoria.AlgodónPage
             this.MsgBoxTimer.Interval = 3000;
             this.MsgBoxTimer.Tick += new System.EventHandler(this.MsgBoxTimer_Tick);
             // 
+            // MáquinaCombo
+            // 
+            this.MáquinaCombo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.MáquinaCombo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.MáquinaCombo.FormattingEnabled = true;
+            this.MáquinaCombo.Location = new System.Drawing.Point(200, 246);
+            this.MáquinaCombo.Name = "MáquinaCombo";
+            this.MáquinaCombo.Size = new System.Drawing.Size(124, 29);
+            this.MáquinaCombo.TabIndex = 105;
+            // 
             // RegistrarEscaleraForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1276, 839);
+            this.Controls.Add(this.MáquinaCombo);
             this.Controls.Add(this.MsgBox);
             this.Controls.Add(this.GuardarButton);
-            this.Controls.Add(this.CantidadSalidaText);
+            this.Controls.Add(this.MermaEscaleraText);
             this.Controls.Add(this.SalidaLabel);
             this.Controls.Add(this.ArrowButton);
             this.Controls.Add(this.EntradaCombo);
@@ -300,7 +293,6 @@ namespace CZS_LaVictoria.AlgodónPage
             this.Controls.Add(this.CantidadEntradaText);
             this.Controls.Add(this.CantidadEntradaLabel);
             this.Controls.Add(this.TurnoText);
-            this.Controls.Add(this.MaquinaText);
             this.Controls.Add(this.FechaPicker);
             this.Controls.Add(this.OperadorCombo);
             this.Controls.Add(this.MaquinaLabel);
@@ -313,7 +305,6 @@ namespace CZS_LaVictoria.AlgodónPage
             this.Name = "RegistrarEscaleraForm";
             this.Text = "RegistrarEscaleraForm";
             ((System.ComponentModel.ISupportInitialize)(this.TurnoText)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.MaquinaText)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -323,7 +314,6 @@ namespace CZS_LaVictoria.AlgodónPage
 
         private System.Windows.Forms.Label SubtitleLabel;
         private System.Windows.Forms.NumericUpDown TurnoText;
-        private System.Windows.Forms.NumericUpDown MaquinaText;
         private Syncfusion.WinForms.Input.SfDateTimeEdit FechaPicker;
         private System.Windows.Forms.ComboBox OperadorCombo;
         private System.Windows.Forms.Label MaquinaLabel;
@@ -337,9 +327,10 @@ namespace CZS_LaVictoria.AlgodónPage
         private FontAwesome.Sharp.IconButton ArrowButton;
         private FontAwesome.Sharp.IconButton MsgBox;
         private System.Windows.Forms.Button GuardarButton;
-        private Syncfusion.WinForms.Input.SfNumericTextBox CantidadSalidaText;
+        private Syncfusion.WinForms.Input.SfNumericTextBox MermaEscaleraText;
         private System.Windows.Forms.Label SalidaLabel;
         private System.Windows.Forms.Label CantidadSalidaUnidad;
         private System.Windows.Forms.Timer MsgBoxTimer;
+        private System.Windows.Forms.ComboBox MáquinaCombo;
     }
 }

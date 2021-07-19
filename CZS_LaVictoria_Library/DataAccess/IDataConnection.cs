@@ -689,6 +689,12 @@ namespace CZS_LaVictoria_Library.DataAccess
         /// <returns>Una lista con los modelos de las producciones.</returns>
         List<ProducciónAlgodónModel> WoolProduction_GetByProceso(string proceso);
 
+        /// <summary>
+        /// Obtiene todas las máquinas usadas anteriormente en procesos de algodón.
+        /// </summary>
+        /// <returns>Una lista con los nombres de las máquinas.</returns>
+        List<string> WoolProduction_GetMáquinas();
+
         #endregion
 
         #region Producción Trapeadores
