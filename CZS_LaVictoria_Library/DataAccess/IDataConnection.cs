@@ -711,5 +711,21 @@ namespace CZS_LaVictoria_Library.DataAccess
         List<ProducciónTrapeadoresModel> MopProduction_GetByDate(DateTime desde, DateTime hasta);
 
         #endregion
+
+        #region Por Pagar
+
+        /// <summary>
+        /// Obtiene todos los registros de cuentas por pagar.
+        /// </summary>
+        /// <returns>Una lista con los modelos de las cuentas.</returns>
+        List<PorPagarModel> Payable_GetAll();
+
+        #endregion
+
+        #region Por Cobrar
+
+        List<PorCobrarModel> Receivable_GetAll();
+
+        #endregion
     }
 }

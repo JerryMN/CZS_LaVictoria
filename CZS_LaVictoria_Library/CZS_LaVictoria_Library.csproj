@@ -56,6 +56,10 @@
     <Compile Include="Models\MaterialModel.cs" />
     <Compile Include="Models\MezclaModel.cs" />
     <Compile Include="Models\OperadorModel.cs" />
+    <Compile Include="Models\PorCobrarModel.cs" />
+    <Compile Include="Models\PorCobrarPagosModel.cs" />
+    <Compile Include="Models\PorPagarModel.cs" />
+    <Compile Include="Models\PorPagarPagosModel.cs" />
     <Compile Include="Models\ProducciónAlgodónModel.cs" />
     <Compile Include="Models\ProducciónPlásticosModel.cs" />
     <Compile Include="Models\OrdenCompraLíneaModel.cs" />
@@ -65,6 +69,7 @@
     <Compile Include="Models\ProveedorProductoModel.cs" />
     <Compile Include="Models\OrdenVentaLíneaModel.cs" />
     <Compile Include="Models\OrdenVentaModel.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

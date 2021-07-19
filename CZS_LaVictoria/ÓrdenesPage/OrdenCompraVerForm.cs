@@ -145,7 +145,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 {
                     MappingName = "FechaCancelación",
                     HeaderText = "Fecha Cancelación",
-                    NullValue = null,
+                    NullValue = null
                 };
             }
         }
@@ -198,13 +198,10 @@ namespace CZS_LaVictoria.ÓrdenesPage
             línea.CantidadRecibida = _newQty;
             var pendiente = línea.CantidadOrden - _newQty;
             línea.CantidadPendiente = pendiente < 0 ? 0 : pendiente;
-
-            // Guardar la fecha de última recepción.
             línea.FechaUltRecepción = DateTime.Today;
+            línea.Estatus = línea.CantidadPendiente == 0 ? "Entregada" : "Parcial";
 
             _orden = GlobalConfig.Connection.OrdenCompra_GetByNumOrden(línea.NumOrden.ToString());
-            Debug.Assert(línea != null, nameof(línea) + " != null");
-            línea.Estatus = línea.CantidadPendiente == 0 ? "Entregada" : "Parcial";
             var saveSuccess = GlobalConfig.Connection.OrdenCompra_UpdateLinea(_orden.Id, línea, _oldQty, _newQty);
             MessageBox.Show(saveSuccess ? "Línea actualizada." : "Error al actualizar línea.");
         }

@@ -9,6 +9,7 @@ namespace CZS_LaVictoria_Library.Models
         public int NumLinea { get; set; }
         public string Producto { get; set; }
         public double Cantidad { get; set; }
+        public decimal Precio { get; set; }
         public DateTime Fecha { get; set; }
     }
 }

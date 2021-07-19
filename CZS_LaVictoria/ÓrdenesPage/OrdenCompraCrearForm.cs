@@ -323,7 +323,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 Área = AreaCombo.Text,
                 Proveedor = _selectedProveedor.Nombre,
                 Condiciones = CondicionesCombo.Text,
-                FechaOrden = (DateTime) FechaOrdenPicker.Value,
+                FechaOrden = (DateTime) FechaOrdenPicker.Value
             };
 
             foreach (var record in DataGrid.View.Records)

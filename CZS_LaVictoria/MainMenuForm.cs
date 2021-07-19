@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using CZS_LaVictoria.AlgodónPage;
+using CZS_LaVictoria.CuentasPage;
 using CZS_LaVictoria.DatosPage;
 using CZS_LaVictoria.ÓrdenesPage;
 using CZS_LaVictoria.PlásticosPage;
@@ -295,6 +296,20 @@ namespace CZS_LaVictoria
         void VerProduccionesTrapeadoresButton_ItemClick(object sender, ItemClickEventArgs e)
         {
             OpenChildForm(new ProducciónTrapeadoresVerForm());
+        }
+
+        #endregion
+
+        #region Cuentas
+
+        void VerPorPagarButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new PorPagarVerForm());
+        }
+
+        void VerPorCobrarButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new PorCobrarVerForm());
         }
 
         #endregion

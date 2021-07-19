@@ -329,7 +329,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 Transporte = TransporteCombo.Text,
                 PuestoEn = PuestoCombo.Text,
                 Presentación = PresentaciónCombo.Text,
-                FechaOrden = (DateTime)FechaOrdenPicker.Value,
+                FechaOrden = (DateTime)FechaOrdenPicker.Value
             };
 
             foreach (var record in DataGrid.View.Records)

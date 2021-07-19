@@ -145,7 +145,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 {
                     MappingName = "FechaCancelación",
                     HeaderText = "Fecha Cancelación",
-                    NullValue = null,
+                    NullValue = null
                 };
             }
         }

@@ -214,6 +214,30 @@
     <Compile Include="AlgodónPage\RegistrarTorceduraForm.Designer.cs">
       <DependentUpon>RegistrarTorceduraForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CuentasPage\PorCobrarCobrarForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuentasPage\PorCobrarCobrarForm.Designer.cs">
+      <DependentUpon>PorCobrarCobrarForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CuentasPage\PorCobrarVerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuentasPage\PorCobrarVerForm.Designer.cs">
+      <DependentUpon>PorCobrarVerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CuentasPage\PorPagarPagarForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuentasPage\PorPagarPagarForm.Designer.cs">
+      <DependentUpon>PorPagarPagarForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CuentasPage\PorPagarVerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuentasPage\PorPagarVerForm.Designer.cs">
+      <DependentUpon>PorPagarVerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DatosPage\AreaCrearForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -446,6 +470,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AlgodónPage\RegistrarTorceduraForm.resx">
       <DependentUpon>RegistrarTorceduraForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CuentasPage\PorCobrarCobrarForm.resx">
+      <DependentUpon>PorCobrarCobrarForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CuentasPage\PorCobrarVerForm.resx">
+      <DependentUpon>PorCobrarVerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CuentasPage\PorPagarPagarForm.resx">
+      <DependentUpon>PorPagarPagarForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CuentasPage\PorPagarVerForm.resx">
+      <DependentUpon>PorPagarVerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DatosPage\AreaCrearForm.resx">
       <DependentUpon>AreaCrearForm.cs</DependentUpon>

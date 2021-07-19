@@ -1288,8 +1288,10 @@ namespace CZS_LaVictoria_Library.DataAccess
             using (IDbConnection connection = new SqlConnection(ConnectionString))
             {
                 Debug.Assert(línea != null, nameof(línea) + " != null");
+                Debug.Assert(línea.FechaUltRecepción != null, "línea.FechaUltRecepción != null");
                 var producto = ProveedorProducto_Find(línea.Producto, línea.Proveedor, línea.Área);
                 var material = Material_GetByNombreArea(producto.MaterialInterno, línea.Área);
+                var nuevaCantidad = newQty - oldQty;
 
                 var p = new DynamicParameters();
                 p.Add("@IdOrden", orderId);
@@ -1331,7 +1333,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                     else
                     {
                         p = new DynamicParameters();
-                        p.Add("@CantidadDisponible", material.CantidadDisponible + newQty - oldQty);
+                        p.Add("@CantidadDisponible", material.CantidadDisponible + nuevaCantidad);
                         p.Add("@Id", material.Id);
 
                         try
@@ -1350,20 +1352,31 @@ namespace CZS_LaVictoria_Library.DataAccess
                     p.Add("@NumOrden", línea.NumOrden);
                     p.Add("@NumLinea", línea.NumLinea);
                     p.Add("@Producto", línea.Producto);
-                    p.Add("@Cantidad", newQty - oldQty);
+                    p.Add("@Cantidad", nuevaCantidad);
                     p.Add("@Precio", línea.PrecioUnitario);
                     p.Add("@Fecha", línea.FechaUltRecepción);
 
-                    try
-                    {
-                        connection.Execute("dbo.spDelivery_Insert", p,
-                            commandType: CommandType.StoredProcedure);
-                    }
-                    catch (Exception ex)
-                    {
-                        Debug.Write(ex.ToString());
-                        Debug.Assert(false);
-                    }
+                    connection.Execute("dbo.spDelivery_Insert", p, commandType: CommandType.StoredProcedure);
+
+                    var orden = OrdenCompra_GetByNumOrden(línea.NumOrden.ToString());
+                    var index = orden.Condiciones.IndexOf(" ", StringComparison.Ordinal);
+                    var dias = int.Parse(orden.Condiciones.Substring(0, index));
+                    p = new DynamicParameters();
+                    p.Add("@NumOrden", línea.NumOrden);
+                    p.Add("@Factura");
+                    p.Add("@FechaFactura");
+                    p.Add("@Proveedor", línea.Proveedor);
+                    p.Add("@Monto", (decimal)nuevaCantidad * línea.PrecioUnitario);
+                    p.Add("@Pagado");
+                    p.Add("@Pendiente", (decimal)nuevaCantidad * línea.PrecioUnitario);
+                    p.Add("@Condiciones", orden.Condiciones);
+                    p.Add("@FechaLímite", línea.FechaUltRecepción.Value.AddDays(dias + 1));
+                    p.Add("@FechaLiquidación");
+                    p.Add("@Estatus", "Pendiente");
+                    p.Add("@Notas");
+
+                    connection.Execute("dbo.spAccountsPayable_Insert", p, commandType: CommandType.StoredProcedure);
+
 
                     scope.Complete();
                     return true;
@@ -1586,13 +1599,14 @@ namespace CZS_LaVictoria_Library.DataAccess
                     p.Add("@Id", material.Id);
 
                     connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
-                    
+
                     p = new DynamicParameters();
                     p.Add("@TipoOrden", "V");
                     p.Add("@NumOrden", línea.NumOrden);
                     p.Add("@NumLinea", línea.NumLinea);
                     p.Add("@Producto", línea.Producto);
-                    p.Add("@Cantidad", - newQty + oldQty);
+                    p.Add("@Cantidad", -newQty + oldQty);
+                    p.Add("@Precio", línea.PrecioUnitario);
                     p.Add("@Fecha", línea.FechaUltEntrega);
 
                     connection.Execute("dbo.spDelivery_Insert", p, commandType: CommandType.StoredProcedure);
@@ -1623,6 +1637,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                 p.Add("@NumLinea", model.NumLinea);
                 p.Add("@Producto", model.Producto);
                 p.Add("@Cantidad", quantity);
+                p.Add("@Precio", model.PrecioUnitario);
                 p.Add("@Fecha", model.FechaUltRecepción);
 
                 try
@@ -1650,6 +1665,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                 p.Add("@NumLinea", model.NumLinea);
                 p.Add("@Producto", model.Producto);
                 p.Add("@Cantidad", quantity);
+                p.Add("@Precio", model.PrecioUnitario);
                 p.Add("@Fecha", model.FechaUltEntrega);
 
                 try
@@ -3075,6 +3091,38 @@ namespace CZS_LaVictoria_Library.DataAccess
                     return null;
                 }
             }
+        }
+
+        #endregion
+
+        #region Por Pagar
+
+        public List<PorPagarModel> Payable_GetAll()
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var output = connection.Query<PorPagarModel>("dbo.spAccountsPayable_GetAll",
+                        commandType: CommandType.StoredProcedure).ToList();
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
+        }
+
+        #endregion
+
+        #region Por Cobrar
+
+        public List<PorCobrarModel> Receivable_GetAll()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
