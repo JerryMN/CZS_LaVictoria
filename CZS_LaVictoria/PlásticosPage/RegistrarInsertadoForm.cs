@@ -17,18 +17,19 @@ namespace CZS_LaVictoria.PlásticosPage
         double _cantidadFibra;
         MaterialModel _alambreSeleccionado = new MaterialModel();
         int _numRollos;
+        MaterialModel _cajaSeleccionada = new MaterialModel();
+        int _numCajas;
         MaterialModel _productoSeleccionado = new MaterialModel();
         int _piezasBuenas;
         int _piezasMalas;
-        int _basesMalas;
-        double _viruta;
-        double _rebaba;
+        double _mermaBases;
+        double _mermaFibra;
 
         public RegistrarInsertadoForm()
         {
             InitializeComponent();
             GetOperadores();
-            GetBasesFibrasAlambres();
+            FillComboBoxes();
             GetProductos();
             FechaPicker.Culture = new CultureInfo("es-MX");
         }
@@ -48,6 +49,11 @@ namespace CZS_LaVictoria.PlásticosPage
         void TipoAlambreCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             _alambreSeleccionado = (MaterialModel) TipoAlambreCombo.SelectedItem;
+        }
+
+        void TipoCajaCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _cajaSeleccionada = (MaterialModel)TipoCajaCombo.SelectedItem;
         }
 
         void SalidaCombo_SelectedIndexChanged(object sender, EventArgs e)
@@ -71,32 +77,31 @@ namespace CZS_LaVictoria.PlásticosPage
 
             if (_numBases > _baseSeleccionada.CantidadDisponible)
             {
-                MsgBox.Text = $"No hay suficientes bases. Hay {_baseSeleccionada.CantidadDisponible}.";
+                MsgBox.Text = $"No hay suficientes bases. Hay {_baseSeleccionada.CantidadDisponible:N}.";
                 MsgBox.Visible = true;
                 return;
             }
 
             if (_cantidadFibra > _fibraSeleccionada.CantidadDisponible)
             {
-                MsgBox.Text = $"No hay suficiente fibra. Hay {_baseSeleccionada.CantidadDisponible} kg.";
+                MsgBox.Text = $"No hay suficiente fibra. Hay {_baseSeleccionada.CantidadDisponible:N} kg.";
                 MsgBox.Visible = true;
                 return;
             }
 
             if (_numRollos > _alambreSeleccionado.CantidadDisponible)
             {
-                MsgBox.Text = $"No hay suficientes rollos de alambre. Hay {_baseSeleccionada.CantidadDisponible}.";
+                MsgBox.Text = $"No hay suficientes rollos de alambre. Hay {_baseSeleccionada.CantidadDisponible:N}.";
                 MsgBox.Visible = true;
                 return;
             }
 
-            if (_piezasBuenas + _piezasMalas + _basesMalas > _numBases)
+            if (_numCajas > _cajaSeleccionada.CantidadDisponible)
             {
-                MsgBox.Text = "No pueden salir más bases de las que entraron.";
+                MsgBox.Text = $"No hay suficientes cajas. Hay {_baseSeleccionada.CantidadDisponible:N}.";
                 MsgBox.Visible = true;
                 return;
             }
-
 
             MsgBox.Text = "Cantidades válidas.";
             MsgBox.IconColor = Color.DarkGreen;
@@ -113,7 +118,7 @@ namespace CZS_LaVictoria.PlásticosPage
             orden.Fecha = (DateTime)FechaPicker.Value;
             orden.Proceso = "Insertado";
             orden.Turno = int.Parse(TurnoText.Text);
-            orden.Máquina = int.Parse(MaquinaText.Text);
+            orden.Máquina = MáquinaCombo.Text;
             orden.Operador = OperadorCombo.Text;
             orden.MaterialEntra = _baseSeleccionada.Nombre;
             orden.CantidadEntra = double.Parse(CantidadBaseText.Text);
@@ -121,11 +126,12 @@ namespace CZS_LaVictoria.PlásticosPage
             orden.CantidadFibraEntra = double.Parse(CantidadFibraText.Text);
             orden.PiezasBuenas = _piezasBuenas;
             orden.PiezasMalas = _piezasMalas;
-            orden.BasesMalas = _basesMalas;
-            orden.Viruta = _viruta;
-            orden.Rebaba = _rebaba;
+            orden.MermaBases = _mermaBases;
+            orden.MermaFibra = _mermaFibra;
             orden.TipoAlambre = _alambreSeleccionado.Nombre;
             orden.RollosAlambre = _numRollos;
+            orden.TipoCaja = _cajaSeleccionada.Nombre;
+            orden.CantidadCajas = _numCajas;
 
             if (_productoSeleccionado == null || _productoSeleccionado.Id == 0)
             {
@@ -177,11 +183,19 @@ namespace CZS_LaVictoria.PlásticosPage
             OperadorCombo.DisplayMember = "Nombre";
         }
 
-        void GetBasesFibrasAlambres()
+        void FillComboBoxes()
         {
+            MáquinaCombo.Items.Clear();
             BaseCombo.Items.Clear();
             FibraCombo.Items.Clear();
             TipoAlambreCombo.Items.Clear();
+            TipoCajaCombo.Items.Clear();
+
+            var máquinas = GlobalConfig.Connection.PlasticProduction_GetMáquinas();
+            foreach (var máquina in máquinas)
+            {
+                MáquinaCombo.Items.Add(máquina);
+            }
 
             var bases = GlobalConfig.Connection.Material_GetByAreaCat("Plásticos", "Bases");
             foreach (var @base in bases)
@@ -201,9 +215,16 @@ namespace CZS_LaVictoria.PlásticosPage
                 TipoAlambreCombo.Items.Add(alambre);
             }
 
+            var cajas = GlobalConfig.Connection.Material_GetByCat("Caja");
+            foreach (var caja in cajas)
+            {
+                TipoCajaCombo.Items.Add(caja);
+            }
+
             BaseCombo.DisplayMember = "Nombre";
             FibraCombo.DisplayMember = "Nombre";
             TipoAlambreCombo.DisplayMember = "Nombre";
+            TipoCajaCombo.DisplayMember = "Nombre";
         }
 
         void GetProductos()
@@ -232,7 +253,7 @@ namespace CZS_LaVictoria.PlásticosPage
                 MsgBox.Text += "Selecciona un operador.\n";
             }
 
-            if (MaquinaText.Text == "")
+            if (MáquinaCombo.Text == "")
             {
                 output = false;
                 MsgBox.Text += "Selecciona una máquina.\n";
@@ -277,6 +298,15 @@ namespace CZS_LaVictoria.PlásticosPage
                 }
             }
 
+            if (TipoCajaCombo.Text != "")
+            {
+                if (CantidadCajasText.Text == "" || CantidadCajasText.Text == "0" || !int.TryParse(CantidadCajasText.Text, out _numCajas))
+                {
+                    output = false;
+                    MsgBox.Text += "Ingresa la cantidad de cajas.\n";
+                }
+            }
+
             if (SalidaCombo.Text == "")
             {
                 output = false;
@@ -295,22 +325,16 @@ namespace CZS_LaVictoria.PlásticosPage
                 MsgBox.Text += "Ingresa el número de piezas malas.\n";
             }
 
-            if (BasesMalasText.Text == "" ||  !int.TryParse(BasesMalasText.Text, out _basesMalas))
+            if (MermaBasesText.Text == "" || !double.TryParse(MermaBasesText.Text, out _mermaBases))
             {
                 output = false;
-                MsgBox.Text += "Ingresa el número de bases malas.\n";
+                MsgBox.Text += "Ingresa la cantidad de merma de bases.\n";
             }
 
-            if (VirutaText.Text == "" || !double.TryParse(VirutaText.Text, out _viruta))
+            if (MermaFibraText.Text == "" || !double.TryParse(MermaFibraText.Text, out _mermaFibra))
             {
                 output = false;
-                MsgBox.Text += "Ingresa la cantidad de viruta.\n";
-            }
-
-            if (RebabaText.Text == "" || !double.TryParse(RebabaText.Text, out _rebaba))
-            {
-                output = false;
-                MsgBox.Text += "Ingresa la cantidad de rebaba.\n";
+                MsgBox.Text += "Ingresa la cantidad de merma de fibra.\n";
             }
 
             return output;
@@ -323,9 +347,8 @@ namespace CZS_LaVictoria.PlásticosPage
             CantidadRollosText.Text = "0";
             PiezasBuenasText.Text = "0";
             PiezasMalasText.Text = "0";
-            BasesMalasText.Text = "0";
-            VirutaText.Text = "0.00";
-            RebabaText.Text = "0.00";
+            MermaBasesText.Text = "0.00";
+            MermaFibraText.Text = "0.00";
 
             void Func(IEnumerable controls)
             {

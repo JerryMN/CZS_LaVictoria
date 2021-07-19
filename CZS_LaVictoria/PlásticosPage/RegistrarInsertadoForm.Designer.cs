@@ -33,14 +33,12 @@ namespace CZS_LaVictoria.PlásticosPage
             this.SubtitleLabel = new System.Windows.Forms.Label();
             this.MsgBox = new FontAwesome.Sharp.IconButton();
             this.GuardarButton = new System.Windows.Forms.Button();
-            this.BasesMalasText = new Syncfusion.WinForms.Input.SfNumericTextBox();
-            this.VirutaText = new Syncfusion.WinForms.Input.SfNumericTextBox();
+            this.MermaBasesText = new Syncfusion.WinForms.Input.SfNumericTextBox();
             this.PiezasMalasText = new Syncfusion.WinForms.Input.SfNumericTextBox();
             this.PiezasBuenasText = new Syncfusion.WinForms.Input.SfNumericTextBox();
             this.SalidaCombo = new System.Windows.Forms.ComboBox();
-            this.BasesMalasLabel = new System.Windows.Forms.Label();
             this.ArrowButton = new FontAwesome.Sharp.IconButton();
-            this.VirutaLabel = new System.Windows.Forms.Label();
+            this.MermaBasesLabel = new System.Windows.Forms.Label();
             this.MermaRealUnidad = new System.Windows.Forms.Label();
             this.PiezasMalasLabel = new System.Windows.Forms.Label();
             this.PiezasBuenasLabel = new System.Windows.Forms.Label();
@@ -57,12 +55,11 @@ namespace CZS_LaVictoria.PlásticosPage
             this.CantidadRollosLabel = new System.Windows.Forms.Label();
             this.CantidadRollosText = new Syncfusion.WinForms.Input.SfNumericTextBox();
             this.RebabaUnidad = new System.Windows.Forms.Label();
-            this.RebabaLabel = new System.Windows.Forms.Label();
-            this.RebabaText = new Syncfusion.WinForms.Input.SfNumericTextBox();
+            this.MermaFibraLabel = new System.Windows.Forms.Label();
+            this.MermaFibraText = new Syncfusion.WinForms.Input.SfNumericTextBox();
             this.CalcularButton = new System.Windows.Forms.Button();
             this.MsgBoxTimer = new System.Windows.Forms.Timer(this.components);
             this.TurnoText = new System.Windows.Forms.NumericUpDown();
-            this.MaquinaText = new System.Windows.Forms.NumericUpDown();
             this.FechaPicker = new Syncfusion.WinForms.Input.SfDateTimeEdit();
             this.OperadorCombo = new System.Windows.Forms.ComboBox();
             this.MaquinaLabel = new System.Windows.Forms.Label();
@@ -70,8 +67,12 @@ namespace CZS_LaVictoria.PlásticosPage
             this.FechaLabel = new System.Windows.Forms.Label();
             this.TipoAlambreLabel = new System.Windows.Forms.Label();
             this.TipoAlambreCombo = new System.Windows.Forms.ComboBox();
+            this.TipoCajaLabel = new System.Windows.Forms.Label();
+            this.TipoCajaCombo = new System.Windows.Forms.ComboBox();
+            this.CantidadCajasLabel = new System.Windows.Forms.Label();
+            this.CantidadCajasText = new Syncfusion.WinForms.Input.SfNumericTextBox();
+            this.MáquinaCombo = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.TurnoText)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.MaquinaText)).BeginInit();
             this.SuspendLayout();
             // 
             // SubtitleLabel
@@ -94,7 +95,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.MsgBox.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.MsgBox.IconSize = 32;
             this.MsgBox.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.MsgBox.Location = new System.Drawing.Point(550, 500);
+            this.MsgBox.Location = new System.Drawing.Point(550, 450);
             this.MsgBox.Name = "MsgBox";
             this.MsgBox.Size = new System.Drawing.Size(420, 262);
             this.MsgBox.TabIndex = 69;
@@ -108,7 +109,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.GuardarButton.AutoSize = true;
             this.GuardarButton.Enabled = false;
             this.GuardarButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GuardarButton.Location = new System.Drawing.Point(892, 450);
+            this.GuardarButton.Location = new System.Drawing.Point(892, 400);
             this.GuardarButton.Name = "GuardarButton";
             this.GuardarButton.Size = new System.Drawing.Size(78, 35);
             this.GuardarButton.TabIndex = 68;
@@ -116,35 +117,19 @@ namespace CZS_LaVictoria.PlásticosPage
             this.GuardarButton.UseVisualStyleBackColor = true;
             this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
             // 
-            // BasesMalasText
+            // MermaBasesText
             // 
-            this.BasesMalasText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.BasesMalasText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BasesMalasText.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.BasesMalasText.HideTrailingZeros = true;
-            this.BasesMalasText.Location = new System.Drawing.Point(720, 297);
-            this.BasesMalasText.MinValue = 0D;
-            this.BasesMalasText.Name = "BasesMalasText";
-            this.BasesMalasText.Size = new System.Drawing.Size(250, 29);
-            this.BasesMalasText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.BasesMalasText.TabIndex = 65;
-            this.BasesMalasText.Text = "0";
-            this.BasesMalasText.WatermarkText = "Calculado automáticamente";
-            this.BasesMalasText.TextChanged += new System.EventHandler(this.InputOutputChanged);
-            // 
-            // VirutaText
-            // 
-            this.VirutaText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.VirutaText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.VirutaText.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.VirutaText.Location = new System.Drawing.Point(720, 347);
-            this.VirutaText.MinValue = 0D;
-            this.VirutaText.Name = "VirutaText";
-            this.VirutaText.Size = new System.Drawing.Size(250, 29);
-            this.VirutaText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.VirutaText.TabIndex = 64;
-            this.VirutaText.WatermarkText = "Calculado automáticamente";
-            this.VirutaText.TextChanged += new System.EventHandler(this.InputOutputChanged);
+            this.MermaBasesText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.MermaBasesText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MermaBasesText.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.MermaBasesText.Location = new System.Drawing.Point(720, 297);
+            this.MermaBasesText.MinValue = 0D;
+            this.MermaBasesText.Name = "MermaBasesText";
+            this.MermaBasesText.Size = new System.Drawing.Size(250, 29);
+            this.MermaBasesText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.MermaBasesText.TabIndex = 64;
+            this.MermaBasesText.WatermarkText = "Calculado automáticamente";
+            this.MermaBasesText.TextChanged += new System.EventHandler(this.InputOutputChanged);
             // 
             // PiezasMalasText
             // 
@@ -188,15 +173,6 @@ namespace CZS_LaVictoria.PlásticosPage
             this.SalidaCombo.SelectedIndexChanged += new System.EventHandler(this.SalidaCombo_SelectedIndexChanged);
             this.SalidaCombo.TextChanged += new System.EventHandler(this.InputOutputChanged);
             // 
-            // BasesMalasLabel
-            // 
-            this.BasesMalasLabel.AutoSize = true;
-            this.BasesMalasLabel.Location = new System.Drawing.Point(600, 300);
-            this.BasesMalasLabel.Name = "BasesMalasLabel";
-            this.BasesMalasLabel.Size = new System.Drawing.Size(94, 21);
-            this.BasesMalasLabel.TabIndex = 53;
-            this.BasesMalasLabel.Text = "Bases Malas";
-            // 
             // ArrowButton
             // 
             this.ArrowButton.FlatAppearance.BorderSize = 0;
@@ -211,19 +187,19 @@ namespace CZS_LaVictoria.PlásticosPage
             this.ArrowButton.TabIndex = 62;
             this.ArrowButton.UseVisualStyleBackColor = true;
             // 
-            // VirutaLabel
+            // MermaBasesLabel
             // 
-            this.VirutaLabel.AutoSize = true;
-            this.VirutaLabel.Location = new System.Drawing.Point(600, 350);
-            this.VirutaLabel.Name = "VirutaLabel";
-            this.VirutaLabel.Size = new System.Drawing.Size(52, 21);
-            this.VirutaLabel.TabIndex = 54;
-            this.VirutaLabel.Text = "Viruta";
+            this.MermaBasesLabel.AutoSize = true;
+            this.MermaBasesLabel.Location = new System.Drawing.Point(600, 300);
+            this.MermaBasesLabel.Name = "MermaBasesLabel";
+            this.MermaBasesLabel.Size = new System.Drawing.Size(103, 21);
+            this.MermaBasesLabel.TabIndex = 54;
+            this.MermaBasesLabel.Text = "Merma Bases";
             // 
             // MermaRealUnidad
             // 
             this.MermaRealUnidad.AutoSize = true;
-            this.MermaRealUnidad.Location = new System.Drawing.Point(976, 350);
+            this.MermaRealUnidad.Location = new System.Drawing.Point(976, 300);
             this.MermaRealUnidad.Name = "MermaRealUnidad";
             this.MermaRealUnidad.Size = new System.Drawing.Size(27, 21);
             this.MermaRealUnidad.TabIndex = 59;
@@ -381,40 +357,40 @@ namespace CZS_LaVictoria.PlásticosPage
             // RebabaUnidad
             // 
             this.RebabaUnidad.AutoSize = true;
-            this.RebabaUnidad.Location = new System.Drawing.Point(976, 400);
+            this.RebabaUnidad.Location = new System.Drawing.Point(976, 350);
             this.RebabaUnidad.Name = "RebabaUnidad";
             this.RebabaUnidad.Size = new System.Drawing.Size(27, 21);
             this.RebabaUnidad.TabIndex = 59;
             this.RebabaUnidad.Text = "kg";
             // 
-            // RebabaLabel
+            // MermaFibraLabel
             // 
-            this.RebabaLabel.AutoSize = true;
-            this.RebabaLabel.Location = new System.Drawing.Point(600, 400);
-            this.RebabaLabel.Name = "RebabaLabel";
-            this.RebabaLabel.Size = new System.Drawing.Size(62, 21);
-            this.RebabaLabel.TabIndex = 54;
-            this.RebabaLabel.Text = "Rebaba";
+            this.MermaFibraLabel.AutoSize = true;
+            this.MermaFibraLabel.Location = new System.Drawing.Point(600, 350);
+            this.MermaFibraLabel.Name = "MermaFibraLabel";
+            this.MermaFibraLabel.Size = new System.Drawing.Size(99, 21);
+            this.MermaFibraLabel.TabIndex = 54;
+            this.MermaFibraLabel.Text = "Merma Fibra";
             // 
-            // RebabaText
+            // MermaFibraText
             // 
-            this.RebabaText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.RebabaText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RebabaText.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.RebabaText.Location = new System.Drawing.Point(720, 397);
-            this.RebabaText.MinValue = 0D;
-            this.RebabaText.Name = "RebabaText";
-            this.RebabaText.Size = new System.Drawing.Size(250, 29);
-            this.RebabaText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.RebabaText.TabIndex = 64;
-            this.RebabaText.WatermarkText = "Calculado automáticamente";
-            this.RebabaText.TextChanged += new System.EventHandler(this.InputOutputChanged);
+            this.MermaFibraText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.MermaFibraText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MermaFibraText.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.MermaFibraText.Location = new System.Drawing.Point(720, 347);
+            this.MermaFibraText.MinValue = 0D;
+            this.MermaFibraText.Name = "MermaFibraText";
+            this.MermaFibraText.Size = new System.Drawing.Size(250, 29);
+            this.MermaFibraText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.MermaFibraText.TabIndex = 64;
+            this.MermaFibraText.WatermarkText = "Calculado automáticamente";
+            this.MermaFibraText.TextChanged += new System.EventHandler(this.InputOutputChanged);
             // 
             // CalcularButton
             // 
             this.CalcularButton.AutoSize = true;
             this.CalcularButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CalcularButton.Location = new System.Drawing.Point(808, 450);
+            this.CalcularButton.Location = new System.Drawing.Point(808, 400);
             this.CalcularButton.Name = "CalcularButton";
             this.CalcularButton.Size = new System.Drawing.Size(78, 35);
             this.CalcularButton.TabIndex = 75;
@@ -444,23 +420,6 @@ namespace CZS_LaVictoria.PlásticosPage
             this.TurnoText.Size = new System.Drawing.Size(120, 29);
             this.TurnoText.TabIndex = 99;
             this.TurnoText.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // MaquinaText
-            // 
-            this.MaquinaText.Location = new System.Drawing.Point(200, 247);
-            this.MaquinaText.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.MaquinaText.Name = "MaquinaText";
-            this.MaquinaText.Size = new System.Drawing.Size(120, 29);
-            this.MaquinaText.TabIndex = 100;
-            this.MaquinaText.Value = new decimal(new int[] {
             1,
             0,
             0,
@@ -534,13 +493,69 @@ namespace CZS_LaVictoria.PlásticosPage
             this.TipoAlambreCombo.SelectedIndexChanged += new System.EventHandler(this.TipoAlambreCombo_SelectedIndexChanged);
             this.TipoAlambreCombo.TextChanged += new System.EventHandler(this.InputOutputChanged);
             // 
+            // TipoCajaLabel
+            // 
+            this.TipoCajaLabel.AutoSize = true;
+            this.TipoCajaLabel.Location = new System.Drawing.Point(53, 600);
+            this.TipoCajaLabel.Name = "TipoCajaLabel";
+            this.TipoCajaLabel.Size = new System.Drawing.Size(40, 21);
+            this.TipoCajaLabel.TabIndex = 71;
+            this.TipoCajaLabel.Text = "Caja";
+            // 
+            // TipoCajaCombo
+            // 
+            this.TipoCajaCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.TipoCajaCombo.FormattingEnabled = true;
+            this.TipoCajaCombo.Location = new System.Drawing.Point(203, 597);
+            this.TipoCajaCombo.Name = "TipoCajaCombo";
+            this.TipoCajaCombo.Size = new System.Drawing.Size(250, 29);
+            this.TipoCajaCombo.TabIndex = 72;
+            this.TipoCajaCombo.SelectedIndexChanged += new System.EventHandler(this.TipoCajaCombo_SelectedIndexChanged);
+            this.TipoCajaCombo.TextChanged += new System.EventHandler(this.InputOutputChanged);
+            // 
+            // CantidadCajasLabel
+            // 
+            this.CantidadCajasLabel.AutoSize = true;
+            this.CantidadCajasLabel.Location = new System.Drawing.Point(53, 650);
+            this.CantidadCajasLabel.Name = "CantidadCajasLabel";
+            this.CantidadCajasLabel.Size = new System.Drawing.Size(134, 21);
+            this.CantidadCajasLabel.TabIndex = 70;
+            this.CantidadCajasLabel.Text = "Cantidad de Cajas";
+            // 
+            // CantidadCajasText
+            // 
+            this.CantidadCajasText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.CantidadCajasText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CantidadCajasText.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.CantidadCajasText.HideTrailingZeros = true;
+            this.CantidadCajasText.Location = new System.Drawing.Point(203, 647);
+            this.CantidadCajasText.MinValue = 0D;
+            this.CantidadCajasText.Name = "CantidadCajasText";
+            this.CantidadCajasText.Size = new System.Drawing.Size(250, 29);
+            this.CantidadCajasText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.CantidadCajasText.TabIndex = 73;
+            this.CantidadCajasText.Text = "0";
+            this.CantidadCajasText.WatermarkText = "Ingresa la cantidad";
+            this.CantidadCajasText.TextChanged += new System.EventHandler(this.InputOutputChanged);
+            // 
+            // MáquinaCombo
+            // 
+            this.MáquinaCombo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.MáquinaCombo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.MáquinaCombo.FormattingEnabled = true;
+            this.MáquinaCombo.Location = new System.Drawing.Point(200, 247);
+            this.MáquinaCombo.Name = "MáquinaCombo";
+            this.MáquinaCombo.Size = new System.Drawing.Size(124, 29);
+            this.MáquinaCombo.TabIndex = 63;
+            this.MáquinaCombo.SelectedIndexChanged += new System.EventHandler(this.SalidaCombo_SelectedIndexChanged);
+            this.MáquinaCombo.TextChanged += new System.EventHandler(this.InputOutputChanged);
+            // 
             // RegistrarInsertadoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1276, 839);
             this.Controls.Add(this.TurnoText);
-            this.Controls.Add(this.MaquinaText);
             this.Controls.Add(this.FechaPicker);
             this.Controls.Add(this.OperadorCombo);
             this.Controls.Add(this.MaquinaLabel);
@@ -548,27 +563,30 @@ namespace CZS_LaVictoria.PlásticosPage
             this.Controls.Add(this.FechaLabel);
             this.Controls.Add(this.CalcularButton);
             this.Controls.Add(this.CantidadEntradaUnidad);
+            this.Controls.Add(this.CantidadCajasText);
             this.Controls.Add(this.CantidadRollosText);
             this.Controls.Add(this.CantidadFibraText);
+            this.Controls.Add(this.CantidadCajasLabel);
             this.Controls.Add(this.CantidadRollosLabel);
+            this.Controls.Add(this.TipoCajaCombo);
             this.Controls.Add(this.TipoAlambreCombo);
             this.Controls.Add(this.FibraCombo);
             this.Controls.Add(this.CantidadFibraLabel);
+            this.Controls.Add(this.TipoCajaLabel);
             this.Controls.Add(this.TipoAlambreLabel);
             this.Controls.Add(this.FibraLabel);
             this.Controls.Add(this.MsgBox);
             this.Controls.Add(this.GuardarButton);
-            this.Controls.Add(this.BasesMalasText);
-            this.Controls.Add(this.RebabaText);
-            this.Controls.Add(this.VirutaText);
+            this.Controls.Add(this.MermaFibraText);
+            this.Controls.Add(this.MermaBasesText);
             this.Controls.Add(this.PiezasMalasText);
             this.Controls.Add(this.PiezasBuenasText);
+            this.Controls.Add(this.MáquinaCombo);
             this.Controls.Add(this.SalidaCombo);
-            this.Controls.Add(this.BasesMalasLabel);
             this.Controls.Add(this.ArrowButton);
-            this.Controls.Add(this.RebabaLabel);
+            this.Controls.Add(this.MermaFibraLabel);
             this.Controls.Add(this.RebabaUnidad);
-            this.Controls.Add(this.VirutaLabel);
+            this.Controls.Add(this.MermaBasesLabel);
             this.Controls.Add(this.MermaRealUnidad);
             this.Controls.Add(this.PiezasMalasLabel);
             this.Controls.Add(this.PiezasBuenasLabel);
@@ -585,7 +603,6 @@ namespace CZS_LaVictoria.PlásticosPage
             this.Text = "RegistrarInsertadoForm";
             this.TextChanged += new System.EventHandler(this.InputOutputChanged);
             ((System.ComponentModel.ISupportInitialize)(this.TurnoText)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.MaquinaText)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -596,14 +613,12 @@ namespace CZS_LaVictoria.PlásticosPage
         private System.Windows.Forms.Label SubtitleLabel;
         private FontAwesome.Sharp.IconButton MsgBox;
         private System.Windows.Forms.Button GuardarButton;
-        private Syncfusion.WinForms.Input.SfNumericTextBox BasesMalasText;
-        private Syncfusion.WinForms.Input.SfNumericTextBox VirutaText;
+        private Syncfusion.WinForms.Input.SfNumericTextBox MermaBasesText;
         private Syncfusion.WinForms.Input.SfNumericTextBox PiezasMalasText;
         private Syncfusion.WinForms.Input.SfNumericTextBox PiezasBuenasText;
         private System.Windows.Forms.ComboBox SalidaCombo;
-        private System.Windows.Forms.Label BasesMalasLabel;
         private FontAwesome.Sharp.IconButton ArrowButton;
-        private System.Windows.Forms.Label VirutaLabel;
+        private System.Windows.Forms.Label MermaBasesLabel;
         private System.Windows.Forms.Label MermaRealUnidad;
         private System.Windows.Forms.Label PiezasMalasLabel;
         private System.Windows.Forms.Label PiezasBuenasLabel;
@@ -620,12 +635,11 @@ namespace CZS_LaVictoria.PlásticosPage
         private System.Windows.Forms.Label CantidadRollosLabel;
         private Syncfusion.WinForms.Input.SfNumericTextBox CantidadRollosText;
         private System.Windows.Forms.Label RebabaUnidad;
-        private System.Windows.Forms.Label RebabaLabel;
-        private Syncfusion.WinForms.Input.SfNumericTextBox RebabaText;
+        private System.Windows.Forms.Label MermaFibraLabel;
+        private Syncfusion.WinForms.Input.SfNumericTextBox MermaFibraText;
         private System.Windows.Forms.Button CalcularButton;
         private System.Windows.Forms.Timer MsgBoxTimer;
         private System.Windows.Forms.NumericUpDown TurnoText;
-        private System.Windows.Forms.NumericUpDown MaquinaText;
         private Syncfusion.WinForms.Input.SfDateTimeEdit FechaPicker;
         private System.Windows.Forms.ComboBox OperadorCombo;
         private System.Windows.Forms.Label MaquinaLabel;
@@ -633,5 +647,10 @@ namespace CZS_LaVictoria.PlásticosPage
         private System.Windows.Forms.Label FechaLabel;
         private System.Windows.Forms.Label TipoAlambreLabel;
         private System.Windows.Forms.ComboBox TipoAlambreCombo;
+        private System.Windows.Forms.Label TipoCajaLabel;
+        private System.Windows.Forms.ComboBox TipoCajaCombo;
+        private System.Windows.Forms.Label CantidadCajasLabel;
+        private Syncfusion.WinForms.Input.SfNumericTextBox CantidadCajasText;
+        private System.Windows.Forms.ComboBox MáquinaCombo;
     }
 }

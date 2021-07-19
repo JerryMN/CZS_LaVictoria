@@ -8,7 +8,7 @@ namespace CZS_LaVictoria_Library.Models
         public DateTime Fecha { get; set; }
         public string Proceso { get; set; }
         public int Turno { get; set; }
-        public int Máquina { get; set; }
+        public string Máquina { get; set; }
         public string Operador { get; set; }
         public string MaterialEntra { get; set; }
         public double CantidadEntra { get; set; }
@@ -19,11 +19,12 @@ namespace CZS_LaVictoria_Library.Models
         public double PesoPromedio { get; set; }
         public int PiezasBuenas { get; set; }
         public int PiezasMalas { get; set; }
-        public int BasesMalas { get; set; }
-        public double Viruta { get; set; }
-        public double Rebaba { get; set; }
+        public double MermaBases { get; set; }
+        public double MermaFibra { get; set; }
         public string TipoAlambre { get; set; }
         public int RollosAlambre { get; set; }
+        public string TipoCaja { get; set; }
+        public int CantidadCajas { get; set; }
         public double MermaMoler { get; set; }
         public double MermaFinal { get; set; }
     }

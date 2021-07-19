@@ -2626,6 +2626,24 @@ namespace CZS_LaVictoria_Library.DataAccess
             }
         }
 
+        public List<string> PlasticProduction_GetMáquinas()
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var output = connection.Query<string>("dbo.spPlasticProduction_GetMáquinas").ToList();
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
+        }
+
         #endregion
 
         #region Producción Algodón
