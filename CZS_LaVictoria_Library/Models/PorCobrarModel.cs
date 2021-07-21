@@ -14,11 +14,13 @@ namespace CZS_LaVictoria_Library.Models
         DateTime? _fechaFactura;
         string _cliente;
         decimal _monto;
-        decimal _pagado;
+        decimal _cobrado;
         decimal _pendiente;
         DateTime? _fechaLiquidación;
         string _estatus;
         string _notas;
+
+        public int Id { get; set; }
 
         public long NumOrden
         {
@@ -50,10 +52,10 @@ namespace CZS_LaVictoria_Library.Models
             set { _monto = value; OnPropertyChanged(nameof(Monto)); }
         }
 
-        public decimal Pagado
+        public decimal Cobrado
         {
-            get => _pagado;
-            set { _pagado = value; OnPropertyChanged(nameof(Pagado)); }
+            get => _cobrado;
+            set { _cobrado = value; OnPropertyChanged(nameof(Cobrado)); }
         }
 
         public decimal Pendiente

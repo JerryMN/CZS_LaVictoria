@@ -1,25 +1,23 @@
-﻿using System;
+﻿using CZS_LaVictoria_Library.Models;
+using CZS_LaVictoria_Library;
+using System;
 using System.Collections;
 using System.Diagnostics;
 using System.Drawing;
-using System.Globalization;
 using System.Windows.Forms;
-using CZS_LaVictoria_Library;
-using CZS_LaVictoria_Library.Models;
+using System.Globalization;
 
 namespace CZS_LaVictoria.CuentasPage
 {
-    public partial class PorPagarAgregarForm : Form
+    public partial class PorCobrarAgregarForm : Form
     {
         decimal _monto;
-        decimal _pagado;
+        decimal _cobrado;
 
-        public PorPagarAgregarForm()
+        public PorCobrarAgregarForm()
         {
             InitializeComponent();
-            GetCondiciones();
             FechaFacturaPicker.Culture = new CultureInfo("es-MX");
-            FechaLimitePicker.Culture = new CultureInfo("es-MX");
         }
 
         #region Events
@@ -33,32 +31,29 @@ namespace CZS_LaVictoria.CuentasPage
             }
 
             Debug.Assert(FechaFacturaPicker.Value != null, "FechaFacturaPicker.Value != null");
-            Debug.Assert(FechaLimitePicker.Value != null, "FechaLimitePicker.Value != null");
-            var línea = new PorPagarModel
+            var línea = new PorCobrarModel()
             {
                 Factura = FacturaText.Text,
-                FechaFactura = (DateTime) FechaFacturaPicker.Value,
-                Proveedor = ProveedorText.Text,
+                FechaFactura = (DateTime)FechaFacturaPicker.Value,
+                Cliente = ClienteText.Text,
                 Monto = _monto,
-                Pagado = _pagado,
-                Pendiente = _monto - _pagado,
-                Condiciones = CondicionesCombo.Text,
-                FechaLímite = (DateTime) FechaLimitePicker.Value,
-                Estatus = _monto == _pagado ? "Pagado" : "Pendiente",
+                Cobrado = _cobrado,
+                Pendiente = _monto - _cobrado,
+                Estatus = _monto == _cobrado ? "Pagado" : "Pendiente",
                 Notas = NotasText.Text
             };
 
-            var saveSuccess = GlobalConfig.Connection.Payable_Create(línea);
+            var saveSuccess = GlobalConfig.Connection.Receivable_Create(línea);
 
             if (saveSuccess)
             {
                 ClearForm();
-                MsgBox.Text = "Pago registrado con éxito.";
+                MsgBox.Text = "Cobro registrado con éxito.";
                 MsgBox.IconColor = Color.DarkGreen;
             }
             else
             {
-                MsgBox.Text = "Error al registrar pago.";
+                MsgBox.Text = "Error al registrar cobro.";
                 MsgBox.IconColor = Color.DarkRed;
             }
 
@@ -76,36 +71,27 @@ namespace CZS_LaVictoria.CuentasPage
 
         #region Methods
 
-        void GetCondiciones()
-        {
-            var condiciones = GlobalConfig.Connection.Proveedor_GetDistinctCondiciones();
-            foreach (var condición in condiciones)
-            {
-                CondicionesCombo.Items.Add(condición);
-            }
-        }
-
         bool ValidateForm()
         {
             var output = true;
             MsgBox.Text = "";
 
-            if (ProveedorText.Text == "")
+            if (ClienteText.Text == "")
             {
                 output = false;
-                MsgBox.Text += "Ingresa el nombre del proveedor.\n";
+                MsgBox.Text += "Ingresa el nombre del cliente.\n";
             }
 
             if (MontoText.Text == "$0.00" || !decimal.TryParse(MontoText.Text.Replace("$", "").Replace(",", ""), out _monto))
             {
                 output = false;
-                MsgBox.Text += "Ingresa el monto del pago a registrar.\n";
+                MsgBox.Text += "Ingresa el monto del cobro a registrar.\n";
             }
 
-            if (!decimal.TryParse(PagadoText.Text.Replace("$", "").Replace(",", ""), out _pagado))
+            if (!decimal.TryParse(CobradoText.Text.Replace("$", "").Replace(",", ""), out _cobrado))
             {
                 output = false;
-                MsgBox.Text += "Ingresa el monto del pago que ya fue pagado.\n";
+                MsgBox.Text += "Ingresa el monto del cobro que ya fue pagado.\n";
             }
 
             return output;
@@ -129,9 +115,8 @@ namespace CZS_LaVictoria.CuentasPage
 
             Func(Controls);
             FechaFacturaPicker.Value = DateTime.Today;
-            FechaLimitePicker.Value = DateTime.Today;
             MontoText.Text = "0";
-            PagadoText.Text = "0";
+            CobradoText.Text = "0";
         }
 
         #endregion

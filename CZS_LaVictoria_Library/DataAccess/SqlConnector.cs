@@ -3213,14 +3213,109 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         #region Por Cobrar
 
+        public bool Receivable_Create(PorCobrarModel línea)
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@Factura", línea.Factura);
+                    p.Add("@FechaFactura", línea.FechaFactura);
+                    p.Add("@Cliente", línea.Cliente);
+                    p.Add("@Monto", línea.Monto);
+                    p.Add("@Cobrado", línea.Cobrado);
+                    p.Add("@Estatus", línea.Estatus);
+                    p.Add("@Notas", línea.Notas);
+
+                    connection.Execute("dbo.spAccountsReceivable_Insert", p, commandType: CommandType.StoredProcedure);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return false;
+                }
+
+                return true;
+            }
+        }
+
+        public bool Receivable_Create(PorCobrarModel línea, PorCobrarPagosModel registro)
+        {
+            using (var scope = new TransactionScope())
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@Factura", línea.Factura);
+                    p.Add("@FechaFactura", línea.FechaFactura);
+                    p.Add("@Monto", línea.Monto);
+                    p.Add("@Cobrado", línea.Cobrado);
+                    p.Add("@Pendiente", línea.Pendiente);
+                    p.Add("@FechaLiquidación", línea.FechaLiquidación);
+                    p.Add("@Estatus", línea.Estatus);
+                    p.Add("@Notas", línea.Notas);
+                    p.Add("@Id", línea.Id);
+
+                    connection.Execute("dbo.spAccountsReceivable_Update", p, commandType: CommandType.StoredProcedure);
+
+                    p = new DynamicParameters();
+                    p.Add("@Factura", registro.Factura);
+                    p.Add("@Pago", registro.Pago);
+                    p.Add("@FechaPago", registro.FechaPago);
+
+                    connection.Execute("dbo.spAR_Payments_Insert", p, commandType: CommandType.StoredProcedure);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return false;
+                }
+
+                scope.Complete();
+                return true;
+            }
+        }
+
         public List<PorCobrarModel> Receivable_GetAll()
         {
-            throw new NotImplementedException();
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var output = connection.Query<PorCobrarModel>("dbo.spAccountsReceivable_GetAll",
+                        commandType: CommandType.StoredProcedure).ToList();
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
         }
 
         public List<PorCobrarPagosModel> Receivable_GetPagos()
         {
-            throw new NotImplementedException();
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var output = connection.Query<PorCobrarPagosModel>("dbo.spAR_Payments_GetAll",
+                        commandType: CommandType.StoredProcedure).ToList();
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
         }
 
         #endregion

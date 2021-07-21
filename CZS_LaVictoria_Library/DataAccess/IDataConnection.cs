@@ -758,6 +758,21 @@ namespace CZS_LaVictoria_Library.DataAccess
         #region Por Cobrar
 
         /// <summary>
+        /// Registra un pago de una cuenta por cobrar.
+        /// </summary>
+        /// <param name="línea">El modelo de la línea que se va a cobrar.</param>
+        /// <returns>True, si se creó correctamente, falso si no.</returns>
+        bool Receivable_Create(PorCobrarModel línea);
+
+        /// <summary>
+        /// Registra un pago de una cuenta por cobrar.
+        /// </summary>
+        /// <param name="línea">El modelo de la línea que se va a cobrar.</param>
+        /// <param name="registro">El modelo del registro del pago.</param>
+        /// <returns>True, si se creó correctamente, falso si no.</returns>
+        bool Receivable_Create(PorCobrarModel línea, PorCobrarPagosModel registro);
+
+        /// <summary>
         /// Obtiene todos los registros de cuentas por cobrar.
         /// </summary>
         /// <returns>Una lista con los modelos de las cuentas.</returns>

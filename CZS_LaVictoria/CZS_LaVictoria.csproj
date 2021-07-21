@@ -226,6 +226,12 @@
     <Compile Include="CuentasPage\PagosPorPagarVerForm.Designer.cs">
       <DependentUpon>PagosPorPagarVerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CuentasPage\PorCobrarAgregarForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuentasPage\PorCobrarAgregarForm.Designer.cs">
+      <DependentUpon>PorCobrarAgregarForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CuentasPage\PorCobrarCobrarForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -494,6 +500,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CuentasPage\PagosPorPagarVerForm.resx">
       <DependentUpon>PagosPorPagarVerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CuentasPage\PorCobrarAgregarForm.resx">
+      <DependentUpon>PorCobrarAgregarForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CuentasPage\PorCobrarCobrarForm.resx">
       <DependentUpon>PorCobrarCobrarForm.cs</DependentUpon>

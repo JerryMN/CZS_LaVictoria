@@ -30,6 +30,8 @@ namespace CZS_LaVictoria.CuentasPage
         private void InitializeComponent()
         {
             this.DataGrid = new Syncfusion.WinForms.DataGrid.SfDataGrid();
+            this.AgregarButton = new FontAwesome.Sharp.IconButton();
+            this.RegistrarButton = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)(this.DataGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,11 +54,49 @@ namespace CZS_LaVictoria.CuentasPage
             this.DataGrid.ValidationMode = Syncfusion.WinForms.DataGrid.Enums.GridValidationMode.InEdit;
             this.DataGrid.AutoGeneratingColumn += new Syncfusion.WinForms.DataGrid.Events.AutoGeneratingColumnEventHandler(this.DataGrid_AutoGeneratingColumn);
             // 
+            // AgregarButton
+            // 
+            this.AgregarButton.AutoSize = true;
+            this.AgregarButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.AgregarButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AgregarButton.IconChar = FontAwesome.Sharp.IconChar.Plus;
+            this.AgregarButton.IconColor = System.Drawing.Color.Black;
+            this.AgregarButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.AgregarButton.IconSize = 24;
+            this.AgregarButton.Location = new System.Drawing.Point(176, 22);
+            this.AgregarButton.Name = "AgregarButton";
+            this.AgregarButton.Size = new System.Drawing.Size(150, 31);
+            this.AgregarButton.TabIndex = 17;
+            this.AgregarButton.Text = "Agregar Nuevo";
+            this.AgregarButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.AgregarButton.UseVisualStyleBackColor = true;
+            this.AgregarButton.Click += new System.EventHandler(this.AgregarButton_Click);
+            // 
+            // RegistrarButton
+            // 
+            this.RegistrarButton.AutoSize = true;
+            this.RegistrarButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.RegistrarButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RegistrarButton.IconChar = FontAwesome.Sharp.IconChar.Receipt;
+            this.RegistrarButton.IconColor = System.Drawing.Color.Green;
+            this.RegistrarButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.RegistrarButton.IconSize = 24;
+            this.RegistrarButton.Location = new System.Drawing.Point(25, 22);
+            this.RegistrarButton.Name = "RegistrarButton";
+            this.RegistrarButton.Size = new System.Drawing.Size(145, 31);
+            this.RegistrarButton.TabIndex = 18;
+            this.RegistrarButton.Text = "Registrar Pago";
+            this.RegistrarButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.RegistrarButton.UseVisualStyleBackColor = true;
+            this.RegistrarButton.Click += new System.EventHandler(this.RegistrarButton_Click);
+            // 
             // PorCobrarVerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1276, 839);
+            this.Controls.Add(this.AgregarButton);
+            this.Controls.Add(this.RegistrarButton);
             this.Controls.Add(this.DataGrid);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -66,11 +106,14 @@ namespace CZS_LaVictoria.CuentasPage
             this.Text = "PorCobrarVerForm";
             ((System.ComponentModel.ISupportInitialize)(this.DataGrid)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private Syncfusion.WinForms.DataGrid.SfDataGrid DataGrid;
+        private FontAwesome.Sharp.IconButton AgregarButton;
+        private FontAwesome.Sharp.IconButton RegistrarButton;
     }
 }

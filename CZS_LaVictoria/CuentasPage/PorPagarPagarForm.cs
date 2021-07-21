@@ -21,6 +21,8 @@ namespace CZS_LaVictoria.CuentasPage
             InitializeComponent();
             _línea = línea;
             LoadForm();
+            FechaFacturaPicker.Culture = new CultureInfo("es-MX");
+            FechaPagoPicker.Culture = new CultureInfo("es-MX");
         }
 
         #region Events
