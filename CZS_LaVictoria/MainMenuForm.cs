@@ -307,9 +307,19 @@ namespace CZS_LaVictoria
             OpenChildForm(new PorPagarVerForm());
         }
 
+        void VerPagosButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new PagosPorPagarVerForm());
+        }
+
         void VerPorCobrarButton_ItemClick(object sender, ItemClickEventArgs e)
         {
             OpenChildForm(new PorCobrarVerForm());
+        }
+
+        void VerCobrosButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new PagosPorCobrarVerForm());
         }
 
         #endregion

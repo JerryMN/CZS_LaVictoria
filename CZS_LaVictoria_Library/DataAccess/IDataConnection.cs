@@ -705,7 +705,7 @@ namespace CZS_LaVictoria_Library.DataAccess
         /// <param name="model">Un modelo con las propiedades de la producción.</param>
         /// <param name="alambre">Un modelo con las propiedades del alambre de entrada al proceso.</param>
         /// <param name="kit">Un modelo con las propiedades del kit de salida del proceso.</param>
-        /// <returns></returns>
+        /// <returns>True, si se creó correctamente, falso si no.</returns>
         bool MopProduction_Create(ProducciónTrapeadoresModel model, MaterialModel alambre, KitModel kit);
 
         /// <summary>
@@ -727,16 +727,47 @@ namespace CZS_LaVictoria_Library.DataAccess
         #region Por Pagar
 
         /// <summary>
+        /// Registra un pago de una cuenta por pagar.
+        /// </summary>
+        /// <param name="línea">El modelo de la línea que se va a pagar.</param>
+        /// <returns>True, si se creó correctamente, falso si no.</returns>
+        bool Payable_Create(PorPagarModel línea);
+
+        /// <summary>
+        /// Registra un pago de una cuenta por pagar.
+        /// </summary>
+        /// <param name="línea">El modelo de la línea que se va a pagar.</param>
+        /// <param name="registro">El modelo del registro del pago.</param>
+        /// <returns>True, si se creó correctamente, falso si no.</returns>
+        bool Payable_Create(PorPagarModel línea, PorPagarPagosModel registro);
+
+        /// <summary>
         /// Obtiene todos los registros de cuentas por pagar.
         /// </summary>
         /// <returns>Una lista con los modelos de las cuentas.</returns>
         List<PorPagarModel> Payable_GetAll();
 
+        /// <summary>
+        /// Obtiene todos los registros de pagos hechos.
+        /// </summary>
+        /// <returns>Una lista con los modelos de los pagos.</returns>
+        List<PorPagarPagosModel> Payable_GetPagos();
+
         #endregion
 
         #region Por Cobrar
 
+        /// <summary>
+        /// Obtiene todos los registros de cuentas por cobrar.
+        /// </summary>
+        /// <returns>Una lista con los modelos de las cuentas.</returns>
         List<PorCobrarModel> Receivable_GetAll();
+
+        /// <summary>
+        /// Obtiene todos los registros de pagos recibidos.
+        /// </summary>
+        /// <returns>Una lista con los modelos de los pagos.</returns>
+        List<PorCobrarPagosModel> Receivable_GetPagos();
 
         #endregion
     }

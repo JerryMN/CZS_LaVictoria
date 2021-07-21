@@ -214,6 +214,18 @@
     <Compile Include="AlgodónPage\RegistrarTorceduraForm.Designer.cs">
       <DependentUpon>RegistrarTorceduraForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CuentasPage\PagosPorCobrarVerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuentasPage\PagosPorCobrarVerForm.Designer.cs">
+      <DependentUpon>PagosPorCobrarVerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CuentasPage\PagosPorPagarVerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuentasPage\PagosPorPagarVerForm.Designer.cs">
+      <DependentUpon>PagosPorPagarVerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CuentasPage\PorCobrarCobrarForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -225,6 +237,12 @@
     </Compile>
     <Compile Include="CuentasPage\PorCobrarVerForm.Designer.cs">
       <DependentUpon>PorCobrarVerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CuentasPage\PorPagarAgregarForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuentasPage\PorPagarAgregarForm.Designer.cs">
+      <DependentUpon>PorPagarAgregarForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CuentasPage\PorPagarPagarForm.cs">
       <SubType>Form</SubType>
@@ -471,11 +489,20 @@
     <EmbeddedResource Include="AlgodónPage\RegistrarTorceduraForm.resx">
       <DependentUpon>RegistrarTorceduraForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CuentasPage\PagosPorCobrarVerForm.resx">
+      <DependentUpon>PagosPorCobrarVerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CuentasPage\PagosPorPagarVerForm.resx">
+      <DependentUpon>PagosPorPagarVerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CuentasPage\PorCobrarCobrarForm.resx">
       <DependentUpon>PorCobrarCobrarForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CuentasPage\PorCobrarVerForm.resx">
       <DependentUpon>PorCobrarVerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CuentasPage\PorPagarAgregarForm.resx">
+      <DependentUpon>PorPagarAgregarForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CuentasPage\PorPagarPagarForm.resx">
       <DependentUpon>PorPagarPagarForm.cs</DependentUpon>

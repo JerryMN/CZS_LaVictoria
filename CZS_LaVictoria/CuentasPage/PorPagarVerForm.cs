@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using CZS_LaVictoria_Library;
@@ -19,7 +20,7 @@ namespace CZS_LaVictoria.CuentasPage
             DataGrid.DataSource = LoadTable();
             DataGrid.Style.CellStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
             DataGrid.Style.HeaderStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
-            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
+            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCellsWithLastColumnFill;
         }
 
         static List<PorPagarModel> LoadTable()
@@ -31,6 +32,9 @@ namespace CZS_LaVictoria.CuentasPage
         {
             switch (e.Column.MappingName)
             {
+                case "Id":
+                    e.Cancel = true;
+                    break;
                 case "NumOrden":
                     e.Column.HeaderText = "Núm. Orden";
                     break;
@@ -59,6 +63,33 @@ namespace CZS_LaVictoria.CuentasPage
                         { MappingName = "FechaLiquidación", HeaderText = "Fecha Liquidación", NullValue = null };
                     break;
             }
+        }
+
+        void RegistrarButton_Click(object sender, EventArgs e)
+        {
+            if (DataGrid.SelectedIndex < 0)
+            {
+                MessageBox.Show("Selecciona una línea.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var línea = (PorPagarModel) DataGrid.SelectedItem;
+
+            if (línea.Estatus == "Pagado")
+            {
+                MessageBox.Show("Esta línea ya está pagada, selecciona otra.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var registro = new PorPagarPagarForm(línea);
+            registro.Show();
+        }
+
+        void AgregarButton_Click(object sender, EventArgs e)
+        {
+            var agregar = new PorPagarAgregarForm();
+            agregar.Show();
+            agregar.Disposed += (o, args) => DataGrid.DataSource = LoadTable();
         }
     }
 }

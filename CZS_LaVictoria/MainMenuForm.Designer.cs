@@ -72,6 +72,8 @@ namespace CZS_LaVictoria
             this.VerProduccionesTrapeadoresButton = new DevExpress.XtraBars.BarButtonItem();
             this.CrearKitButton = new DevExpress.XtraBars.BarButtonItem();
             this.VerKitsButton = new DevExpress.XtraBars.BarButtonItem();
+            this.VerPorPagarButton = new DevExpress.XtraBars.BarButtonItem();
+            this.VerPorCobrarButton = new DevExpress.XtraBars.BarButtonItem();
             this.ÓrdenesTab = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.Órdenes_CompraGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Órdenes_VentaGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -86,6 +88,9 @@ namespace CZS_LaVictoria
             this.TrapeadoresTab = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.Trapeadores_RegistrarGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Trapeadores_VerGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.CuentasTab = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.Cuentas_PagarGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.Cuentas_CobrarGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.DatosTab = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.Datos_ProveedoresGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Datos_ClientesGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -94,11 +99,8 @@ namespace CZS_LaVictoria
             this.Datos_MezclasGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Datos_PersonalGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ChildPanel = new DevExpress.XtraEditors.PanelControl();
-            this.CuentasTab = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.Cuentas_PagarGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.VerPorPagarButton = new DevExpress.XtraBars.BarButtonItem();
-            this.Cuentas_CobrarGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.VerPorCobrarButton = new DevExpress.XtraBars.BarButtonItem();
+            this.VerPagosButton = new DevExpress.XtraBars.BarButtonItem();
+            this.VerCobrosButton = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.RibbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ChildPanel)).BeginInit();
             this.SuspendLayout();
@@ -152,10 +154,12 @@ namespace CZS_LaVictoria
             this.CrearKitButton,
             this.VerKitsButton,
             this.VerPorPagarButton,
-            this.VerPorCobrarButton});
+            this.VerPorCobrarButton,
+            this.VerPagosButton,
+            this.VerCobrosButton});
             this.RibbonControl.Location = new System.Drawing.Point(0, 0);
             this.RibbonControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.RibbonControl.MaxItemId = 48;
+            this.RibbonControl.MaxItemId = 50;
             this.RibbonControl.Name = "RibbonControl";
             this.RibbonControl.OptionsMenuMinWidth = 495;
             this.RibbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -509,6 +513,22 @@ namespace CZS_LaVictoria
             this.VerKitsButton.Name = "VerKitsButton";
             this.VerKitsButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerKitsButton_ItemClick);
             // 
+            // VerPorPagarButton
+            // 
+            this.VerPorPagarButton.Caption = "Ver Por Pagar";
+            this.VerPorPagarButton.Id = 46;
+            this.VerPorPagarButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("VerPorPagarButton.ImageOptions.SvgImage")));
+            this.VerPorPagarButton.Name = "VerPorPagarButton";
+            this.VerPorPagarButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerPorPagarButton_ItemClick);
+            // 
+            // VerPorCobrarButton
+            // 
+            this.VerPorCobrarButton.Caption = "Ver Por Cobrar";
+            this.VerPorCobrarButton.Id = 47;
+            this.VerPorCobrarButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("VerPorCobrarButton.ImageOptions.SvgImage")));
+            this.VerPorCobrarButton.Name = "VerPorCobrarButton";
+            this.VerPorCobrarButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerPorCobrarButton_ItemClick);
+            // 
             // ÓrdenesTab
             // 
             this.ÓrdenesTab.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F);
@@ -628,6 +648,30 @@ namespace CZS_LaVictoria
             this.Trapeadores_VerGroup.Name = "Trapeadores_VerGroup";
             this.Trapeadores_VerGroup.Text = "Ver";
             // 
+            // CuentasTab
+            // 
+            this.CuentasTab.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.Cuentas_PagarGroup,
+            this.Cuentas_CobrarGroup});
+            this.CuentasTab.Name = "CuentasTab";
+            this.CuentasTab.Text = "Cuentas";
+            // 
+            // Cuentas_PagarGroup
+            // 
+            this.Cuentas_PagarGroup.AllowTextClipping = false;
+            this.Cuentas_PagarGroup.ItemLinks.Add(this.VerPorPagarButton);
+            this.Cuentas_PagarGroup.ItemLinks.Add(this.VerPagosButton);
+            this.Cuentas_PagarGroup.Name = "Cuentas_PagarGroup";
+            this.Cuentas_PagarGroup.Text = "Por Pagar";
+            // 
+            // Cuentas_CobrarGroup
+            // 
+            this.Cuentas_CobrarGroup.AllowTextClipping = false;
+            this.Cuentas_CobrarGroup.ItemLinks.Add(this.VerPorCobrarButton);
+            this.Cuentas_CobrarGroup.ItemLinks.Add(this.VerCobrosButton);
+            this.Cuentas_CobrarGroup.Name = "Cuentas_CobrarGroup";
+            this.Cuentas_CobrarGroup.Text = "Por Cobrar";
+            // 
             // DatosTab
             // 
             this.DatosTab.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F);
@@ -700,43 +744,21 @@ namespace CZS_LaVictoria
             this.ChildPanel.Size = new System.Drawing.Size(1278, 841);
             this.ChildPanel.TabIndex = 1;
             // 
-            // CuentasTab
+            // VerPagosButton
             // 
-            this.CuentasTab.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.Cuentas_PagarGroup,
-            this.Cuentas_CobrarGroup});
-            this.CuentasTab.Name = "CuentasTab";
-            this.CuentasTab.Text = "Cuentas";
+            this.VerPagosButton.Caption = "Ver Pagos Hechos";
+            this.VerPagosButton.Id = 48;
+            this.VerPagosButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("VerPagosButton.ImageOptions.SvgImage")));
+            this.VerPagosButton.Name = "VerPagosButton";
+            this.VerPagosButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerPagosButton_ItemClick);
             // 
-            // Cuentas_PagarGroup
+            // VerCobrosButton
             // 
-            this.Cuentas_PagarGroup.AllowTextClipping = false;
-            this.Cuentas_PagarGroup.ItemLinks.Add(this.VerPorPagarButton);
-            this.Cuentas_PagarGroup.Name = "Cuentas_PagarGroup";
-            this.Cuentas_PagarGroup.Text = "Por Pagar";
-            // 
-            // VerPorPagarButton
-            // 
-            this.VerPorPagarButton.Caption = "Ver Por Pagar";
-            this.VerPorPagarButton.Id = 46;
-            this.VerPorPagarButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("VerPorPagarButton.ImageOptions.SvgImage")));
-            this.VerPorPagarButton.Name = "VerPorPagarButton";
-            this.VerPorPagarButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerPorPagarButton_ItemClick);
-            // 
-            // Cuentas_CobrarGroup
-            // 
-            this.Cuentas_CobrarGroup.AllowTextClipping = false;
-            this.Cuentas_CobrarGroup.ItemLinks.Add(this.VerPorCobrarButton);
-            this.Cuentas_CobrarGroup.Name = "Cuentas_CobrarGroup";
-            this.Cuentas_CobrarGroup.Text = "Por Cobrar";
-            // 
-            // VerPorCobrarButton
-            // 
-            this.VerPorCobrarButton.Caption = "Ver Por Cobrar";
-            this.VerPorCobrarButton.Id = 47;
-            this.VerPorCobrarButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("VerPorCobrarButton.ImageOptions.SvgImage")));
-            this.VerPorCobrarButton.Name = "VerPorCobrarButton";
-            this.VerPorCobrarButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerPorCobrarButton_ItemClick);
+            this.VerCobrosButton.Caption = "Ver Cobros Hechos";
+            this.VerCobrosButton.Id = 49;
+            this.VerCobrosButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("VerCobrosButton.ImageOptions.SvgImage")));
+            this.VerCobrosButton.Name = "VerCobrosButton";
+            this.VerCobrosButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerCobrosButton_ItemClick);
             // 
             // MainMenuForm
             // 
@@ -834,6 +856,8 @@ namespace CZS_LaVictoria
         private DevExpress.XtraBars.Ribbon.RibbonPage CuentasTab;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup Cuentas_PagarGroup;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup Cuentas_CobrarGroup;
+        private DevExpress.XtraBars.BarButtonItem VerPagosButton;
+        private DevExpress.XtraBars.BarButtonItem VerCobrosButton;
     }
 }
 

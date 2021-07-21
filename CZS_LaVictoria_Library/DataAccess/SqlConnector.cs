@@ -3102,6 +3102,75 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         #region Por Pagar
 
+        public bool Payable_Create(PorPagarModel línea)
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@Factura", línea.Factura);
+                    p.Add("@FechaFactura", línea.FechaFactura);
+                    p.Add("@Proveedor", línea.Proveedor);
+                    p.Add("@Monto", línea.Monto);
+                    p.Add("@Pagado", línea.Pagado);
+                    p.Add("@Condiciones", línea.Condiciones);
+                    p.Add("@FechaLímite", línea.FechaLímite);
+                    p.Add("@Estatus", línea.Estatus);
+                    p.Add("@Notas", línea.Notas);
+
+                    connection.Execute("dbo.spAccountsPayable_Insert", p, commandType: CommandType.StoredProcedure);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return false;
+                }
+
+                return true;
+            }
+        }
+
+        public bool Payable_Create(PorPagarModel línea, PorPagarPagosModel registro)
+        {
+            using (var scope = new TransactionScope())
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@Factura", línea.Factura);
+                    p.Add("@FechaFactura", línea.FechaFactura);
+                    p.Add("@Monto", línea.Monto);
+                    p.Add("@Pagado", línea.Pagado);
+                    p.Add("@Pendiente", línea.Pendiente);
+                    p.Add("@FechaLiquidación", línea.FechaLiquidación);
+                    p.Add("@Estatus", línea.Estatus);
+                    p.Add("@Notas", línea.Notas);
+                    p.Add("@Id", línea.Id);
+
+                    connection.Execute("dbo.spAccountsPayable_Update", p, commandType: CommandType.StoredProcedure);
+
+                    p = new DynamicParameters();
+                    p.Add("@Factura", registro.Factura);
+                    p.Add("@Pago", registro.Pago);
+                    p.Add("@FechaPago", registro.FechaPago);
+
+                    connection.Execute("dbo.spAP_Payments_Insert", p, commandType: CommandType.StoredProcedure);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return false;
+                }
+
+                scope.Complete();
+                return true;
+            }
+        }
+
         public List<PorPagarModel> Payable_GetAll()
         {
             using (IDbConnection connection = new SqlConnection(ConnectionString))
@@ -3121,11 +3190,35 @@ namespace CZS_LaVictoria_Library.DataAccess
             }
         }
 
+        public List<PorPagarPagosModel> Payable_GetPagos()
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                try
+                {
+                    var output = connection.Query<PorPagarPagosModel>("dbo.spAP_Payments_GetAll",
+                        commandType: CommandType.StoredProcedure).ToList();
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
+        }
+
         #endregion
 
         #region Por Cobrar
 
         public List<PorCobrarModel> Receivable_GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<PorCobrarPagosModel> Receivable_GetPagos()
         {
             throw new NotImplementedException();
         }

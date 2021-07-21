@@ -22,6 +22,8 @@ namespace CZS_LaVictoria_Library.Models
         string _estatus;
         string _notas;
 
+        public int Id { get; set; }
+
         public long NumOrden
         {
             get => _numOrden;
