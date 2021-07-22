@@ -10,6 +10,7 @@ using CZS_LaVictoria.TrapeadoresPage;
 using CZS_LaVictoria_Library;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
+using DevExpress.XtraReports.UI;
 using DevExpress.XtraSplashScreen;
 
 namespace CZS_LaVictoria
@@ -320,6 +321,21 @@ namespace CZS_LaVictoria
         void VerCobrosButton_ItemClick(object sender, ItemClickEventArgs e)
         {
             OpenChildForm(new PagosPorCobrarVerForm());
+        }
+
+        void VerPagosHechosButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new ReportePorPagarForm());
+        }
+
+        void VerCobrosRecibidosButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new ReportePorCobrarForm());
+        }
+
+        void VerCuentasButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new ReporteCuentasForm());
         }
 
         #endregion

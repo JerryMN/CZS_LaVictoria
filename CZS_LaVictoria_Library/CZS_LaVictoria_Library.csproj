@@ -51,6 +51,7 @@
     <Compile Include="Models\AreaModel.cs" />
     <Compile Include="Models\ClienteModel.cs" />
     <Compile Include="Models\ClienteProductoModel.cs" />
+    <Compile Include="Models\CuentasModel.cs" />
     <Compile Include="Models\HistorialModel.cs" />
     <Compile Include="Models\KitModel.cs" />
     <Compile Include="Models\MaterialModel.cs" />

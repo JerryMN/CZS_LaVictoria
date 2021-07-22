@@ -753,6 +753,14 @@ namespace CZS_LaVictoria_Library.DataAccess
         /// <returns>Una lista con los modelos de los pagos.</returns>
         List<PorPagarPagosModel> Payable_GetPagos();
 
+        /// <summary>
+        /// Obtiene todos los registros de pagos hechos entre ciertas fechas.
+        /// </summary>
+        /// <param name="desde">La fecha desde donde buscar.</param>
+        /// <param name="hasta">La fecha hasta donde buscar.</param>
+        /// <returns>Una lista con los modelos de los pagos.</returns>
+        List<PorPagarPagosModel> Payable_GetPagosByDate(DateTime desde, DateTime hasta);
+
         #endregion
 
         #region Por Cobrar
@@ -783,6 +791,14 @@ namespace CZS_LaVictoria_Library.DataAccess
         /// </summary>
         /// <returns>Una lista con los modelos de los pagos.</returns>
         List<PorCobrarPagosModel> Receivable_GetPagos();
+
+        /// <summary>
+        /// Obtiene todos los registros de pagos recibidos1 entre ciertas fechas.
+        /// </summary>
+        /// <param name="desde">La fecha desde donde buscar.</param>
+        /// <param name="hasta">La fecha hasta donde buscar.</param>
+        /// <returns>Una lista con los modelos de los pagos.</returns>
+        List<PorCobrarPagosModel> Receivable_GetPagosByDate(DateTime desde, DateTime hasta);
 
         #endregion
     }

@@ -12,7 +12,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 {
     public class SqlConnector : IDataConnection
     {
-        const string ConnectionString =
+        public const string ConnectionString =
             "Server=czsystems.database.windows.net;Database=escobaslavictoria;User Id=czsystems_escobaslavictoria;Password=Prye2uikg4;";
 
         const string MasterString =
@@ -3209,6 +3209,29 @@ namespace CZS_LaVictoria_Library.DataAccess
             }
         }
 
+        public List<PorPagarPagosModel> Payable_GetPagosByDate(DateTime desde, DateTime hasta)
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@Desde", desde);
+                p.Add("@Hasta", hasta);
+
+                try
+                {
+                    var output = connection.Query<PorPagarPagosModel>("dbo.spAP_Payments_GetByDate", p,
+                        commandType: CommandType.StoredProcedure).ToList();
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
+        }
+
         #endregion
 
         #region Por Cobrar
@@ -3306,6 +3329,29 @@ namespace CZS_LaVictoria_Library.DataAccess
                 try
                 {
                     var output = connection.Query<PorCobrarPagosModel>("dbo.spAR_Payments_GetAll",
+                        commandType: CommandType.StoredProcedure).ToList();
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
+        }
+
+        public List<PorCobrarPagosModel> Receivable_GetPagosByDate(DateTime desde, DateTime hasta)
+        {
+            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@Desde", desde);
+                p.Add("@Hasta", hasta);
+
+                try
+                {
+                    var output = connection.Query<PorCobrarPagosModel>("dbo.spAR_Payments_GetByDate", p,
                         commandType: CommandType.StoredProcedure).ToList();
                     return output;
                 }
