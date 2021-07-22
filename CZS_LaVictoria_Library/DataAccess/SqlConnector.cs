@@ -12,7 +12,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 {
     public class SqlConnector : IDataConnection
     {
-        public const string ConnectionString =
+        public const string connectionString =
             "Server=czsystems.database.windows.net;Database=escobaslavictoria;User Id=czsystems_escobaslavictoria;Password=Prye2uikg4;";
 
         const string MasterString =
@@ -39,7 +39,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public bool Area_Create(AreaModel model)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Area", model.Área);
@@ -62,7 +62,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<AreaModel> Area_GetAll()
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -80,7 +80,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<string> Area_GetDistinct()
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -98,7 +98,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<AreaModel> Area_GetByArea(string area)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Area", area);
@@ -121,7 +121,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public bool Area_Update(AreaModel model)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Area", model.Área);
@@ -145,7 +145,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public bool Area_Delete(AreaModel model)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Id", model.Id);
@@ -170,7 +170,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public bool Proveedor_Create(ProveedorModel model)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Nombre", model.Nombre);
@@ -196,7 +196,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<ProveedorModel> Proveedor_GetAll()
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -214,7 +214,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<string> Proveedor_GetDistinctCondiciones()
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -232,7 +232,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public bool Proveedor_Update(ProveedorModel model)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Nombre", model.Nombre);
@@ -259,7 +259,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public bool Proveedor_Delete(ProveedorModel model)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Id", model.Id);
@@ -284,7 +284,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public bool ProveedorProducto_Create(ProveedorProductoModel model, ProveedorModel proveedor)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@MaterialExterno", model.MaterialExterno);
@@ -311,7 +311,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<ProveedorProductoModel> ProveedorProducto_GetAll()
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -329,7 +329,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<ProveedorProductoModel> ProveedorProducto_GetByProveedorArea(int idProveedor, string area)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@IdProveedor", idProveedor);
@@ -352,7 +352,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public ProveedorProductoModel ProveedorProducto_Find(string nombreExterno, string proveedor, string area)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@NombreExterno", nombreExterno);
@@ -376,7 +376,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public bool ProveedorProducto_Update(ProveedorProductoModel model)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@MaterialExterno", model.MaterialExterno);
@@ -400,7 +400,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public bool ProveedorProducto_Delete(ProveedorProductoModel model)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Id", model.Id);
@@ -425,7 +425,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public bool Cliente_Create(ClienteModel model)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Nombre", model.Nombre);
@@ -452,7 +452,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<ClienteModel> Cliente_GetAll()
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -471,7 +471,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<string> Cliente_GetDistinctCiudades()
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -489,7 +489,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public bool Cliente_Update(ClienteModel model)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Nombre", model.Nombre);
@@ -517,7 +517,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public bool Cliente_Delete(ClienteModel model)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Id", model.Id);
@@ -542,7 +542,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public bool ClienteProducto_Create(ClienteProductoModel model, ClienteModel cliente)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@ProductoInterno", model.ProductoInterno);
@@ -567,7 +567,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<ClienteProductoModel> ClienteProducto_GetAll()
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -585,7 +585,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<ClienteProductoModel> ClienteProducto_GetByClienteArea(int? idCliente, string area)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@IdClient", idCliente);
@@ -610,7 +610,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public ClienteProductoModel ClienteProducto_Find(string nombreInterno, string area)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@NombreInterno", nombreInterno);
@@ -633,7 +633,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public bool ClienteProducto_Update(ClienteProductoModel model)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@ProductoInterno", model.ProductoInterno);
@@ -656,7 +656,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public bool ClienteProducto_Delete(ClienteProductoModel model)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Id", model.Id);
@@ -681,7 +681,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public bool Material_Create(MaterialModel model)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Nombre", model.Nombre);
@@ -705,7 +705,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<MaterialModel> Material_GetAll()
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -725,7 +725,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<MaterialModel> Material_GetByAreaCat(string area, string categoría)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Area", area);
@@ -748,7 +748,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<MaterialModel> Material_GetByArea(string area)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Area", area);
@@ -770,7 +770,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<MaterialModel> Material_GetByCat(string categoría)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Categoría", categoría);
@@ -793,7 +793,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public MaterialModel Material_GetByNombreArea(string nombre, string area)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Nombre", nombre);
@@ -818,7 +818,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<string> Material_GetDistinctCategorías()
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -837,7 +837,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public bool Material_Update(MaterialModel model)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@CantidadDisponible", model.CantidadDisponible);
@@ -859,7 +859,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public bool Material_Delete(MaterialModel model)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Id", model.Id);
@@ -885,7 +885,7 @@ namespace CZS_LaVictoria_Library.DataAccess
         public bool Mezcla_Create(MezclaModel model)
         {
             using (var scope = new TransactionScope())
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Nombre", model.Nombre);
@@ -931,7 +931,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<MezclaModel> Mezcla_GetAll()
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -978,7 +978,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public bool Mezcla_Delete(MezclaModel model)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Id", model.Id);
@@ -1004,7 +1004,7 @@ namespace CZS_LaVictoria_Library.DataAccess
         public bool Kit_Create(KitModel model)
         {
             using (var scope = new TransactionScope())
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Nombre", model.Nombre);
@@ -1049,7 +1049,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<KitModel> Kit_GetAll()
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -1096,7 +1096,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public bool Kit_Delete(KitModel model)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Id", model.Id);
@@ -1122,7 +1122,7 @@ namespace CZS_LaVictoria_Library.DataAccess
         public bool OrdenCompra_Create(OrdenCompraModel model)
         {
             using (var scope = new TransactionScope())
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@NumOrden", model.NumOrden);
@@ -1180,7 +1180,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public long OrdenCompra_GetLastNumOrden()
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -1203,7 +1203,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public OrdenCompraModel OrdenCompra_GetByNumOrden(string numOrden)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@NumOrden", numOrden);
@@ -1225,7 +1225,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<OrdenCompraLíneaModel> OrdenCompra_GetLineasByNumOrden(string numOrden)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@NumOrden", long.Parse(numOrden));
@@ -1246,7 +1246,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<OrdenCompraLíneaModel> OrdenCompra_GetLineasPendientes()
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -1265,7 +1265,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<OrdenCompraLíneaModel> OrdenCompra_GetAllLineas()
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -1285,7 +1285,7 @@ namespace CZS_LaVictoria_Library.DataAccess
         public bool OrdenCompra_UpdateLinea(long orderId, OrdenCompraLíneaModel línea, double oldQty, double newQty)
         {
             using (var scope = new TransactionScope())
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 Debug.Assert(línea != null, nameof(línea) + " != null");
                 Debug.Assert(línea.FechaUltRecepción != null, "línea.FechaUltRecepción != null");
@@ -1397,7 +1397,7 @@ namespace CZS_LaVictoria_Library.DataAccess
         public bool OrdenVenta_Create(OrdenVentaModel model)
         {
             using (var scope = new TransactionScope())
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@NumOrden", model.NumOrden);
@@ -1457,7 +1457,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public long OrdenVenta_GetLastNumOrden()
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -1480,7 +1480,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public OrdenVentaModel OrdenVenta_GetByNumOrden(string numOrden)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@NumOrden", numOrden);
@@ -1502,7 +1502,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<OrdenVentaLíneaModel> OrdenVenta_GetLineasByNumOrden(string numOrden)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@NumOrden", numOrden);
@@ -1524,7 +1524,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<OrdenVentaLíneaModel> OrdenVenta_GetLineasPendientes()
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -1543,7 +1543,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<OrdenVentaLíneaModel> OrdenVenta_GetAllLineas()
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -1563,7 +1563,7 @@ namespace CZS_LaVictoria_Library.DataAccess
         public bool OrdenVenta_UpdateLinea(long orderId, OrdenVentaLíneaModel línea, double oldQty, double newQty)
         {
             using (var scope = new TransactionScope())
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 Debug.Assert(línea != null, nameof(línea) + " != null");
                 var producto = ClienteProducto_Find(línea.Producto, línea.Área);
@@ -1605,7 +1605,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                     p.Add("@NumOrden", línea.NumOrden);
                     p.Add("@NumLinea", línea.NumLinea);
                     p.Add("@Producto", línea.Producto);
-                    p.Add("@Cantidad", -newQty + oldQty);
+                    p.Add("@Cantidad", newQty - oldQty);
                     p.Add("@Precio", línea.PrecioUnitario);
                     p.Add("@Fecha", línea.FechaUltEntrega);
 
@@ -1629,7 +1629,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public bool Delivery_Create(OrdenCompraLíneaModel model, double quantity)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@TipoOrden", "C");
@@ -1657,7 +1657,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public bool Delivery_Create(OrdenVentaLíneaModel model, double quantity)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@TipoOrden", "V");
@@ -1685,7 +1685,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<HistorialModel> Delivery_GetCompra()
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -1704,7 +1704,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<HistorialModel> Delivery_GetVenta()
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -1727,7 +1727,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public bool Operator_Create(OperadorModel model)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Nombre", model.Nombre);
@@ -1749,7 +1749,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<OperadorModel> Operador_GetAll()
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -1768,7 +1768,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<OperadorModel> Operador_GetByArea(string area)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Area", area);
@@ -1790,7 +1790,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public bool Operator_Update(OperadorModel model)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Nombre", model.Nombre);
@@ -1813,7 +1813,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public bool Operator_Delete(OperadorModel model)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Id", model.Id);
@@ -1840,7 +1840,7 @@ namespace CZS_LaVictoria_Library.DataAccess
             MaterialModel materialSalida)
         {
             using (var scope = new TransactionScope())
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -1895,7 +1895,7 @@ namespace CZS_LaVictoria_Library.DataAccess
             MaterialModel materialSalida)
         {
             using (var scope = new TransactionScope())
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -1993,7 +1993,7 @@ namespace CZS_LaVictoria_Library.DataAccess
             MaterialModel materialSalida)
         {
             using (var scope = new TransactionScope())
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -2088,7 +2088,7 @@ namespace CZS_LaVictoria_Library.DataAccess
             MaterialModel materialSalida)
         {
             using (var scope = new TransactionScope())
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -2182,7 +2182,7 @@ namespace CZS_LaVictoria_Library.DataAccess
             MaterialModel materialSalida)
         {
             using (var scope = new TransactionScope())
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -2280,7 +2280,7 @@ namespace CZS_LaVictoria_Library.DataAccess
             MaterialModel materialSalida)
         {
             using (var scope = new TransactionScope())
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -2375,7 +2375,7 @@ namespace CZS_LaVictoria_Library.DataAccess
             MaterialModel fibraEntrada, MaterialModel alambreEntrada, MaterialModel materialSalida)
         {
             using (var scope = new TransactionScope())
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -2527,7 +2527,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<ProducciónPlásticosModel> PlasticProduction_GetAll()
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -2545,7 +2545,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<ProducciónPlásticosModel> PlasticProduction_GetByDate(DateTime desde, DateTime hasta)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Desde", desde);
@@ -2568,7 +2568,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<ProducciónPlásticosModel> PlasticProduction_GetByProceso(string proceso)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Proceso", proceso);
@@ -2590,7 +2590,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<string> PlasticProduction_GetMáquinas()
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -2613,7 +2613,7 @@ namespace CZS_LaVictoria_Library.DataAccess
         public bool WoolProduction_CreateEscalera(ProducciónAlgodónModel model, MaterialModel materialEntrada)
         {
             using (var scope = new TransactionScope())
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -2650,7 +2650,7 @@ namespace CZS_LaVictoria_Library.DataAccess
         public bool WoolProduction_CreateCardas(ProducciónAlgodónModel model)
         {
             using (var scope = new TransactionScope())
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -2681,7 +2681,7 @@ namespace CZS_LaVictoria_Library.DataAccess
         public bool WoolProduction_CreateEstirado(ProducciónAlgodónModel model)
         {
             using (var scope = new TransactionScope())
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -2712,7 +2712,7 @@ namespace CZS_LaVictoria_Library.DataAccess
         public bool WoolProduction_CreateOpenEnd(ProducciónAlgodónModel model, MaterialModel materialSalida)
         {
             using (var scope = new TransactionScope())
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -2781,7 +2781,7 @@ namespace CZS_LaVictoria_Library.DataAccess
         public bool WoolProduction_CreateTorcedura(ProducciónAlgodónModel model)
         {
             using (var scope = new TransactionScope())
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -2818,7 +2818,7 @@ namespace CZS_LaVictoria_Library.DataAccess
         public bool WoolProduction_CreateEnrollado(ProducciónAlgodónModel model, MaterialModel materialSalida)
         {
             using (var scope = new TransactionScope())
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -2891,7 +2891,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<ProducciónAlgodónModel> WoolProduction_GetAll()
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -2909,7 +2909,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<ProducciónAlgodónModel> WoolProduction_GetByDate(DateTime desde, DateTime hasta)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Desde", desde);
@@ -2932,7 +2932,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<ProducciónAlgodónModel> WoolProduction_GetByProceso(string proceso)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Proceso", proceso);
@@ -2954,7 +2954,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<string> WoolProduction_GetMáquinas()
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -2977,7 +2977,7 @@ namespace CZS_LaVictoria_Library.DataAccess
         public bool MopProduction_Create(ProducciónTrapeadoresModel model, MaterialModel alambre, KitModel kit)
         {
             using (var scope = new TransactionScope())
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -3059,7 +3059,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<ProducciónTrapeadoresModel> MopProduction_GetAll()
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -3077,7 +3077,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<ProducciónTrapeadoresModel> MopProduction_GetByDate(DateTime desde, DateTime hasta)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Desde", desde);
@@ -3104,7 +3104,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public bool Payable_Create(PorPagarModel línea)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -3135,7 +3135,7 @@ namespace CZS_LaVictoria_Library.DataAccess
         public bool Payable_Create(PorPagarModel línea, PorPagarPagosModel registro)
         {
             using (var scope = new TransactionScope())
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -3173,7 +3173,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<PorPagarModel> Payable_GetAll()
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -3192,7 +3192,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<PorPagarPagosModel> Payable_GetPagos()
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -3211,7 +3211,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<PorPagarPagosModel> Payable_GetPagosByDate(DateTime desde, DateTime hasta)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Desde", desde);
@@ -3238,7 +3238,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public bool Receivable_Create(PorCobrarModel línea)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -3267,7 +3267,7 @@ namespace CZS_LaVictoria_Library.DataAccess
         public bool Receivable_Create(PorCobrarModel línea, PorCobrarPagosModel registro)
         {
             using (var scope = new TransactionScope())
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -3305,7 +3305,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<PorCobrarModel> Receivable_GetAll()
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -3324,7 +3324,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<PorCobrarPagosModel> Receivable_GetPagos()
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -3343,7 +3343,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         public List<PorCobrarPagosModel> Receivable_GetPagosByDate(DateTime desde, DateTime hasta)
         {
-            using (IDbConnection connection = new SqlConnection(ConnectionString))
+            using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@Desde", desde);

@@ -231,6 +231,18 @@
     <Compile Include="AlgodónPage\RegistrarTorceduraForm.Designer.cs">
       <DependentUpon>RegistrarTorceduraForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AlgodónPage\ReporteProducciónAlgodón.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AlgodónPage\ReporteProducciónAlgodón.Designer.cs">
+      <DependentUpon>ReporteProducciónAlgodón.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AlgodónPage\ReporteProducciónAlgodónForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AlgodónPage\ReporteProducciónAlgodónForm.Designer.cs">
+      <DependentUpon>ReporteProducciónAlgodónForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CuentasPage\PagosPorCobrarVerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -465,6 +477,18 @@
     <Compile Include="PlásticosPage\RegistrarMolidoForm.Designer.cs">
       <DependentUpon>RegistrarMolidoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PlásticosPage\ReporteProducciónPlástico.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PlásticosPage\ReporteProducciónPlástico.Designer.cs">
+      <DependentUpon>ReporteProducciónPlástico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PlásticosPage\ReporteProducciónPlásticosForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PlásticosPage\ReporteProducciónPlásticosForm.Designer.cs">
+      <DependentUpon>ReporteProducciónPlásticosForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TrapeadoresPage\ProducciónTrapeadoresVerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -476,6 +500,18 @@
     </Compile>
     <Compile Include="TrapeadoresPage\RegistrarTrapeadoresForm.Designer.cs">
       <DependentUpon>RegistrarTrapeadoresForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TrapeadoresPage\ReporteProducciónTrapeadores.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TrapeadoresPage\ReporteProducciónTrapeadores.Designer.cs">
+      <DependentUpon>ReporteProducciónTrapeadores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TrapeadoresPage\ReporteProducciónTrapeadoresForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TrapeadoresPage\ReporteProducciónTrapeadoresForm.Designer.cs">
+      <DependentUpon>ReporteProducciónTrapeadoresForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ÓrdenesPage\AgregarNotasForm.cs">
       <SubType>Form</SubType>
@@ -527,6 +563,42 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ÓrdenesPage\ReporteHistorialCompra.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ÓrdenesPage\ReporteHistorialCompra.Designer.cs">
+      <DependentUpon>ReporteHistorialCompra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ÓrdenesPage\ReporteHistorialCompraForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ÓrdenesPage\ReporteHistorialCompraForm.Designer.cs">
+      <DependentUpon>ReporteHistorialCompraForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ÓrdenesPage\ReporteHistorialVenta.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ÓrdenesPage\ReporteHistorialVenta.Designer.cs">
+      <DependentUpon>ReporteHistorialVenta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ÓrdenesPage\ReporteHistorialVentaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ÓrdenesPage\ReporteHistorialVentaForm.Designer.cs">
+      <DependentUpon>ReporteHistorialVentaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ÓrdenesPage\ReporteInventario.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ÓrdenesPage\ReporteInventario.Designer.cs">
+      <DependentUpon>ReporteInventario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ÓrdenesPage\ReporteInventarioForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ÓrdenesPage\ReporteInventarioForm.Designer.cs">
+      <DependentUpon>ReporteInventarioForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AlgodónPage\ProducciónAlgodónVerForm.resx">
       <DependentUpon>ProducciónAlgodónVerForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -547,6 +619,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AlgodónPage\RegistrarTorceduraForm.resx">
       <DependentUpon>RegistrarTorceduraForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AlgodónPage\ReporteProducciónAlgodón.resx">
+      <DependentUpon>ReporteProducciónAlgodón.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AlgodónPage\ReporteProducciónAlgodónForm.resx">
+      <DependentUpon>ReporteProducciónAlgodónForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CuentasPage\PagosPorCobrarVerForm.resx">
       <DependentUpon>PagosPorCobrarVerForm.cs</DependentUpon>
@@ -665,11 +743,23 @@
     <EmbeddedResource Include="PlásticosPage\RegistrarMolidoForm.resx">
       <DependentUpon>RegistrarMolidoForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PlásticosPage\ReporteProducciónPlástico.resx">
+      <DependentUpon>ReporteProducciónPlástico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlásticosPage\ReporteProducciónPlásticosForm.resx">
+      <DependentUpon>ReporteProducciónPlásticosForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TrapeadoresPage\ProducciónTrapeadoresVerForm.resx">
       <DependentUpon>ProducciónTrapeadoresVerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TrapeadoresPage\RegistrarTrapeadoresForm.resx">
       <DependentUpon>RegistrarTrapeadoresForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrapeadoresPage\ReporteProducciónTrapeadores.resx">
+      <DependentUpon>ReporteProducciónTrapeadores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrapeadoresPage\ReporteProducciónTrapeadoresForm.resx">
+      <DependentUpon>ReporteProducciónTrapeadoresForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ÓrdenesPage\AgregarNotasForm.resx">
       <DependentUpon>AgregarNotasForm.cs</DependentUpon>
@@ -705,6 +795,24 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ÓrdenesPage\ReporteHistorialCompra.resx">
+      <DependentUpon>ReporteHistorialCompra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ÓrdenesPage\ReporteHistorialCompraForm.resx">
+      <DependentUpon>ReporteHistorialCompraForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ÓrdenesPage\ReporteHistorialVenta.resx">
+      <DependentUpon>ReporteHistorialVenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ÓrdenesPage\ReporteHistorialVentaForm.resx">
+      <DependentUpon>ReporteHistorialVentaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ÓrdenesPage\ReporteInventario.resx">
+      <DependentUpon>ReporteInventario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ÓrdenesPage\ReporteInventarioForm.resx">
+      <DependentUpon>ReporteInventarioForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

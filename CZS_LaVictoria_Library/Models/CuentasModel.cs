@@ -36,7 +36,7 @@ namespace CZS_LaVictoria_Library.Models
         {
             var startDate = $"'2021-{month}-1'";
             var endDate = $"'2021-{month}-{_monthEnd.Day}'";
-            using (IDbConnection connection = new SqlConnection(SqlConnector.ConnectionString))
+            using (IDbConnection connection = new SqlConnection(SqlConnector.connectionString))
             {
                 var income = connection.ExecuteScalar(
                     $"SELECT SUM(Pago) From dbo.AR_Payments where FechaPago >= {startDate} and FechaPago <= {endDate}");

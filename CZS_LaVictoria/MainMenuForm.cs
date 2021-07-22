@@ -10,7 +10,6 @@ using CZS_LaVictoria.TrapeadoresPage;
 using CZS_LaVictoria_Library;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
-using DevExpress.XtraReports.UI;
 using DevExpress.XtraSplashScreen;
 
 namespace CZS_LaVictoria
@@ -98,9 +97,24 @@ namespace CZS_LaVictoria
             OpenChildForm(new InventarioVerForm());
         }
 
+        void VerReporteInventario_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new ReporteInventarioForm());
+        }
+
         void VerHistorialButton_ItemClick(object sender, ItemClickEventArgs e)
         {
             OpenChildForm(new HistorialVerForm());
+        }
+
+        void VerReporteCompras_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new ReporteHistorialCompraForm());
+        }
+
+        void VerReporteVentas_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new ReporteHistorialVentaForm());
         }
 
         #endregion
@@ -246,6 +260,11 @@ namespace CZS_LaVictoria
             OpenChildForm(new PiezasMalasVerForm());
         }
 
+        void VerReporteProducciónPlásticosButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new ReporteProducciónPlásticosForm());
+        }
+
         #endregion
 
         #region Algodón
@@ -285,6 +304,11 @@ namespace CZS_LaVictoria
             OpenChildForm(new ProducciónAlgodónVerForm());
         }
 
+        void VerReporteProducciónAlgodónButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new ReporteProducciónAlgodónForm());
+        }
+
         #endregion
 
         #region Trapeadores
@@ -297,6 +321,11 @@ namespace CZS_LaVictoria
         void VerProduccionesTrapeadoresButton_ItemClick(object sender, ItemClickEventArgs e)
         {
             OpenChildForm(new ProducciónTrapeadoresVerForm());
+        }
+
+        void VerReporteProducciónTrapeadoresButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new ReporteProducciónTrapeadoresForm());
         }
 
         #endregion

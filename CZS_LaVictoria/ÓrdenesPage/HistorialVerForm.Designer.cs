@@ -40,6 +40,9 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.DataGrid.AccessibleName = "Table";
             this.DataGrid.AllowEditing = false;
             this.DataGrid.AllowFiltering = true;
+            this.DataGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DataGrid.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.LastColumnFill;
             this.DataGrid.Location = new System.Drawing.Point(0, 52);
             this.DataGrid.Name = "DataGrid";
