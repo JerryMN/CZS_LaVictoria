@@ -55,9 +55,9 @@ namespace CZS_LaVictoria.DatosPage
             this.NombreLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NombreLabel.Location = new System.Drawing.Point(50, 150);
             this.NombreLabel.Name = "NombreLabel";
-            this.NombreLabel.Size = new System.Drawing.Size(68, 21);
+            this.NombreLabel.Size = new System.Drawing.Size(75, 21);
             this.NombreLabel.TabIndex = 0;
-            this.NombreLabel.Text = "Nombre";
+            this.NombreLabel.Text = "Nombre*";
             // 
             // TeléfonoLabel
             // 
@@ -65,9 +65,9 @@ namespace CZS_LaVictoria.DatosPage
             this.TeléfonoLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TeléfonoLabel.Location = new System.Drawing.Point(50, 200);
             this.TeléfonoLabel.Name = "TeléfonoLabel";
-            this.TeléfonoLabel.Size = new System.Drawing.Size(68, 21);
+            this.TeléfonoLabel.Size = new System.Drawing.Size(75, 21);
             this.TeléfonoLabel.TabIndex = 0;
-            this.TeléfonoLabel.Text = "Teléfono";
+            this.TeléfonoLabel.Text = "Teléfono*";
             // 
             // CorreoLabel
             // 
@@ -75,9 +75,9 @@ namespace CZS_LaVictoria.DatosPage
             this.CorreoLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CorreoLabel.Location = new System.Drawing.Point(50, 250);
             this.CorreoLabel.Name = "CorreoLabel";
-            this.CorreoLabel.Size = new System.Drawing.Size(58, 21);
+            this.CorreoLabel.Size = new System.Drawing.Size(65, 21);
             this.CorreoLabel.TabIndex = 0;
-            this.CorreoLabel.Text = "Correo";
+            this.CorreoLabel.Text = "Correo*";
             // 
             // DirecciónLabel
             // 
@@ -95,9 +95,9 @@ namespace CZS_LaVictoria.DatosPage
             this.ResponsableLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ResponsableLabel.Location = new System.Drawing.Point(50, 400);
             this.ResponsableLabel.Name = "ResponsableLabel";
-            this.ResponsableLabel.Size = new System.Drawing.Size(72, 21);
+            this.ResponsableLabel.Size = new System.Drawing.Size(79, 21);
             this.ResponsableLabel.TabIndex = 0;
-            this.ResponsableLabel.Text = "Contacto";
+            this.ResponsableLabel.Text = "Contacto*";
             // 
             // NombreText
             // 

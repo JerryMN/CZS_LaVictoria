@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 using System.Net.Mail;
 using System.Windows.Forms;
@@ -74,6 +73,7 @@ namespace CZS_LaVictoria.DatosPage
         bool ValidateForm()
         {
             var output = true;
+            MsgBox.Text = "";
 
             if (NombreText.Text == "")
             {
@@ -103,12 +103,6 @@ namespace CZS_LaVictoria.DatosPage
                     output = false;
                     MsgBox.Text += "Ingresa un correo válido.\n";
                 }
-            }
-
-            if (DirecciónText.Text == "")
-            {
-                output = false;
-                MsgBox.Text += "Ingresa la dirección del proveedor.\n";
             }
 
             if (ResponsableText.Text == "")
