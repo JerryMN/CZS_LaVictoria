@@ -52,6 +52,13 @@ namespace CZS_LaVictoria.DatosPage
 
         void EditarButton_Click(object sender, EventArgs e)
         {
+            if (DataGrid.SelectedIndex < 0)
+            {
+                MessageBox.Show("Selecciona un proveedor a editar.", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+                return;
+            }
+
             if (EditarButton.Text == "Editar")
             {
                 DataGrid.AllowEditing = true;
@@ -82,6 +89,13 @@ namespace CZS_LaVictoria.DatosPage
 
         void BorrarButton_Click(object sender, EventArgs e)
         {
+            if (DataGrid.SelectedIndex < 0)
+            {
+                MessageBox.Show("Selecciona un proveedor a borrar.", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+                return;
+            }
+
             var model = (ProveedorModel)DataGrid.SelectedItem;
 
             if (MessageBox.Show($"Estás seguro de eliminar al proveedor {model.Nombre}? Esta acción es irreversible.", "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
