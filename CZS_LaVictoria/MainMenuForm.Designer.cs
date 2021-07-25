@@ -58,7 +58,6 @@ namespace CZS_LaVictoria
             this.VerInventarioButton = new DevExpress.XtraBars.BarButtonItem();
             this.VerHistorialButton = new DevExpress.XtraBars.BarButtonItem();
             this.CrearOperadorButton = new DevExpress.XtraBars.BarButtonItem();
-            this.OpcionesBarButton = new DevExpress.XtraBars.BarButtonItem();
             this.VerProduccionesButton = new DevExpress.XtraBars.BarButtonItem();
             this.VerPiezasMalasButton = new DevExpress.XtraBars.BarButtonItem();
             this.RegistrarEscaleraButton = new DevExpress.XtraBars.BarButtonItem();
@@ -82,6 +81,9 @@ namespace CZS_LaVictoria
             this.VerReporteInventario = new DevExpress.XtraBars.BarButtonItem();
             this.VerReporteCompras = new DevExpress.XtraBars.BarButtonItem();
             this.VerReporteVentas = new DevExpress.XtraBars.BarButtonItem();
+            this.VerReporteProducciónPlásticosButton = new DevExpress.XtraBars.BarButtonItem();
+            this.VerReporteProducciónAlgodónButton = new DevExpress.XtraBars.BarButtonItem();
+            this.VerReporteProducciónTrapeadoresButton = new DevExpress.XtraBars.BarButtonItem();
             this.ÓrdenesTab = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.Órdenes_CompraGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Órdenes_VentaGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -108,9 +110,8 @@ namespace CZS_LaVictoria
             this.Datos_MezclasGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Datos_PersonalGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ChildPanel = new DevExpress.XtraEditors.PanelControl();
-            this.VerReporteProducciónPlásticosButton = new DevExpress.XtraBars.BarButtonItem();
-            this.VerReporteProducciónAlgodónButton = new DevExpress.XtraBars.BarButtonItem();
-            this.VerReporteProducciónTrapeadoresButton = new DevExpress.XtraBars.BarButtonItem();
+            this.Datos_CorreoGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ConfigurarCorreoButton = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.RibbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ChildPanel)).BeginInit();
             this.SuspendLayout();
@@ -149,7 +150,6 @@ namespace CZS_LaVictoria
             this.VerInventarioButton,
             this.VerHistorialButton,
             this.CrearOperadorButton,
-            this.OpcionesBarButton,
             this.VerProduccionesButton,
             this.VerPiezasMalasButton,
             this.RegistrarEscaleraButton,
@@ -175,10 +175,11 @@ namespace CZS_LaVictoria
             this.VerReporteVentas,
             this.VerReporteProducciónPlásticosButton,
             this.VerReporteProducciónAlgodónButton,
-            this.VerReporteProducciónTrapeadoresButton});
+            this.VerReporteProducciónTrapeadoresButton,
+            this.ConfigurarCorreoButton});
             this.RibbonControl.Location = new System.Drawing.Point(0, 0);
             this.RibbonControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.RibbonControl.MaxItemId = 59;
+            this.RibbonControl.MaxItemId = 60;
             this.RibbonControl.Name = "RibbonControl";
             this.RibbonControl.OptionsMenuMinWidth = 495;
             this.RibbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -188,7 +189,6 @@ namespace CZS_LaVictoria
             this.TrapeadoresTab,
             this.CuentasTab,
             this.DatosTab});
-            this.RibbonControl.QuickToolbarItemLinks.Add(this.OpcionesBarButton);
             this.RibbonControl.Size = new System.Drawing.Size(1278, 158);
             // 
             // CrearOrdenCompraButton
@@ -414,14 +414,6 @@ namespace CZS_LaVictoria
             this.CrearOperadorButton.Name = "CrearOperadorButton";
             this.CrearOperadorButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.CrearOperadorButton_ItemClick);
             // 
-            // OpcionesBarButton
-            // 
-            this.OpcionesBarButton.Caption = "Opciones";
-            this.OpcionesBarButton.Id = 32;
-            this.OpcionesBarButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("OpcionesBarButton.ImageOptions.SvgImage")));
-            this.OpcionesBarButton.Name = "OpcionesBarButton";
-            this.OpcionesBarButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.OpcionesBarButton_ItemClick);
-            // 
             // VerProduccionesButton
             // 
             this.VerProduccionesButton.Caption = "Ver Producciones";
@@ -612,6 +604,30 @@ namespace CZS_LaVictoria
             this.VerReporteVentas.Name = "VerReporteVentas";
             this.VerReporteVentas.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerReporteVentas_ItemClick);
             // 
+            // VerReporteProducciónPlásticosButton
+            // 
+            this.VerReporteProducciónPlásticosButton.Caption = "Reporte Producciones";
+            this.VerReporteProducciónPlásticosButton.Id = 56;
+            this.VerReporteProducciónPlásticosButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("VerReporteProducciónPlásticosButton.ImageOptions.SvgImage")));
+            this.VerReporteProducciónPlásticosButton.Name = "VerReporteProducciónPlásticosButton";
+            this.VerReporteProducciónPlásticosButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerReporteProducciónPlásticosButton_ItemClick);
+            // 
+            // VerReporteProducciónAlgodónButton
+            // 
+            this.VerReporteProducciónAlgodónButton.Caption = "Reporte Producciones";
+            this.VerReporteProducciónAlgodónButton.Id = 57;
+            this.VerReporteProducciónAlgodónButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("VerReporteProducciónAlgodónButton.ImageOptions.SvgImage")));
+            this.VerReporteProducciónAlgodónButton.Name = "VerReporteProducciónAlgodónButton";
+            this.VerReporteProducciónAlgodónButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerReporteProducciónAlgodónButton_ItemClick);
+            // 
+            // VerReporteProducciónTrapeadoresButton
+            // 
+            this.VerReporteProducciónTrapeadoresButton.Caption = "Reporte Producciones";
+            this.VerReporteProducciónTrapeadoresButton.Id = 58;
+            this.VerReporteProducciónTrapeadoresButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("VerReporteProducciónTrapeadoresButton.ImageOptions.SvgImage")));
+            this.VerReporteProducciónTrapeadoresButton.Name = "VerReporteProducciónTrapeadoresButton";
+            this.VerReporteProducciónTrapeadoresButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerReporteProducciónTrapeadoresButton_ItemClick);
+            // 
             // ÓrdenesTab
             // 
             this.ÓrdenesTab.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F);
@@ -781,7 +797,8 @@ namespace CZS_LaVictoria
             this.Datos_AreasGroup,
             this.Datos_KitsGroup,
             this.Datos_MezclasGroup,
-            this.Datos_PersonalGroup});
+            this.Datos_PersonalGroup,
+            this.Datos_CorreoGroup});
             this.DatosTab.Name = "DatosTab";
             this.DatosTab.Text = "Datos";
             // 
@@ -843,29 +860,20 @@ namespace CZS_LaVictoria
             this.ChildPanel.Size = new System.Drawing.Size(1278, 841);
             this.ChildPanel.TabIndex = 1;
             // 
-            // VerReporteProducciónPlásticosButton
+            // Datos_CorreoGroup
             // 
-            this.VerReporteProducciónPlásticosButton.Caption = "Reporte Producciones";
-            this.VerReporteProducciónPlásticosButton.Id = 56;
-            this.VerReporteProducciónPlásticosButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("VerReporteProducciónPlásticosButton.ImageOptions.SvgImage")));
-            this.VerReporteProducciónPlásticosButton.Name = "VerReporteProducciónPlásticosButton";
-            this.VerReporteProducciónPlásticosButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerReporteProducciónPlásticosButton_ItemClick);
+            this.Datos_CorreoGroup.AllowTextClipping = false;
+            this.Datos_CorreoGroup.ItemLinks.Add(this.ConfigurarCorreoButton);
+            this.Datos_CorreoGroup.Name = "Datos_CorreoGroup";
+            this.Datos_CorreoGroup.Text = "Correo";
             // 
-            // VerReporteProducciónAlgodónButton
+            // ConfigurarCorreoButton
             // 
-            this.VerReporteProducciónAlgodónButton.Caption = "Reporte Producciones";
-            this.VerReporteProducciónAlgodónButton.Id = 57;
-            this.VerReporteProducciónAlgodónButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("VerReporteProducciónAlgodónButton.ImageOptions.SvgImage")));
-            this.VerReporteProducciónAlgodónButton.Name = "VerReporteProducciónAlgodónButton";
-            this.VerReporteProducciónAlgodónButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerReporteProducciónAlgodónButton_ItemClick);
-            // 
-            // VerReporteProducciónTrapeadoresButton
-            // 
-            this.VerReporteProducciónTrapeadoresButton.Caption = "Reporte Producciones";
-            this.VerReporteProducciónTrapeadoresButton.Id = 58;
-            this.VerReporteProducciónTrapeadoresButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("VerReporteProducciónTrapeadoresButton.ImageOptions.SvgImage")));
-            this.VerReporteProducciónTrapeadoresButton.Name = "VerReporteProducciónTrapeadoresButton";
-            this.VerReporteProducciónTrapeadoresButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerReporteProducciónTrapeadoresButton_ItemClick);
+            this.ConfigurarCorreoButton.Caption = "Configurar Correo";
+            this.ConfigurarCorreoButton.Id = 59;
+            this.ConfigurarCorreoButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("ConfigurarCorreoButton.ImageOptions.SvgImage")));
+            this.ConfigurarCorreoButton.Name = "ConfigurarCorreoButton";
+            this.ConfigurarCorreoButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.ConfigurarCorreoButton_ItemClick);
             // 
             // MainMenuForm
             // 
@@ -936,7 +944,6 @@ namespace CZS_LaVictoria
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup Órdenes_HistorialGroup;
         private DevExpress.XtraBars.BarButtonItem CrearOperadorButton;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup Datos_PersonalGroup;
-        private DevExpress.XtraBars.BarButtonItem OpcionesBarButton;
         private DevExpress.XtraBars.BarButtonItem VerProduccionesButton;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup Plásticos_VerGroup;
         private DevExpress.XtraBars.BarButtonItem VerPiezasMalasButton;
@@ -975,6 +982,8 @@ namespace CZS_LaVictoria
         private DevExpress.XtraBars.BarButtonItem VerReporteProducciónPlásticosButton;
         private DevExpress.XtraBars.BarButtonItem VerReporteProducciónAlgodónButton;
         private DevExpress.XtraBars.BarButtonItem VerReporteProducciónTrapeadoresButton;
+        private DevExpress.XtraBars.BarButtonItem ConfigurarCorreoButton;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup Datos_CorreoGroup;
     }
 }
 

@@ -11,5 +11,8 @@
     <Setting Name="emailPassword" Type="System.String" Scope="User">
       <Value Profile="(Default)">xggtroybzdniydta</Value>
     </Setting>
+    <Setting Name="smtpPort" Type="System.String" Scope="User">
+      <Value Profile="(Default)">587</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

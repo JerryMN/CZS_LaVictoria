@@ -1,5 +1,5 @@
 ﻿
-namespace CZS_LaVictoria
+namespace CZS_LaVictoria.DatosPage
 {
     partial class OpcionesForm
     {
@@ -41,6 +41,8 @@ namespace CZS_LaVictoria
             this.MsgBoxTimer = new System.Windows.Forms.Timer(this.components);
             this.MsgBox = new FontAwesome.Sharp.IconButton();
             this.GuardarButton = new System.Windows.Forms.Button();
+            this.PuertoLabel = new System.Windows.Forms.Label();
+            this.PuertoText = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // SubtitleLabel
@@ -66,7 +68,7 @@ namespace CZS_LaVictoria
             // CorreoText
             // 
             this.CorreoText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CorreoText.Location = new System.Drawing.Point(220, 247);
+            this.CorreoText.Location = new System.Drawing.Point(220, 297);
             this.CorreoText.Name = "CorreoText";
             this.CorreoText.Size = new System.Drawing.Size(250, 29);
             this.CorreoText.TabIndex = 22;
@@ -83,7 +85,7 @@ namespace CZS_LaVictoria
             // 
             this.CorreoLabel.AutoSize = true;
             this.CorreoLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CorreoLabel.Location = new System.Drawing.Point(50, 250);
+            this.CorreoLabel.Location = new System.Drawing.Point(50, 300);
             this.CorreoLabel.Name = "CorreoLabel";
             this.CorreoLabel.Size = new System.Drawing.Size(58, 21);
             this.CorreoLabel.TabIndex = 20;
@@ -103,7 +105,7 @@ namespace CZS_LaVictoria
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(50, 303);
+            this.label1.Location = new System.Drawing.Point(50, 353);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 21);
             this.label1.TabIndex = 20;
@@ -112,7 +114,7 @@ namespace CZS_LaVictoria
             // ContraseñaText
             // 
             this.ContraseñaText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ContraseñaText.Location = new System.Drawing.Point(220, 300);
+            this.ContraseñaText.Location = new System.Drawing.Point(220, 350);
             this.ContraseñaText.Name = "ContraseñaText";
             this.ContraseñaText.PasswordChar = '*';
             this.ContraseñaText.Size = new System.Drawing.Size(250, 29);
@@ -133,7 +135,7 @@ namespace CZS_LaVictoria
             this.MsgBox.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.MsgBox.IconSize = 32;
             this.MsgBox.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.MsgBox.Location = new System.Drawing.Point(50, 400);
+            this.MsgBox.Location = new System.Drawing.Point(50, 450);
             this.MsgBox.Name = "MsgBox";
             this.MsgBox.Size = new System.Drawing.Size(420, 157);
             this.MsgBox.TabIndex = 25;
@@ -146,13 +148,31 @@ namespace CZS_LaVictoria
             // 
             this.GuardarButton.AutoSize = true;
             this.GuardarButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GuardarButton.Location = new System.Drawing.Point(392, 350);
+            this.GuardarButton.Location = new System.Drawing.Point(392, 400);
             this.GuardarButton.Name = "GuardarButton";
             this.GuardarButton.Size = new System.Drawing.Size(78, 33);
             this.GuardarButton.TabIndex = 24;
             this.GuardarButton.Text = "Guardar";
             this.GuardarButton.UseVisualStyleBackColor = true;
             this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
+            // 
+            // PuertoLabel
+            // 
+            this.PuertoLabel.AutoSize = true;
+            this.PuertoLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PuertoLabel.Location = new System.Drawing.Point(50, 250);
+            this.PuertoLabel.Name = "PuertoLabel";
+            this.PuertoLabel.Size = new System.Drawing.Size(100, 21);
+            this.PuertoLabel.TabIndex = 21;
+            this.PuertoLabel.Text = "Puerto SMTP";
+            // 
+            // PuertoText
+            // 
+            this.PuertoText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PuertoText.Location = new System.Drawing.Point(220, 247);
+            this.PuertoText.Name = "PuertoText";
+            this.PuertoText.Size = new System.Drawing.Size(250, 29);
+            this.PuertoText.TabIndex = 23;
             // 
             // OpcionesForm
             // 
@@ -164,8 +184,10 @@ namespace CZS_LaVictoria
             this.Controls.Add(this.ContraseñaText);
             this.Controls.Add(this.CorreoText);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.PuertoText);
             this.Controls.Add(this.SmtpText);
             this.Controls.Add(this.CorreoLabel);
+            this.Controls.Add(this.PuertoLabel);
             this.Controls.Add(this.SmtpLabel);
             this.Controls.Add(this.CorreoSubtitleLabel);
             this.Controls.Add(this.SubtitleLabel);
@@ -192,5 +214,7 @@ namespace CZS_LaVictoria
         private System.Windows.Forms.Timer MsgBoxTimer;
         private FontAwesome.Sharp.IconButton MsgBox;
         private System.Windows.Forms.Button GuardarButton;
+        private System.Windows.Forms.Label PuertoLabel;
+        private System.Windows.Forms.TextBox PuertoText;
     }
 }

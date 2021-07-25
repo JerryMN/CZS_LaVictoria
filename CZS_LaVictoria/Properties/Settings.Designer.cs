@@ -58,5 +58,17 @@ namespace CZS_LaVictoria.Properties {
                 this["emailPassword"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("587")]
+        public string smtpPort {
+            get {
+                return ((string)(this["smtpPort"]));
+            }
+            set {
+                this["smtpPort"] = value;
+            }
+        }
     }
 }

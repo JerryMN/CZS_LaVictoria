@@ -4,7 +4,7 @@ using System.Net.Mail;
 using System.Windows.Forms;
 using CZS_LaVictoria.Properties;
 
-namespace CZS_LaVictoria
+namespace CZS_LaVictoria.DatosPage
 {
     public partial class OpcionesForm : Form
     {
@@ -18,6 +18,9 @@ namespace CZS_LaVictoria
 
         void GuardarButton_Click(object sender, EventArgs e)
         {
+            MsgBox.Visible = false;
+            MsgBox.Text = "";
+
             if (!ValidatePreferences())
             {
                 MsgBox.IconColor = Color.DarkRed;
@@ -26,12 +29,14 @@ namespace CZS_LaVictoria
             }
 
             Settings.Default.smtpServer = SmtpText.Text;
+            Settings.Default.smtpPort = PuertoText.Text;
             Settings.Default.emailAddress = CorreoText.Text;
             Settings.Default.emailPassword = ContraseñaText.Text;
             Settings.Default.Save();
 
             MsgBox.Text = "Datos guardados exitosamente.";
             MsgBox.IconColor = Color.DarkGreen;
+            MsgBox.Visible = true;
             MsgBoxTimer.Start();
         }
 
@@ -48,6 +53,7 @@ namespace CZS_LaVictoria
         void LoadPreferences()
         {
             SmtpText.Text = Settings.Default.smtpServer;
+            PuertoText.Text = Settings.Default.smtpPort;
             CorreoText.Text = Settings.Default.emailAddress;
             ContraseñaText.Text = Settings.Default.emailPassword;
         }
@@ -60,6 +66,12 @@ namespace CZS_LaVictoria
             {
                 output = false;
                 MsgBox.Text += "Ingresa el servidor SMTP.\n";
+            }
+
+            if (PuertoText.Text == "" || !int.TryParse(PuertoText.Text, out _))
+            {
+                output = false;
+                MsgBox.Text += "Ingresa el puerto SMTP.\n";
             }
 
             if (CorreoText.Text == "")

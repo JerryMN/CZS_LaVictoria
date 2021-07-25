@@ -1,38 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Net;
 using System.Net.Mail;
 using System.Windows.Forms;
+using CZS_LaVictoria.Properties;
 using CZS_LaVictoria_Library;
 using CZS_LaVictoria_Library.Models;
 using Syncfusion.Data;
+using Syncfusion.Pdf;
+using Syncfusion.Pdf.Graphics;
 using Syncfusion.WinForms.DataGrid;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid.Events;
-using Syncfusion.WinForms.Input.Enums;
-using Syncfusion.WinForms.DataGridConverter;
-using Syncfusion.WinForms.DataGridConverter.Events;
-using Syncfusion.Pdf.Graphics;
-using Syncfusion.Pdf;
-using Syncfusion.WinForms.ListView.Enums;
-using System.Collections;
-using System.Diagnostics;
 using Syncfusion.WinForms.DataGrid.Interactivity;
 using Syncfusion.WinForms.DataGrid.Styles;
+using Syncfusion.WinForms.DataGridConverter;
+using Syncfusion.WinForms.DataGridConverter.Events;
+using Syncfusion.WinForms.Input.Enums;
 using Syncfusion.WinForms.Input.Events;
+using Syncfusion.WinForms.ListView.Enums;
 
 namespace CZS_LaVictoria.ÓrdenesPage
 {
     public partial class OrdenCompraCrearForm : Form
     {
-        ProveedorModel _selectedProveedor;
-        List<AreaModel> _selectedArea;
-        List<ProveedorProductoModel> _productos;
         readonly List<OrdenCompraLíneaModel> _orderLines = new List<OrdenCompraLíneaModel>();
         int _numLinea = 1;
         string _pdfPath;
+        List<ProveedorProductoModel> _productos;
+        List<AreaModel> _selectedArea;
+        ProveedorModel _selectedProveedor;
+        int _ticks;
 
         public OrdenCompraCrearForm()
         {
@@ -80,44 +82,40 @@ namespace CZS_LaVictoria.ÓrdenesPage
         #region Events
 
         /// <summary>
-        /// Cambia la fecha mínima de entrega al cambiar la fecha de la orden.
+        ///     Cambia la fecha mínima de entrega al cambiar la fecha de la orden.
         /// </summary>
         void FechaOrdenPicker_ValueChanged(object sender, DateTimeValueChangedEventArgs e)
         {
             if (DataGrid.Columns.Count == 0) return;
             Debug.Assert(FechaOrdenPicker.Value != null, "FechaOrdenPicker.Value != null");
-            ((GridDateTimeColumn)DataGrid.Columns["FechaEntrega"]).MinDateTime = (DateTime)FechaOrdenPicker.Value;
+            ((GridDateTimeColumn) DataGrid.Columns["FechaEntrega"]).MinDateTime = (DateTime) FechaOrdenPicker.Value;
         }
 
         /// <summary>
-        /// Llena el formulario con los datos del proveedor seleccionado.
+        ///     Llena el formulario con los datos del proveedor seleccionado.
         /// </summary>
         void ProveedorCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _selectedProveedor = (ProveedorModel)ProveedorCombo.SelectedItem;
-            if (_selectedProveedor == null) return;
+            _selectedProveedor = (ProveedorModel) ProveedorCombo.SelectedItem;
+            if (_selectedProveedor == null || _selectedProveedor.Id == 0) return;
             GetCondiciones();
-            TeléfonoText.Text = _selectedProveedor.Teléfono;
-            CorreoText.Text = _selectedProveedor.Correo;
-            AtencionText.Text = _selectedProveedor.Responsable;
             CondicionesCombo.Text = _selectedProveedor.Condiciones;
             if (AreaCombo.Text == "") return;
             GetProducts();
         }
 
         /// <summary>
-        /// Obtiene los productos para el proveedor y área seleccionadas.
+        ///     Obtiene los productos para el proveedor y área seleccionadas.
         /// </summary>
         void AreaCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ProveedorCombo.Text == "") return;
             var selectedArea = AreaCombo.Text;
             _selectedArea = GlobalConfig.Connection.Area_GetByArea(selectedArea);
             GetProducts();
         }
 
         /// <summary>
-        /// Genera las columnas de la tabla.
+        ///     Genera las columnas de la tabla.
         /// </summary>
         void DataGrid_AutoGeneratingColumn(object sender, AutoGeneratingColumnArgs e)
         {
@@ -172,14 +170,14 @@ namespace CZS_LaVictoria.ÓrdenesPage
                     {
                         MappingName = "FechaEntrega",
                         HeaderText = "Fecha Entrega",
-                        MinDateTime = (DateTime)FechaOrdenPicker.Value
+                        MinDateTime = (DateTime) FechaOrdenPicker.Value
                     };
                     break;
             }
         }
 
         /// <summary>
-        /// Da el número de línea adecuado a cada fila de la tabla.
+        ///     Da el número de línea adecuado a cada fila de la tabla.
         /// </summary>
         void DataGrid_AddNewRowInitiating(object sender, AddNewRowInitiatingEventArgs e)
         {
@@ -188,31 +186,30 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 data.NumLinea = _numLinea;
                 data.FechaEntrega = DateTime.Today;
             }
+
             _numLinea += 1;
         }
 
         /// <summary>
-        /// Cambia el precio unitario al del producto seleccionado.
+        ///     Cambia el precio unitario al del producto seleccionado.
         /// </summary>
         void DataGridOnCellComboBoxSelectionChanged(object sender, CellComboBoxSelectionChangedEventArgs e)
         {
             if (e.GridColumn.MappingName != "Producto") return;
             if (e.Record is OrdenCompraLíneaModel row)
-            {
                 if (e.SelectedItem is ProveedorProductoModel producto)
                 {
                     row.PrecioUnitario = producto.PrecioUnitario;
                     row.Producto = producto.MaterialInterno;
                 }
-            }
+
             if (e.RowIndex == DataGrid.GetAddNewRowIndex())
-            {
-                DataGrid.TableControl.Invalidate(DataGrid.TableControl.GetRowRectangle(DataGrid.GetAddNewRowIndex(), false));
-            }
+                DataGrid.TableControl.Invalidate(
+                    DataGrid.TableControl.GetRowRectangle(DataGrid.GetAddNewRowIndex(), false));
         }
 
         /// <summary>
-        /// Calcula el subtotal al cambiar la cantidad o el precio unitario.
+        ///     Calcula el subtotal al cambiar la cantidad o el precio unitario.
         /// </summary>
         void DataGrid_CurrentCellEndEdit(object sender, CurrentCellEndEditEventArgs e)
         {
@@ -227,24 +224,24 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 var record = DataGrid.View.TopLevelGroup.DisplayElements[recordIndex];
                 if (!record.IsRecords)
                     return;
-                data = ((RecordEntry)record).Data;
+                data = ((RecordEntry) record).Data;
             }
             else
             {
                 data = DataGrid.View.Records.GetItemAt(recordIndex);
             }
 
-            var cantidad = decimal.Parse(DataGrid.View.GetPropertyAccessProvider().GetValue(data, "CantidadOrden").ToString());
-            var precio = decimal.Parse(DataGrid.View.GetPropertyAccessProvider().GetValue(data, "PrecioUnitario").ToString());
+            var cantidad = decimal.Parse(DataGrid.View.GetPropertyAccessProvider().GetValue(data, "CantidadOrden")
+                .ToString());
+            var precio = decimal.Parse(DataGrid.View.GetPropertyAccessProvider().GetValue(data, "PrecioUnitario")
+                .ToString());
 
             if (col.MappingName == "CantidadOrden" || col.MappingName == "PrecioUnitario")
-            {
                 DataGrid.View.GetPropertyAccessProvider().SetValue(data, "Subtotal", cantidad * precio);
-            }
         }
 
         /// <summary>
-        /// Calcula el subtotal al seleccionar o deseleccionar la casilla de IVA.
+        ///     Calcula el subtotal al seleccionar o deseleccionar la casilla de IVA.
         /// </summary>
         void DataGrid_CellCheckBoxClick(object sender, CellCheckBoxClickEventArgs e)
         {
@@ -257,39 +254,35 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 var record = DataGrid.View.TopLevelGroup.DisplayElements[recordIndex];
                 if (!record.IsRecords)
                     return;
-                data = ((RecordEntry)record).Data;
+                data = ((RecordEntry) record).Data;
             }
             else
             {
                 data = DataGrid.View.Records.GetItemAt(recordIndex);
             }
 
-            var cantidad = decimal.Parse(DataGrid.View.GetPropertyAccessProvider().GetValue(data, "CantidadOrden").ToString());
-            var precio = decimal.Parse(DataGrid.View.GetPropertyAccessProvider().GetValue(data, "PrecioUnitario").ToString());
+            var cantidad = decimal.Parse(DataGrid.View.GetPropertyAccessProvider().GetValue(data, "CantidadOrden")
+                .ToString());
+            var precio = decimal.Parse(DataGrid.View.GetPropertyAccessProvider().GetValue(data, "PrecioUnitario")
+                .ToString());
 
             if (e.NewValue == CheckState.Checked)
-            {
                 DataGrid.View.GetPropertyAccessProvider().SetValue(data, "Subtotal", cantidad * precio * 1.16m);
-            }
             else
-            {
                 DataGrid.View.GetPropertyAccessProvider().SetValue(data, "Subtotal", cantidad * precio);
-            }
         }
 
         /// <summary>
-        /// Cambia el texto de la columna IVA del pdf.
+        ///     Cambia el texto de la columna IVA del pdf.
         /// </summary>
         static void OnCellExporting(object sender, DataGridCellPdfExportingEventArgs e)
         {
             if (e.ColumnName == "Iva" && e.CellType == ExportCellType.RecordCell)
-            {
                 e.CellValue = e.CellValue.ToString() == "True" ? "Sí" : "No";
-            }
         }
 
         /// <summary>
-        /// Genera el encabezado del pdf.
+        ///     Genera el encabezado del pdf.
         /// </summary>
         void OnHeaderFooterExporting(object sender, PdfHeaderFooterEventArgs e)
         {
@@ -303,17 +296,33 @@ namespace CZS_LaVictoria.ÓrdenesPage
             header.Graphics.DrawString($"Escobas La Victoria — Orden de Compra {NumOrdenText.Text}", font, brush, 0, 0);
             header.Graphics.DrawString($"Fecha Orden: {FechaOrdenPicker.Value.ToString().Substring(0, 11)}  |   " +
                                        $"Área: {AreaCombo.Text}", smallFont, brush, 0, 30);
-            header.Graphics.DrawString($"Proveedor: {_selectedProveedor.Nombre}  |  Atención: {AtencionText.Text}", smallFont, brush, 0, 45);
+            header.Graphics.DrawString(
+                $"Proveedor: {_selectedProveedor.Nombre}  |  Atención: {_selectedProveedor.Responsable}", smallFont,
+                brush, 0, 45);
             e.PdfDocumentTemplate.Top = header;
         }
 
         /// <summary>
-        /// Guarda la orden de compra en SQL.
+        ///     Guarda la orden de compra en SQL.
         /// </summary>
         void GuardarButton_Click(object sender, EventArgs e)
         {
+            MsgBox.Visible = false;
+            MsgBox.Text = "";
+            MsgBox.IconColor = Color.DarkGreen;
+
+            if (!ValidateForm())
+            {
+                MsgBox.Visible = true;
+                return;
+            }
+
             CreatePdf();
-            SendMail();
+            if (MsgBox.IconColor == Color.DarkRed)
+            {
+                MsgBox.Text = "Error al guardar PDF. Abortando.\n";
+                return;
+            }
 
             Debug.Assert(FechaOrdenPicker.Value != null, "FechaOrdenPicker.Value != null");
             var order = new OrdenCompraModel
@@ -338,24 +347,39 @@ namespace CZS_LaVictoria.ÓrdenesPage
 
             if (saveSuccess)
             {
-                ClearForm();
-                MsgBox.Text = "Orden de compra registrada con éxito.";
+                MsgBox.Text += "Orden de compra registrada con éxito.";
                 MsgBox.IconColor = Color.DarkGreen;
             }
             else
             {
                 MsgBox.Text = "Error al registrar orden de compra.";
+                File.Delete(_pdfPath);
                 MsgBox.IconColor = Color.DarkRed;
+                return;
             }
 
+            SendMail();
+            if (MsgBox.IconColor == Color.DarkRed)
+            {
+                MsgBox.Text = "Error al enviar correo. Abortando. " +
+                              "Puedes enviar el correo manualmente.\n";
+                return;
+            }
+
+            ClearForm();
             MsgBox.Visible = true;
             MsgBoxTimer.Start();
         }
 
         void MsgBoxTimer_Tick(object sender, EventArgs e)
         {
-            MsgBoxTimer.Stop();
-            MsgBox.Visible = false;
+            if (_ticks == 1)
+            {
+                MsgBoxTimer.Stop();
+                MsgBox.Visible = false;
+            }
+
+            _ticks += 1;
         }
 
         #endregion
@@ -363,97 +387,84 @@ namespace CZS_LaVictoria.ÓrdenesPage
         #region Methods
 
         /// <summary>
-        /// Obtiene el número de la última orden, y le suma 1. Si el año cambia, resetea el contador.
+        ///     Obtiene el número de la última orden, y le suma 1. Si el año cambia, resetea el contador.
         /// </summary>
         /// <returns>El número consecutivo para la orden nueva.</returns>
-        string GetNumOrden()
+        static string GetNumOrden()
         {
             var order = GlobalConfig.Connection.OrdenCompra_GetLastNumOrden();
             var lastOrderYear = order.ToString().Substring(0, 2);
             var thisYear = DateTime.Today.Year.ToString().Substring(2, 2);
-            if (lastOrderYear != thisYear)
-            {
-                order = long.Parse(thisYear + "00000");
-            }
+            if (lastOrderYear != thisYear) order = long.Parse(thisYear + "00000");
 
             order += 1;
             return order.ToString();
         }
 
         /// <summary>
-        /// Obtiene todos los proveedores en SQL.
+        ///     Obtiene todos los proveedores en SQL.
         /// </summary>
         void GetProveedores()
         {
             ProveedorCombo.Items.Clear();
             var proveedores = GlobalConfig.Connection.Proveedor_GetAll();
 
-            foreach (var proveedor in proveedores)
-            {
-                ProveedorCombo.Items.Add(proveedor);
-            }
+            foreach (var proveedor in proveedores) ProveedorCombo.Items.Add(proveedor);
 
             ProveedorCombo.DisplayMember = "Nombre";
+            ProveedorCombo.Sorted = true;
         }
 
         /// <summary>
-        /// Obtiene todas las áreas en SQL.
+        ///     Obtiene todas las áreas en SQL.
         /// </summary>
         void GetAreas()
         {
             AreaCombo.Items.Clear();
             var areas = GlobalConfig.Connection.Area_GetDistinct();
 
-            foreach (var area in areas)
-            {
-                AreaCombo.Items.Add(area);
-            }
-
-            AreaCombo.DisplayMember = "Área";
+            foreach (var area in areas) AreaCombo.Items.Add(area);
         }
 
         /// <summary>
-        /// Obtiene todas las diferentes condiciones en SQL.
+        ///     Obtiene todas las diferentes condiciones en SQL.
         /// </summary>
         void GetCondiciones()
         {
             CondicionesCombo.Items.Clear();
             var condiciones = GlobalConfig.Connection.Proveedor_GetDistinctCondiciones();
 
-            foreach (var condición in condiciones)
-            {
-                CondicionesCombo.Items.Add(condición);
-            }
-
-            CondicionesCombo.DisplayMember = "Condiciones";
+            foreach (var condición in condiciones) CondicionesCombo.Items.Add(condición);
         }
 
         /// <summary>
-        /// Obtiene los productos para el proveedor y área seleccionadas.
+        ///     Obtiene los productos para el proveedor y área seleccionadas.
         /// </summary>
         void GetProducts()
         {
             if (_selectedProveedor == null || AreaCombo.Text == "") return;
-            _productos = GlobalConfig.Connection.ProveedorProducto_GetByProveedorArea(_selectedProveedor.Id, AreaCombo.Text);
+            _productos =
+                GlobalConfig.Connection.ProveedorProducto_GetByProveedorArea(_selectedProveedor.Id, AreaCombo.Text);
             ((GridComboBoxColumn) DataGrid.Columns["Producto"]).DataSource = _productos;
             ((GridComboBoxColumn) DataGrid.Columns["Producto"]).DisplayMember = "MaterialExterno";
             ((GridComboBoxColumn) DataGrid.Columns["Producto"]).ValueMember = "MaterialExterno";
+            ((GridComboBoxColumn) DataGrid.Columns["Producto"]).SortMode = DataReflectionMode.Display;
         }
 
         /// <summary>
-        /// Valida que la orden se pueda crear.
+        ///     Valida que la orden se pueda crear.
         /// </summary>
         /// <returns>True, si la orden se puede crear, False de lo contrario.</returns>
         bool ValidateForm()
         {
             var output = true;
-            MsgBox.Text = "";
 
             if (NumOrdenText.Text == "")
             {
                 MsgBox.Text += "Ocurrió un error al obtener el número de orden.\n";
                 return false;
             }
+
             if (ProveedorCombo.Text == "")
             {
                 output = false;
@@ -469,24 +480,17 @@ namespace CZS_LaVictoria.ÓrdenesPage
             if (DataGrid.View.Records.Count == 0)
             {
                 output = false;
-                MsgBox.Text += "Agrega líneas a la orden.\n";
+                MsgBox.Text += "Agrega al menos una línea a la orden.\n";
             }
 
             return output;
         }
 
         /// <summary>
-        /// Genera un PDF con el encabezado de la orden y la tabla.
+        ///     Genera un PDF con el encabezado de la orden y la tabla.
         /// </summary>
         void CreatePdf()
         {
-            if (!ValidateForm())
-            {
-                MsgBox.Visible = true;
-                MsgBoxTimer.Start();
-                return;
-            }
-
             var options = new PdfExportingOptions {FitAllColumnsInOnePage = true, RepeatHeaders = true};
             options.HeaderFooterExporting += OnHeaderFooterExporting;
             options.CellExporting += OnCellExporting;
@@ -494,36 +498,32 @@ namespace CZS_LaVictoria.ÓrdenesPage
             {
                 var document = DataGrid.ExportToPdf(options);
                 _pdfPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
-                           $"\\CZ Systems - La Victoria\\Ordenes de Compra\\{_selectedProveedor.Nombre}\\{DateTime.Today.Year}\\{NumOrdenText.Text}.pdf";
+                           $"\\CZ Systems - La Victoria\\Órdenes de Compra\\{_selectedProveedor.Nombre}\\{DateTime.Today.Year}\\{NumOrdenText.Text}.pdf";
                 document.Save(_pdfPath);
+                MsgBox.Text += "PDF guardado.\n";
+                MsgBox.IconColor = Color.DarkGreen;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
+                MsgBox.IconColor = Color.DarkRed;
             }
-            MsgBox.Text = "PDF guardado.\n";
-            MsgBox.IconColor = Color.DarkGreen;
-            MsgBox.Visible = true;
         }
 
         /// <summary>
-        /// Envía el último pdf generado por correo.
+        ///     Envía el último pdf generado por correo.
         /// </summary>
         void SendMail()
         {
             using (var mail = new MailMessage())
+            using (var smtpServer = new SmtpClient(Settings.Default.smtpServer))
             {
-                var addresses = "";
-                using (var smtpServer = new SmtpClient(Properties.Settings.Default.smtpServer))
+                try
                 {
-                    mail.From = new MailAddress(Properties.Settings.Default.emailAddress);
-                    // TODO - Uncomment next line.
-                    //mail.To.Add(_selectedProveedor.Correo);
+                    mail.From = new MailAddress(Settings.Default.emailAddress);
+                    mail.To.Add(_selectedProveedor.Correo);
                     mail.To.Add("gerardo.mondragonb@hotmail.com");
-                    foreach (var area in _selectedArea)
-                    {
-                        mail.To.Add(area.Correo);
-                    }
+                    foreach (var area in _selectedArea) mail.To.Add(area.Correo);
 
                     mail.Subject = $"Orden de Compra #{NumOrdenText.Text} - Escobas La Victoria";
                     mail.Body =
@@ -531,43 +531,33 @@ namespace CZS_LaVictoria.ÓrdenesPage
                         $"\nSe ha generado una nueva orden de compra #{NumOrdenText.Text} la cual encontrará anexa." +
                         "\nFavor de confirmar de recibido. \nGracias, \n \nEscobas La Victoria";
                     mail.Attachments.Add(new Attachment(_pdfPath));
-                    smtpServer.Port = 587;
-                    smtpServer.Credentials = new NetworkCredential(Properties.Settings.Default.emailAddress,
-                        Properties.Settings.Default.emailPassword);
+                    smtpServer.Port = int.Parse(Settings.Default.smtpPort);
+                    smtpServer.Credentials = new NetworkCredential(Settings.Default.emailAddress,
+                        Settings.Default.emailPassword);
                     smtpServer.EnableSsl = true;
                     smtpServer.Send(mail);
-                }
 
-                foreach (var address in mail.To)
+                    var addresses = string.Join(", ", mail.To);
+                    MsgBox.Text += $"Mensaje enviado a {addresses}.\n";
+                    MsgBox.IconColor = Color.DarkGreen;
+                }
+                catch (Exception ex)
                 {
-                    if (mail.To.Count == 1)
-                    {
-                        addresses += address.Address;
-                    }
-                    else
-                    {
-                        addresses += address.Address + ", ";
-                    }
+                    MessageBox.Show(ex.ToString());
+                    MsgBox.IconColor = Color.DarkRed;
                 }
-
-                MsgBox.Text += $"Mensaje enviado a {addresses}.\n";
-                MsgBox.IconColor = Color.DarkGreen;
-                MsgBox.Visible = true;
-                MsgBoxTimer.Start();
             }
         }
 
         /// <summary>
-        /// Reestablece el formulario a su aspecto original.
+        ///     Reestablece el formulario a su aspecto original.
         /// </summary>
         void ClearForm()
         {
             NumOrdenText.Text = GetNumOrden();
-            CorreoText.Text = "Selecciona un proveedor...";
-            AtencionText.Text = "Selecciona un proveedor...";
             FechaOrdenPicker.Value = DateTime.Today;
             DataGrid.AllowDeleting = true;
-            for (var i = DataGrid.RowCount - 1 ; i > 0; i--)
+            for (var i = DataGrid.RowCount - 1; i > 0; i--)
             {
                 var record = DataGrid.GetRecordAtRowIndex(i);
                 DataGrid.SelectedItem = record;
@@ -578,24 +568,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             DataGrid.AllowDeleting = false;
             ProveedorCombo.Focus();
 
-            void Func(IEnumerable controls)
-            {
-                foreach (Control control in controls)
-                    if (control is TextBox box)
-                    {
-                        if (box.Name == "NumOrdenText") continue;
-                        box.Clear();
-                    }
-                    else if (control is ComboBox comboBox)
-                    {
-                        comboBox.Text = "";
-                        comboBox.SelectedItem = null;
-                    }
-                    else
-                        Func(control.Controls);
-            }
-
-            Func(Controls);
+            Tools.ClearForm(this);
         }
 
         #endregion

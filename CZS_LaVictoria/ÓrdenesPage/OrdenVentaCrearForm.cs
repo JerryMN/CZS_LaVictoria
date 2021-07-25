@@ -481,7 +481,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             {
                 var document = DataGrid.ExportToPdf(options);
                 _pdfPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
-                           $"\\CZ Systems - La Victoria\\Ordenes de Venta\\{_selectedClient.Nombre}\\{DateTime.Today.Year}\\{NumOrdenText.Text}.pdf";
+                           $"\\CZ Systems - La Victoria\\Órdenes de Venta\\{_selectedClient.Nombre}\\{DateTime.Today.Year}\\{NumOrdenText.Text}.pdf";
                 document.Save(_pdfPath);
             }
             catch (Exception ex)

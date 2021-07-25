@@ -34,16 +34,10 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.ProductosGroupBox = new System.Windows.Forms.GroupBox();
             this.DataGrid = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             this.DatosGroupBox = new System.Windows.Forms.GroupBox();
-            this.TeléfonoText = new Syncfusion.Windows.Forms.Tools.MaskedEditBox();
             this.CondicionesCombo = new System.Windows.Forms.ComboBox();
             this.AreaCombo = new System.Windows.Forms.ComboBox();
             this.CondicionesLabel = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.AreaLabel = new Syncfusion.Windows.Forms.Tools.AutoLabel();
-            this.AtenciónLabel = new Syncfusion.Windows.Forms.Tools.AutoLabel();
-            this.CorreoText = new Syncfusion.Windows.Forms.Tools.AutoLabel();
-            this.AtencionText = new Syncfusion.Windows.Forms.Tools.AutoLabel();
-            this.CorreoLabel = new Syncfusion.Windows.Forms.Tools.AutoLabel();
-            this.TeléfonoLabel = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.ProveedorCombo = new System.Windows.Forms.ComboBox();
             this.ProveedorLabel = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.FechaOrdenPicker = new Syncfusion.WinForms.Input.SfDateTimeEdit();
@@ -58,7 +52,6 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.ProductosGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGrid)).BeginInit();
             this.DatosGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TeléfonoText)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumOrdenText)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.purchaseOrderLineModelBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -97,16 +90,10 @@ namespace CZS_LaVictoria.ÓrdenesPage
             // 
             // DatosGroupBox
             // 
-            this.DatosGroupBox.Controls.Add(this.TeléfonoText);
             this.DatosGroupBox.Controls.Add(this.CondicionesCombo);
             this.DatosGroupBox.Controls.Add(this.AreaCombo);
             this.DatosGroupBox.Controls.Add(this.CondicionesLabel);
             this.DatosGroupBox.Controls.Add(this.AreaLabel);
-            this.DatosGroupBox.Controls.Add(this.AtenciónLabel);
-            this.DatosGroupBox.Controls.Add(this.CorreoText);
-            this.DatosGroupBox.Controls.Add(this.AtencionText);
-            this.DatosGroupBox.Controls.Add(this.CorreoLabel);
-            this.DatosGroupBox.Controls.Add(this.TeléfonoLabel);
             this.DatosGroupBox.Controls.Add(this.ProveedorCombo);
             this.DatosGroupBox.Controls.Add(this.ProveedorLabel);
             this.DatosGroupBox.Controls.Add(this.FechaOrdenPicker);
@@ -120,25 +107,12 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.DatosGroupBox.TabStop = false;
             this.DatosGroupBox.Text = "Datos";
             // 
-            // TeléfonoText
-            // 
-            this.TeléfonoText.BackColor = System.Drawing.SystemColors.Control;
-            this.TeléfonoText.BeforeTouchSize = new System.Drawing.Size(150, 29);
-            this.TeléfonoText.Border3DStyle = System.Windows.Forms.Border3DStyle.Flat;
-            this.TeléfonoText.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TeléfonoText.Location = new System.Drawing.Point(450, 90);
-            this.TeléfonoText.Mask = "(###) ### ####";
-            this.TeléfonoText.MaxLength = 14;
-            this.TeléfonoText.Name = "TeléfonoText";
-            this.TeléfonoText.ReadOnly = true;
-            this.TeléfonoText.Size = new System.Drawing.Size(190, 22);
-            this.TeléfonoText.TabIndex = 27;
-            // 
             // CondicionesCombo
             // 
-            this.CondicionesCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CondicionesCombo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.CondicionesCombo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.CondicionesCombo.FormattingEnabled = true;
-            this.CondicionesCombo.Location = new System.Drawing.Point(830, 137);
+            this.CondicionesCombo.Location = new System.Drawing.Point(830, 87);
             this.CondicionesCombo.Name = "CondicionesCombo";
             this.CondicionesCombo.Size = new System.Drawing.Size(202, 29);
             this.CondicionesCombo.TabIndex = 26;
@@ -147,7 +121,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             // 
             this.AreaCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.AreaCombo.FormattingEnabled = true;
-            this.AreaCombo.Location = new System.Drawing.Point(830, 87);
+            this.AreaCombo.Location = new System.Drawing.Point(450, 37);
             this.AreaCombo.Name = "AreaCombo";
             this.AreaCombo.Size = new System.Drawing.Size(202, 29);
             this.AreaCombo.TabIndex = 25;
@@ -156,7 +130,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             // CondicionesLabel
             // 
             this.CondicionesLabel.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.CondicionesLabel.Location = new System.Drawing.Point(730, 140);
+            this.CondicionesLabel.Location = new System.Drawing.Point(730, 90);
             this.CondicionesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.CondicionesLabel.Name = "CondicionesLabel";
             this.CondicionesLabel.Size = new System.Drawing.Size(98, 21);
@@ -166,68 +140,18 @@ namespace CZS_LaVictoria.ÓrdenesPage
             // AreaLabel
             // 
             this.AreaLabel.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.AreaLabel.Location = new System.Drawing.Point(730, 90);
+            this.AreaLabel.Location = new System.Drawing.Point(350, 40);
             this.AreaLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.AreaLabel.Name = "AreaLabel";
             this.AreaLabel.Size = new System.Drawing.Size(45, 21);
             this.AreaLabel.TabIndex = 23;
             this.AreaLabel.Text = "Área:";
             // 
-            // AtenciónLabel
-            // 
-            this.AtenciónLabel.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.AtenciónLabel.Location = new System.Drawing.Point(730, 40);
-            this.AtenciónLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.AtenciónLabel.Name = "AtenciónLabel";
-            this.AtenciónLabel.Size = new System.Drawing.Size(74, 21);
-            this.AtenciónLabel.TabIndex = 21;
-            this.AtenciónLabel.Text = "Atención:";
-            // 
-            // CorreoText
-            // 
-            this.CorreoText.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.CorreoText.Location = new System.Drawing.Point(450, 140);
-            this.CorreoText.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.CorreoText.Name = "CorreoText";
-            this.CorreoText.Size = new System.Drawing.Size(190, 21);
-            this.CorreoText.TabIndex = 20;
-            this.CorreoText.Text = "Selecciona un proveedor...";
-            // 
-            // AtencionText
-            // 
-            this.AtencionText.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.AtencionText.Location = new System.Drawing.Point(830, 40);
-            this.AtencionText.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.AtencionText.Name = "AtencionText";
-            this.AtencionText.Size = new System.Drawing.Size(190, 21);
-            this.AtencionText.TabIndex = 19;
-            this.AtencionText.Text = "Selecciona un proveedor...";
-            // 
-            // CorreoLabel
-            // 
-            this.CorreoLabel.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.CorreoLabel.Location = new System.Drawing.Point(350, 140);
-            this.CorreoLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.CorreoLabel.Name = "CorreoLabel";
-            this.CorreoLabel.Size = new System.Drawing.Size(61, 21);
-            this.CorreoLabel.TabIndex = 18;
-            this.CorreoLabel.Text = "Correo:";
-            // 
-            // TeléfonoLabel
-            // 
-            this.TeléfonoLabel.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.TeléfonoLabel.Location = new System.Drawing.Point(350, 90);
-            this.TeléfonoLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.TeléfonoLabel.Name = "TeléfonoLabel";
-            this.TeléfonoLabel.Size = new System.Drawing.Size(71, 21);
-            this.TeléfonoLabel.TabIndex = 17;
-            this.TeléfonoLabel.Text = "Teléfono:";
-            // 
             // ProveedorCombo
             // 
             this.ProveedorCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ProveedorCombo.FormattingEnabled = true;
-            this.ProveedorCombo.Location = new System.Drawing.Point(450, 37);
+            this.ProveedorCombo.Location = new System.Drawing.Point(830, 37);
             this.ProveedorCombo.Name = "ProveedorCombo";
             this.ProveedorCombo.Size = new System.Drawing.Size(200, 29);
             this.ProveedorCombo.TabIndex = 16;
@@ -236,7 +160,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             // ProveedorLabel
             // 
             this.ProveedorLabel.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.ProveedorLabel.Location = new System.Drawing.Point(350, 40);
+            this.ProveedorLabel.Location = new System.Drawing.Point(730, 40);
             this.ProveedorLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ProveedorLabel.Name = "ProveedorLabel";
             this.ProveedorLabel.Size = new System.Drawing.Size(85, 21);
@@ -358,7 +282,6 @@ namespace CZS_LaVictoria.ÓrdenesPage
             ((System.ComponentModel.ISupportInitialize)(this.DataGrid)).EndInit();
             this.DatosGroupBox.ResumeLayout(false);
             this.DatosGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TeléfonoText)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumOrdenText)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.purchaseOrderLineModelBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -371,9 +294,6 @@ namespace CZS_LaVictoria.ÓrdenesPage
         private System.Windows.Forms.GroupBox ProductosGroupBox;
         private System.Windows.Forms.GroupBox DatosGroupBox;
         private Syncfusion.Windows.Forms.Tools.AutoLabel NumOrdenLabel;
-        private Syncfusion.Windows.Forms.Tools.AutoLabel CorreoText;
-        private Syncfusion.Windows.Forms.Tools.AutoLabel CorreoLabel;
-        private Syncfusion.Windows.Forms.Tools.AutoLabel TeléfonoLabel;
         private System.Windows.Forms.ComboBox ProveedorCombo;
         private Syncfusion.Windows.Forms.Tools.AutoLabel ProveedorLabel;
         private Syncfusion.WinForms.Input.SfDateTimeEdit FechaOrdenPicker;
@@ -383,9 +303,6 @@ namespace CZS_LaVictoria.ÓrdenesPage
         private System.Windows.Forms.ComboBox AreaCombo;
         private Syncfusion.Windows.Forms.Tools.AutoLabel CondicionesLabel;
         private Syncfusion.Windows.Forms.Tools.AutoLabel AreaLabel;
-        private Syncfusion.Windows.Forms.Tools.AutoLabel AtenciónLabel;
-        private Syncfusion.Windows.Forms.Tools.AutoLabel AtencionText;
-        private Syncfusion.Windows.Forms.Tools.MaskedEditBox TeléfonoText;
         private System.Windows.Forms.Label SubtitleLabel;
         private System.Windows.Forms.BindingSource purchaseOrderLineModelBindingSource;
         private Syncfusion.WinForms.DataGrid.SfDataGrid DataGrid;
