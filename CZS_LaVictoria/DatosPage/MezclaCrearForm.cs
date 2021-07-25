@@ -35,7 +35,7 @@ namespace CZS_LaVictoria.DatosPage
                 return;
             }
 
-            var material = (MaterialModel)MaterialCombo.SelectedItem;
+            var material = (MaterialModel) MaterialCombo.SelectedItem;
             double.TryParse(CantidadText.Text, out var cantidad);
 
             MaterialesListBox.Items.Add(material);
@@ -117,10 +117,7 @@ namespace CZS_LaVictoria.DatosPage
         {
             var materiales = GlobalConfig.Connection.Material_GetByAreaCat("Plásticos", "Molido");
 
-            foreach (var material in materiales)
-            {
-                MaterialCombo.Items.Add(material);
-            }
+            foreach (var material in materiales) MaterialCombo.Items.Add(material);
 
             MaterialCombo.DisplayMember = "Nombre";
             MaterialCombo.Sorted = true;

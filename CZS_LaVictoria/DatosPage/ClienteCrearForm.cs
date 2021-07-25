@@ -77,10 +77,7 @@ namespace CZS_LaVictoria.DatosPage
         {
             var ciudades = GlobalConfig.Connection.Cliente_GetDistinctCiudades();
 
-            foreach (var ciudad in ciudades)
-            {
-                CiudadCombo.Items.Add(ciudad);
-            }
+            foreach (var ciudad in ciudades) CiudadCombo.Items.Add(ciudad);
 
             CiudadCombo.DisplayMember = "Ciudad";
         }

@@ -28,13 +28,11 @@ namespace CZS_LaVictoria.DatosPage
         void DataGridOnQueryRowHeight(object sender, QueryRowHeightEventArgs e)
         {
             if (DataGrid.AutoSizeController.GetAutoRowHeight(e.RowIndex, new RowAutoFitOptions(), out var autoHeight))
-            {
                 if (autoHeight > 24)
                 {
                     e.Height = autoHeight;
                     e.Handled = true;
                 }
-            }
         }
 
         void DataGrid_AutoGeneratingColumn(object sender, AutoGeneratingColumnArgs e)
@@ -71,24 +69,18 @@ namespace CZS_LaVictoria.DatosPage
                 DataGrid.AllowEditing = true;
                 DataGrid.Columns["Cliente"].AllowEditing = false;
                 EditarButton.Text = "Guardar";
-
             }
             else if (EditarButton.Text == "Guardar")
             {
-
-                var model = (ClienteProductoModel)DataGrid.SelectedItem;
+                var model = (ClienteProductoModel) DataGrid.SelectedItem;
                 var updateSuccess = GlobalConfig.Connection.ClienteProducto_Update(model);
 
                 if (updateSuccess)
-                {
                     MessageBox.Show($"Producto {model.ProductoInterno} actualizado con éxito.", "Mensaje",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
                 else
-                {
                     MessageBox.Show($"Error al actualizar producto {model.ProductoInterno}.", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
 
                 DataGrid.AllowEditing = false;
                 EditarButton.Text = "Editar";
@@ -104,13 +96,12 @@ namespace CZS_LaVictoria.DatosPage
                 return;
             }
 
-            var model = (ClienteProductoModel)DataGrid.SelectedItem;
+            var model = (ClienteProductoModel) DataGrid.SelectedItem;
 
-            if (MessageBox.Show($"Estás seguro de eliminar al producto {model.ProductoInterno}? Esta acción es irreversible.", 
+            if (MessageBox.Show(
+                $"Estás seguro de eliminar al producto {model.ProductoInterno}? Esta acción es irreversible.",
                 "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-            {
                 return;
-            }
 
             var deleteSuccess = GlobalConfig.Connection.ClienteProducto_Delete(model);
 

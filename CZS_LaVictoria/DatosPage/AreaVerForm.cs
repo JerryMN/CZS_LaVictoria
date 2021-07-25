@@ -49,24 +49,18 @@ namespace CZS_LaVictoria.DatosPage
             {
                 DataGrid.AllowEditing = true;
                 EditarButton.Text = "Guardar";
-
             }
             else if (EditarButton.Text == "Guardar")
             {
-
-                var model = (AreaModel)DataGrid.SelectedItem;
+                var model = (AreaModel) DataGrid.SelectedItem;
                 var updateSuccess = GlobalConfig.Connection.Area_Update(model);
 
                 if (updateSuccess)
-                {
                     MessageBox.Show($"Área {model.Área} actualizada con éxito.", "Mensaje", MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
-                }
                 else
-                {
                     MessageBox.Show($"Error al actualizar área {model.Área}.", "Error", MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
-                }
 
                 DataGrid.AllowEditing = false;
                 EditarButton.Text = "Editar";
@@ -82,13 +76,12 @@ namespace CZS_LaVictoria.DatosPage
                 return;
             }
 
-            var model = (AreaModel)DataGrid.SelectedItem;
+            var model = (AreaModel) DataGrid.SelectedItem;
 
-            if (MessageBox.Show($"Estás seguro de eliminar el área {model.Área}? Esta acción es irreversible.", "Mensaje", 
+            if (MessageBox.Show($"Estás seguro de eliminar el área {model.Área}? Esta acción es irreversible.",
+                "Mensaje",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-            {
                 return;
-            }
 
             var deleteSuccess = GlobalConfig.Connection.Area_Delete(model);
 

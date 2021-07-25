@@ -33,15 +33,9 @@ namespace CZS_LaVictoria.DatosPage
             _selectedModel = (KitModel) NombreCombo.SelectedItem;
             Debug.Assert(_selectedModel?.Materiales != null, "selected?.Materiales != null");
 
-            foreach (var material in _selectedModel?.Materiales)
-            {
-                MaterialesListBox.Items.Add(material.Nombre);
-            }
+            foreach (var material in _selectedModel?.Materiales) MaterialesListBox.Items.Add(material.Nombre);
 
-            foreach (var cantidad in _selectedModel?.Cantidades)
-            {
-                CantidadesListBox.Items.Add(cantidad);
-            }
+            foreach (var cantidad in _selectedModel?.Cantidades) CantidadesListBox.Items.Add(cantidad);
         }
 
         void EliminarButton_Click(object sender, EventArgs e)
@@ -57,16 +51,15 @@ namespace CZS_LaVictoria.DatosPage
                 return;
             }
 
-            if (MessageBox.Show($"Estás seguro de eliminar el kit {_selectedModel.Nombre}? Esta acción es irreversible.", "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-            {
-                return;
-            }
+            if (MessageBox.Show(
+                $"Estás seguro de eliminar el kit {_selectedModel.Nombre}? Esta acción es irreversible.", "Mensaje",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No) return;
 
             var deleteSuccess = GlobalConfig.Connection.Kit_Delete(_selectedModel);
 
             if (deleteSuccess)
             {
-                ClearForm();
+                Tools.ClearForm(this);
                 GetKits();
                 MsgBox.Text = $"Kit {_selectedModel.Nombre} eliminado con éxito.";
                 MsgBox.IconColor = Color.DarkGreen;
@@ -95,40 +88,11 @@ namespace CZS_LaVictoria.DatosPage
         {
             var kits = GlobalConfig.Connection.Kit_GetAll();
 
-            foreach (var kit in kits)
-            {
-                NombreCombo.Items.Add(kit);
-            }
+            foreach (var kit in kits) NombreCombo.Items.Add(kit);
 
             NombreCombo.DisplayMember = "Nombre";
         }
-
-        void ClearForm()
-        {
-            void Func(IEnumerable controls)
-            {
-                foreach (Control control in controls)
-                    switch (control)
-                    {
-                        case TextBox box:
-                            box.Clear();
-                            break;
-                        case ComboBox comboBox:
-                            comboBox.Text = "";
-                            comboBox.SelectedItem = null;
-                            break;
-                        case ListBox listBox:
-                            listBox.Items.Clear();
-                            break;
-                        default:
-                            Func(control.Controls);
-                            break;
-                    }
-            }
-
-            Func(Controls);
-        }
-
+        
         #endregion
     }
 }

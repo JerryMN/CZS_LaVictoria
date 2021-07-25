@@ -33,7 +33,8 @@ namespace CZS_LaVictoria.DatosPage
                 return;
             }
 
-            var model = new AreaModel { Área = AreaCombo.Text, Responsable = ResponsableText.Text, Correo = CorreoText.Text };
+            var model = new AreaModel
+                {Área = AreaCombo.Text, Responsable = ResponsableText.Text, Correo = CorreoText.Text};
 
             var saveSuccess = GlobalConfig.Connection.Area_Create(model);
 
@@ -67,10 +68,7 @@ namespace CZS_LaVictoria.DatosPage
         {
             var areas = GlobalConfig.Connection.Area_GetDistinct();
 
-            foreach (var area in areas)
-            {
-                AreaCombo.Items.Add(area);
-            }
+            foreach (var area in areas) AreaCombo.Items.Add(area);
         }
 
         bool ValidateForm()

@@ -33,15 +33,9 @@ namespace CZS_LaVictoria.DatosPage
             _selectedModel = (MezclaModel) NombreCombo.SelectedItem;
             Debug.Assert(_selectedModel?.Materiales != null, "selected?.Materiales != null");
 
-            foreach (var material in _selectedModel?.Materiales)
-            {
-                MaterialesListBox.Items.Add(material.Nombre);
-            }
+            foreach (var material in _selectedModel?.Materiales) MaterialesListBox.Items.Add(material.Nombre);
 
-            foreach (var cantidad in _selectedModel?.Cantidades)
-            {
-                CantidadesListBox.Items.Add(cantidad);
-            }
+            foreach (var cantidad in _selectedModel?.Cantidades) CantidadesListBox.Items.Add(cantidad);
 
             CantidadText.Text = _selectedModel.CantidadMezcla.ToString(CultureInfo.InvariantCulture);
         }
@@ -59,10 +53,9 @@ namespace CZS_LaVictoria.DatosPage
                 return;
             }
 
-            if (MessageBox.Show($"Estás seguro de eliminar la mezcla {_selectedModel.Nombre}? Esta acción es irreversible.", "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-            {
-                return;
-            }
+            if (MessageBox.Show(
+                $"Estás seguro de eliminar la mezcla {_selectedModel.Nombre}? Esta acción es irreversible.", "Mensaje",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No) return;
 
             var deleteSuccess = GlobalConfig.Connection.Mezcla_Delete(_selectedModel);
 
@@ -98,10 +91,7 @@ namespace CZS_LaVictoria.DatosPage
         {
             var mezclas = GlobalConfig.Connection.Mezcla_GetAll();
 
-            foreach (var mezcla in mezclas)
-            {
-                NombreCombo.Items.Add(mezcla);
-            }
+            foreach (var mezcla in mezclas) NombreCombo.Items.Add(mezcla);
 
             NombreCombo.DisplayMember = "Nombre";
         }

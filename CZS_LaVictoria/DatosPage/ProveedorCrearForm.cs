@@ -36,7 +36,8 @@ namespace CZS_LaVictoria.DatosPage
                 return;
             }
 
-            var model = new ProveedorModel(NombreText.Text, TeléfonoText.Text, CorreoText.Text, DirecciónText.Text, ResponsableText.Text, CondicionesCombo.Text);
+            var model = new ProveedorModel(NombreText.Text, TeléfonoText.Text, CorreoText.Text, DirecciónText.Text,
+                ResponsableText.Text, CondicionesCombo.Text);
             var saveSuccess = GlobalConfig.Connection.Proveedor_Create(model);
 
             if (saveSuccess)
@@ -67,10 +68,7 @@ namespace CZS_LaVictoria.DatosPage
         {
             var condiciones = GlobalConfig.Connection.Proveedor_GetDistinctCondiciones();
 
-            foreach (var condición in condiciones)
-            {
-                CondicionesCombo.Items.Add(condición);
-            }
+            foreach (var condición in condiciones) CondicionesCombo.Items.Add(condición);
 
             CondicionesCombo.DisplayMember = "Condiciones";
         }

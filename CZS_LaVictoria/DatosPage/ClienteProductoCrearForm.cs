@@ -66,10 +66,7 @@ namespace CZS_LaVictoria.DatosPage
         {
             var areas = GlobalConfig.Connection.Area_GetDistinct();
 
-            foreach (var area in areas)
-            {
-                AreaCombo.Items.Add(area);
-            }
+            foreach (var area in areas) AreaCombo.Items.Add(area);
         }
 
         bool ValidateForm()

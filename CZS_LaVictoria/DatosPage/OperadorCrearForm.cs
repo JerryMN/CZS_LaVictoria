@@ -1,10 +1,10 @@
-﻿using CZS_LaVictoria_Library;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using CZS_LaVictoria_Library;
 using CZS_LaVictoria_Library.Models;
-using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid;
+using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid.Events;
 using Syncfusion.WinForms.DataGrid.Styles;
 using Syncfusion.WinForms.ListView.Enums;
@@ -38,7 +38,7 @@ namespace CZS_LaVictoria.DatosPage
                     break;
                 case "Área":
                     e.Column = new GridComboBoxColumn
-                        { MappingName = "Área", HeaderText = "Área", DropDownStyle = DropDownStyle.DropDownList };
+                        {MappingName = "Área", HeaderText = "Área", DropDownStyle = DropDownStyle.DropDownList};
                     break;
             }
         }
@@ -85,12 +85,10 @@ namespace CZS_LaVictoria.DatosPage
             {
                 DataGrid.AllowEditing = true;
                 EditarButton.Text = "Guardar";
-
             }
             else if (EditarButton.Text == "Guardar")
             {
-
-                var model = (OperadorModel)DataGrid.SelectedItem;
+                var model = (OperadorModel) DataGrid.SelectedItem;
                 var updateSuccess = GlobalConfig.Connection.Operator_Update(model);
 
                 if (updateSuccess)
@@ -120,13 +118,11 @@ namespace CZS_LaVictoria.DatosPage
                 return;
             }
 
-            var model = (OperadorModel)DataGrid.SelectedItem;
+            var model = (OperadorModel) DataGrid.SelectedItem;
 
-            if (MessageBox.Show($"Estás seguro de eliminar al operador {model.Nombre}? Esta acción es irreversible.", 
+            if (MessageBox.Show($"Estás seguro de eliminar al operador {model.Nombre}? Esta acción es irreversible.",
                 "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-            {
                 return;
-            }
 
             var deleteSuccess = GlobalConfig.Connection.Operator_Delete(model);
 
@@ -167,12 +163,9 @@ namespace CZS_LaVictoria.DatosPage
             var areas = GlobalConfig.Connection.Area_GetDistinct();
             AreaCombo.Items.Clear();
 
-            foreach (var area in areas)
-            {
-                AreaCombo.Items.Add(area);
-            }
+            foreach (var area in areas) AreaCombo.Items.Add(area);
 
-            ((GridComboBoxColumn)DataGrid.Columns["Área"]).DataSource = areas;
+            ((GridComboBoxColumn) DataGrid.Columns["Área"]).DataSource = areas;
         }
 
         bool ValidateForm()

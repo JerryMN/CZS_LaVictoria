@@ -34,8 +34,9 @@ namespace CZS_LaVictoria.DatosPage
                 return;
             }
 
-            var model = new ProveedorProductoModel(MaterialProveedorText.Text, MaterialInternoText.Text, PrecioUnitarioText.Text, AreaCombo.Text, CategoríaCombo.Text);
-            var proveedor = (ProveedorModel)ProveedorCombo.SelectedItem;
+            var model = new ProveedorProductoModel(MaterialProveedorText.Text, MaterialInternoText.Text,
+                PrecioUnitarioText.Text, AreaCombo.Text, CategoríaCombo.Text);
+            var proveedor = (ProveedorModel) ProveedorCombo.SelectedItem;
             var saveSuccess = GlobalConfig.Connection.ProveedorProducto_Create(model, proveedor);
 
             if (saveSuccess)
@@ -58,7 +59,7 @@ namespace CZS_LaVictoria.DatosPage
         {
             MsgBox.Visible = false;
             MsgBoxTimer.Stop();
-        } 
+        }
 
         #endregion
 
@@ -69,10 +70,7 @@ namespace CZS_LaVictoria.DatosPage
         {
             var proveedores = GlobalConfig.Connection.Proveedor_GetAll();
 
-            foreach (var proveedor in proveedores)
-            {
-                ProveedorCombo.Items.Add(proveedor);
-            }
+            foreach (var proveedor in proveedores) ProveedorCombo.Items.Add(proveedor);
 
             ProveedorCombo.DisplayMember = "Nombre";
         }
@@ -81,10 +79,7 @@ namespace CZS_LaVictoria.DatosPage
         {
             var areas = GlobalConfig.Connection.Area_GetDistinct();
 
-            foreach (var area in areas)
-            {
-                AreaCombo.Items.Add(area);
-            }
+            foreach (var area in areas) AreaCombo.Items.Add(area);
         }
 
         void GetCategorías()
@@ -92,9 +87,8 @@ namespace CZS_LaVictoria.DatosPage
             var categorías = GlobalConfig.Connection.Material_GetDistinctCategorías();
 
             foreach (var categoría in categorías)
-            {
-                if (categoría != null) CategoríaCombo.Items.Add(categoría);
-            }
+                if (categoría != null)
+                    CategoríaCombo.Items.Add(categoría);
         }
 
         bool ValidateForm()

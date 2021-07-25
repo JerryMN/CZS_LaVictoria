@@ -1,9 +1,9 @@
-﻿using CZS_LaVictoria_Library;
-using CZS_LaVictoria_Library.Models;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using CZS_LaVictoria_Library;
+using CZS_LaVictoria_Library.Models;
 
 namespace CZS_LaVictoria.DatosPage
 {
@@ -35,7 +35,7 @@ namespace CZS_LaVictoria.DatosPage
                 return;
             }
 
-            var material = (MaterialModel)MaterialCombo.SelectedItem;
+            var material = (MaterialModel) MaterialCombo.SelectedItem;
             double.TryParse(CantidadText.Text, out var cantidad);
 
             MaterialesListBox.Items.Add(material);
@@ -120,10 +120,7 @@ namespace CZS_LaVictoria.DatosPage
             materiales.AddRange(mechas);
             materiales = materiales.Distinct().ToList();
 
-            foreach (var material in materiales)
-            {
-                MaterialCombo.Items.Add(material);
-            }
+            foreach (var material in materiales) MaterialCombo.Items.Add(material);
 
             MaterialCombo.DisplayMember = "Nombre";
             MaterialCombo.Sorted = true;
