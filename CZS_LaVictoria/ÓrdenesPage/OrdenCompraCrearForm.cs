@@ -51,6 +51,11 @@ namespace CZS_LaVictoria.ÓrdenesPage
             DataGrid.Style.CellStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
             DataGrid.Style.HeaderStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
             DataGrid.Style.TableSummaryRowStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
+            if (GlobalConfig.Connection.CZS_GetLicencia()) return;
+            MessageBox.Show(
+                "No se puede verificar la licencia. Verifica el estatus de la misma y verifica tu conexión a internet.",
+                "Error de licencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            Application.Exit();
 
             var tableSummary = new GridTableSummaryRow
             {
