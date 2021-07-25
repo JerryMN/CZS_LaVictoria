@@ -72,15 +72,6 @@ namespace CZS_LaVictoria
             OpenChildForm(new OpcionesForm());
         }
 
-        #region Datos - Personal
-
-        void CrearOperadorButton_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            OpenChildForm(new OperadorCrearForm());
-        }
-
-        #endregion
-
         #region Ordenes
 
         void CrearOrdenCompraButton_ItemClick(object sender, ItemClickEventArgs e)
@@ -126,96 +117,6 @@ namespace CZS_LaVictoria
         void VerReporteVentas_ItemClick(object sender, ItemClickEventArgs e)
         {
             OpenChildForm(new ReporteHistorialVentaForm());
-        }
-
-        #endregion
-
-        #region Datos - Proveedores
-
-        void CrearProveedorButton_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            OpenChildForm(new ProveedorCrearForm());
-        }
-
-        void VerProveedoresButton_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            OpenChildForm(new ProveedorVerForm());
-        }
-
-        void CrearMaterialButton_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            OpenChildForm(new ProveedorProductoCrearForm());
-        }
-
-        void VerMaterialesButton_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            OpenChildForm(new ProveedorProductoVerForm());
-        }
-
-        #endregion
-
-        #region Datos - Clientes
-
-        void CrearClienteButton_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            OpenChildForm(new ClienteCrearForm());
-        }
-
-        void VerClientesButton_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            OpenChildForm(new ClienteVerForm());
-        }
-
-        void CrearProductoButton_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            OpenChildForm(new ClienteProductoCrearForm());
-        }
-
-        void VerProductosButton_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            OpenChildForm(new ClienteProductoVerForm());
-        }
-
-        #endregion
-
-        #region Datos - Areas
-
-        void CrearAreaButton_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            OpenChildForm(new AreaCrearForm());
-        }
-
-        void VerAreasButton_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            OpenChildForm(new AreaVerForm());
-        }
-
-        #endregion
-
-        #region Datos - Kits
-
-        void CrearKitButton_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            OpenChildForm(new KitCrearForm());
-        }
-
-        void VerKitsButton_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            OpenChildForm(new KitVerForm());
-        }
-
-        #endregion
-
-        #region Datos - Mezclas
-
-        void CrearMezclaButton_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            OpenChildForm(new MezclaCrearForm());
-        }
-
-        void VerMezclasButton_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            OpenChildForm(new MezclaVerForm());
         }
 
         #endregion
@@ -367,6 +268,105 @@ namespace CZS_LaVictoria
         void VerCuentasButton_ItemClick(object sender, ItemClickEventArgs e)
         {
             OpenChildForm(new ReporteCuentasForm());
+        }
+
+        #endregion
+
+        #region Datos - Proveedores
+
+        void CrearProveedorButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new ProveedorCrearForm());
+        }
+
+        void VerProveedoresButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new ProveedorVerForm());
+        }
+
+        void CrearMaterialButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new ProveedorProductoCrearForm());
+        }
+
+        void VerMaterialesButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new ProveedorProductoVerForm());
+        }
+
+        #endregion
+
+        #region Datos - Clientes
+
+        void CrearClienteButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new ClienteCrearForm());
+        }
+
+        void VerClientesButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new ClienteVerForm());
+        }
+
+        void CrearProductoButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new ClienteProductoCrearForm());
+        }
+
+        void VerProductosButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new ClienteProductoVerForm());
+        }
+
+        #endregion
+
+        #region Datos - Areas
+
+        void CrearAreaButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new AreaCrearForm());
+        }
+
+        void VerAreasButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new AreaVerForm());
+        }
+
+        #endregion
+
+        #region Datos - Kits
+
+        void CrearKitButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new KitCrearForm());
+        }
+
+        void VerKitsButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new KitVerForm());
+        }
+
+        #endregion
+
+        #region Datos - Mezclas
+
+        void CrearMezclaButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new MezclaCrearForm());
+        }
+
+        void VerMezclasButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new MezclaVerForm());
+        }
+
+        #endregion
+
+        #region Datos - Personal
+
+        void CrearOperadorButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new OperadorCrearForm());
         }
 
         #endregion
