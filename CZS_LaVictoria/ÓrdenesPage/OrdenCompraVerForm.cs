@@ -2,15 +2,15 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.Windows.Forms;
 using CZS_LaVictoria_Library;
-using Syncfusion.WinForms.DataGrid.Events;
-using Syncfusion.WinForms.DataGrid;
-using Syncfusion.WinForms.Input.Enums;
-using System.Globalization;
 using CZS_LaVictoria_Library.Models;
+using Syncfusion.WinForms.DataGrid;
 using Syncfusion.WinForms.DataGrid.Enums;
+using Syncfusion.WinForms.DataGrid.Events;
 using Syncfusion.WinForms.DataGrid.Styles;
+using Syncfusion.WinForms.Input.Enums;
 
 // ReSharper disable UseObjectOrCollectionInitializer
 
@@ -18,10 +18,10 @@ namespace CZS_LaVictoria.ÓrdenesPage
 {
     public partial class OrdenCompraVerForm : Form
     {
-        OrdenCompraModel _orden;
-        double _oldQty;
+        static string _newQtyString;
         double _newQty;
-        string _newQtyString;
+        double _oldQty;
+        OrdenCompraModel _orden;
 
         public OrdenCompraVerForm()
         {
@@ -29,152 +29,94 @@ namespace CZS_LaVictoria.ÓrdenesPage
             DataGrid.Style.CellStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
             DataGrid.Style.HeaderStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
             DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
+            DataGrid.DataSource = GlobalConfig.Connection.OrdenCompra_GetAllLineas();
         }
 
         #region Events
 
         /// <summary>
-        /// Busca las líneas de una orden de compra.
+        ///     Busca las líneas de una orden de compra.
         /// </summary>
         void BuscarButton_Click(object sender, EventArgs e)
         {
             // Si no hay alguna orden seleccionada, muestra todas las líneas de todas las órdenes.
             if (NumOrdenText.Text == "" && PendientesCheck.CheckState == CheckState.Unchecked)
-            {
                 DataGrid.DataSource = GlobalConfig.Connection.OrdenCompra_GetAllLineas();
-            }
             else if (NumOrdenText.Text == "" && PendientesCheck.CheckState == CheckState.Checked)
-            {
                 DataGrid.DataSource = GlobalConfig.Connection.OrdenCompra_GetLineasPendientes();
-            }
             // Al seleccionar una orden, muestra todas las líneas de esa orden.
             else
-            {
-                _orden = GlobalConfig.Connection.OrdenCompra_GetByNumOrden(NumOrdenText.Text);
-                DataGrid.DataSource = _orden;
-            }
+                DataGrid.DataSource = GlobalConfig.Connection.OrdenCompra_GetLineasByNumOrden(NumOrdenText.Text);
 
             // Ordenar tabla por Número de Orden.
-            if (DataGrid.SortColumnDescriptions.Count != 0)
-            {
-                DataGrid.SortColumnDescriptions.RemoveAt(0);
-            }
+            if (DataGrid.SortColumnDescriptions.Count != 0) DataGrid.SortColumnDescriptions.RemoveAt(0);
 
-            DataGrid.SortColumnDescriptions.Add(new SortColumnDescription { ColumnName = "NumOrden", SortDirection = ListSortDirection.Ascending });
+            DataGrid.SortColumnDescriptions.Add(new SortColumnDescription
+                {ColumnName = "NumOrden", SortDirection = ListSortDirection.Ascending});
         }
 
         /// <summary>
-        /// Genera las columnas de la tabla.
+        ///     Genera las columnas de la tabla.
         /// </summary>
         void DataGrid_AutoGeneratingColumn(object sender, AutoGeneratingColumnArgs e)
         {
-            if (e.Column.MappingName == "NumOrden")
+            switch (e.Column.MappingName)
             {
-                var nfi = new NumberFormatInfo { NumberDecimalDigits = 0, NumberGroupSizes = new int[] { } };
-                e.Column = new GridNumericColumn
-                { MappingName = "NumOrden", HeaderText = "Orden", NumberFormatInfo = nfi };
-            }
-
-            if (e.Column.MappingName == "NumLinea")
-            {
-                e.Column.HeaderText = "Línea";
-                e.Column.AllowFiltering = false;
-            }
-
-            if (e.Column.MappingName == "Producto")
-            {
-                e.Column.HeaderText = "Producto";
-                e.Column.AutoSizeColumnsMode = AutoSizeColumnsMode.LastColumnFill;
-            }
-
-            if (e.Column.MappingName == "CantidadOrden")
-            {
-                e.Column.HeaderText = "Cantidad Orden";
-            }
-
-            if (e.Column.MappingName == "CantidadRecibida")
-            {
-                e.Column.HeaderText = "Cantidad Recibida";
-            }
-
-            if (e.Column.MappingName == "CantidadPendiente")
-            {
-                e.Column.HeaderText = "Cantidad Pendiente";
-            }
-
-            if (e.Column.MappingName == "PrecioUnitario")
-            {
-                e.Column = new GridNumericColumn
-                { MappingName = "PrecioUnitario", HeaderText = "Precio Unitario", FormatMode = FormatMode.Currency};
-            }
-
-            if (e.Column.MappingName == "Iva")
-            {
-                e.Column = new GridCheckBoxColumn { MappingName = "Iva", HeaderText = "IVA" };
-            }
-
-            if (e.Column.MappingName == "Subtotal")
-            {
-                e.Column = new GridNumericColumn
-                { MappingName = "Subtotal", HeaderText = "Subtotal", FormatMode = FormatMode.Currency };
-            }
-
-            if (e.Column.MappingName == "FechaEntrega")
-            {
-                e.Column = new GridDateTimeColumn
-                {
-                    MappingName = "FechaEntrega",
-                    HeaderText = "Fecha Entrega",
-                    NullValue = null
-                };
-            }
-
-            if (e.Column.MappingName == "FechaUltRecepción")
-            {
-                e.Column = new GridDateTimeColumn
-                {
-                    MappingName = "FechaUltRecepción",
-                    HeaderText = "Fecha Últ. Recepción",
-                    NullValue = null
-                };
-            }
-
-            if (e.Column.MappingName == "FechaCancelación")
-            {
-                e.Column = new GridDateTimeColumn
-                {
-                    MappingName = "FechaCancelación",
-                    HeaderText = "Fecha Cancelación",
-                    NullValue = null
-                };
+                case "NumOrden":
+                    var nfi = new NumberFormatInfo {NumberDecimalDigits = 0, NumberGroupSizes = new int[] { }};
+                    e.Column = new GridNumericColumn
+                        {MappingName = "NumOrden", HeaderText = "Orden", NumberFormatInfo = nfi};
+                    break;
+                case "NumLinea":
+                    e.Column.HeaderText = "Línea";
+                    e.Column.AllowFiltering = false;
+                    break;
+                case "CantidadOrden":
+                    e.Column.HeaderText = "Cantidad Orden";
+                    break;
+                case "CantidadRecibida":
+                    e.Column.HeaderText = "Cantidad Recibida";
+                    break;
+                case "CantidadPendiente":
+                    e.Column.HeaderText = "Cantidad Pendiente";
+                    break;
+                case "PrecioUnitario":
+                    e.Column = new GridNumericColumn
+                    {
+                        MappingName = "PrecioUnitario", HeaderText = "Precio Unitario", FormatMode = FormatMode.Currency
+                    };
+                    break;
+                case "Iva":
+                    e.Column = new GridCheckBoxColumn {MappingName = "Iva", HeaderText = "IVA"};
+                    break;
+                case "Subtotal":
+                    e.Column = new GridNumericColumn
+                        {MappingName = "Subtotal", HeaderText = "Subtotal", FormatMode = FormatMode.Currency};
+                    break;
+                case "FechaEntrega":
+                    e.Column = new GridDateTimeColumn
+                        {MappingName = "FechaEntrega", HeaderText = "Fecha Entrega", NullValue = null};
+                    break;
+                case "FechaUltRecepción":
+                    e.Column = new GridDateTimeColumn
+                        {MappingName = "FechaUltRecepción", HeaderText = "Fecha Últ. Recepción", NullValue = null};
+                    break;
+                case "FechaCancelación":
+                    e.Column = new GridDateTimeColumn
+                        {MappingName = "FechaCancelación", HeaderText = "Fecha Cancelación", NullValue = null};
+                    break;
             }
         }
 
         /// <summary>
-        /// Actualiza una línea al moverse de ella.
-        /// </summary>
-        void DataGridOnSelectionChanging(object sender, SelectionChangingEventArgs e)
-        {
-            if (e.RemovedItems.Count == 0) return;
-            var línea = e.RemovedItems[0] as OrdenCompraLíneaModel;
-            _orden = GlobalConfig.Connection.OrdenCompra_GetByNumOrden(línea?.NumOrden.ToString());
-            Debug.Assert(línea != null, nameof(línea) + " != null");
-            línea.Estatus = línea.CantidadPendiente == 0 ? "Entregada" : "Parcial";
-            var saveSuccess = GlobalConfig.Connection.OrdenCompra_UpdateLinea(_orden.Id, línea, _oldQty, _newQty);
-            MessageBox.Show(saveSuccess ? "Línea actualizada." : "Error al actualizar línea.");
-
-            // Unhook para que este método sólo se ejecute después de Recibir Button.
-            DataGrid.SelectionChanging -= DataGridOnSelectionChanging;
-        }
-
-        /// <summary>
-        /// Pregunta al usuario la cantidad recibida de alguna línea seleccionada.
+        ///     Pregunta al usuario la cantidad recibida de alguna línea seleccionada.
         /// </summary>
         void RecibirButton_Click(object sender, EventArgs e)
         {
             if (DataGrid.SelectedIndex < 0)
             {
-                MessageBox.Show("Selecciona una línea.");
+                MessageBox.Show("Selecciona una línea a recibir.", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -182,7 +124,8 @@ namespace CZS_LaVictoria.ÓrdenesPage
             Debug.Assert(línea != null, nameof(línea) + " != null");
             if (línea.Estatus == "Entregada" || línea.Estatus == "Cancelada" || línea.Estatus == "Cerrada")
             {
-                MessageBox.Show("Esta línea no se puede recibir.");
+                MessageBox.Show("Esta línea no se puede recibir, ya está cerrada o cancelada.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -191,9 +134,11 @@ namespace CZS_LaVictoria.ÓrdenesPage
             // Preguntar la cantidad que se entregó. (No es cantidad acumulada).
             // De esta manera, la nueva cantidad es la recibida hasta el momento
             // más la ingresada por el usuario.
+            _newQtyString = "";
             ShowInputDialog(ref _newQtyString);
             if (string.IsNullOrEmpty(_newQtyString)) return;
-            _newQty = _oldQty + double.Parse(_newQtyString);
+            if (!double.TryParse(_newQtyString, out var dialogResult)) return;
+            _newQty = _oldQty + dialogResult;
             // Guardar las cantidades en la tabla.
             línea.CantidadRecibida = _newQty;
             var pendiente = línea.CantidadOrden - _newQty;
@@ -203,25 +148,32 @@ namespace CZS_LaVictoria.ÓrdenesPage
 
             _orden = GlobalConfig.Connection.OrdenCompra_GetByNumOrden(línea.NumOrden.ToString());
             var saveSuccess = GlobalConfig.Connection.OrdenCompra_UpdateLinea(_orden.Id, línea, _oldQty, _newQty);
-            MessageBox.Show(saveSuccess ? "Línea actualizada." : "Error al actualizar línea.");
+            MessageBox.Show(saveSuccess ? "Línea actualizada." : "Error al actualizar línea.", "Mensaje",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         /// <summary>
-        /// Marca una línea como cancelada.
+        ///     Marca una línea como cancelada.
         /// </summary>
         void CancelarButton_Click(object sender, EventArgs e)
         {
             if (DataGrid.SelectedIndex < 0)
             {
-                MessageBox.Show("Selecciona una línea.");
+                MessageBox.Show("Selecciona una línea a cerrar o cancelar.", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
                 return;
             }
+
+            if (MessageBox.Show("Estás seguro de cerrar o cancelar esta línea? Esta acción es irreversible,",
+                "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
 
             var línea = (OrdenCompraLíneaModel) DataGrid.SelectedItem;
             Debug.Assert(línea != null, nameof(línea) + " != null");
             if (línea.Estatus == "Entregada" || línea.Estatus == "Cancelada" || línea.Estatus == "Cerrada")
             {
-                MessageBox.Show("Esta línea ya no se puede cerrar o cancelar.");
+                MessageBox.Show("Esta línea no se puede cerrar o cancelar, ya está previamente cerrada o cancelada.",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -230,7 +182,8 @@ namespace CZS_LaVictoria.ÓrdenesPage
             línea.FechaCancelación = DateTime.Today;
             línea.Estatus = línea.CantidadRecibida == 0 ? "Cancelada" : "Cerrada";
             var deleteSuccess = GlobalConfig.Connection.OrdenCompra_UpdateLinea(_orden.Id, línea, 0, 0);
-            MessageBox.Show(deleteSuccess ? "Línea cancelada." : "Error al cancelar línea.");
+            MessageBox.Show(deleteSuccess ? $"Línea {línea.Estatus.ToLower()}." : "Error al cerrar o cancelar línea.",
+                "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         #endregion
@@ -238,8 +191,8 @@ namespace CZS_LaVictoria.ÓrdenesPage
         #region Methods
 
         /// <summary>
-        /// Muestra el diálogo para que el usuario ingrese una cantidad.
-        /// Checa si el input es válido (un número).
+        ///     Muestra el diálogo para que el usuario ingrese una cantidad.
+        ///     Checa si el input es válido (un número).
         /// </summary>
         /// <param name="input">La variable donde se guarda el input.</param>
         static void ShowInputDialog(ref string input)
@@ -250,11 +203,13 @@ namespace CZS_LaVictoria.ÓrdenesPage
             inputBox.FormBorderStyle = FormBorderStyle.FixedDialog;
             inputBox.ClientSize = size;
             inputBox.Text = "Cantidad recibida:";
+            inputBox.MinimizeBox = false;
+            inputBox.MaximizeBox = false;
 
             var textBox = new TextBox();
             textBox.Size = new Size(size.Width - 10, 23);
             textBox.Location = new Point(5, 5);
-            textBox.Text = input;
+            textBox.Text = "";
             inputBox.Controls.Add(textBox);
 
             var okButton = new Button();
@@ -279,11 +234,14 @@ namespace CZS_LaVictoria.ÓrdenesPage
 
             var result = inputBox.ShowDialog();
             if (result == DialogResult.Cancel) return;
+
             if (!double.TryParse(textBox.Text, out _))
             {
-                MessageBox.Show("Ingresa un número!");
+                MessageBox.Show("Ingresa un número!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowInputDialog(ref _newQtyString);
                 return;
             }
+
             input = textBox.Text;
         }
 
