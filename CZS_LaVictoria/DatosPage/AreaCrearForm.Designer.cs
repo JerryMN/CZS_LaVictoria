@@ -51,7 +51,7 @@ namespace CZS_LaVictoria.DatosPage
             this.AreaCombo.Location = new System.Drawing.Point(220, 147);
             this.AreaCombo.Name = "AreaCombo";
             this.AreaCombo.Size = new System.Drawing.Size(250, 29);
-            this.AreaCombo.TabIndex = 17;
+            this.AreaCombo.TabIndex = 2;
             // 
             // AreaLabel
             // 
@@ -59,9 +59,9 @@ namespace CZS_LaVictoria.DatosPage
             this.AreaLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AreaLabel.Location = new System.Drawing.Point(50, 150);
             this.AreaLabel.Name = "AreaLabel";
-            this.AreaLabel.Size = new System.Drawing.Size(42, 21);
-            this.AreaLabel.TabIndex = 16;
-            this.AreaLabel.Text = "Área";
+            this.AreaLabel.Size = new System.Drawing.Size(49, 21);
+            this.AreaLabel.TabIndex = 1;
+            this.AreaLabel.Text = "Área*";
             // 
             // ResponsableText
             // 
@@ -69,7 +69,7 @@ namespace CZS_LaVictoria.DatosPage
             this.ResponsableText.Location = new System.Drawing.Point(220, 197);
             this.ResponsableText.Name = "ResponsableText";
             this.ResponsableText.Size = new System.Drawing.Size(250, 29);
-            this.ResponsableText.TabIndex = 19;
+            this.ResponsableText.TabIndex = 4;
             // 
             // ResponsableLabel
             // 
@@ -77,9 +77,9 @@ namespace CZS_LaVictoria.DatosPage
             this.ResponsableLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ResponsableLabel.Location = new System.Drawing.Point(50, 200);
             this.ResponsableLabel.Name = "ResponsableLabel";
-            this.ResponsableLabel.Size = new System.Drawing.Size(98, 21);
-            this.ResponsableLabel.TabIndex = 18;
-            this.ResponsableLabel.Text = "Responsable";
+            this.ResponsableLabel.Size = new System.Drawing.Size(105, 21);
+            this.ResponsableLabel.TabIndex = 3;
+            this.ResponsableLabel.Text = "Responsable*";
             // 
             // MsgBox
             // 
@@ -94,7 +94,8 @@ namespace CZS_LaVictoria.DatosPage
             this.MsgBox.Location = new System.Drawing.Point(50, 350);
             this.MsgBox.Name = "MsgBox";
             this.MsgBox.Size = new System.Drawing.Size(420, 157);
-            this.MsgBox.TabIndex = 21;
+            this.MsgBox.TabIndex = 8;
+            this.MsgBox.TabStop = false;
             this.MsgBox.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.MsgBox.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.MsgBox.UseVisualStyleBackColor = true;
@@ -107,7 +108,7 @@ namespace CZS_LaVictoria.DatosPage
             this.GuardarButton.Location = new System.Drawing.Point(392, 300);
             this.GuardarButton.Name = "GuardarButton";
             this.GuardarButton.Size = new System.Drawing.Size(78, 33);
-            this.GuardarButton.TabIndex = 20;
+            this.GuardarButton.TabIndex = 7;
             this.GuardarButton.Text = "Guardar";
             this.GuardarButton.UseVisualStyleBackColor = true;
             this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
@@ -124,7 +125,7 @@ namespace CZS_LaVictoria.DatosPage
             this.SubtitleLabel.Location = new System.Drawing.Point(50, 25);
             this.SubtitleLabel.Name = "SubtitleLabel";
             this.SubtitleLabel.Size = new System.Drawing.Size(145, 37);
-            this.SubtitleLabel.TabIndex = 16;
+            this.SubtitleLabel.TabIndex = 0;
             this.SubtitleLabel.Text = "Crear Área";
             // 
             // CorreoLabel
@@ -133,9 +134,9 @@ namespace CZS_LaVictoria.DatosPage
             this.CorreoLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CorreoLabel.Location = new System.Drawing.Point(50, 250);
             this.CorreoLabel.Name = "CorreoLabel";
-            this.CorreoLabel.Size = new System.Drawing.Size(58, 21);
-            this.CorreoLabel.TabIndex = 18;
-            this.CorreoLabel.Text = "Correo";
+            this.CorreoLabel.Size = new System.Drawing.Size(65, 21);
+            this.CorreoLabel.TabIndex = 5;
+            this.CorreoLabel.Text = "Correo*";
             // 
             // CorreoText
             // 
@@ -143,7 +144,7 @@ namespace CZS_LaVictoria.DatosPage
             this.CorreoText.Location = new System.Drawing.Point(220, 247);
             this.CorreoText.Name = "CorreoText";
             this.CorreoText.Size = new System.Drawing.Size(250, 29);
-            this.CorreoText.TabIndex = 19;
+            this.CorreoText.TabIndex = 6;
             // 
             // AreaCrearForm
             // 

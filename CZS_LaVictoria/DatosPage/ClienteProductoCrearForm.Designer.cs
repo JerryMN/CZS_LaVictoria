@@ -33,13 +33,11 @@ namespace CZS_LaVictoria.DatosPage
             this.MsgBox = new FontAwesome.Sharp.IconButton();
             this.GuardarButton = new System.Windows.Forms.Button();
             this.AreaCombo = new System.Windows.Forms.ComboBox();
-            this.ClienteCombo = new System.Windows.Forms.ComboBox();
             this.PrecioUnitarioText = new Syncfusion.Windows.Forms.Tools.CurrencyTextBox();
             this.ProductoInternoText = new System.Windows.Forms.TextBox();
             this.PrecioUnitarioLabel = new System.Windows.Forms.Label();
             this.AreaLabel = new System.Windows.Forms.Label();
             this.ProductoInternoLabel = new System.Windows.Forms.Label();
-            this.ClienteLabel = new System.Windows.Forms.Label();
             this.MsgBoxTimer = new System.Windows.Forms.Timer(this.components);
             this.SubtitleLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PrecioUnitarioText)).BeginInit();
@@ -55,10 +53,11 @@ namespace CZS_LaVictoria.DatosPage
             this.MsgBox.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.MsgBox.IconSize = 32;
             this.MsgBox.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.MsgBox.Location = new System.Drawing.Point(50, 450);
+            this.MsgBox.Location = new System.Drawing.Point(50, 350);
             this.MsgBox.Name = "MsgBox";
             this.MsgBox.Size = new System.Drawing.Size(420, 150);
-            this.MsgBox.TabIndex = 26;
+            this.MsgBox.TabIndex = 10;
+            this.MsgBox.TabStop = false;
             this.MsgBox.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.MsgBox.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.MsgBox.UseVisualStyleBackColor = true;
@@ -68,10 +67,10 @@ namespace CZS_LaVictoria.DatosPage
             // 
             this.GuardarButton.AutoSize = true;
             this.GuardarButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GuardarButton.Location = new System.Drawing.Point(392, 400);
+            this.GuardarButton.Location = new System.Drawing.Point(392, 300);
             this.GuardarButton.Name = "GuardarButton";
             this.GuardarButton.Size = new System.Drawing.Size(78, 31);
-            this.GuardarButton.TabIndex = 25;
+            this.GuardarButton.TabIndex = 9;
             this.GuardarButton.Text = "Guardar";
             this.GuardarButton.UseVisualStyleBackColor = true;
             this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
@@ -81,20 +80,10 @@ namespace CZS_LaVictoria.DatosPage
             this.AreaCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.AreaCombo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AreaCombo.FormattingEnabled = true;
-            this.AreaCombo.Location = new System.Drawing.Point(220, 347);
+            this.AreaCombo.Location = new System.Drawing.Point(220, 247);
             this.AreaCombo.Name = "AreaCombo";
             this.AreaCombo.Size = new System.Drawing.Size(250, 29);
-            this.AreaCombo.TabIndex = 23;
-            // 
-            // ClienteCombo
-            // 
-            this.ClienteCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ClienteCombo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ClienteCombo.FormattingEnabled = true;
-            this.ClienteCombo.Location = new System.Drawing.Point(220, 147);
-            this.ClienteCombo.Name = "ClienteCombo";
-            this.ClienteCombo.Size = new System.Drawing.Size(250, 29);
-            this.ClienteCombo.TabIndex = 24;
+            this.AreaCombo.TabIndex = 8;
             // 
             // PrecioUnitarioText
             // 
@@ -105,59 +94,49 @@ namespace CZS_LaVictoria.DatosPage
             0,
             131072});
             this.PrecioUnitarioText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PrecioUnitarioText.Location = new System.Drawing.Point(220, 297);
+            this.PrecioUnitarioText.Location = new System.Drawing.Point(220, 197);
             this.PrecioUnitarioText.Name = "PrecioUnitarioText";
             this.PrecioUnitarioText.Size = new System.Drawing.Size(250, 29);
-            this.PrecioUnitarioText.TabIndex = 22;
+            this.PrecioUnitarioText.TabIndex = 6;
             this.PrecioUnitarioText.Text = "$0.00";
             // 
             // ProductoInternoText
             // 
             this.ProductoInternoText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ProductoInternoText.Location = new System.Drawing.Point(220, 247);
+            this.ProductoInternoText.Location = new System.Drawing.Point(220, 147);
             this.ProductoInternoText.Name = "ProductoInternoText";
             this.ProductoInternoText.Size = new System.Drawing.Size(250, 29);
-            this.ProductoInternoText.TabIndex = 21;
+            this.ProductoInternoText.TabIndex = 4;
             // 
             // PrecioUnitarioLabel
             // 
             this.PrecioUnitarioLabel.AutoSize = true;
             this.PrecioUnitarioLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PrecioUnitarioLabel.Location = new System.Drawing.Point(50, 300);
+            this.PrecioUnitarioLabel.Location = new System.Drawing.Point(50, 200);
             this.PrecioUnitarioLabel.Name = "PrecioUnitarioLabel";
-            this.PrecioUnitarioLabel.Size = new System.Drawing.Size(113, 21);
-            this.PrecioUnitarioLabel.TabIndex = 15;
-            this.PrecioUnitarioLabel.Text = "Precio Unitario";
+            this.PrecioUnitarioLabel.Size = new System.Drawing.Size(120, 21);
+            this.PrecioUnitarioLabel.TabIndex = 5;
+            this.PrecioUnitarioLabel.Text = "Precio Unitario*";
             // 
             // AreaLabel
             // 
             this.AreaLabel.AutoSize = true;
             this.AreaLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AreaLabel.Location = new System.Drawing.Point(50, 350);
+            this.AreaLabel.Location = new System.Drawing.Point(50, 250);
             this.AreaLabel.Name = "AreaLabel";
-            this.AreaLabel.Size = new System.Drawing.Size(95, 21);
-            this.AreaLabel.TabIndex = 16;
-            this.AreaLabel.Text = "Área Interna";
+            this.AreaLabel.Size = new System.Drawing.Size(102, 21);
+            this.AreaLabel.TabIndex = 7;
+            this.AreaLabel.Text = "Área Interna*";
             // 
             // ProductoInternoLabel
             // 
             this.ProductoInternoLabel.AutoSize = true;
             this.ProductoInternoLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ProductoInternoLabel.Location = new System.Drawing.Point(50, 250);
+            this.ProductoInternoLabel.Location = new System.Drawing.Point(50, 150);
             this.ProductoInternoLabel.Name = "ProductoInternoLabel";
-            this.ProductoInternoLabel.Size = new System.Drawing.Size(127, 21);
-            this.ProductoInternoLabel.TabIndex = 18;
-            this.ProductoInternoLabel.Text = "Producto Interno";
-            // 
-            // ClienteLabel
-            // 
-            this.ClienteLabel.AutoSize = true;
-            this.ClienteLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ClienteLabel.Location = new System.Drawing.Point(50, 150);
-            this.ClienteLabel.Name = "ClienteLabel";
-            this.ClienteLabel.Size = new System.Drawing.Size(58, 21);
-            this.ClienteLabel.TabIndex = 19;
-            this.ClienteLabel.Text = "Cliente";
+            this.ProductoInternoLabel.Size = new System.Drawing.Size(134, 21);
+            this.ProductoInternoLabel.TabIndex = 3;
+            this.ProductoInternoLabel.Text = "Producto Interno*";
             // 
             // MsgBoxTimer
             // 
@@ -171,7 +150,7 @@ namespace CZS_LaVictoria.DatosPage
             this.SubtitleLabel.Location = new System.Drawing.Point(50, 25);
             this.SubtitleLabel.Name = "SubtitleLabel";
             this.SubtitleLabel.Size = new System.Drawing.Size(355, 37);
-            this.SubtitleLabel.TabIndex = 27;
+            this.SubtitleLabel.TabIndex = 0;
             this.SubtitleLabel.Text = "Crear Producto para Cliente";
             // 
             // ClienteProductoCrearForm
@@ -183,13 +162,11 @@ namespace CZS_LaVictoria.DatosPage
             this.Controls.Add(this.MsgBox);
             this.Controls.Add(this.GuardarButton);
             this.Controls.Add(this.AreaCombo);
-            this.Controls.Add(this.ClienteCombo);
             this.Controls.Add(this.PrecioUnitarioText);
             this.Controls.Add(this.ProductoInternoText);
             this.Controls.Add(this.PrecioUnitarioLabel);
             this.Controls.Add(this.AreaLabel);
             this.Controls.Add(this.ProductoInternoLabel);
-            this.Controls.Add(this.ClienteLabel);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -206,13 +183,11 @@ namespace CZS_LaVictoria.DatosPage
         private FontAwesome.Sharp.IconButton MsgBox;
         private System.Windows.Forms.Button GuardarButton;
         private System.Windows.Forms.ComboBox AreaCombo;
-        private System.Windows.Forms.ComboBox ClienteCombo;
         private Syncfusion.Windows.Forms.Tools.CurrencyTextBox PrecioUnitarioText;
         private System.Windows.Forms.TextBox ProductoInternoText;
         private System.Windows.Forms.Label PrecioUnitarioLabel;
         private System.Windows.Forms.Label AreaLabel;
         private System.Windows.Forms.Label ProductoInternoLabel;
-        private System.Windows.Forms.Label ClienteLabel;
         private System.Windows.Forms.Timer MsgBoxTimer;
         private System.Windows.Forms.Label SubtitleLabel;
     }

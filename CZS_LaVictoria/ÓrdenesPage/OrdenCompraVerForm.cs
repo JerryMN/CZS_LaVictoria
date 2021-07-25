@@ -178,7 +178,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 return;
             }
 
-            var línea = DataGrid.SelectedItem as OrdenCompraLíneaModel;
+            var línea = (OrdenCompraLíneaModel) DataGrid.SelectedItem;
             Debug.Assert(línea != null, nameof(línea) + " != null");
             if (línea.Estatus == "Entregada" || línea.Estatus == "Cancelada" || línea.Estatus == "Cerrada")
             {
@@ -217,7 +217,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 return;
             }
 
-            var línea = DataGrid.SelectedItem as OrdenCompraLíneaModel;
+            var línea = (OrdenCompraLíneaModel) DataGrid.SelectedItem;
             Debug.Assert(línea != null, nameof(línea) + " != null");
             if (línea.Estatus == "Entregada" || línea.Estatus == "Cancelada" || línea.Estatus == "Cerrada")
             {

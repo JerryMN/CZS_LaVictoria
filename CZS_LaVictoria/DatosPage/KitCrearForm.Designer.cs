@@ -51,7 +51,7 @@ namespace CZS_LaVictoria.DatosPage
             this.NombreText.Location = new System.Drawing.Point(220, 147);
             this.NombreText.Name = "NombreText";
             this.NombreText.Size = new System.Drawing.Size(250, 29);
-            this.NombreText.TabIndex = 53;
+            this.NombreText.TabIndex = 2;
             // 
             // CantidadesListBox
             // 
@@ -61,7 +61,8 @@ namespace CZS_LaVictoria.DatosPage
             this.CantidadesListBox.Name = "CantidadesListBox";
             this.CantidadesListBox.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.CantidadesListBox.Size = new System.Drawing.Size(200, 193);
-            this.CantidadesListBox.TabIndex = 51;
+            this.CantidadesListBox.TabIndex = 9;
+            this.CantidadesListBox.TabStop = false;
             // 
             // MaterialesListBox
             // 
@@ -70,7 +71,8 @@ namespace CZS_LaVictoria.DatosPage
             this.MaterialesListBox.Location = new System.Drawing.Point(520, 147);
             this.MaterialesListBox.Name = "MaterialesListBox";
             this.MaterialesListBox.Size = new System.Drawing.Size(200, 193);
-            this.MaterialesListBox.TabIndex = 52;
+            this.MaterialesListBox.TabIndex = 8;
+            this.MaterialesListBox.TabStop = false;
             // 
             // MsgBox
             // 
@@ -85,7 +87,8 @@ namespace CZS_LaVictoria.DatosPage
             this.MsgBox.Location = new System.Drawing.Point(506, 400);
             this.MsgBox.Name = "MsgBox";
             this.MsgBox.Size = new System.Drawing.Size(420, 157);
-            this.MsgBox.TabIndex = 50;
+            this.MsgBox.TabIndex = 12;
+            this.MsgBox.TabStop = false;
             this.MsgBox.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.MsgBox.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.MsgBox.UseVisualStyleBackColor = true;
@@ -98,7 +101,7 @@ namespace CZS_LaVictoria.DatosPage
             this.AgregarButton.Location = new System.Drawing.Point(392, 300);
             this.AgregarButton.Name = "AgregarButton";
             this.AgregarButton.Size = new System.Drawing.Size(78, 33);
-            this.AgregarButton.TabIndex = 47;
+            this.AgregarButton.TabIndex = 7;
             this.AgregarButton.Text = "Agregar";
             this.AgregarButton.UseVisualStyleBackColor = true;
             this.AgregarButton.Click += new System.EventHandler(this.AgregarButton_Click);
@@ -110,7 +113,7 @@ namespace CZS_LaVictoria.DatosPage
             this.EliminarButton.Location = new System.Drawing.Point(764, 350);
             this.EliminarButton.Name = "EliminarButton";
             this.EliminarButton.Size = new System.Drawing.Size(78, 33);
-            this.EliminarButton.TabIndex = 48;
+            this.EliminarButton.TabIndex = 10;
             this.EliminarButton.Text = "Eliminar";
             this.EliminarButton.UseVisualStyleBackColor = true;
             this.EliminarButton.Click += new System.EventHandler(this.EliminarButton_Click);
@@ -122,7 +125,7 @@ namespace CZS_LaVictoria.DatosPage
             this.GuardarButton.Location = new System.Drawing.Point(848, 350);
             this.GuardarButton.Name = "GuardarButton";
             this.GuardarButton.Size = new System.Drawing.Size(78, 33);
-            this.GuardarButton.TabIndex = 49;
+            this.GuardarButton.TabIndex = 11;
             this.GuardarButton.Text = "Guardar";
             this.GuardarButton.UseVisualStyleBackColor = true;
             this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
@@ -137,7 +140,7 @@ namespace CZS_LaVictoria.DatosPage
             this.CantidadText.Name = "CantidadText";
             this.CantidadText.Size = new System.Drawing.Size(250, 29);
             this.CantidadText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.CantidadText.TabIndex = 46;
+            this.CantidadText.TabIndex = 6;
             this.CantidadText.WatermarkText = "Ingresa la cantidad";
             // 
             // Cantidad
@@ -146,9 +149,9 @@ namespace CZS_LaVictoria.DatosPage
             this.Cantidad.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Cantidad.Location = new System.Drawing.Point(50, 250);
             this.Cantidad.Name = "Cantidad";
-            this.Cantidad.Size = new System.Drawing.Size(72, 21);
-            this.Cantidad.TabIndex = 45;
-            this.Cantidad.Text = "Cantidad";
+            this.Cantidad.Size = new System.Drawing.Size(79, 21);
+            this.Cantidad.TabIndex = 5;
+            this.Cantidad.Text = "Cantidad*";
             // 
             // MaterialCombo
             // 
@@ -160,7 +163,7 @@ namespace CZS_LaVictoria.DatosPage
             this.MaterialCombo.Location = new System.Drawing.Point(220, 197);
             this.MaterialCombo.Name = "MaterialCombo";
             this.MaterialCombo.Size = new System.Drawing.Size(250, 29);
-            this.MaterialCombo.TabIndex = 44;
+            this.MaterialCombo.TabIndex = 4;
             // 
             // NombreLabel
             // 
@@ -168,9 +171,9 @@ namespace CZS_LaVictoria.DatosPage
             this.NombreLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NombreLabel.Location = new System.Drawing.Point(50, 150);
             this.NombreLabel.Name = "NombreLabel";
-            this.NombreLabel.Size = new System.Drawing.Size(68, 21);
-            this.NombreLabel.TabIndex = 42;
-            this.NombreLabel.Text = "Nombre";
+            this.NombreLabel.Size = new System.Drawing.Size(75, 21);
+            this.NombreLabel.TabIndex = 1;
+            this.NombreLabel.Text = "Nombre*";
             // 
             // MaterialLabel
             // 
@@ -178,9 +181,9 @@ namespace CZS_LaVictoria.DatosPage
             this.MaterialLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaterialLabel.Location = new System.Drawing.Point(50, 200);
             this.MaterialLabel.Name = "MaterialLabel";
-            this.MaterialLabel.Size = new System.Drawing.Size(67, 21);
-            this.MaterialLabel.TabIndex = 43;
-            this.MaterialLabel.Text = "Material";
+            this.MaterialLabel.Size = new System.Drawing.Size(74, 21);
+            this.MaterialLabel.TabIndex = 3;
+            this.MaterialLabel.Text = "Material*";
             // 
             // SubtitleLabel
             // 
@@ -189,7 +192,7 @@ namespace CZS_LaVictoria.DatosPage
             this.SubtitleLabel.Location = new System.Drawing.Point(50, 25);
             this.SubtitleLabel.Name = "SubtitleLabel";
             this.SubtitleLabel.Size = new System.Drawing.Size(123, 37);
-            this.SubtitleLabel.TabIndex = 41;
+            this.SubtitleLabel.TabIndex = 0;
             this.SubtitleLabel.Text = "Crear Kit";
             // 
             // MsgBoxTimer

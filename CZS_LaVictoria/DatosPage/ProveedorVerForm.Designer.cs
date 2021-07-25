@@ -48,7 +48,7 @@ namespace CZS_LaVictoria.DatosPage
             this.EditarButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.EditarButton.Name = "EditarButton";
             this.EditarButton.Size = new System.Drawing.Size(84, 31);
-            this.EditarButton.TabIndex = 1;
+            this.EditarButton.TabIndex = 0;
             this.EditarButton.Text = "Editar";
             this.EditarButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.EditarButton.UseVisualStyleBackColor = true;

@@ -20,7 +20,7 @@ namespace CZS_LaVictoria.DatosPage
             DataGrid.QueryRowHeight += DataGridOnQueryRowHeight;
             DataGrid.Style.CellStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
             DataGrid.Style.HeaderStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
-            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
+            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCellsWithLastColumnFill;
         }
 
         #region Events
@@ -37,21 +37,31 @@ namespace CZS_LaVictoria.DatosPage
             }
         }
 
-        void DataGrid_AutoGeneratingColumn(object sender, Syncfusion.WinForms.DataGrid.Events.AutoGeneratingColumnArgs e)
+        void DataGrid_AutoGeneratingColumn(object sender, AutoGeneratingColumnArgs e)
         {
-            if (e.Column.HeaderText == "Id")
+            switch (e.Column.HeaderText)
             {
-                e.Cancel = true;
-            }
-
-            if (e.Column.HeaderText == "TeléfonoDos")
-            {
-                e.Column.HeaderText = "Teléfono Dos";
+                case "Id":
+                    e.Cancel = true;
+                    break;
+                case "TeléfonoDos":
+                    e.Column.HeaderText = "Teléfono Dos";
+                    break;
+                case "Dirección":
+                    e.Column.AutoSizeColumnsMode = AutoSizeColumnsMode.LastColumnFill;
+                    break;
             }
         }
 
         void EditarButton_Click(object sender, EventArgs e)
         {
+            if (DataGrid.SelectedIndex < 0)
+            {
+                MessageBox.Show("Selecciona un cliente a editar.", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+                return;
+            }
+
             if (EditarButton.Text == "Editar")
             {
                 DataGrid.AllowEditing = true;
@@ -66,13 +76,13 @@ namespace CZS_LaVictoria.DatosPage
 
                 if (updateSuccess)
                 {
-                    DataGrid.AllowEditing = false;
-                    EditarButton.Text = "Editar";
-                    MessageBox.Show($"Cliente {model.Nombre} actualizado con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Cliente {model.Nombre} actualizado con éxito.", "Mensaje", MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
                 }
                 else
                 {
-                    MessageBox.Show($"Error al actualizar cliente {model.Nombre}.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Error al actualizar cliente {model.Nombre}.", "Error", MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
                 }
 
                 DataGrid.AllowEditing = false;
@@ -82,9 +92,17 @@ namespace CZS_LaVictoria.DatosPage
 
         void BorrarButton_Click(object sender, EventArgs e)
         {
+            if (DataGrid.SelectedIndex < 0)
+            {
+                MessageBox.Show("Selecciona un cliente a borrar.", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+                return;
+            }
+
             var model = (ClienteModel)DataGrid.SelectedItem;
 
-            if (MessageBox.Show($"Estás seguro de eliminar al cliente {model.Nombre}? Esta acción es irreversible.", "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            if (MessageBox.Show($"Estás seguro de eliminar al cliente {model.Nombre}? Esta acción es irreversible.", 
+                "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
             {
                 return;
             }
@@ -94,11 +112,13 @@ namespace CZS_LaVictoria.DatosPage
             if (deleteSuccess)
             {
                 DataGrid.DataSource = GetClientes();
-                MessageBox.Show($"Cliente {model.Nombre} eliminado con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Cliente {model.Nombre} eliminado con éxito.", "Mensaje", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show($"Error al eliminar cliente {model.Nombre}.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Error al eliminar cliente {model.Nombre}.", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
             }
         }
 

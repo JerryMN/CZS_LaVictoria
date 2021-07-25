@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Drawing;
 using System.Net.Mail;
 using System.Windows.Forms;
@@ -14,6 +13,11 @@ namespace CZS_LaVictoria.DatosPage
         {
             InitializeComponent();
             GetCondiciones();
+            if (GlobalConfig.Connection.CZS_GetLicencia()) return;
+            MessageBox.Show(
+                "No se puede verificar la licencia. Verifica el estatus de la misma y verifica tu conexión a internet.",
+                "Error de licencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            Application.Exit();
         }
 
         void TeléfonoText_Enter(object sender, EventArgs e)
@@ -24,6 +28,7 @@ namespace CZS_LaVictoria.DatosPage
         void GuardarButton_Click(object sender, EventArgs e)
         {
             MsgBox.Visible = false;
+            MsgBox.Text = "";
 
             if (!ValidateForm())
             {
@@ -36,7 +41,7 @@ namespace CZS_LaVictoria.DatosPage
 
             if (saveSuccess)
             {
-                ClearForm();
+                Tools.ClearForm(this);
                 MsgBox.Text = $"Proveedor {model.Nombre} guardado con éxito.";
                 MsgBox.IconColor = Color.DarkGreen;
             }
@@ -73,7 +78,6 @@ namespace CZS_LaVictoria.DatosPage
         bool ValidateForm()
         {
             var output = true;
-            MsgBox.Text = "";
 
             if (NombreText.Text == "")
             {
@@ -112,25 +116,6 @@ namespace CZS_LaVictoria.DatosPage
             }
 
             return output;
-        }
-
-        void ClearForm()
-        {
-            void Func(IEnumerable controls)
-            {
-                foreach (Control control in controls)
-                    if (control is TextBox box)
-                        box.Clear();
-                    else if (control is ComboBox comboBox)
-                    {
-                        comboBox.SelectedItem = null;
-                        comboBox.Text = "";
-                    }
-                    else
-                        Func(control.Controls);
-            }
-
-            Func(Controls);
         }
 
         #endregion

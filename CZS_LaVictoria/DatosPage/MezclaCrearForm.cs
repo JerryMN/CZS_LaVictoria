@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -15,6 +14,11 @@ namespace CZS_LaVictoria.DatosPage
             InitializeComponent();
             GetMateriales();
             MaterialesListBox.DisplayMember = "Nombre";
+            if (GlobalConfig.Connection.CZS_GetLicencia()) return;
+            MessageBox.Show(
+                "No se puede verificar la licencia. Verifica el estatus de la misma y verifica tu conexión a internet.",
+                "Error de licencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            Application.Exit();
         }
 
         #region Events
@@ -23,6 +27,8 @@ namespace CZS_LaVictoria.DatosPage
         {
             NombreText.Enabled = false;
             MsgBox.Visible = false;
+            MsgBox.Text = "";
+
             if (!ValidateForm())
             {
                 MsgBox.Visible = true;
@@ -71,12 +77,19 @@ namespace CZS_LaVictoria.DatosPage
                 return;
             }
 
-            var model = CreateModel();
+            var model = new MezclaModel
+            {
+                Nombre = NombreText.Text,
+                Materiales = MaterialesListBox.Items.Cast<MaterialModel>().ToList(),
+                Cantidades = CantidadesListBox.Items.Cast<double>().ToList(),
+                CantidadMezcla = CantidadesListBox.Items.Cast<object>().Sum(item => double.Parse(item.ToString()))
+            };
+
             var saveSuccess = GlobalConfig.Connection.Mezcla_Create(model);
 
             if (saveSuccess)
             {
-                ClearForm();
+                Tools.ClearForm(this);
                 MsgBox.Text = $"Mezcla {model.Nombre} guardada con éxito.";
                 MsgBox.IconColor = Color.DarkGreen;
             }
@@ -137,47 +150,6 @@ namespace CZS_LaVictoria.DatosPage
             }
 
             return output;
-        }
-
-        MezclaModel CreateModel()
-        {
-            var model = new MezclaModel();
-            var materiales = MaterialesListBox.Items.Cast<MaterialModel>().ToList();
-            var cantidades = CantidadesListBox.Items.Cast<double>().ToList();
-            var cantidad = CantidadesListBox.Items.Cast<object>().Sum(item => double.Parse(item.ToString()));
-
-            model.Nombre = NombreText.Text;
-            model.Materiales = materiales;
-            model.Cantidades = cantidades;
-            model.CantidadMezcla = cantidad;
-
-            return model;
-        }
-
-        void ClearForm()
-        {
-            void Func(IEnumerable controls)
-            {
-                foreach (Control control in controls)
-                    if (control is TextBox box)
-                    {
-                        box.Clear();
-                        box.Enabled = true;
-                    }
-                    else if (control is ComboBox cbox)
-                    {
-                        cbox.Text = "";
-                        cbox.SelectedItem = null;
-                    }
-                    else if (control is ListBox listBox)
-                    {
-                        listBox.Items.Clear();
-                    }
-                    else
-                        Func(control.Controls);
-            }
-
-            Func(Controls);
         }
 
         #endregion

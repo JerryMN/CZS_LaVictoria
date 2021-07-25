@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
@@ -11,7 +10,7 @@ namespace CZS_LaVictoria.DatosPage
 {
     public partial class MezclaVerForm : Form
     {
-        MezclaModel _selectedModel;
+        MezclaModel _selectedModel = new MezclaModel();
 
         public MezclaVerForm()
         {
@@ -23,12 +22,15 @@ namespace CZS_LaVictoria.DatosPage
 
         void NombreCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (NombreCombo.SelectedItem == null) return;
+            MsgBox.Visible = false;
+            MsgBox.Text = "";
+
+            if (NombreCombo.SelectedIndex < 0) return;
 
             MaterialesListBox.Items.Clear();
             CantidadesListBox.Items.Clear();
 
-            _selectedModel = NombreCombo.SelectedItem as MezclaModel;
+            _selectedModel = (MezclaModel) NombreCombo.SelectedItem;
             Debug.Assert(_selectedModel?.Materiales != null, "selected?.Materiales != null");
 
             foreach (var material in _selectedModel?.Materiales)
@@ -46,13 +48,28 @@ namespace CZS_LaVictoria.DatosPage
 
         void EliminarButton_Click(object sender, EventArgs e)
         {
-            if (_selectedModel == null) return;
+            MsgBox.Visible = false;
+            MsgBox.Text = "";
+
+            if (NombreCombo.SelectedIndex < 0)
+            {
+                MsgBox.Text = "Selecciona una mezcla a borrar.";
+                MsgBox.IconColor = Color.DarkRed;
+                MsgBox.Visible = true;
+                return;
+            }
+
+            if (MessageBox.Show($"Estás seguro de eliminar la mezcla {_selectedModel.Nombre}? Esta acción es irreversible.", "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            {
+                return;
+            }
 
             var deleteSuccess = GlobalConfig.Connection.Mezcla_Delete(_selectedModel);
 
             if (deleteSuccess)
             {
-                ClearForm();
+                Tools.ClearForm(this);
+                CantidadText.Text = "0.00";
                 GetMezclas();
                 MsgBox.Text = $"Mezcla {_selectedModel.Nombre} eliminada con éxito.";
                 MsgBox.IconColor = Color.DarkGreen;
@@ -87,29 +104,6 @@ namespace CZS_LaVictoria.DatosPage
             }
 
             NombreCombo.DisplayMember = "Nombre";
-        }
-
-        void ClearForm()
-        {
-            CantidadText.Text = "0";
-            MaterialesListBox.Items.Clear();
-            CantidadesListBox.Items.Clear();
-
-            void Func(IEnumerable controls)
-            {
-                foreach (Control control in controls)
-                    if (control is TextBox box)
-                        box.Clear();
-                    else if (control is ComboBox comboBox)
-                    {
-                        comboBox.Text = "";
-                        comboBox.SelectedItem = null;
-                    }
-                    else
-                        Func(control.Controls);
-            }
-
-            Func(Controls);
         }
 
         #endregion

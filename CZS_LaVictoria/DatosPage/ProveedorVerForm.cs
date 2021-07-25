@@ -20,7 +20,7 @@ namespace CZS_LaVictoria.DatosPage
             DataGrid.QueryRowHeight += DataGridOnQueryRowHeight;
             DataGrid.Style.CellStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
             DataGrid.Style.HeaderStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
-            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
+            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCellsWithLastColumnFill;
         }
 
         #region Events
@@ -39,14 +39,14 @@ namespace CZS_LaVictoria.DatosPage
 
         void DataGrid_AutoGeneratingColumn(object sender, AutoGeneratingColumnArgs e)
         {
-            if (e.Column.MappingName == "Id")
+            switch (e.Column.MappingName)
             {
-                e.Cancel = true;
-            }
-
-            if (e.Column.MappingName == "Dirección")
-            {
-                e.Column.AutoSizeColumnsMode = AutoSizeColumnsMode.LastColumnFill;
+                case "Id":
+                    e.Cancel = true;
+                    break;
+                case "Dirección":
+                    e.Column.AutoSizeColumnsMode = AutoSizeColumnsMode.LastColumnFill;
+                    break;
             }
         }
 
@@ -73,13 +73,13 @@ namespace CZS_LaVictoria.DatosPage
 
                 if (updateSuccess)
                 {
-                    DataGrid.AllowEditing = false;
-                    EditarButton.Text = "Editar";
-                    MessageBox.Show($"Proveedor {model.Nombre} actualizado con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Proveedor {model.Nombre} actualizado con éxito.", "Mensaje", MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
                 }
                 else
                 {
-                    MessageBox.Show($"Error al actualizar proveedor {model.Nombre}.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Error al actualizar proveedor {model.Nombre}.", "Error", MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
                 }
 
                 DataGrid.AllowEditing = false;
@@ -98,7 +98,8 @@ namespace CZS_LaVictoria.DatosPage
 
             var model = (ProveedorModel)DataGrid.SelectedItem;
 
-            if (MessageBox.Show($"Estás seguro de eliminar al proveedor {model.Nombre}? Esta acción es irreversible.", "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            if (MessageBox.Show($"Estás seguro de eliminar al proveedor {model.Nombre}? Esta acción es irreversible.", 
+                "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
             {
                 return;
             }
@@ -108,11 +109,13 @@ namespace CZS_LaVictoria.DatosPage
             if (deleteSuccess)
             {
                 DataGrid.DataSource = GetProveedores();
-                MessageBox.Show($"Proveedor {model.Nombre} eliminado con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Proveedor {model.Nombre} eliminado con éxito.", "Mensaje", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show($"Error al eliminar proveedor {model.Nombre}.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Error al eliminar proveedor {model.Nombre}.", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
             }
         }
 

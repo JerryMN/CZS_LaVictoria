@@ -32,7 +32,7 @@ namespace CZS_LaVictoria
                 Title = "Escobas La Victoria",
                 Subtitle = "Por CZ Systems",
                 RightFooter = "Iniciando...",
-                LeftFooter = "Copyright © 2020 - 2021 CZ Systems \nTodos los derechos reservados.",
+                LeftFooter = "Copyright © 2021 CZ Systems \nTodos los derechos reservados.",
                 LoadingIndicatorType = FluentLoadingIndicatorType.Dots,
                 Opacity = 30,
                 OpacityColor = Color.DarkRed
@@ -43,8 +43,9 @@ namespace CZS_LaVictoria
             SplashScreenManager.CloseForm();
 
             if (_validLicense) return;
-            MessageBox.Show("Licencia no válida o vencida.", "Error de licencia", MessageBoxButtons.OK,
-                MessageBoxIcon.Error);
+            MessageBox.Show(
+                "No se puede verificar la licencia. Verifica el estatus de la misma y verifica tu conexión a internet.",
+                "Error de licencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Application.Exit();
         }
 

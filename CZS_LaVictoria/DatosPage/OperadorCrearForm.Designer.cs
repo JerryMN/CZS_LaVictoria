@@ -50,9 +50,9 @@ namespace CZS_LaVictoria.DatosPage
             this.OperadorLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OperadorLabel.Location = new System.Drawing.Point(50, 150);
             this.OperadorLabel.Name = "OperadorLabel";
-            this.OperadorLabel.Size = new System.Drawing.Size(77, 21);
-            this.OperadorLabel.TabIndex = 40;
-            this.OperadorLabel.Text = "Operador";
+            this.OperadorLabel.Size = new System.Drawing.Size(84, 21);
+            this.OperadorLabel.TabIndex = 1;
+            this.OperadorLabel.Text = "Operador*";
             // 
             // SubtitleLabel
             // 
@@ -60,27 +60,28 @@ namespace CZS_LaVictoria.DatosPage
             this.SubtitleLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SubtitleLabel.Location = new System.Drawing.Point(50, 25);
             this.SubtitleLabel.Name = "SubtitleLabel";
-            this.SubtitleLabel.Size = new System.Drawing.Size(278, 37);
-            this.SubtitleLabel.TabIndex = 39;
-            this.SubtitleLabel.Text = "Registro de Operador";
+            this.SubtitleLabel.Size = new System.Drawing.Size(330, 37);
+            this.SubtitleLabel.TabIndex = 0;
+            this.SubtitleLabel.Text = "Crear y Editar Operadores";
             // 
             // OperadorText
             // 
             this.OperadorText.Location = new System.Drawing.Point(200, 147);
             this.OperadorText.Name = "OperadorText";
             this.OperadorText.Size = new System.Drawing.Size(300, 29);
-            this.OperadorText.TabIndex = 41;
+            this.OperadorText.TabIndex = 2;
             // 
             // AreaCombo
             // 
             this.AreaCombo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.AreaCombo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.AreaCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.AreaCombo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AreaCombo.FormattingEnabled = true;
             this.AreaCombo.Location = new System.Drawing.Point(200, 197);
             this.AreaCombo.Name = "AreaCombo";
             this.AreaCombo.Size = new System.Drawing.Size(300, 29);
-            this.AreaCombo.TabIndex = 43;
+            this.AreaCombo.TabIndex = 4;
             // 
             // AreaLabel
             // 
@@ -88,9 +89,9 @@ namespace CZS_LaVictoria.DatosPage
             this.AreaLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AreaLabel.Location = new System.Drawing.Point(50, 200);
             this.AreaLabel.Name = "AreaLabel";
-            this.AreaLabel.Size = new System.Drawing.Size(42, 21);
-            this.AreaLabel.TabIndex = 42;
-            this.AreaLabel.Text = "Área";
+            this.AreaLabel.Size = new System.Drawing.Size(49, 21);
+            this.AreaLabel.TabIndex = 3;
+            this.AreaLabel.Text = "Área*";
             // 
             // MsgBox
             // 
@@ -105,7 +106,8 @@ namespace CZS_LaVictoria.DatosPage
             this.MsgBox.Location = new System.Drawing.Point(80, 300);
             this.MsgBox.Name = "MsgBox";
             this.MsgBox.Size = new System.Drawing.Size(420, 165);
-            this.MsgBox.TabIndex = 45;
+            this.MsgBox.TabIndex = 8;
+            this.MsgBox.TabStop = false;
             this.MsgBox.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.MsgBox.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.MsgBox.UseVisualStyleBackColor = true;
@@ -118,7 +120,7 @@ namespace CZS_LaVictoria.DatosPage
             this.GuardarButton.Location = new System.Drawing.Point(422, 250);
             this.GuardarButton.Name = "GuardarButton";
             this.GuardarButton.Size = new System.Drawing.Size(78, 35);
-            this.GuardarButton.TabIndex = 44;
+            this.GuardarButton.TabIndex = 5;
             this.GuardarButton.Text = "Guardar";
             this.GuardarButton.UseVisualStyleBackColor = true;
             this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
@@ -140,7 +142,7 @@ namespace CZS_LaVictoria.DatosPage
             this.BorrarButton.Location = new System.Drawing.Point(725, 145);
             this.BorrarButton.Name = "BorrarButton";
             this.BorrarButton.Size = new System.Drawing.Size(88, 31);
-            this.BorrarButton.TabIndex = 47;
+            this.BorrarButton.TabIndex = 7;
             this.BorrarButton.Text = "Borrar";
             this.BorrarButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BorrarButton.UseVisualStyleBackColor = true;
@@ -158,7 +160,7 @@ namespace CZS_LaVictoria.DatosPage
             this.EditarButton.Location = new System.Drawing.Point(600, 145);
             this.EditarButton.Name = "EditarButton";
             this.EditarButton.Size = new System.Drawing.Size(84, 31);
-            this.EditarButton.TabIndex = 48;
+            this.EditarButton.TabIndex = 6;
             this.EditarButton.Text = "Editar";
             this.EditarButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.EditarButton.UseVisualStyleBackColor = true;
@@ -176,7 +178,7 @@ namespace CZS_LaVictoria.DatosPage
             this.DataGrid.Name = "DataGrid";
             this.DataGrid.ShowGroupDropArea = true;
             this.DataGrid.Size = new System.Drawing.Size(500, 500);
-            this.DataGrid.TabIndex = 46;
+            this.DataGrid.TabIndex = 9;
             this.DataGrid.Text = "sfDataGrid1";
             this.DataGrid.AutoGeneratingColumn += new Syncfusion.WinForms.DataGrid.Events.AutoGeneratingColumnEventHandler(this.DataGrid_AutoGeneratingColumn);
             // 

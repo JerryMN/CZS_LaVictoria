@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Drawing;
 using System.Net.Mail;
 using System.Windows.Forms;
@@ -14,6 +13,11 @@ namespace CZS_LaVictoria.DatosPage
         {
             InitializeComponent();
             GetAreas();
+            if (GlobalConfig.Connection.CZS_GetLicencia()) return;
+            MessageBox.Show(
+                "No se puede verificar la licencia. Verifica el estatus de la misma y verifica tu conexión a internet.",
+                "Error de licencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            Application.Exit();
         }
 
         #region Events
@@ -21,6 +25,7 @@ namespace CZS_LaVictoria.DatosPage
         void GuardarButton_Click(object sender, EventArgs e)
         {
             MsgBox.Visible = false;
+            MsgBox.Text = "";
 
             if (!ValidateForm())
             {
@@ -34,7 +39,7 @@ namespace CZS_LaVictoria.DatosPage
 
             if (saveSuccess)
             {
-                ClearForm();
+                Tools.ClearForm(this);
                 MsgBox.Text = $"Área {model.Área} guardada con éxito.";
                 MsgBox.IconColor = Color.DarkGreen;
             }
@@ -60,14 +65,12 @@ namespace CZS_LaVictoria.DatosPage
 
         void GetAreas()
         {
-            var areas = GlobalConfig.Connection.Area_GetAll();
+            var areas = GlobalConfig.Connection.Area_GetDistinct();
 
             foreach (var area in areas)
             {
                 AreaCombo.Items.Add(area);
             }
-
-            AreaCombo.DisplayMember = "Área";
         }
 
         bool ValidateForm()
@@ -105,25 +108,6 @@ namespace CZS_LaVictoria.DatosPage
             }
 
             return output;
-        }
-
-        void ClearForm()
-        {
-            void Func(IEnumerable controls)
-            {
-                foreach (Control control in controls)
-                    if (control is TextBox box)
-                        box.Clear();
-                    else if (control is ComboBox comboBox)
-                    {
-                        comboBox.Text = "";
-                        comboBox.SelectedItem = null;
-                    }
-                    else
-                        Func(control.Controls);
-            }
-
-            Func(Controls);
         }
 
         #endregion

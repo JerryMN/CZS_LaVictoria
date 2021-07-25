@@ -540,7 +540,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         #region ClienteProducto
 
-        public bool ClienteProducto_Create(ClienteProductoModel model, ClienteModel cliente)
+        public bool ClienteProducto_Create(ClienteProductoModel model)
         {
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
@@ -548,8 +548,6 @@ namespace CZS_LaVictoria_Library.DataAccess
                 p.Add("@ProductoInterno", model.ProductoInterno);
                 p.Add("@PrecioUnitario", model.PrecioUnitario);
                 p.Add("@Area", model.Área);
-                p.Add("@IdCliente", cliente?.Id);
-                p.Add("@Cliente", cliente?.Nombre);
 
                 try
                 {
@@ -583,18 +581,17 @@ namespace CZS_LaVictoria_Library.DataAccess
             }
         }
 
-        public List<ClienteProductoModel> ClienteProducto_GetByClienteArea(int? idCliente, string area)
+        public List<ClienteProductoModel> ClienteProducto_GetByArea(string area)
         {
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
-                p.Add("@IdClient", idCliente);
                 p.Add("@Area", area);
 
                 List<ClienteProductoModel> output;
                 try
                 {
-                    output = connection.Query<ClienteProductoModel>("dbo.spClientProducts_GetByClienteArea", p,
+                    output = connection.Query<ClienteProductoModel>("dbo.spClientProducts_GetByArea", p,
                         commandType: CommandType.StoredProcedure).ToList();
                 }
                 catch (Exception ex)

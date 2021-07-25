@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Drawing;
 using System.Windows.Forms;
 using CZS_LaVictoria_Library;
@@ -15,6 +14,11 @@ namespace CZS_LaVictoria.DatosPage
             GetProveedores();
             GetAreas();
             GetCategorías();
+            if (GlobalConfig.Connection.CZS_GetLicencia()) return;
+            MessageBox.Show(
+                "No se puede verificar la licencia. Verifica el estatus de la misma y verifica tu conexión a internet.",
+                "Error de licencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            Application.Exit();
         }
 
         #region Events
@@ -22,6 +26,7 @@ namespace CZS_LaVictoria.DatosPage
         void GuardarButton_Click(object sender, EventArgs e)
         {
             MsgBox.Visible = false;
+            MsgBox.Text = "";
 
             if (!ValidateForm())
             {
@@ -35,7 +40,7 @@ namespace CZS_LaVictoria.DatosPage
 
             if (saveSuccess)
             {
-                ClearForm();
+                Tools.ClearForm(this);
                 MsgBox.Text = $"Material {model.MaterialExterno} del proveedor {proveedor.Nombre} guardado con éxito.";
                 MsgBox.IconColor = Color.DarkGreen;
             }
@@ -54,6 +59,7 @@ namespace CZS_LaVictoria.DatosPage
             MsgBox.Visible = false;
             MsgBoxTimer.Stop();
         } 
+
         #endregion
 
 
@@ -104,13 +110,13 @@ namespace CZS_LaVictoria.DatosPage
             if (MaterialProveedorText.Text == "")
             {
                 output = false;
-                MsgBox.Text += "Ingresa el nombre del material.\n";
+                MsgBox.Text += "Ingresa el nombre del material (proveedor).\n";
             }
 
             if (MaterialInternoText.Text == "")
             {
                 output = false;
-                MsgBox.Text += "Ingresa el nombre del material.\n";
+                MsgBox.Text += "Ingresa el nombre del material (interno).\n";
             }
 
             if (PrecioUnitarioText.Text == "$0.00")
@@ -125,27 +131,14 @@ namespace CZS_LaVictoria.DatosPage
                 MsgBox.Text += "Selecciona un área.\n";
             }
 
-            return output;
-        }
-
-        void ClearForm()
-        {
-            void Func(IEnumerable controls)
+            if (CategoríaCombo.Text == "")
             {
-                foreach (Control control in controls)
-                    if (control is TextBox box)
-                        box.Clear();
-                    else if (control is ComboBox comboBox)
-                    {
-                        comboBox.SelectedItem = null;
-                        comboBox.Text = "";
-                    }
-                    else
-                        Func(control.Controls);
+                output = false;
+                MsgBox.Text += "Selecciona una categoría.\n";
             }
 
-            Func(Controls);
-        } 
+            return output;
+        }
 
         #endregion
     }

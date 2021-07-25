@@ -21,7 +21,7 @@ namespace CZS_LaVictoria.DatosPage
             DataGrid.QueryRowHeight += DataGridOnQueryRowHeight;
             DataGrid.Style.CellStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
             DataGrid.Style.HeaderStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
-            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
+            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCellsWithLastColumnFill;
         }
 
         #region Events
@@ -56,6 +56,7 @@ namespace CZS_LaVictoria.DatosPage
                     break;
                 case "MaterialInterno":
                     e.Column.HeaderText = "Nombre Interno";
+                    e.Column.AutoSizeColumnsMode = AutoSizeColumnsMode.LastColumnFill;
                     break;
                 case "PrecioUnitario":
                     e.Column = new GridNumericColumn
@@ -75,13 +76,19 @@ namespace CZS_LaVictoria.DatosPage
 
         void EditarButton_Click(object sender, EventArgs e)
         {
+            if (DataGrid.SelectedIndex < 0)
+            {
+                MessageBox.Show("Selecciona un producto a editar.", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+                return;
+            }
+
             if (EditarButton.Text == "Editar")
             {
                 DataGrid.AllowEditing = true;
                 DataGrid.Columns["Proveedor"].AllowEditing = false;
                 EditarButton.Text = "Guardar";
             }
-
             else if (EditarButton.Text == "Guardar")
             {
 
@@ -90,15 +97,13 @@ namespace CZS_LaVictoria.DatosPage
 
                 if (updateSuccess)
                 {
-                    DataGrid.AllowEditing = false;
-                    EditarButton.Text = "Editar";
                     MessageBox.Show($"Material {model.MaterialExterno} del proveedor {model.Proveedor} actualizado con éxito.", 
                         "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
                     MessageBox.Show($"Error al actualizar material {model.MaterialExterno} del proveedor {model.Proveedor}.", 
-                        "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 DataGrid.AllowEditing = false;
@@ -108,10 +113,17 @@ namespace CZS_LaVictoria.DatosPage
 
         void BorrarButton_Click(object sender, EventArgs e)
         {
+            if (DataGrid.SelectedIndex < 0)
+            {
+                MessageBox.Show("Selecciona un producto a borrar.", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+                return;
+            }
+
             var model = (ProveedorProductoModel)DataGrid.SelectedItem;
 
-            if (MessageBox.Show($"Estás seguro de eliminar al producto {model.MaterialExterno} del proveedor {model.Proveedor}? Esta acción es irreversible.", 
-                null, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No) return;
+            if (MessageBox.Show($"Estás seguro de eliminar el producto {model.MaterialExterno} del proveedor {model.Proveedor}? Esta acción es irreversible.",
+                "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No) return;
 
             var deleteSuccess = GlobalConfig.Connection.ProveedorProducto_Delete(model);
 
@@ -124,7 +136,7 @@ namespace CZS_LaVictoria.DatosPage
             else
             {
                 MessageBox.Show($"Error al eliminar material {model.MaterialExterno} del proveedor {model.Proveedor}.", 
-                    "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

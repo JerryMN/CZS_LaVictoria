@@ -1,6 +1,5 @@
 ﻿using CZS_LaVictoria_Library;
 using System;
-using System.Collections;
 using System.Drawing;
 using System.Windows.Forms;
 using CZS_LaVictoria_Library.Models;
@@ -53,7 +52,7 @@ namespace CZS_LaVictoria.DatosPage
 
             if (saveSuccess)
             {
-                ClearForm();
+                Tools.ClearForm(this);
                 MsgBox.Text = $"Operador {model.Nombre} registrado con éxito.";
                 MsgBox.IconColor = Color.DarkGreen;
                 GetOperadores();
@@ -70,6 +69,13 @@ namespace CZS_LaVictoria.DatosPage
 
         void EditarButton_Click(object sender, EventArgs e)
         {
+            if (DataGrid.SelectedIndex < 0)
+            {
+                MessageBox.Show("Selecciona un operador a editar.", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+                return;
+            }
+
             if (EditarButton.Text == "Editar")
             {
                 DataGrid.AllowEditing = true;
@@ -84,8 +90,6 @@ namespace CZS_LaVictoria.DatosPage
 
                 if (updateSuccess)
                 {
-                    DataGrid.AllowEditing = false;
-                    EditarButton.Text = "Editar";
                     MsgBox.Text = $"Operador {model.Nombre} actualizado con éxito.";
                     MsgBox.IconColor = Color.DarkGreen;
                 }
@@ -104,9 +108,17 @@ namespace CZS_LaVictoria.DatosPage
 
         void BorrarButton_Click(object sender, EventArgs e)
         {
+            if (DataGrid.SelectedIndex < 0)
+            {
+                MessageBox.Show("Selecciona un operador a borrar.", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+                return;
+            }
+
             var model = (OperadorModel)DataGrid.SelectedItem;
 
-            if (MessageBox.Show($"Estás seguro de eliminar al operador {model.Nombre}? Esta acción es irreversible.", "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            if (MessageBox.Show($"Estás seguro de eliminar al operador {model.Nombre}? Esta acción es irreversible.", 
+                "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
             {
                 return;
             }
@@ -175,25 +187,6 @@ namespace CZS_LaVictoria.DatosPage
             }
 
             return output;
-        }
-
-        void ClearForm()
-        {
-            void Func(IEnumerable controls)
-            {
-                foreach (Control control in controls)
-                    if (control is TextBox box)
-                        box.Clear();
-                    else if (control is ComboBox comboBox)
-                    {
-                        comboBox.Text = "";
-                        comboBox.SelectedItem = null;
-                    }
-                    else
-                        Func(control.Controls);
-            }
-
-            Func(Controls);
         }
 
         #endregion

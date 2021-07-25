@@ -55,9 +55,9 @@ namespace CZS_LaVictoria.DatosPage
             this.ProveedorLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ProveedorLabel.Location = new System.Drawing.Point(50, 150);
             this.ProveedorLabel.Name = "ProveedorLabel";
-            this.ProveedorLabel.Size = new System.Drawing.Size(82, 21);
+            this.ProveedorLabel.Size = new System.Drawing.Size(89, 21);
             this.ProveedorLabel.TabIndex = 1;
-            this.ProveedorLabel.Text = "Proveedor";
+            this.ProveedorLabel.Text = "Proveedor*";
             // 
             // MaterialProveedorLabel
             // 
@@ -65,9 +65,9 @@ namespace CZS_LaVictoria.DatosPage
             this.MaterialProveedorLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaterialProveedorLabel.Location = new System.Drawing.Point(50, 250);
             this.MaterialProveedorLabel.Name = "MaterialProveedorLabel";
-            this.MaterialProveedorLabel.Size = new System.Drawing.Size(143, 21);
-            this.MaterialProveedorLabel.TabIndex = 1;
-            this.MaterialProveedorLabel.Text = "Material Proveedor";
+            this.MaterialProveedorLabel.Size = new System.Drawing.Size(150, 21);
+            this.MaterialProveedorLabel.TabIndex = 3;
+            this.MaterialProveedorLabel.Text = "Material Proveedor*";
             // 
             // MaterialInternoLabel
             // 
@@ -75,9 +75,9 @@ namespace CZS_LaVictoria.DatosPage
             this.MaterialInternoLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaterialInternoLabel.Location = new System.Drawing.Point(50, 300);
             this.MaterialInternoLabel.Name = "MaterialInternoLabel";
-            this.MaterialInternoLabel.Size = new System.Drawing.Size(121, 21);
-            this.MaterialInternoLabel.TabIndex = 1;
-            this.MaterialInternoLabel.Text = "Material Interno";
+            this.MaterialInternoLabel.Size = new System.Drawing.Size(128, 21);
+            this.MaterialInternoLabel.TabIndex = 5;
+            this.MaterialInternoLabel.Text = "Material Interno*";
             // 
             // PrecioUnitarioLabel
             // 
@@ -85,9 +85,9 @@ namespace CZS_LaVictoria.DatosPage
             this.PrecioUnitarioLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PrecioUnitarioLabel.Location = new System.Drawing.Point(50, 350);
             this.PrecioUnitarioLabel.Name = "PrecioUnitarioLabel";
-            this.PrecioUnitarioLabel.Size = new System.Drawing.Size(113, 21);
-            this.PrecioUnitarioLabel.TabIndex = 1;
-            this.PrecioUnitarioLabel.Text = "Precio Unitario";
+            this.PrecioUnitarioLabel.Size = new System.Drawing.Size(120, 21);
+            this.PrecioUnitarioLabel.TabIndex = 7;
+            this.PrecioUnitarioLabel.Text = "Precio Unitario*";
             // 
             // MaterialProveedorText
             // 
@@ -95,7 +95,7 @@ namespace CZS_LaVictoria.DatosPage
             this.MaterialProveedorText.Location = new System.Drawing.Point(220, 247);
             this.MaterialProveedorText.Name = "MaterialProveedorText";
             this.MaterialProveedorText.Size = new System.Drawing.Size(250, 29);
-            this.MaterialProveedorText.TabIndex = 2;
+            this.MaterialProveedorText.TabIndex = 4;
             // 
             // MaterialInternoText
             // 
@@ -103,7 +103,7 @@ namespace CZS_LaVictoria.DatosPage
             this.MaterialInternoText.Location = new System.Drawing.Point(220, 297);
             this.MaterialInternoText.Name = "MaterialInternoText";
             this.MaterialInternoText.Size = new System.Drawing.Size(250, 29);
-            this.MaterialInternoText.TabIndex = 2;
+            this.MaterialInternoText.TabIndex = 6;
             // 
             // PrecioUnitarioText
             // 
@@ -117,7 +117,7 @@ namespace CZS_LaVictoria.DatosPage
             this.PrecioUnitarioText.Location = new System.Drawing.Point(220, 347);
             this.PrecioUnitarioText.Name = "PrecioUnitarioText";
             this.PrecioUnitarioText.Size = new System.Drawing.Size(250, 29);
-            this.PrecioUnitarioText.TabIndex = 3;
+            this.PrecioUnitarioText.TabIndex = 8;
             this.PrecioUnitarioText.Text = "$0.00";
             // 
             // ProveedorCombo
@@ -128,7 +128,7 @@ namespace CZS_LaVictoria.DatosPage
             this.ProveedorCombo.Location = new System.Drawing.Point(220, 147);
             this.ProveedorCombo.Name = "ProveedorCombo";
             this.ProveedorCombo.Size = new System.Drawing.Size(250, 29);
-            this.ProveedorCombo.TabIndex = 4;
+            this.ProveedorCombo.TabIndex = 2;
             // 
             // MsgBox
             // 
@@ -144,6 +144,7 @@ namespace CZS_LaVictoria.DatosPage
             this.MsgBox.Name = "MsgBox";
             this.MsgBox.Size = new System.Drawing.Size(420, 150);
             this.MsgBox.TabIndex = 14;
+            this.MsgBox.TabStop = false;
             this.MsgBox.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.MsgBox.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.MsgBox.UseVisualStyleBackColor = true;
@@ -172,9 +173,9 @@ namespace CZS_LaVictoria.DatosPage
             this.AreaLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AreaLabel.Location = new System.Drawing.Point(50, 400);
             this.AreaLabel.Name = "AreaLabel";
-            this.AreaLabel.Size = new System.Drawing.Size(95, 21);
-            this.AreaLabel.TabIndex = 1;
-            this.AreaLabel.Text = "Área Interna";
+            this.AreaLabel.Size = new System.Drawing.Size(102, 21);
+            this.AreaLabel.TabIndex = 9;
+            this.AreaLabel.Text = "Área Interna*";
             // 
             // AreaCombo
             // 
@@ -184,7 +185,7 @@ namespace CZS_LaVictoria.DatosPage
             this.AreaCombo.Location = new System.Drawing.Point(220, 397);
             this.AreaCombo.Name = "AreaCombo";
             this.AreaCombo.Size = new System.Drawing.Size(250, 29);
-            this.AreaCombo.TabIndex = 4;
+            this.AreaCombo.TabIndex = 10;
             // 
             // SubtitleLabel
             // 
@@ -193,7 +194,7 @@ namespace CZS_LaVictoria.DatosPage
             this.SubtitleLabel.Location = new System.Drawing.Point(50, 25);
             this.SubtitleLabel.Name = "SubtitleLabel";
             this.SubtitleLabel.Size = new System.Drawing.Size(360, 37);
-            this.SubtitleLabel.TabIndex = 29;
+            this.SubtitleLabel.TabIndex = 0;
             this.SubtitleLabel.Text = "Crear Material de Proveedor";
             // 
             // CategoríaLabel
@@ -202,9 +203,9 @@ namespace CZS_LaVictoria.DatosPage
             this.CategoríaLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CategoríaLabel.Location = new System.Drawing.Point(50, 450);
             this.CategoríaLabel.Name = "CategoríaLabel";
-            this.CategoríaLabel.Size = new System.Drawing.Size(77, 21);
-            this.CategoríaLabel.TabIndex = 1;
-            this.CategoríaLabel.Text = "Categoría";
+            this.CategoríaLabel.Size = new System.Drawing.Size(84, 21);
+            this.CategoríaLabel.TabIndex = 11;
+            this.CategoríaLabel.Text = "Categoría*";
             // 
             // CategoríaCombo
             // 
@@ -215,7 +216,7 @@ namespace CZS_LaVictoria.DatosPage
             this.CategoríaCombo.Location = new System.Drawing.Point(220, 447);
             this.CategoríaCombo.Name = "CategoríaCombo";
             this.CategoríaCombo.Size = new System.Drawing.Size(250, 29);
-            this.CategoríaCombo.TabIndex = 4;
+            this.CategoríaCombo.TabIndex = 12;
             // 
             // ProveedorProductoCrearForm
             // 

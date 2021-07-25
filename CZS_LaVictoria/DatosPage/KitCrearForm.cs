@@ -1,7 +1,6 @@
 ﻿using CZS_LaVictoria_Library;
 using CZS_LaVictoria_Library.Models;
 using System;
-using System.Collections;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -15,6 +14,11 @@ namespace CZS_LaVictoria.DatosPage
             InitializeComponent();
             GetMateriales();
             MaterialesListBox.DisplayMember = "Nombre";
+            if (GlobalConfig.Connection.CZS_GetLicencia()) return;
+            MessageBox.Show(
+                "No se puede verificar la licencia. Verifica el estatus de la misma y verifica tu conexión a internet.",
+                "Error de licencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            Application.Exit();
         }
 
         #region Events
@@ -23,6 +27,8 @@ namespace CZS_LaVictoria.DatosPage
         {
             NombreText.Enabled = false;
             MsgBox.Visible = false;
+            MsgBox.Text = "";
+
             if (!ValidateForm())
             {
                 MsgBox.Visible = true;
@@ -77,11 +83,12 @@ namespace CZS_LaVictoria.DatosPage
                 Materiales = MaterialesListBox.Items.Cast<MaterialModel>().ToList(),
                 Cantidades = CantidadesListBox.Items.Cast<double>().ToList()
             };
+
             var saveSuccess = GlobalConfig.Connection.Kit_Create(model);
 
             if (saveSuccess)
             {
-                ClearForm();
+                Tools.ClearForm(this);
                 MsgBox.Text = $"Kit {model.Nombre} guardado con éxito.";
                 MsgBox.IconColor = Color.DarkGreen;
             }
@@ -125,7 +132,6 @@ namespace CZS_LaVictoria.DatosPage
         bool ValidateForm()
         {
             var output = true;
-            MsgBox.Text = "";
 
             if (NombreText.Text == "")
             {
@@ -146,32 +152,6 @@ namespace CZS_LaVictoria.DatosPage
             }
 
             return output;
-        }
-
-        void ClearForm()
-        {
-            void Func(IEnumerable controls)
-            {
-                foreach (Control control in controls)
-                    if (control is TextBox box)
-                    {
-                        box.Clear();
-                        box.Enabled = true;
-                    }
-                    else if (control is ComboBox cbox)
-                    {
-                        cbox.Text = "";
-                        cbox.SelectedItem = null;
-                    }
-                    else if (control is ListBox listBox)
-                    {
-                        listBox.Items.Clear();
-                    }
-                    else
-                        Func(control.Controls);
-            }
-
-            Func(Controls);
         }
 
         #endregion

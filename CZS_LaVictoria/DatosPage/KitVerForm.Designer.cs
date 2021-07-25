@@ -48,7 +48,8 @@ namespace CZS_LaVictoria.DatosPage
             this.CantidadesListBox.Name = "CantidadesListBox";
             this.CantidadesListBox.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.CantidadesListBox.Size = new System.Drawing.Size(200, 193);
-            this.CantidadesListBox.TabIndex = 60;
+            this.CantidadesListBox.TabIndex = 5;
+            this.CantidadesListBox.TabStop = false;
             // 
             // MaterialesListBox
             // 
@@ -58,7 +59,8 @@ namespace CZS_LaVictoria.DatosPage
             this.MaterialesListBox.Name = "MaterialesListBox";
             this.MaterialesListBox.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.MaterialesListBox.Size = new System.Drawing.Size(200, 193);
-            this.MaterialesListBox.TabIndex = 61;
+            this.MaterialesListBox.TabIndex = 4;
+            this.MaterialesListBox.TabStop = false;
             // 
             // MsgBox
             // 
@@ -73,7 +75,8 @@ namespace CZS_LaVictoria.DatosPage
             this.MsgBox.Location = new System.Drawing.Point(506, 400);
             this.MsgBox.Name = "MsgBox";
             this.MsgBox.Size = new System.Drawing.Size(420, 157);
-            this.MsgBox.TabIndex = 59;
+            this.MsgBox.TabIndex = 6;
+            this.MsgBox.TabStop = false;
             this.MsgBox.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.MsgBox.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.MsgBox.UseVisualStyleBackColor = true;
@@ -86,7 +89,7 @@ namespace CZS_LaVictoria.DatosPage
             this.EliminarButton.Location = new System.Drawing.Point(392, 200);
             this.EliminarButton.Name = "EliminarButton";
             this.EliminarButton.Size = new System.Drawing.Size(78, 33);
-            this.EliminarButton.TabIndex = 58;
+            this.EliminarButton.TabIndex = 3;
             this.EliminarButton.Text = "Eliminar";
             this.EliminarButton.UseVisualStyleBackColor = true;
             this.EliminarButton.Click += new System.EventHandler(this.EliminarButton_Click);
@@ -101,7 +104,7 @@ namespace CZS_LaVictoria.DatosPage
             this.NombreCombo.Location = new System.Drawing.Point(220, 147);
             this.NombreCombo.Name = "NombreCombo";
             this.NombreCombo.Size = new System.Drawing.Size(250, 29);
-            this.NombreCombo.TabIndex = 57;
+            this.NombreCombo.TabIndex = 2;
             this.NombreCombo.SelectedIndexChanged += new System.EventHandler(this.NombreCombo_SelectedIndexChanged);
             // 
             // NombreLabel
@@ -111,7 +114,7 @@ namespace CZS_LaVictoria.DatosPage
             this.NombreLabel.Location = new System.Drawing.Point(50, 150);
             this.NombreLabel.Name = "NombreLabel";
             this.NombreLabel.Size = new System.Drawing.Size(68, 21);
-            this.NombreLabel.TabIndex = 56;
+            this.NombreLabel.TabIndex = 1;
             this.NombreLabel.Text = "Nombre";
             // 
             // SubtitleLabel
@@ -121,7 +124,7 @@ namespace CZS_LaVictoria.DatosPage
             this.SubtitleLabel.Location = new System.Drawing.Point(50, 25);
             this.SubtitleLabel.Name = "SubtitleLabel";
             this.SubtitleLabel.Size = new System.Drawing.Size(109, 37);
-            this.SubtitleLabel.TabIndex = 54;
+            this.SubtitleLabel.TabIndex = 0;
             this.SubtitleLabel.Text = "Ver Kits";
             // 
             // MsgBoxTimer

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Drawing;
 using System.Windows.Forms;
 using CZS_LaVictoria_Library;
@@ -12,16 +11,20 @@ namespace CZS_LaVictoria.DatosPage
         public ClienteProductoCrearForm()
         {
             InitializeComponent();
-            GetClientes();
             GetAreas();
+            if (GlobalConfig.Connection.CZS_GetLicencia()) return;
+            MessageBox.Show(
+                "No se puede verificar la licencia. Verifica el estatus de la misma y verifica tu conexión a internet.",
+                "Error de licencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            Application.Exit();
         }
 
         #region Events
 
         void GuardarButton_Click(object sender, EventArgs e)
         {
-            ClienteModel cliente;
             MsgBox.Visible = false;
+            MsgBox.Text = "";
 
             if (!ValidateForm())
             {
@@ -31,20 +34,11 @@ namespace CZS_LaVictoria.DatosPage
 
             var model = new ClienteProductoModel(ProductoInternoText.Text, PrecioUnitarioText.Text, AreaCombo.Text);
 
-            try
-            {
-                cliente = (ClienteModel)ClienteCombo.SelectedItem;
-            }
-            catch (Exception)
-            {
-                cliente = null;
-            }
-
-            var saveSuccess = GlobalConfig.Connection.ClienteProducto_Create(model, cliente);
+            var saveSuccess = GlobalConfig.Connection.ClienteProducto_Create(model);
 
             if (saveSuccess)
             {
-                ClearForm();
+                Tools.ClearForm(this);
                 MsgBox.Text = $"Producto {model.ProductoInterno} guardado con éxito.";
                 MsgBox.IconColor = Color.DarkGreen;
             }
@@ -67,18 +61,6 @@ namespace CZS_LaVictoria.DatosPage
         #endregion
 
         #region Methods
-
-        void GetClientes()
-        {
-            var clientes = GlobalConfig.Connection.Cliente_GetAll();
-
-            foreach (var cliente in clientes)
-            {
-                ClienteCombo.Items.Add(cliente);
-            }
-
-            ClienteCombo.DisplayMember = "Nombre";
-        }
 
         void GetAreas()
         {
@@ -113,25 +95,6 @@ namespace CZS_LaVictoria.DatosPage
             }
 
             return output;
-        }
-
-        void ClearForm()
-        {
-            void Func(IEnumerable controls)
-            {
-                foreach (Control control in controls)
-                    if (control is TextBox box)
-                        box.Clear();
-                    else if (control is ComboBox comboBox)
-                    {
-                        comboBox.SelectedItem = null;
-                        comboBox.Text = "";
-                    }
-                    else
-                        Func(control.Controls);
-            }
-
-            Func(Controls);
         }
 
         #endregion

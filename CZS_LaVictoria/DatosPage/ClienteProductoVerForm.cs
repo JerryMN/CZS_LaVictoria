@@ -20,7 +20,7 @@ namespace CZS_LaVictoria.DatosPage
             DataGrid.QueryRowHeight += DataGridOnQueryRowHeight;
             DataGrid.Style.CellStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
             DataGrid.Style.HeaderStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
-            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
+            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCellsWithLastColumnFill;
         }
 
         #region Events
@@ -39,29 +39,33 @@ namespace CZS_LaVictoria.DatosPage
 
         void DataGrid_AutoGeneratingColumn(object sender, AutoGeneratingColumnArgs e)
         {
-            if (e.Column.MappingName == "Id")
+            switch (e.Column.MappingName)
             {
-                e.Cancel = true;
-            }
-
-            if (e.Column.MappingName == "ProductoInterno")
-            {
-                e.Column.HeaderText = "Producto Interno";
-            }
-
-            if (e.Column.MappingName == "PrecioUnitario")
-            {
-                e.Column.HeaderText = "Precio Unitario";
-            }
-
-            if (e.Column.MappingName == "IdClient")
-            {
-                e.Cancel = true;
+                case "Id":
+                    e.Cancel = true;
+                    break;
+                case "ProductoInterno":
+                    e.Column.HeaderText = "Producto Interno";
+                    e.Column.AutoSizeColumnsMode = AutoSizeColumnsMode.LastColumnFill;
+                    break;
+                case "PrecioUnitario":
+                    e.Column.HeaderText = "Precio Unitario";
+                    break;
+                case "IdClient":
+                    e.Cancel = true;
+                    break;
             }
         }
 
         void EditarButton_Click(object sender, EventArgs e)
         {
+            if (DataGrid.SelectedIndex < 0)
+            {
+                MessageBox.Show("Selecciona un producto a editar.", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+                return;
+            }
+
             if (EditarButton.Text == "Editar")
             {
                 DataGrid.AllowEditing = true;
@@ -75,21 +79,15 @@ namespace CZS_LaVictoria.DatosPage
                 var model = (ClienteProductoModel)DataGrid.SelectedItem;
                 var updateSuccess = GlobalConfig.Connection.ClienteProducto_Update(model);
 
-                if (updateSuccess && model.Cliente != "")
+                if (updateSuccess)
                 {
-                    DataGrid.AllowEditing = false;
-                    EditarButton.Text = "Editar";
-                    MessageBox.Show($"Producto {model.ProductoInterno} para cliente {model.Cliente} actualizado con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else if (updateSuccess && model.Cliente == "")
-                {
-                    DataGrid.AllowEditing = false;
-                    EditarButton.Text = "Editar";
-                    MessageBox.Show($"Producto {model.ProductoInterno} actualizado con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Producto {model.ProductoInterno} actualizado con éxito.", "Mensaje",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    MessageBox.Show($"Error al actualizar producto {model.ProductoInterno}.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Error al actualizar producto {model.ProductoInterno}.", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 DataGrid.AllowEditing = false;
@@ -99,9 +97,17 @@ namespace CZS_LaVictoria.DatosPage
 
         void BorrarButton_Click(object sender, EventArgs e)
         {
+            if (DataGrid.SelectedIndex < 0)
+            {
+                MessageBox.Show("Selecciona un producto a borrar.", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+                return;
+            }
+
             var model = (ClienteProductoModel)DataGrid.SelectedItem;
 
-            if (MessageBox.Show($"Estás seguro de eliminar al producto {model.ProductoInterno}? Esta acción es irreversible.", null, MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            if (MessageBox.Show($"Estás seguro de eliminar al producto {model.ProductoInterno}? Esta acción es irreversible.", 
+                "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
             {
                 return;
             }
@@ -111,11 +117,13 @@ namespace CZS_LaVictoria.DatosPage
             if (deleteSuccess)
             {
                 DataGrid.DataSource = GetProductos();
-                MessageBox.Show($"Material {model.ProductoInterno} eliminado con éxito.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Material {model.ProductoInterno} eliminado con éxito.", "Mensaje",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show($"Error al eliminar material {model.ProductoInterno}.", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Error al eliminar material {model.ProductoInterno}.", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
             }
         }
 

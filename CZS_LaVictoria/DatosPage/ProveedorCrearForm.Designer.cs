@@ -56,7 +56,7 @@ namespace CZS_LaVictoria.DatosPage
             this.NombreLabel.Location = new System.Drawing.Point(50, 150);
             this.NombreLabel.Name = "NombreLabel";
             this.NombreLabel.Size = new System.Drawing.Size(75, 21);
-            this.NombreLabel.TabIndex = 0;
+            this.NombreLabel.TabIndex = 1;
             this.NombreLabel.Text = "Nombre*";
             // 
             // TeléfonoLabel
@@ -66,7 +66,7 @@ namespace CZS_LaVictoria.DatosPage
             this.TeléfonoLabel.Location = new System.Drawing.Point(50, 200);
             this.TeléfonoLabel.Name = "TeléfonoLabel";
             this.TeléfonoLabel.Size = new System.Drawing.Size(75, 21);
-            this.TeléfonoLabel.TabIndex = 0;
+            this.TeléfonoLabel.TabIndex = 3;
             this.TeléfonoLabel.Text = "Teléfono*";
             // 
             // CorreoLabel
@@ -76,7 +76,7 @@ namespace CZS_LaVictoria.DatosPage
             this.CorreoLabel.Location = new System.Drawing.Point(50, 250);
             this.CorreoLabel.Name = "CorreoLabel";
             this.CorreoLabel.Size = new System.Drawing.Size(65, 21);
-            this.CorreoLabel.TabIndex = 0;
+            this.CorreoLabel.TabIndex = 5;
             this.CorreoLabel.Text = "Correo*";
             // 
             // DirecciónLabel
@@ -86,7 +86,7 @@ namespace CZS_LaVictoria.DatosPage
             this.DirecciónLabel.Location = new System.Drawing.Point(50, 300);
             this.DirecciónLabel.Name = "DirecciónLabel";
             this.DirecciónLabel.Size = new System.Drawing.Size(75, 21);
-            this.DirecciónLabel.TabIndex = 0;
+            this.DirecciónLabel.TabIndex = 7;
             this.DirecciónLabel.Text = "Dirección";
             // 
             // ResponsableLabel
@@ -96,7 +96,7 @@ namespace CZS_LaVictoria.DatosPage
             this.ResponsableLabel.Location = new System.Drawing.Point(50, 400);
             this.ResponsableLabel.Name = "ResponsableLabel";
             this.ResponsableLabel.Size = new System.Drawing.Size(79, 21);
-            this.ResponsableLabel.TabIndex = 0;
+            this.ResponsableLabel.TabIndex = 9;
             this.ResponsableLabel.Text = "Contacto*";
             // 
             // NombreText
@@ -105,7 +105,7 @@ namespace CZS_LaVictoria.DatosPage
             this.NombreText.Location = new System.Drawing.Point(220, 147);
             this.NombreText.Name = "NombreText";
             this.NombreText.Size = new System.Drawing.Size(250, 29);
-            this.NombreText.TabIndex = 1;
+            this.NombreText.TabIndex = 2;
             // 
             // CorreoText
             // 
@@ -113,7 +113,7 @@ namespace CZS_LaVictoria.DatosPage
             this.CorreoText.Location = new System.Drawing.Point(220, 247);
             this.CorreoText.Name = "CorreoText";
             this.CorreoText.Size = new System.Drawing.Size(250, 29);
-            this.CorreoText.TabIndex = 1;
+            this.CorreoText.TabIndex = 6;
             // 
             // DirecciónText
             // 
@@ -122,7 +122,7 @@ namespace CZS_LaVictoria.DatosPage
             this.DirecciónText.Multiline = true;
             this.DirecciónText.Name = "DirecciónText";
             this.DirecciónText.Size = new System.Drawing.Size(250, 84);
-            this.DirecciónText.TabIndex = 1;
+            this.DirecciónText.TabIndex = 8;
             // 
             // ResponsableText
             // 
@@ -130,7 +130,7 @@ namespace CZS_LaVictoria.DatosPage
             this.ResponsableText.Location = new System.Drawing.Point(220, 397);
             this.ResponsableText.Name = "ResponsableText";
             this.ResponsableText.Size = new System.Drawing.Size(250, 29);
-            this.ResponsableText.TabIndex = 1;
+            this.ResponsableText.TabIndex = 10;
             // 
             // TeléfonoText
             // 
@@ -141,7 +141,7 @@ namespace CZS_LaVictoria.DatosPage
             this.TeléfonoText.MaxLength = 14;
             this.TeléfonoText.Name = "TeléfonoText";
             this.TeléfonoText.Size = new System.Drawing.Size(250, 29);
-            this.TeléfonoText.TabIndex = 2;
+            this.TeléfonoText.TabIndex = 4;
             this.TeléfonoText.Enter += new System.EventHandler(this.TeléfonoText_Enter);
             // 
             // GuardarButton
@@ -151,7 +151,7 @@ namespace CZS_LaVictoria.DatosPage
             this.GuardarButton.Location = new System.Drawing.Point(392, 500);
             this.GuardarButton.Name = "GuardarButton";
             this.GuardarButton.Size = new System.Drawing.Size(78, 31);
-            this.GuardarButton.TabIndex = 3;
+            this.GuardarButton.TabIndex = 13;
             this.GuardarButton.Text = "Guardar";
             this.GuardarButton.UseVisualStyleBackColor = true;
             this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
@@ -169,7 +169,8 @@ namespace CZS_LaVictoria.DatosPage
             this.MsgBox.Location = new System.Drawing.Point(50, 550);
             this.MsgBox.Name = "MsgBox";
             this.MsgBox.Size = new System.Drawing.Size(420, 150);
-            this.MsgBox.TabIndex = 12;
+            this.MsgBox.TabIndex = 14;
+            this.MsgBox.TabStop = false;
             this.MsgBox.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.MsgBox.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.MsgBox.UseVisualStyleBackColor = true;
@@ -187,7 +188,7 @@ namespace CZS_LaVictoria.DatosPage
             this.CondicionesLabel.Location = new System.Drawing.Point(50, 450);
             this.CondicionesLabel.Name = "CondicionesLabel";
             this.CondicionesLabel.Size = new System.Drawing.Size(95, 21);
-            this.CondicionesLabel.TabIndex = 13;
+            this.CondicionesLabel.TabIndex = 11;
             this.CondicionesLabel.Text = "Condiciones";
             // 
             // CondicionesCombo
@@ -199,7 +200,7 @@ namespace CZS_LaVictoria.DatosPage
             this.CondicionesCombo.Location = new System.Drawing.Point(220, 447);
             this.CondicionesCombo.Name = "CondicionesCombo";
             this.CondicionesCombo.Size = new System.Drawing.Size(250, 29);
-            this.CondicionesCombo.TabIndex = 14;
+            this.CondicionesCombo.TabIndex = 12;
             // 
             // SubtitleLabel
             // 
@@ -208,7 +209,7 @@ namespace CZS_LaVictoria.DatosPage
             this.SubtitleLabel.Location = new System.Drawing.Point(50, 25);
             this.SubtitleLabel.Name = "SubtitleLabel";
             this.SubtitleLabel.Size = new System.Drawing.Size(215, 37);
-            this.SubtitleLabel.TabIndex = 28;
+            this.SubtitleLabel.TabIndex = 0;
             this.SubtitleLabel.Text = "Crear Proveedor";
             // 
             // ProveedorCrearForm

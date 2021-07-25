@@ -186,9 +186,8 @@ namespace CZS_LaVictoria_Library.DataAccess
         /// Crea un producto a comercializar.
         /// </summary>
         /// <param name="model">Un modelo con las propiedades del producto.</param>
-        /// <param name="cliente">Un modelo con las propiedades del cliente. Puede pasarse null.</param>
         /// <returns>True, si se creó correctamente, falso si no.</returns>
-        bool ClienteProducto_Create(ClienteProductoModel model, ClienteModel cliente);
+        bool ClienteProducto_Create(ClienteProductoModel model);
 
         /// <summary>
         /// Obtiene todos los productos con o sin cliente.
@@ -197,12 +196,11 @@ namespace CZS_LaVictoria_Library.DataAccess
         List<ClienteProductoModel> ClienteProducto_GetAll();
 
         /// <summary>
-        /// Obtiene todos los productos de un cliente(?) y de un área.
+        /// Obtiene todos los productos de un área.
         /// </summary>
-        /// <param name="idCliente">El id único del cliente. Puede ser null.</param>
         /// <param name="area">El área interna de la empresa.</param>
         /// <returns>Una lista con los modelos de los productos.</returns>
-        List<ClienteProductoModel> ClienteProducto_GetByClienteArea(int? idCliente, string area);
+        List<ClienteProductoModel> ClienteProducto_GetByArea(string area);
 
         /// <summary>
         /// Obtiene un producto con cierto nombre, y de cierta área.

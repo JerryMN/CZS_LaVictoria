@@ -22,12 +22,15 @@ namespace CZS_LaVictoria.DatosPage
 
         void NombreCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (NombreCombo.SelectedItem == null) return;
+            MsgBox.Visible = false;
+            MsgBox.Text = "";
+
+            if (NombreCombo.SelectedIndex < 0) return;
 
             MaterialesListBox.Items.Clear();
             CantidadesListBox.Items.Clear();
 
-            _selectedModel = NombreCombo.SelectedItem as KitModel;
+            _selectedModel = (KitModel) NombreCombo.SelectedItem;
             Debug.Assert(_selectedModel?.Materiales != null, "selected?.Materiales != null");
 
             foreach (var material in _selectedModel?.Materiales)
@@ -43,7 +46,21 @@ namespace CZS_LaVictoria.DatosPage
 
         void EliminarButton_Click(object sender, EventArgs e)
         {
-            if (_selectedModel == null) return;
+            MsgBox.Visible = false;
+            MsgBox.Text = "";
+
+            if (NombreCombo.SelectedIndex < 0)
+            {
+                MsgBox.Text = "Selecciona un kit a borrar.";
+                MsgBox.IconColor = Color.DarkRed;
+                MsgBox.Visible = true;
+                return;
+            }
+
+            if (MessageBox.Show($"Estás seguro de eliminar el kit {_selectedModel.Nombre}? Esta acción es irreversible.", "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            {
+                return;
+            }
 
             var deleteSuccess = GlobalConfig.Connection.Kit_Delete(_selectedModel);
 
@@ -88,21 +105,25 @@ namespace CZS_LaVictoria.DatosPage
 
         void ClearForm()
         {
-            MaterialesListBox.Items.Clear();
-            CantidadesListBox.Items.Clear();
-
             void Func(IEnumerable controls)
             {
                 foreach (Control control in controls)
-                    if (control is TextBox box)
-                        box.Clear();
-                    else if (control is ComboBox comboBox)
+                    switch (control)
                     {
-                        comboBox.Text = "";
-                        comboBox.SelectedItem = null;
+                        case TextBox box:
+                            box.Clear();
+                            break;
+                        case ComboBox comboBox:
+                            comboBox.Text = "";
+                            comboBox.SelectedItem = null;
+                            break;
+                        case ListBox listBox:
+                            listBox.Items.Clear();
+                            break;
+                        default:
+                            Func(control.Controls);
+                            break;
                     }
-                    else
-                        Func(control.Controls);
             }
 
             Func(Controls);

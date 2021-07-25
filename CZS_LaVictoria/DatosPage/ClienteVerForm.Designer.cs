@@ -47,7 +47,7 @@ namespace CZS_LaVictoria.DatosPage
             this.DataGrid.Name = "DataGrid";
             this.DataGrid.ShowGroupDropArea = true;
             this.DataGrid.Size = new System.Drawing.Size(1276, 786);
-            this.DataGrid.TabIndex = 1;
+            this.DataGrid.TabIndex = 2;
             this.DataGrid.Text = "sfDataGrid1";
             this.DataGrid.AutoGeneratingColumn += new Syncfusion.WinForms.DataGrid.Events.AutoGeneratingColumnEventHandler(this.DataGrid_AutoGeneratingColumn);
             // 
@@ -63,7 +63,7 @@ namespace CZS_LaVictoria.DatosPage
             this.BorrarButton.Location = new System.Drawing.Point(125, 12);
             this.BorrarButton.Name = "BorrarButton";
             this.BorrarButton.Size = new System.Drawing.Size(88, 31);
-            this.BorrarButton.TabIndex = 2;
+            this.BorrarButton.TabIndex = 1;
             this.BorrarButton.Text = "Borrar";
             this.BorrarButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BorrarButton.UseVisualStyleBackColor = true;
@@ -81,7 +81,7 @@ namespace CZS_LaVictoria.DatosPage
             this.EditarButton.Location = new System.Drawing.Point(12, 12);
             this.EditarButton.Name = "EditarButton";
             this.EditarButton.Size = new System.Drawing.Size(84, 31);
-            this.EditarButton.TabIndex = 3;
+            this.EditarButton.TabIndex = 0;
             this.EditarButton.Text = "Editar";
             this.EditarButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.EditarButton.UseVisualStyleBackColor = true;
