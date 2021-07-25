@@ -2,15 +2,8 @@
 {
     public class MaterialModel
     {
-        public int Id { get; set; }
-        public string Nombre { get; set; }
-        public string Área { get; set; }
-        public string Categoría { get; set; }
-        public double CantidadDisponible { get; set; }
-
         public MaterialModel()
         {
-            
         }
 
         public MaterialModel(string nombre, string area, string categoría, string cantidadDisponible)
@@ -30,5 +23,11 @@
             Categoría = categoría;
             CantidadDisponible = cantidadDisponible;
         }
+
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public string Área { get; set; }
+        public string Categoría { get; set; }
+        public double CantidadDisponible { get; set; }
     }
 }

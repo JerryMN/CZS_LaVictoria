@@ -29,7 +29,8 @@ namespace CZS_LaVictoria_Library.DataAccess
                 p.Add("@Empresa", "Escobas La Victoria");
                 p.Add("@Habilitado", 0, DbType.Boolean, ParameterDirection.Output);
 
-                return connection.QuerySingle<bool>("dbo.spLicencias_Consulta", p, commandType: CommandType.StoredProcedure);
+                return connection.QuerySingle<bool>("dbo.spLicencias_Consulta", p,
+                    commandType: CommandType.StoredProcedure);
             }
         }
 
@@ -465,7 +466,6 @@ namespace CZS_LaVictoria_Library.DataAccess
                     Debug.Assert(false);
                     return null;
                 }
-
             }
         }
 
@@ -946,10 +946,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                         var cants = connection.Query<double>("dbo.spMixDetails_GetCantidades", p,
                             commandType: CommandType.StoredProcedure).ToList();
 
-                        foreach (var cant in cants)
-                        {
-                            mezclaModel.Cantidades.Add(cant);
-                        }
+                        foreach (var cant in cants) mezclaModel.Cantidades.Add(cant);
 
                         foreach (var id in idsMat)
                         {
@@ -1064,10 +1061,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                         var cants = connection.Query<double>("dbo.spKitDetails_GetCantidades", p,
                             commandType: CommandType.StoredProcedure).ToList();
 
-                        foreach (var cant in cants)
-                        {
-                            kitModel.Cantidades.Add(cant);
-                        }
+                        foreach (var cant in cants) kitModel.Cantidades.Add(cant);
 
                         foreach (var id in idsMat)
                         {
@@ -1363,9 +1357,9 @@ namespace CZS_LaVictoria_Library.DataAccess
                     p.Add("@Factura");
                     p.Add("@FechaFactura");
                     p.Add("@Proveedor", línea.Proveedor);
-                    p.Add("@Monto", (decimal)nuevaCantidad * línea.PrecioUnitario);
+                    p.Add("@Monto", (decimal) nuevaCantidad * línea.PrecioUnitario);
                     p.Add("@Pagado");
-                    p.Add("@Pendiente", (decimal)nuevaCantidad * línea.PrecioUnitario);
+                    p.Add("@Pendiente", (decimal) nuevaCantidad * línea.PrecioUnitario);
                     p.Add("@Condiciones", orden.Condiciones);
                     p.Add("@FechaLímite", línea.FechaUltRecepción.Value.AddDays(dias + 1));
                     p.Add("@FechaLiquidación");
@@ -1586,10 +1580,8 @@ namespace CZS_LaVictoria_Library.DataAccess
                     }
 
                     if (material == null)
-                    {
                         // Material no existe en inventario.
                         return false;
-                    }
 
                     p = new DynamicParameters();
                     p.Add("@CantidadDisponible", material.CantidadDisponible - newQty + oldQty);
@@ -2983,7 +2975,8 @@ namespace CZS_LaVictoria_Library.DataAccess
                     var index = 0;
                     foreach (var material in kit.Materiales)
                     {
-                        p.Add("@CantidadDisponible", material.CantidadDisponible - model.CantidadKit * kit.Cantidades[index]);
+                        p.Add("@CantidadDisponible",
+                            material.CantidadDisponible - model.CantidadKit * kit.Cantidades[index]);
                         p.Add("@Id", material.Id);
                         connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
                         index += 1;

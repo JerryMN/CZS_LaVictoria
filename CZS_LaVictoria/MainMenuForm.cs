@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 using CZS_LaVictoria.AlgodónPage;
 using CZS_LaVictoria.CuentasPage;
@@ -39,7 +40,7 @@ namespace CZS_LaVictoria
             };
 
             SplashScreenManager.ShowFluentSplashScreen(op, parentForm: this, useFadeIn: true, useFadeOut: true);
-            System.Threading.Thread.Sleep(5000);
+            Thread.Sleep(5000);
             SplashScreenManager.CloseForm();
 
             if (_validLicense) return;
@@ -50,7 +51,7 @@ namespace CZS_LaVictoria
         }
 
         /// <summary>
-        /// Abre un formulario dentro del formulario principal.
+        ///     Abre un formulario dentro del formulario principal.
         /// </summary>
         /// <param name="childForm">El formulario a abrir.</param>
         void OpenChildForm(Form childForm)
@@ -70,6 +71,15 @@ namespace CZS_LaVictoria
         {
             OpenChildForm(new OpcionesForm());
         }
+
+        #region Datos - Personal
+
+        void CrearOperadorButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new OperadorCrearForm());
+        }
+
+        #endregion
 
         #region Ordenes
 
@@ -206,15 +216,6 @@ namespace CZS_LaVictoria
         void VerMezclasButton_ItemClick(object sender, ItemClickEventArgs e)
         {
             OpenChildForm(new MezclaVerForm());
-        }
-
-        #endregion
-
-        #region Datos - Personal
-
-        void CrearOperadorButton_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            OpenChildForm(new OperadorCrearForm());
         }
 
         #endregion

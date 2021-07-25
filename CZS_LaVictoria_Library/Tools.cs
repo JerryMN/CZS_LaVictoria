@@ -11,7 +11,7 @@ namespace CZS_LaVictoria_Library
             {
                 foreach (Control control in controls)
                     switch (control)
-                    { 
+                    {
                         case TextBox box:
                             box.Clear();
                             box.Enabled = true;

@@ -9,9 +9,5 @@ namespace CZS_LaVictoria_Library.Models
         public List<MaterialModel> Materiales { get; set; } = new List<MaterialModel>();
         public List<double> Cantidades { get; set; } = new List<double>();
         public double CantidadMezcla { get; set; }
-
-        public MezclaModel()
-        {
-        }
     }
 }

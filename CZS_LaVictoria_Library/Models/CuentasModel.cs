@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
+using System.Data.SqlClient;
 using CZS_LaVictoria_Library.DataAccess;
 using Dapper;
 
@@ -29,6 +29,7 @@ namespace CZS_LaVictoria_Library.Models
                 _monthEnd = new DateTime(2021, i, DateTime.DaysInMonth(2021, i));
                 result.Add(CreateItem(2021, i));
             }
+
             return result;
         }
 
@@ -45,22 +46,14 @@ namespace CZS_LaVictoria_Library.Models
 
                 var model = new CuentasModel {Month = new DateTime(year, month, DateTime.DaysInMonth(year, month))};
                 if (income == null)
-                {
                     model.Income = 0;
-                }
                 else
-                {
-                    model.Income = (decimal)income;
-                }
+                    model.Income = (decimal) income;
 
                 if (outcome == null)
-                {
                     model.Outcome = 0;
-                }
                 else
-                {
-                    model.Outcome = (decimal)outcome;
-                }
+                    model.Outcome = (decimal) outcome;
 
                 return model;
             }

@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Net.Mail;
 using System.Windows.Forms;
+using CZS_LaVictoria.Properties;
 
 namespace CZS_LaVictoria
 {
@@ -24,10 +25,10 @@ namespace CZS_LaVictoria
                 return;
             }
 
-            Properties.Settings.Default.smtpServer = SmtpText.Text;
-            Properties.Settings.Default.emailAddress = CorreoText.Text;
-            Properties.Settings.Default.emailPassword = ContraseñaText.Text;
-            Properties.Settings.Default.Save();
+            Settings.Default.smtpServer = SmtpText.Text;
+            Settings.Default.emailAddress = CorreoText.Text;
+            Settings.Default.emailPassword = ContraseñaText.Text;
+            Settings.Default.Save();
 
             MsgBox.Text = "Datos guardados exitosamente.";
             MsgBox.IconColor = Color.DarkGreen;
@@ -46,9 +47,9 @@ namespace CZS_LaVictoria
 
         void LoadPreferences()
         {
-            SmtpText.Text = Properties.Settings.Default.smtpServer;
-            CorreoText.Text = Properties.Settings.Default.emailAddress;
-            ContraseñaText.Text = Properties.Settings.Default.emailPassword;
+            SmtpText.Text = Settings.Default.smtpServer;
+            CorreoText.Text = Settings.Default.emailAddress;
+            ContraseñaText.Text = Settings.Default.emailPassword;
         }
 
         bool ValidatePreferences()

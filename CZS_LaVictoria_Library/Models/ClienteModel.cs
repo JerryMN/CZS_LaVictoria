@@ -2,20 +2,12 @@
 {
     public class ClienteModel
     {
-        public int Id { get; set; }
-        public string Nombre { get; set; }
-        public string Atención { get; set; }
-        public string Correo { get; set; }
-        public string Teléfono { get; set; }
-        public string TeléfonoDos { get; set; }
-        public string Dirección { get; set; }
-        public string Ciudad { get; set; }
-
         public ClienteModel()
         {
         }
 
-        public ClienteModel(string nombre, string atención, string correo, string teléfono, string teléfonoDos, string dirección, string ciudad)
+        public ClienteModel(string nombre, string atención, string correo, string teléfono, string teléfonoDos,
+            string dirección, string ciudad)
         {
             Nombre = nombre;
             Atención = atención;
@@ -25,5 +17,14 @@
             Dirección = dirección;
             Ciudad = ciudad;
         }
+
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public string Atención { get; set; }
+        public string Correo { get; set; }
+        public string Teléfono { get; set; }
+        public string TeléfonoDos { get; set; }
+        public string Dirección { get; set; }
+        public string Ciudad { get; set; }
     }
 }

@@ -2,14 +2,8 @@
 {
     public class ClienteProductoModel
     {
-        public int Id { get; set; }
-        public string ProductoInterno { get; set; }
-        public decimal PrecioUnitario { get; set; }
-        public string Área { get; set; }
-
         public ClienteProductoModel()
         {
-
         }
 
         public ClienteProductoModel(string productoInterno, string precioUnitario, string area)
@@ -21,5 +15,10 @@
 
             Área = area;
         }
+
+        public int Id { get; set; }
+        public string ProductoInterno { get; set; }
+        public decimal PrecioUnitario { get; set; }
+        public string Área { get; set; }
     }
 }
