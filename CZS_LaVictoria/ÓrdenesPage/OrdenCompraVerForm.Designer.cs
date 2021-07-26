@@ -52,7 +52,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.BuscarButton.Location = new System.Drawing.Point(275, 21);
             this.BuscarButton.Name = "BuscarButton";
             this.BuscarButton.Size = new System.Drawing.Size(90, 31);
-            this.BuscarButton.TabIndex = 8;
+            this.BuscarButton.TabIndex = 2;
             this.BuscarButton.Text = "Buscar";
             this.BuscarButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BuscarButton.UseVisualStyleBackColor = true;
@@ -73,7 +73,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.DataGrid.Name = "DataGrid";
             this.DataGrid.ShowGroupDropArea = true;
             this.DataGrid.Size = new System.Drawing.Size(1276, 763);
-            this.DataGrid.TabIndex = 7;
+            this.DataGrid.TabIndex = 6;
             this.DataGrid.Text = "sfDataGrid1";
             this.DataGrid.ValidationMode = Syncfusion.WinForms.DataGrid.Enums.GridValidationMode.InEdit;
             this.DataGrid.AutoGeneratingColumn += new Syncfusion.WinForms.DataGrid.Events.AutoGeneratingColumnEventHandler(this.DataGrid_AutoGeneratingColumn);
@@ -85,7 +85,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.NumOrdenText.MaxLength = 7;
             this.NumOrdenText.Name = "NumOrdenText";
             this.NumOrdenText.Size = new System.Drawing.Size(150, 29);
-            this.NumOrdenText.TabIndex = 11;
+            this.NumOrdenText.TabIndex = 1;
             // 
             // NumOrdenLabel
             // 
@@ -94,7 +94,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.NumOrdenLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.NumOrdenLabel.Name = "NumOrdenLabel";
             this.NumOrdenLabel.Size = new System.Drawing.Size(82, 21);
-            this.NumOrdenLabel.TabIndex = 10;
+            this.NumOrdenLabel.TabIndex = 0;
             this.NumOrdenLabel.Text = "No. orden:";
             // 
             // PendientesCheck
@@ -103,7 +103,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.PendientesCheck.Location = new System.Drawing.Point(375, 25);
             this.PendientesCheck.Name = "PendientesCheck";
             this.PendientesCheck.Size = new System.Drawing.Size(140, 25);
-            this.PendientesCheck.TabIndex = 12;
+            this.PendientesCheck.TabIndex = 3;
             this.PendientesCheck.Text = "Sólo pendientes";
             this.PendientesCheck.UseVisualStyleBackColor = true;
             // 
@@ -119,7 +119,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.RecibirButton.Location = new System.Drawing.Point(550, 22);
             this.RecibirButton.Name = "RecibirButton";
             this.RecibirButton.Size = new System.Drawing.Size(133, 31);
-            this.RecibirButton.TabIndex = 8;
+            this.RecibirButton.TabIndex = 4;
             this.RecibirButton.Text = "Recibir Línea";
             this.RecibirButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.RecibirButton.UseVisualStyleBackColor = true;
@@ -137,7 +137,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.CancelarButton.Location = new System.Drawing.Point(700, 22);
             this.CancelarButton.Name = "CancelarButton";
             this.CancelarButton.Size = new System.Drawing.Size(145, 31);
-            this.CancelarButton.TabIndex = 8;
+            this.CancelarButton.TabIndex = 5;
             this.CancelarButton.Text = "Cancelar Línea";
             this.CancelarButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.CancelarButton.UseVisualStyleBackColor = true;

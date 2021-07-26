@@ -8,11 +8,23 @@ namespace CZS_LaVictoria.ÓrdenesPage
         public AgregarNotasForm()
         {
             InitializeComponent();
+            MinimizeBox = false;
+            MaximizeBox = false;
         }
 
-        void ButtonSaveNotes_Click(object sender, EventArgs e)
+        public string Notas { get; set; }
+
+        void GuardarButton_Click(object sender, EventArgs e)
         {
-            Hide();
+            Notas = NotasText.Text;
+            DialogResult = DialogResult.OK;
+            Close();
+        }
+
+        void CerrarButton_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+            Close();
         }
     }
 }

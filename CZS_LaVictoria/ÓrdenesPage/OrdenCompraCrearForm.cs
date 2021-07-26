@@ -30,6 +30,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
     {
         readonly List<OrdenCompraLíneaModel> _orderLines = new List<OrdenCompraLíneaModel>();
         int _numLinea = 1;
+        string _notas = "";
         string _pdfPath;
         List<ProveedorProductoModel> _productos;
         List<AreaModel> _selectedArea;
@@ -296,6 +297,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             var brush = new PdfSolidBrush(Color.Black);
             var width = e.PdfPage.GetClientSize().Width;
             var header = new PdfPageTemplateElement(width, 80);
+            var footer = new PdfPageTemplateElement(width, 80);
 
             header.Graphics.DrawImage(PdfImage.FromFile(@"..\..\Resources\Logo.png"), width - 70, 0, 70, 70);
             header.Graphics.DrawString($"Escobas La Victoria — Orden de Compra {NumOrdenText.Text}", font, brush, 0, 0);
@@ -304,7 +306,11 @@ namespace CZS_LaVictoria.ÓrdenesPage
             header.Graphics.DrawString(
                 $"Proveedor: {_selectedProveedor.Nombre}  |  Atención: {_selectedProveedor.Responsable}", smallFont,
                 brush, 0, 45);
+
+            footer.Graphics.DrawString("Notas: " + _notas, smallFont, brush, 0, 0);
+
             e.PdfDocumentTemplate.Top = header;
+            e.PdfDocumentTemplate.Bottom = footer;
         }
 
         /// <summary>
@@ -349,6 +355,8 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 order.Líneas.Add(data);
             }
 
+            order.Notas = _notas;
+
             var saveSuccess = GlobalConfig.Connection.OrdenCompra_Create(order);
 
             if (saveSuccess)
@@ -375,6 +383,15 @@ namespace CZS_LaVictoria.ÓrdenesPage
             ClearForm();
             MsgBox.Visible = true;
             MsgBoxTimer.Start();
+        }
+
+        void NotasButton_Click(object sender, EventArgs e)
+        {
+            using (var form = new AgregarNotasForm())
+            {
+                var result = form.ShowDialog();
+                _notas = result == DialogResult.OK ? form.Notas : "";
+            }
         }
 
         void MsgBoxTimer_Tick(object sender, EventArgs e)
@@ -570,6 +587,8 @@ namespace CZS_LaVictoria.ÓrdenesPage
             }
 
             _numLinea = 1;
+            _notas = "";
+            _ticks = 1;
             DataGrid.AllowDeleting = false;
             ProveedorCombo.Focus();
 

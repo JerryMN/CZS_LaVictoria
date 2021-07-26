@@ -15,5 +15,6 @@ namespace CZS_LaVictoria_Library.Models
         public string Presentación { get; set; }
         public DateTime FechaOrden { get; set; }
         public List<OrdenVentaLíneaModel> Líneas { get; set; } = new List<OrdenVentaLíneaModel>();
+        public string Notas { get; set; }
     }
 }

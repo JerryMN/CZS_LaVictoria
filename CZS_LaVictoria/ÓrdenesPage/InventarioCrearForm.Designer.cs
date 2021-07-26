@@ -51,7 +51,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.AreaCombo.Location = new System.Drawing.Point(142, 79);
             this.AreaCombo.Name = "AreaCombo";
             this.AreaCombo.Size = new System.Drawing.Size(300, 29);
-            this.AreaCombo.TabIndex = 29;
+            this.AreaCombo.TabIndex = 3;
             // 
             // AreaLabel
             // 
@@ -60,7 +60,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.AreaLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.AreaLabel.Name = "AreaLabel";
             this.AreaLabel.Size = new System.Drawing.Size(45, 21);
-            this.AreaLabel.TabIndex = 28;
+            this.AreaLabel.TabIndex = 2;
             this.AreaLabel.Text = "Área:";
             // 
             // MaterialLabel
@@ -70,7 +70,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.MaterialLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.MaterialLabel.Name = "MaterialLabel";
             this.MaterialLabel.Size = new System.Drawing.Size(70, 21);
-            this.MaterialLabel.TabIndex = 27;
+            this.MaterialLabel.TabIndex = 0;
             this.MaterialLabel.Text = "Material:";
             // 
             // CategoríaLabel
@@ -80,7 +80,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.CategoríaLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.CategoríaLabel.Name = "CategoríaLabel";
             this.CategoríaLabel.Size = new System.Drawing.Size(80, 21);
-            this.CategoríaLabel.TabIndex = 28;
+            this.CategoríaLabel.TabIndex = 4;
             this.CategoríaLabel.Text = "Categoría:";
             // 
             // CategoríaCombo
@@ -91,7 +91,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.CategoríaCombo.Location = new System.Drawing.Point(142, 129);
             this.CategoríaCombo.Name = "CategoríaCombo";
             this.CategoríaCombo.Size = new System.Drawing.Size(300, 29);
-            this.CategoríaCombo.TabIndex = 29;
+            this.CategoríaCombo.TabIndex = 5;
             // 
             // CantidadLabel
             // 
@@ -100,7 +100,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.CantidadLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.CantidadLabel.Name = "CantidadLabel";
             this.CantidadLabel.Size = new System.Drawing.Size(75, 21);
-            this.CantidadLabel.TabIndex = 28;
+            this.CantidadLabel.TabIndex = 6;
             this.CantidadLabel.Text = "Cantidad:";
             // 
             // CantidadText
@@ -112,7 +112,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.CantidadText.Name = "CantidadText";
             this.CantidadText.Size = new System.Drawing.Size(300, 29);
             this.CantidadText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.CantidadText.TabIndex = 31;
+            this.CantidadText.TabIndex = 7;
             // 
             // GuardarButton
             // 
@@ -123,7 +123,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.GuardarButton.Location = new System.Drawing.Point(404, 232);
             this.GuardarButton.Name = "GuardarButton";
             this.GuardarButton.Size = new System.Drawing.Size(38, 36);
-            this.GuardarButton.TabIndex = 32;
+            this.GuardarButton.TabIndex = 8;
             this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
             // 
             // MaterialText
@@ -131,7 +131,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.MaterialText.Location = new System.Drawing.Point(142, 29);
             this.MaterialText.Name = "MaterialText";
             this.MaterialText.Size = new System.Drawing.Size(300, 29);
-            this.MaterialText.TabIndex = 33;
+            this.MaterialText.TabIndex = 1;
             // 
             // MsgBox
             // 
@@ -146,7 +146,8 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.MsgBox.Location = new System.Drawing.Point(42, 282);
             this.MsgBox.Name = "MsgBox";
             this.MsgBox.Size = new System.Drawing.Size(400, 150);
-            this.MsgBox.TabIndex = 34;
+            this.MsgBox.TabIndex = 9;
+            this.MsgBox.TabStop = false;
             this.MsgBox.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.MsgBox.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.MsgBox.UseVisualStyleBackColor = true;

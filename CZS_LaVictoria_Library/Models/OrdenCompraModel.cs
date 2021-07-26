@@ -13,5 +13,6 @@ namespace CZS_LaVictoria_Library.Models
         public string Condiciones { get; set; }
         public DateTime FechaOrden { get; set; }
         public List<OrdenCompraLíneaModel> Líneas { get; set; } = new List<OrdenCompraLíneaModel>();
+        public string Notas { get; set; }
     }
 }

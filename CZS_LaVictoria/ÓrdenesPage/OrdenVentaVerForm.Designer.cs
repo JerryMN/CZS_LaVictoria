@@ -46,7 +46,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.PendientesCheck.Location = new System.Drawing.Point(375, 25);
             this.PendientesCheck.Name = "PendientesCheck";
             this.PendientesCheck.Size = new System.Drawing.Size(140, 25);
-            this.PendientesCheck.TabIndex = 19;
+            this.PendientesCheck.TabIndex = 3;
             this.PendientesCheck.Text = "Sólo pendientes";
             this.PendientesCheck.UseVisualStyleBackColor = true;
             // 
@@ -57,7 +57,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.NumOrdenText.MaxLength = 7;
             this.NumOrdenText.Name = "NumOrdenText";
             this.NumOrdenText.Size = new System.Drawing.Size(150, 29);
-            this.NumOrdenText.TabIndex = 18;
+            this.NumOrdenText.TabIndex = 1;
             // 
             // NumOrdenLabel
             // 
@@ -66,7 +66,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.NumOrdenLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.NumOrdenLabel.Name = "NumOrdenLabel";
             this.NumOrdenLabel.Size = new System.Drawing.Size(82, 21);
-            this.NumOrdenLabel.TabIndex = 17;
+            this.NumOrdenLabel.TabIndex = 0;
             this.NumOrdenLabel.Text = "No. orden:";
             // 
             // CancelarButton
@@ -81,7 +81,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.CancelarButton.Location = new System.Drawing.Point(700, 22);
             this.CancelarButton.Name = "CancelarButton";
             this.CancelarButton.Size = new System.Drawing.Size(145, 31);
-            this.CancelarButton.TabIndex = 14;
+            this.CancelarButton.TabIndex = 5;
             this.CancelarButton.Text = "Cancelar Línea";
             this.CancelarButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.CancelarButton.UseVisualStyleBackColor = true;
@@ -99,7 +99,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.EntregarButton.Location = new System.Drawing.Point(550, 22);
             this.EntregarButton.Name = "EntregarButton";
             this.EntregarButton.Size = new System.Drawing.Size(144, 31);
-            this.EntregarButton.TabIndex = 15;
+            this.EntregarButton.TabIndex = 4;
             this.EntregarButton.Text = "Entregar Línea";
             this.EntregarButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.EntregarButton.UseVisualStyleBackColor = true;
@@ -117,7 +117,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.BuscarButton.Location = new System.Drawing.Point(275, 21);
             this.BuscarButton.Name = "BuscarButton";
             this.BuscarButton.Size = new System.Drawing.Size(90, 31);
-            this.BuscarButton.TabIndex = 16;
+            this.BuscarButton.TabIndex = 2;
             this.BuscarButton.Text = "Buscar";
             this.BuscarButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BuscarButton.UseVisualStyleBackColor = true;
@@ -138,7 +138,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.DataGrid.Name = "DataGrid";
             this.DataGrid.ShowGroupDropArea = true;
             this.DataGrid.Size = new System.Drawing.Size(1276, 763);
-            this.DataGrid.TabIndex = 20;
+            this.DataGrid.TabIndex = 6;
             this.DataGrid.Text = "sfDataGrid1";
             this.DataGrid.ValidationMode = Syncfusion.WinForms.DataGrid.Enums.GridValidationMode.InEdit;
             this.DataGrid.AutoGeneratingColumn += new Syncfusion.WinForms.DataGrid.Events.AutoGeneratingColumnEventHandler(this.DataGrid_AutoGeneratingColumn);

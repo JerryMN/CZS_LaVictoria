@@ -1122,6 +1122,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                 p.Add("@Proveedor", model.Proveedor);
                 p.Add("@Condiciones", model.Condiciones);
                 p.Add("@FechaOrden", model.FechaOrden);
+                p.Add("@Notas", model.Notas);
                 p.Add("@Id", 0, direction: ParameterDirection.Output);
 
                 try
@@ -1399,6 +1400,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                 p.Add("@PuestoEn", model.PuestoEn);
                 p.Add("@Presentación", model.Presentación);
                 p.Add("@FechaOrden", model.FechaOrden);
+                p.Add("@Notas", model.Notas);
                 p.Add("@Id", 0, direction: ParameterDirection.Output);
 
                 try

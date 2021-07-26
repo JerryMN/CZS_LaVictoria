@@ -51,6 +51,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.MsgBox = new FontAwesome.Sharp.IconButton();
             this.GuardarButton = new DevExpress.XtraEditors.SimpleButton();
             this.MsgBoxTimer = new System.Windows.Forms.Timer(this.components);
+            this.NotasButton = new DevExpress.XtraEditors.SimpleButton();
             this.DatosGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumOrdenText)).BeginInit();
             this.ProductosGroupBox.SuspendLayout();
@@ -85,7 +86,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.AreaCombo.Location = new System.Drawing.Point(450, 87);
             this.AreaCombo.Name = "AreaCombo";
             this.AreaCombo.Size = new System.Drawing.Size(200, 29);
-            this.AreaCombo.TabIndex = 45;
+            this.AreaCombo.TabIndex = 9;
             this.AreaCombo.SelectedIndexChanged += new System.EventHandler(this.AreaCombo_SelectedIndexChanged);
             // 
             // AreaLabel
@@ -95,7 +96,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.AreaLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.AreaLabel.Name = "AreaLabel";
             this.AreaLabel.Size = new System.Drawing.Size(45, 21);
-            this.AreaLabel.TabIndex = 44;
+            this.AreaLabel.TabIndex = 8;
             this.AreaLabel.Text = "Área:";
             // 
             // FechaOrdenPicker
@@ -105,7 +106,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.FechaOrdenPicker.Location = new System.Drawing.Point(130, 85);
             this.FechaOrdenPicker.Name = "FechaOrdenPicker";
             this.FechaOrdenPicker.Size = new System.Drawing.Size(150, 31);
-            this.FechaOrdenPicker.TabIndex = 43;
+            this.FechaOrdenPicker.TabIndex = 7;
             this.FechaOrdenPicker.ValueChanged += new Syncfusion.WinForms.Input.Events.DateTimeValueChangedEventHandler(this.FechaOrdenPicker_ValueChanged);
             // 
             // FechaOrdenLabel
@@ -115,7 +116,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.FechaOrdenLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.FechaOrdenLabel.Name = "FechaOrdenLabel";
             this.FechaOrdenLabel.Size = new System.Drawing.Size(74, 21);
-            this.FechaOrdenLabel.TabIndex = 40;
+            this.FechaOrdenLabel.TabIndex = 6;
             this.FechaOrdenLabel.Text = "Creación:";
             // 
             // NumOrdenText
@@ -125,7 +126,8 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.NumOrdenText.Name = "NumOrdenText";
             this.NumOrdenText.ReadOnly = true;
             this.NumOrdenText.Size = new System.Drawing.Size(150, 29);
-            this.NumOrdenText.TabIndex = 39;
+            this.NumOrdenText.TabIndex = 1;
+            this.NumOrdenText.TabStop = false;
             this.NumOrdenText.Text = "2100000";
             // 
             // NumOrdenLabel
@@ -135,7 +137,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.NumOrdenLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.NumOrdenLabel.Name = "NumOrdenLabel";
             this.NumOrdenLabel.Size = new System.Drawing.Size(82, 21);
-            this.NumOrdenLabel.TabIndex = 38;
+            this.NumOrdenLabel.TabIndex = 0;
             this.NumOrdenLabel.Text = "No. orden:";
             // 
             // ClienteCombo
@@ -145,7 +147,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.ClienteCombo.Location = new System.Drawing.Point(450, 37);
             this.ClienteCombo.Name = "ClienteCombo";
             this.ClienteCombo.Size = new System.Drawing.Size(200, 29);
-            this.ClienteCombo.TabIndex = 31;
+            this.ClienteCombo.TabIndex = 3;
             this.ClienteCombo.SelectedIndexChanged += new System.EventHandler(this.ClienteCombo_SelectedIndexChanged);
             // 
             // ClienteLabel
@@ -155,7 +157,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.ClienteLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ClienteLabel.Name = "ClienteLabel";
             this.ClienteLabel.Size = new System.Drawing.Size(61, 21);
-            this.ClienteLabel.TabIndex = 30;
+            this.ClienteLabel.TabIndex = 2;
             this.ClienteLabel.Text = "Cliente:";
             // 
             // TransporteCombo
@@ -165,7 +167,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.TransporteCombo.Location = new System.Drawing.Point(830, 37);
             this.TransporteCombo.Name = "TransporteCombo";
             this.TransporteCombo.Size = new System.Drawing.Size(200, 29);
-            this.TransporteCombo.TabIndex = 29;
+            this.TransporteCombo.TabIndex = 5;
             // 
             // PuestoCombo
             // 
@@ -174,7 +176,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.PuestoCombo.Location = new System.Drawing.Point(830, 92);
             this.PuestoCombo.Name = "PuestoCombo";
             this.PuestoCombo.Size = new System.Drawing.Size(200, 29);
-            this.PuestoCombo.TabIndex = 28;
+            this.PuestoCombo.TabIndex = 11;
             // 
             // TransporteLabel
             // 
@@ -183,7 +185,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.TransporteLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.TransporteLabel.Name = "TransporteLabel";
             this.TransporteLabel.Size = new System.Drawing.Size(87, 21);
-            this.TransporteLabel.TabIndex = 24;
+            this.TransporteLabel.TabIndex = 4;
             this.TransporteLabel.Text = "Transporte:";
             // 
             // PuestoLabel
@@ -193,7 +195,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.PuestoLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.PuestoLabel.Name = "PuestoLabel";
             this.PuestoLabel.Size = new System.Drawing.Size(81, 21);
-            this.PuestoLabel.TabIndex = 23;
+            this.PuestoLabel.TabIndex = 10;
             this.PuestoLabel.Text = "Puesto en:";
             // 
             // ProductosGroupBox
@@ -221,7 +223,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.DataGrid.Size = new System.Drawing.Size(1170, 272);
             this.DataGrid.Style.AddNewRowStyle.BackColor = System.Drawing.Color.Maroon;
             this.DataGrid.Style.AddNewRowStyle.TextColor = System.Drawing.Color.White;
-            this.DataGrid.TabIndex = 42;
+            this.DataGrid.TabIndex = 0;
             this.DataGrid.Text = "sfDataGrid1";
             this.DataGrid.AutoGeneratingColumn += new Syncfusion.WinForms.DataGrid.Events.AutoGeneratingColumnEventHandler(this.DataGrid_AutoGeneratingColumn);
             this.DataGrid.CurrentCellEndEdit += new Syncfusion.WinForms.DataGrid.Events.CurrentCellEndEditEventHandler(this.DataGrid_CurrentCellEndEdit);
@@ -235,7 +237,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.SubtitleLabel.Location = new System.Drawing.Point(50, 25);
             this.SubtitleLabel.Name = "SubtitleLabel";
             this.SubtitleLabel.Size = new System.Drawing.Size(206, 37);
-            this.SubtitleLabel.TabIndex = 30;
+            this.SubtitleLabel.TabIndex = 0;
             this.SubtitleLabel.Text = "Orden de Venta";
             // 
             // MsgBox
@@ -251,7 +253,8 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.MsgBox.Location = new System.Drawing.Point(806, 625);
             this.MsgBox.Name = "MsgBox";
             this.MsgBox.Size = new System.Drawing.Size(420, 157);
-            this.MsgBox.TabIndex = 34;
+            this.MsgBox.TabIndex = 5;
+            this.MsgBox.TabStop = false;
             this.MsgBox.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.MsgBox.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.MsgBox.UseVisualStyleBackColor = true;
@@ -263,13 +266,13 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.GuardarButton.Appearance.Options.UseFont = true;
             this.GuardarButton.AutoSize = true;
             this.GuardarButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("GuardarButton.ImageOptions.SvgImage")));
-            this.GuardarButton.Location = new System.Drawing.Point(50, 625);
+            this.GuardarButton.Location = new System.Drawing.Point(180, 625);
             this.GuardarButton.LookAndFeel.SkinName = "Office 2019 Colorful";
             this.GuardarButton.LookAndFeel.UseDefaultLookAndFeel = false;
             this.GuardarButton.Name = "GuardarButton";
             this.GuardarButton.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
             this.GuardarButton.Size = new System.Drawing.Size(99, 36);
-            this.GuardarButton.TabIndex = 33;
+            this.GuardarButton.TabIndex = 4;
             this.GuardarButton.Text = "Guardar";
             this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
             // 
@@ -278,11 +281,28 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.MsgBoxTimer.Interval = 3000;
             this.MsgBoxTimer.Tick += new System.EventHandler(this.MsgBoxTimer_Tick);
             // 
+            // NotasButton
+            // 
+            this.NotasButton.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NotasButton.Appearance.Options.UseFont = true;
+            this.NotasButton.AutoSize = true;
+            this.NotasButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("NotasButton.ImageOptions.SvgImage")));
+            this.NotasButton.Location = new System.Drawing.Point(50, 625);
+            this.NotasButton.LookAndFeel.SkinName = "Office 2019 Colorful";
+            this.NotasButton.LookAndFeel.UseDefaultLookAndFeel = false;
+            this.NotasButton.Name = "NotasButton";
+            this.NotasButton.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
+            this.NotasButton.Size = new System.Drawing.Size(83, 36);
+            this.NotasButton.TabIndex = 3;
+            this.NotasButton.Text = "Notas";
+            this.NotasButton.Click += new System.EventHandler(this.NotasButton_Click);
+            // 
             // OrdenVentaCrearForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1276, 839);
+            this.Controls.Add(this.NotasButton);
             this.Controls.Add(this.MsgBox);
             this.Controls.Add(this.GuardarButton);
             this.Controls.Add(this.SubtitleLabel);
@@ -325,5 +345,6 @@ namespace CZS_LaVictoria.ÓrdenesPage
         private DevExpress.XtraEditors.SimpleButton GuardarButton;
         private Syncfusion.WinForms.DataGrid.SfDataGrid DataGrid;
         private System.Windows.Forms.Timer MsgBoxTimer;
+        private DevExpress.XtraEditors.SimpleButton NotasButton;
     }
 }

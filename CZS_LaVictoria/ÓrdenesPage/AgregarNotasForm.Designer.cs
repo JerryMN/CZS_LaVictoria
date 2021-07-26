@@ -29,108 +29,68 @@ namespace CZS_LaVictoria.ÓrdenesPage
         /// </summary>
         private void InitializeComponent()
         {
-            this.PanelNoteOne = new System.Windows.Forms.GroupBox();
-            this.TextNoteOne = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
-            this.PanelNoteTwo = new System.Windows.Forms.GroupBox();
-            this.textNoteTwo = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
-            this.ButtonSaveNotes = new FontAwesome.Sharp.IconButton();
-            this.PanelNoteOne.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TextNoteOne)).BeginInit();
-            this.PanelNoteTwo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textNoteTwo)).BeginInit();
+            this.NotasText = new System.Windows.Forms.TextBox();
+            this.GuardarButton = new System.Windows.Forms.Button();
+            this.CerrarButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // PanelNoteOne
+            // NotasText
             // 
-            this.PanelNoteOne.Controls.Add(this.TextNoteOne);
-            this.PanelNoteOne.Location = new System.Drawing.Point(30, 50);
-            this.PanelNoteOne.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.PanelNoteOne.Name = "PanelNoteOne";
-            this.PanelNoteOne.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.PanelNoteOne.Size = new System.Drawing.Size(390, 175);
-            this.PanelNoteOne.TabIndex = 0;
-            this.PanelNoteOne.TabStop = false;
-            this.PanelNoteOne.Text = "Nota 1";
+            this.NotasText.Location = new System.Drawing.Point(50, 50);
+            this.NotasText.Multiline = true;
+            this.NotasText.Name = "NotasText";
+            this.NotasText.Size = new System.Drawing.Size(500, 200);
+            this.NotasText.TabIndex = 0;
             // 
-            // TextNoteOne
+            // GuardarButton
             // 
-            this.TextNoteOne.BeforeTouchSize = new System.Drawing.Size(382, 143);
-            this.TextNoteOne.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TextNoteOne.Location = new System.Drawing.Point(4, 27);
-            this.TextNoteOne.Multiline = true;
-            this.TextNoteOne.Name = "TextNoteOne";
-            this.TextNoteOne.Size = new System.Drawing.Size(382, 143);
-            this.TextNoteOne.TabIndex = 1;
+            this.GuardarButton.AutoSize = true;
+            this.GuardarButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GuardarButton.Location = new System.Drawing.Point(388, 256);
+            this.GuardarButton.Name = "GuardarButton";
+            this.GuardarButton.Size = new System.Drawing.Size(78, 35);
+            this.GuardarButton.TabIndex = 1;
+            this.GuardarButton.Text = "Guardar";
+            this.GuardarButton.UseVisualStyleBackColor = true;
+            this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
             // 
-            // PanelNoteTwo
+            // CerrarButton
             // 
-            this.PanelNoteTwo.Controls.Add(this.textNoteTwo);
-            this.PanelNoteTwo.Location = new System.Drawing.Point(30, 275);
-            this.PanelNoteTwo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.PanelNoteTwo.Name = "PanelNoteTwo";
-            this.PanelNoteTwo.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.PanelNoteTwo.Size = new System.Drawing.Size(390, 175);
-            this.PanelNoteTwo.TabIndex = 1;
-            this.PanelNoteTwo.TabStop = false;
-            this.PanelNoteTwo.Text = "Nota 2";
+            this.CerrarButton.AutoSize = true;
+            this.CerrarButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.CerrarButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CerrarButton.Location = new System.Drawing.Point(472, 256);
+            this.CerrarButton.Name = "CerrarButton";
+            this.CerrarButton.Size = new System.Drawing.Size(78, 35);
+            this.CerrarButton.TabIndex = 2;
+            this.CerrarButton.Text = "Cerrar";
+            this.CerrarButton.UseVisualStyleBackColor = true;
+            this.CerrarButton.Click += new System.EventHandler(this.CerrarButton_Click);
             // 
-            // textNoteTwo
+            // AgregarNotasForm
             // 
-            this.textNoteTwo.BeforeTouchSize = new System.Drawing.Size(382, 143);
-            this.textNoteTwo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textNoteTwo.Location = new System.Drawing.Point(4, 27);
-            this.textNoteTwo.Multiline = true;
-            this.textNoteTwo.Name = "textNoteTwo";
-            this.textNoteTwo.Size = new System.Drawing.Size(382, 143);
-            this.textNoteTwo.TabIndex = 2;
-            // 
-            // ButtonSaveNotes
-            // 
-            this.ButtonSaveNotes.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.ButtonSaveNotes.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.ButtonSaveNotes.IconChar = FontAwesome.Sharp.IconChar.None;
-            this.ButtonSaveNotes.IconColor = System.Drawing.Color.Black;
-            this.ButtonSaveNotes.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.ButtonSaveNotes.Location = new System.Drawing.Point(30, 458);
-            this.ButtonSaveNotes.Name = "ButtonSaveNotes";
-            this.ButtonSaveNotes.Size = new System.Drawing.Size(119, 37);
-            this.ButtonSaveNotes.TabIndex = 3;
-            this.ButtonSaveNotes.Text = "Guardar";
-            this.ButtonSaveNotes.UseVisualStyleBackColor = true;
-            this.ButtonSaveNotes.Click += new System.EventHandler(this.ButtonSaveNotes_Click);
-            // 
-            // AddNotesForm
-            // 
-            this.AcceptButton = this.ButtonSaveNotes;
+            this.AcceptButton = this.GuardarButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.ButtonSaveNotes;
-            this.ClientSize = new System.Drawing.Size(450, 550);
-            this.Controls.Add(this.ButtonSaveNotes);
-            this.Controls.Add(this.PanelNoteTwo);
-            this.Controls.Add(this.PanelNoteOne);
+            this.CancelButton = this.CerrarButton;
+            this.ClientSize = new System.Drawing.Size(600, 350);
+            this.Controls.Add(this.CerrarButton);
+            this.Controls.Add(this.GuardarButton);
+            this.Controls.Add(this.NotasText);
             this.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "AddNotesForm";
+            this.Name = "AgregarNotasForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AddNotesForm";
-            this.PanelNoteOne.ResumeLayout(false);
-            this.PanelNoteOne.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TextNoteOne)).EndInit();
-            this.PanelNoteTwo.ResumeLayout(false);
-            this.PanelNoteTwo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textNoteTwo)).EndInit();
+            this.Text = "Agregar Notas a Orden";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.GroupBox PanelNoteOne;
-        private System.Windows.Forms.GroupBox PanelNoteTwo;
-        private Syncfusion.Windows.Forms.Tools.TextBoxExt TextNoteOne;
-        private Syncfusion.Windows.Forms.Tools.TextBoxExt textNoteTwo;
-        private FontAwesome.Sharp.IconButton ButtonSaveNotes;
+        private System.Windows.Forms.TextBox NotasText;
+        private System.Windows.Forms.Button GuardarButton;
+        private System.Windows.Forms.Button CerrarButton;
     }
 }
