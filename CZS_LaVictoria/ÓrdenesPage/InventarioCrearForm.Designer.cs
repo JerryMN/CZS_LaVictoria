@@ -59,9 +59,9 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.AreaLabel.Location = new System.Drawing.Point(42, 82);
             this.AreaLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.AreaLabel.Name = "AreaLabel";
-            this.AreaLabel.Size = new System.Drawing.Size(45, 21);
+            this.AreaLabel.Size = new System.Drawing.Size(49, 21);
             this.AreaLabel.TabIndex = 2;
-            this.AreaLabel.Text = "Área:";
+            this.AreaLabel.Text = "Área*";
             // 
             // MaterialLabel
             // 
@@ -69,9 +69,9 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.MaterialLabel.Location = new System.Drawing.Point(42, 32);
             this.MaterialLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.MaterialLabel.Name = "MaterialLabel";
-            this.MaterialLabel.Size = new System.Drawing.Size(70, 21);
+            this.MaterialLabel.Size = new System.Drawing.Size(74, 21);
             this.MaterialLabel.TabIndex = 0;
-            this.MaterialLabel.Text = "Material:";
+            this.MaterialLabel.Text = "Material*";
             // 
             // CategoríaLabel
             // 
@@ -79,9 +79,9 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.CategoríaLabel.Location = new System.Drawing.Point(42, 132);
             this.CategoríaLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.CategoríaLabel.Name = "CategoríaLabel";
-            this.CategoríaLabel.Size = new System.Drawing.Size(80, 21);
+            this.CategoríaLabel.Size = new System.Drawing.Size(84, 21);
             this.CategoríaLabel.TabIndex = 4;
-            this.CategoríaLabel.Text = "Categoría:";
+            this.CategoríaLabel.Text = "Categoría*";
             // 
             // CategoríaCombo
             // 
@@ -99,9 +99,9 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.CantidadLabel.Location = new System.Drawing.Point(42, 182);
             this.CantidadLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.CantidadLabel.Name = "CantidadLabel";
-            this.CantidadLabel.Size = new System.Drawing.Size(75, 21);
+            this.CantidadLabel.Size = new System.Drawing.Size(79, 21);
             this.CantidadLabel.TabIndex = 6;
-            this.CantidadLabel.Text = "Cantidad:";
+            this.CantidadLabel.Text = "Cantidad*";
             // 
             // CantidadText
             // 
@@ -176,9 +176,11 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "InventarioCrearForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Añadir material a inventario";
+            this.Text = "Añadir Material a Inventario";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -20,35 +20,33 @@ namespace CZS_LaVictoria.ÓrdenesPage
             DataGrid.DataSource = GetStock();
             DataGrid.Style.CellStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
             DataGrid.Style.HeaderStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
-            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
+            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCellsWithLastColumnFill;
         }
 
         #region Events
 
         void DataGrid_AutoGeneratingColumn(object sender, AutoGeneratingColumnArgs e)
         {
-            if (e.Column.MappingName == "Id")
+            switch (e.Column.MappingName)
             {
-                e.Cancel = true;
-            }
-
-            if (e.Column.MappingName == "Nombre")
-            {
-                e.Column.AutoSizeColumnsMode = AutoSizeColumnsMode.LastColumnFill;
-            }
-
-            if (e.Column.MappingName == "CantidadDisponible")
-            {
-                e.Column = new GridNumericColumn
-                {
-                    MappingName = "CantidadDisponible",
-                    HeaderText = "Cantidad Disponible",
-                    FormatMode = FormatMode.Numeric
-                };
+                case "Id":
+                    e.Cancel = true;
+                    break;
+                case "Nombre":
+                    e.Column.AutoSizeColumnsMode = AutoSizeColumnsMode.LastColumnFill;
+                    break;
+                case "CantidadDisponible":
+                    e.Column = new GridNumericColumn
+                    {
+                        MappingName = "CantidadDisponible",
+                        HeaderText = "Cantidad Disponible",
+                        FormatMode = FormatMode.Numeric
+                    };
+                    break;
             }
         }
 
-        void NuevoButton_Click(object sender, System.EventArgs e)
+        void NuevoButton_Click(object sender, EventArgs e)
         {
             var newForm = new InventarioCrearForm();
             newForm.Show();

@@ -57,22 +57,22 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.CompraButton.AutoSize = true;
             this.CompraButton.Location = new System.Drawing.Point(12, 12);
             this.CompraButton.Name = "CompraButton";
-            this.CompraButton.Size = new System.Drawing.Size(84, 25);
+            this.CompraButton.Size = new System.Drawing.Size(114, 25);
             this.CompraButton.TabIndex = 5;
             this.CompraButton.TabStop = true;
-            this.CompraButton.Text = "Compra";
+            this.CompraButton.Text = "Recepciones";
             this.CompraButton.UseVisualStyleBackColor = true;
             this.CompraButton.CheckedChanged += new System.EventHandler(this.RadioChanged);
             // 
             // VentaButton
             // 
             this.VentaButton.AutoSize = true;
-            this.VentaButton.Location = new System.Drawing.Point(112, 12);
+            this.VentaButton.Location = new System.Drawing.Point(132, 12);
             this.VentaButton.Name = "VentaButton";
-            this.VentaButton.Size = new System.Drawing.Size(67, 25);
+            this.VentaButton.Size = new System.Drawing.Size(88, 25);
             this.VentaButton.TabIndex = 5;
             this.VentaButton.TabStop = true;
-            this.VentaButton.Text = "Venta";
+            this.VentaButton.Text = "Entregas";
             this.VentaButton.UseVisualStyleBackColor = true;
             this.VentaButton.CheckedChanged += new System.EventHandler(this.RadioChanged);
             // 

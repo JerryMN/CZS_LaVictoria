@@ -17,54 +17,47 @@ namespace CZS_LaVictoria.ÓrdenesPage
             InitializeComponent();
             DataGrid.Style.CellStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
             DataGrid.Style.HeaderStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
-            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
+            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCellsWithLastColumnFill;
         }
 
         #region Events
 
         /// <summary>
-        /// Genera las columnas de la tabla.
+        ///     Genera las columnas de la tabla.
         /// </summary>
         void DataGrid_AutoGeneratingColumn(object sender, AutoGeneratingColumnArgs e)
         {
-            if (e.Column.MappingName == "TipoOrden")
+            switch (e.Column.MappingName)
             {
-                e.Cancel = true;
+                case "TipoOrden":
+                    e.Cancel = true;
+                    break;
+                case "NumOrden":
+                    e.Column.HeaderText = "Núm. Orden";
+                    break;
+                case "NumLinea":
+                    e.Column.HeaderText = "Núm. Línea";
+                    break;
+                case "Producto":
+                    e.Column.AutoSizeColumnsMode = AutoSizeColumnsMode.LastColumnFill;
+                    break;
+                case "Cantidad":
+                    e.Column = new GridNumericColumn
+                        {MappingName = "Cantidad", HeaderText = "Cantidad", FormatMode = FormatMode.Numeric};
+                    break;
             }
 
-            if (e.Column.MappingName == "NumOrden")
-            {
-                e.Column.HeaderText = "Núm. Orden";
-            }
-
-            if (e.Column.MappingName == "NumLinea")
-            {
-                e.Column.HeaderText = "Núm. Línea";
-            }
-
-            if (e.Column.MappingName == "Producto")
-            {
-                e.Column.AutoSizeColumnsMode = AutoSizeColumnsMode.LastColumnFill;
-            }
-
-            if (e.Column.MappingName == "Cantidad")
-            {
-                e.Column = new GridNumericColumn
-                    {MappingName = "Cantidad", HeaderText = "Cantidad", FormatMode = FormatMode.Numeric};
-            }
-
-            if (e.Column.MappingName == "Precio")
-            {
-                e.Cancel = true;
-            }
+            if (e.Column.MappingName == "Precio") e.Cancel = true;
         }
 
         /// <summary>
-        /// Cambia el contenido de la tabla dependiendo del botón seleccionado.
+        ///     Cambia el contenido de la tabla dependiendo del botón seleccionado.
         /// </summary>
         void RadioChanged(object sender, EventArgs e)
         {
-            DataGrid.DataSource = CompraButton.Checked ? GlobalConfig.Connection.Delivery_GetCompra() : GlobalConfig.Connection.Delivery_GetVenta();
+            DataGrid.DataSource = CompraButton.Checked
+                ? GlobalConfig.Connection.Delivery_GetCompra()
+                : GlobalConfig.Connection.Delivery_GetVenta();
         }
 
         #endregion

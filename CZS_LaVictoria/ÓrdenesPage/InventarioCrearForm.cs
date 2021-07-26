@@ -1,8 +1,7 @@
-﻿using CZS_LaVictoria_Library;
-using System;
-using System.Collections;
+﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using CZS_LaVictoria_Library;
 using CZS_LaVictoria_Library.Models;
 
 namespace CZS_LaVictoria.ÓrdenesPage
@@ -33,7 +32,8 @@ namespace CZS_LaVictoria.ÓrdenesPage
             {
                 MsgBox.Text = $"{MaterialText.Text} guardado en inventario";
                 MsgBox.IconColor = Color.DarkGreen;
-                ClearForm();
+                Tools.ClearForm(this);
+                CantidadText.Text = "0";
             }
             else
             {
@@ -59,12 +59,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
         {
             var areas = GlobalConfig.Connection.Area_GetDistinct();
 
-            foreach (var area in areas)
-            {
-                AreaCombo.Items.Add(area);
-            }
-
-            AreaCombo.DisplayMember = "Área";
+            foreach (var area in areas) AreaCombo.Items.Add(area);
         }
 
         void GetCategorías()
@@ -72,9 +67,8 @@ namespace CZS_LaVictoria.ÓrdenesPage
             var categorías = GlobalConfig.Connection.Material_GetDistinctCategorías();
 
             foreach (var categoría in categorías)
-            {
-                if (categoría != null) CategoríaCombo.Items.Add(categoría);
-            }
+                if (categoría != null)
+                    CategoríaCombo.Items.Add(categoría);
         }
 
         bool ValidateForm()
@@ -106,26 +100,6 @@ namespace CZS_LaVictoria.ÓrdenesPage
             }
 
             return output;
-        }
-
-        void ClearForm()
-        {
-            CantidadText.Text = "0";
-            void Func(IEnumerable controls)
-            {
-                foreach (Control control in controls)
-                    if (control is TextBox box)
-                        box.Clear();
-                    else if (control is ComboBox comboBox)
-                    {
-                        comboBox.SelectedItem = null;
-                        comboBox.Text = "";
-                    }
-                    else
-                        Func(control.Controls);
-            }
-
-            Func(Controls);
         }
 
         #endregion
