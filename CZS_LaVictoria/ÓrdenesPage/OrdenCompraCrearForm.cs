@@ -318,6 +318,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
 
             if (!ValidateForm())
             {
+                MsgBox.IconColor = Color.DarkRed;
                 MsgBox.Visible = true;
                 return;
             }
@@ -527,7 +528,6 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 {
                     mail.From = new MailAddress(Settings.Default.emailAddress);
                     mail.To.Add(_selectedProveedor.Correo);
-                    mail.To.Add("gerardo.mondragonb@hotmail.com");
                     foreach (var area in _selectedArea) mail.To.Add(area.Correo);
 
                     mail.Subject = $"Orden de Compra #{NumOrdenText.Text} - Escobas La Victoria";

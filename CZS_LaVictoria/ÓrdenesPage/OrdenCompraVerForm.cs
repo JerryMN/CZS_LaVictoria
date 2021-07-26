@@ -153,7 +153,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
         }
 
         /// <summary>
-        ///     Marca una línea como cancelada.
+        ///     Marca una línea como cerrada o cancelada.
         /// </summary>
         void CancelarButton_Click(object sender, EventArgs e)
         {

@@ -43,10 +43,8 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.ClienteLabel = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.TransporteCombo = new System.Windows.Forms.ComboBox();
             this.PuestoCombo = new System.Windows.Forms.ComboBox();
-            this.PresentaciónCombo = new System.Windows.Forms.ComboBox();
             this.TransporteLabel = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.PuestoLabel = new Syncfusion.Windows.Forms.Tools.AutoLabel();
-            this.PresentaciónLabel = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.ProductosGroupBox = new System.Windows.Forms.GroupBox();
             this.DataGrid = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             this.SubtitleLabel = new System.Windows.Forms.Label();
@@ -71,10 +69,8 @@ namespace CZS_LaVictoria.ÓrdenesPage
             this.DatosGroupBox.Controls.Add(this.ClienteLabel);
             this.DatosGroupBox.Controls.Add(this.TransporteCombo);
             this.DatosGroupBox.Controls.Add(this.PuestoCombo);
-            this.DatosGroupBox.Controls.Add(this.PresentaciónCombo);
             this.DatosGroupBox.Controls.Add(this.TransporteLabel);
             this.DatosGroupBox.Controls.Add(this.PuestoLabel);
-            this.DatosGroupBox.Controls.Add(this.PresentaciónLabel);
             this.DatosGroupBox.Location = new System.Drawing.Point(50, 100);
             this.DatosGroupBox.Name = "DatosGroupBox";
             this.DatosGroupBox.Size = new System.Drawing.Size(1176, 183);
@@ -175,19 +171,10 @@ namespace CZS_LaVictoria.ÓrdenesPage
             // 
             this.PuestoCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.PuestoCombo.FormattingEnabled = true;
-            this.PuestoCombo.Location = new System.Drawing.Point(830, 137);
+            this.PuestoCombo.Location = new System.Drawing.Point(830, 92);
             this.PuestoCombo.Name = "PuestoCombo";
             this.PuestoCombo.Size = new System.Drawing.Size(200, 29);
             this.PuestoCombo.TabIndex = 28;
-            // 
-            // PresentaciónCombo
-            // 
-            this.PresentaciónCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.PresentaciónCombo.FormattingEnabled = true;
-            this.PresentaciónCombo.Location = new System.Drawing.Point(830, 87);
-            this.PresentaciónCombo.Name = "PresentaciónCombo";
-            this.PresentaciónCombo.Size = new System.Drawing.Size(200, 29);
-            this.PresentaciónCombo.TabIndex = 27;
             // 
             // TransporteLabel
             // 
@@ -202,22 +189,12 @@ namespace CZS_LaVictoria.ÓrdenesPage
             // PuestoLabel
             // 
             this.PuestoLabel.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.PuestoLabel.Location = new System.Drawing.Point(730, 140);
+            this.PuestoLabel.Location = new System.Drawing.Point(730, 95);
             this.PuestoLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.PuestoLabel.Name = "PuestoLabel";
             this.PuestoLabel.Size = new System.Drawing.Size(81, 21);
             this.PuestoLabel.TabIndex = 23;
             this.PuestoLabel.Text = "Puesto en:";
-            // 
-            // PresentaciónLabel
-            // 
-            this.PresentaciónLabel.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.PresentaciónLabel.Location = new System.Drawing.Point(730, 90);
-            this.PresentaciónLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.PresentaciónLabel.Name = "PresentaciónLabel";
-            this.PresentaciónLabel.Size = new System.Drawing.Size(102, 21);
-            this.PresentaciónLabel.TabIndex = 22;
-            this.PresentaciónLabel.Text = "Presentación:";
             // 
             // ProductosGroupBox
             // 
@@ -332,10 +309,8 @@ namespace CZS_LaVictoria.ÓrdenesPage
         private System.Windows.Forms.GroupBox DatosGroupBox;
         private System.Windows.Forms.GroupBox ProductosGroupBox;
         private System.Windows.Forms.ComboBox PuestoCombo;
-        private System.Windows.Forms.ComboBox PresentaciónCombo;
         private Syncfusion.Windows.Forms.Tools.AutoLabel TransporteLabel;
         private Syncfusion.Windows.Forms.Tools.AutoLabel PuestoLabel;
-        private Syncfusion.Windows.Forms.Tools.AutoLabel PresentaciónLabel;
         private System.Windows.Forms.ComboBox ClienteCombo;
         private Syncfusion.Windows.Forms.Tools.AutoLabel ClienteLabel;
         private System.Windows.Forms.ComboBox TransporteCombo;
