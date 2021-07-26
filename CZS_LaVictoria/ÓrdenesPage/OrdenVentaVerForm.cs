@@ -26,24 +26,13 @@ namespace CZS_LaVictoria.ÓrdenesPage
         public OrdenVentaVerForm()
         {
             InitializeComponent();
-            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
             DataGrid.DataSource = GlobalConfig.Connection.OrdenVenta_GetAllLineas();
-            DataGrid.QueryRowHeight += DataGridOnQueryRowHeight;
             DataGrid.Style.CellStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
             DataGrid.Style.HeaderStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
+            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCellsWithLastColumnFill;
         }
 
         #region Events
-
-        void DataGridOnQueryRowHeight(object sender, QueryRowHeightEventArgs e)
-        {
-            if (DataGrid.AutoSizeController.GetAutoRowHeight(e.RowIndex, new RowAutoFitOptions(), out var autoHeight))
-                if (autoHeight > 24)
-                {
-                    e.Height = autoHeight;
-                    e.Handled = true;
-                }
-        }
 
         /// <summary>
         ///     Busca las líneas de una orden de venta.
@@ -159,7 +148,9 @@ namespace CZS_LaVictoria.ÓrdenesPage
 
             _orden = GlobalConfig.Connection.OrdenVenta_GetByNumOrden(línea.NumOrden.ToString());
             var saveSuccess = GlobalConfig.Connection.OrdenVenta_UpdateLinea(_orden.Id, línea, _oldQty, _newQty);
-            MessageBox.Show(saveSuccess ? "Línea actualizada." : "Error al actualizar línea.", "Mensaje",
+            MessageBox.Show(
+                saveSuccess ? "Línea actualizada." : "Error al actualizar línea. Verifica disponibilidad en inventario.",
+                "Mensaje",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 

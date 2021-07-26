@@ -55,7 +55,7 @@ namespace CZS_LaVictoria.AlgodónPage
             this.SubtitleLabel.Location = new System.Drawing.Point(50, 25);
             this.SubtitleLabel.Name = "SubtitleLabel";
             this.SubtitleLabel.Size = new System.Drawing.Size(278, 37);
-            this.SubtitleLabel.TabIndex = 32;
+            this.SubtitleLabel.TabIndex = 0;
             this.SubtitleLabel.Text = "Registro de Enrollado";
             // 
             // CantidadSalidaUnidad
@@ -64,7 +64,7 @@ namespace CZS_LaVictoria.AlgodónPage
             this.CantidadSalidaUnidad.Location = new System.Drawing.Point(1006, 150);
             this.CantidadSalidaUnidad.Name = "CantidadSalidaUnidad";
             this.CantidadSalidaUnidad.Size = new System.Drawing.Size(27, 21);
-            this.CantidadSalidaUnidad.TabIndex = 162;
+            this.CantidadSalidaUnidad.TabIndex = 10;
             this.CantidadSalidaUnidad.Text = "kg";
             // 
             // MsgBox
@@ -80,7 +80,8 @@ namespace CZS_LaVictoria.AlgodónPage
             this.MsgBox.Location = new System.Drawing.Point(580, 250);
             this.MsgBox.Name = "MsgBox";
             this.MsgBox.Size = new System.Drawing.Size(420, 165);
-            this.MsgBox.TabIndex = 161;
+            this.MsgBox.TabIndex = 13;
+            this.MsgBox.TabStop = false;
             this.MsgBox.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.MsgBox.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.MsgBox.UseVisualStyleBackColor = true;
@@ -93,7 +94,7 @@ namespace CZS_LaVictoria.AlgodónPage
             this.GuardarButton.Location = new System.Drawing.Point(922, 200);
             this.GuardarButton.Name = "GuardarButton";
             this.GuardarButton.Size = new System.Drawing.Size(78, 35);
-            this.GuardarButton.TabIndex = 160;
+            this.GuardarButton.TabIndex = 12;
             this.GuardarButton.Text = "Guardar";
             this.GuardarButton.UseVisualStyleBackColor = true;
             this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
@@ -108,7 +109,7 @@ namespace CZS_LaVictoria.AlgodónPage
             this.CantidadSalidaText.Name = "CantidadSalidaText";
             this.CantidadSalidaText.Size = new System.Drawing.Size(250, 29);
             this.CantidadSalidaText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.CantidadSalidaText.TabIndex = 159;
+            this.CantidadSalidaText.TabIndex = 9;
             this.CantidadSalidaText.WatermarkText = "Ingresa la cantidad";
             // 
             // SalidaLabel
@@ -117,9 +118,9 @@ namespace CZS_LaVictoria.AlgodónPage
             this.SalidaLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SalidaLabel.Location = new System.Drawing.Point(600, 150);
             this.SalidaLabel.Name = "SalidaLabel";
-            this.SalidaLabel.Size = new System.Drawing.Size(76, 21);
-            this.SalidaLabel.TabIndex = 158;
-            this.SalidaLabel.Text = "Enrollado";
+            this.SalidaLabel.Size = new System.Drawing.Size(83, 21);
+            this.SalidaLabel.TabIndex = 8;
+            this.SalidaLabel.Text = "Enrollado*";
             // 
             // ArrowButton
             // 
@@ -132,7 +133,8 @@ namespace CZS_LaVictoria.AlgodónPage
             this.ArrowButton.Location = new System.Drawing.Point(500, 200);
             this.ArrowButton.Name = "ArrowButton";
             this.ArrowButton.Size = new System.Drawing.Size(44, 36);
-            this.ArrowButton.TabIndex = 156;
+            this.ArrowButton.TabIndex = 11;
+            this.ArrowButton.TabStop = false;
             this.ArrowButton.UseVisualStyleBackColor = true;
             // 
             // TurnoText
@@ -150,7 +152,7 @@ namespace CZS_LaVictoria.AlgodónPage
             0});
             this.TurnoText.Name = "TurnoText";
             this.TurnoText.Size = new System.Drawing.Size(120, 29);
-            this.TurnoText.TabIndex = 151;
+            this.TurnoText.TabIndex = 7;
             this.TurnoText.Value = new decimal(new int[] {
             1,
             0,
@@ -163,7 +165,7 @@ namespace CZS_LaVictoria.AlgodónPage
             this.FechaPicker.Location = new System.Drawing.Point(200, 147);
             this.FechaPicker.Name = "FechaPicker";
             this.FechaPicker.Size = new System.Drawing.Size(250, 33);
-            this.FechaPicker.TabIndex = 150;
+            this.FechaPicker.TabIndex = 1;
             // 
             // OperadorCombo
             // 
@@ -173,7 +175,7 @@ namespace CZS_LaVictoria.AlgodónPage
             this.OperadorCombo.Location = new System.Drawing.Point(200, 197);
             this.OperadorCombo.Name = "OperadorCombo";
             this.OperadorCombo.Size = new System.Drawing.Size(250, 29);
-            this.OperadorCombo.TabIndex = 149;
+            this.OperadorCombo.TabIndex = 4;
             // 
             // MaquinaLabel
             // 
@@ -181,9 +183,9 @@ namespace CZS_LaVictoria.AlgodónPage
             this.MaquinaLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaquinaLabel.Location = new System.Drawing.Point(50, 250);
             this.MaquinaLabel.Name = "MaquinaLabel";
-            this.MaquinaLabel.Size = new System.Drawing.Size(126, 21);
-            this.MaquinaLabel.TabIndex = 146;
-            this.MaquinaLabel.Text = "Máquina / Turno";
+            this.MaquinaLabel.Size = new System.Drawing.Size(140, 21);
+            this.MaquinaLabel.TabIndex = 5;
+            this.MaquinaLabel.Text = "Máquina* / Turno*";
             // 
             // OperadorLabel
             // 
@@ -191,9 +193,9 @@ namespace CZS_LaVictoria.AlgodónPage
             this.OperadorLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OperadorLabel.Location = new System.Drawing.Point(50, 200);
             this.OperadorLabel.Name = "OperadorLabel";
-            this.OperadorLabel.Size = new System.Drawing.Size(77, 21);
-            this.OperadorLabel.TabIndex = 147;
-            this.OperadorLabel.Text = "Operador";
+            this.OperadorLabel.Size = new System.Drawing.Size(84, 21);
+            this.OperadorLabel.TabIndex = 3;
+            this.OperadorLabel.Text = "Operador*";
             // 
             // FechaLabel
             // 
@@ -201,9 +203,9 @@ namespace CZS_LaVictoria.AlgodónPage
             this.FechaLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FechaLabel.Location = new System.Drawing.Point(50, 150);
             this.FechaLabel.Name = "FechaLabel";
-            this.FechaLabel.Size = new System.Drawing.Size(144, 21);
-            this.FechaLabel.TabIndex = 148;
-            this.FechaLabel.Text = "Fecha de operación";
+            this.FechaLabel.Size = new System.Drawing.Size(151, 21);
+            this.FechaLabel.TabIndex = 2;
+            this.FechaLabel.Text = "Fecha de operación*";
             // 
             // MsgBoxTimer
             // 
@@ -218,7 +220,7 @@ namespace CZS_LaVictoria.AlgodónPage
             this.MáquinaCombo.Location = new System.Drawing.Point(200, 247);
             this.MáquinaCombo.Name = "MáquinaCombo";
             this.MáquinaCombo.Size = new System.Drawing.Size(124, 29);
-            this.MáquinaCombo.TabIndex = 163;
+            this.MáquinaCombo.TabIndex = 6;
             // 
             // RegistrarEnrolladoForm
             // 

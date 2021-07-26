@@ -26,24 +26,13 @@ namespace CZS_LaVictoria.ÓrdenesPage
         public OrdenCompraVerForm()
         {
             InitializeComponent();
-            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
             DataGrid.DataSource = GlobalConfig.Connection.OrdenCompra_GetAllLineas();
-            DataGrid.QueryRowHeight += DataGridOnQueryRowHeight;
             DataGrid.Style.CellStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
             DataGrid.Style.HeaderStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
+            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCellsWithLastColumnFill;
         }
 
         #region Events
-
-        void DataGridOnQueryRowHeight(object sender, QueryRowHeightEventArgs e)
-        {
-            if (DataGrid.AutoSizeController.GetAutoRowHeight(e.RowIndex, new RowAutoFitOptions(), out var autoHeight))
-                if (autoHeight > 24)
-                {
-                    e.Height = autoHeight;
-                    e.Handled = true;
-                }
-        }
 
         /// <summary>
         ///     Busca las líneas de una orden de compra.

@@ -463,7 +463,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
         void GetProducts()
         {
             if (_selectedClient == null || AreaCombo.Text == "") return;
-            _productos = GlobalConfig.Connection.ClienteProducto_GetAll();
+            _productos = GlobalConfig.Connection.ClienteProducto_GetByArea(AreaCombo.Text);
             ((GridComboBoxColumn) DataGrid.Columns["Producto"]).DataSource = _productos;
             ((GridComboBoxColumn) DataGrid.Columns["Producto"]).DisplayMember = "ProductoInterno";
             ((GridComboBoxColumn) DataGrid.Columns["Producto"]).ValueMember = "ProductoInterno";

@@ -1585,6 +1585,10 @@ namespace CZS_LaVictoria_Library.DataAccess
                         // Material no existe en inventario.
                         return false;
 
+                    if (material.CantidadDisponible < línea.CantidadEntregada)
+                        // No hay suficiente stock para hacer la entrega.
+                        return false;
+
                     p = new DynamicParameters();
                     p.Add("@CantidadDisponible", material.CantidadDisponible - newQty + oldQty);
                     p.Add("@Id", material.Id);
@@ -2655,6 +2659,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                     p.Add("@CantidadEntra", model.CantidadEntra);
                     p.Add("@MaterialSale", model.MaterialSale);
                     p.Add("@CantidadSale", model.CantidadSale);
+                    p.Add("@Merma");
                     connection.Execute("dbo.spWoolProduction_Insert", p, commandType: CommandType.StoredProcedure);
                 }
                 catch (Exception ex)
@@ -2686,6 +2691,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                     p.Add("@CantidadEntra", model.CantidadEntra);
                     p.Add("@MaterialSale", model.MaterialSale);
                     p.Add("@CantidadSale", model.CantidadSale);
+                    p.Add("@Merma");
                     connection.Execute("dbo.spWoolProduction_Insert", p, commandType: CommandType.StoredProcedure);
                 }
                 catch (Exception ex)
@@ -2717,6 +2723,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                     p.Add("@CantidadEntra", model.CantidadEntra);
                     p.Add("@MaterialSale", model.MaterialSale);
                     p.Add("@CantidadSale", model.CantidadSale);
+                    p.Add("@Merma");
                     connection.Execute("dbo.spWoolProduction_Insert", p, commandType: CommandType.StoredProcedure);
 
                     var hilo = new MaterialModel();
@@ -2786,6 +2793,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                     p.Add("@CantidadEntra", model.CantidadEntra);
                     p.Add("@MaterialSale", model.MaterialSale);
                     p.Add("@CantidadSale", model.CantidadSale);
+                    p.Add("@Merma");
                     connection.Execute("dbo.spWoolProduction_Insert", p, commandType: CommandType.StoredProcedure);
 
                     var hilo = Material_GetByNombreArea(model.MaterialEntra, "Algodón");
@@ -2828,6 +2836,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                     p.Add("@CantidadEntra", model.CantidadEntra);
                     p.Add("@MaterialSale", model.MaterialSale);
                     p.Add("@CantidadSale", model.CantidadSale);
+                    p.Add("@Merma");
                     connection.Execute("dbo.spWoolProduction_Insert", p, commandType: CommandType.StoredProcedure);
 
                     var enrollado = new MaterialModel();
@@ -2908,7 +2917,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
                 try
                 {
-                    var output = connection.Query<ProducciónAlgodónModel>("dbo.spWoolProduction_GetByDate", p,
+                    var output = connection.Query<ProducciónAlgodónModel>("dbo.spWoolProduction_GetByFecha", p,
                         commandType: CommandType.StoredProcedure).ToList();
                     return output;
                 }
