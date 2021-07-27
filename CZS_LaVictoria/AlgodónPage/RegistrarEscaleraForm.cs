@@ -21,6 +21,11 @@ namespace CZS_LaVictoria.AlgodónPage
             GetMáquinas();
             GetAlgodones();
             FechaPicker.Culture = new CultureInfo("es-MX");
+            if (GlobalConfig.Connection.CZS_GetLicencia()) return;
+            MessageBox.Show(
+                "No se puede verificar la licencia. Verifica el estatus de la misma y verifica tu conexión a internet.",
+                "Error de licencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            Application.Exit();
         }
 
         #region Events
