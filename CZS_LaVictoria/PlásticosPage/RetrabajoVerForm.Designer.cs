@@ -1,7 +1,7 @@
 ﻿
 namespace CZS_LaVictoria.PlásticosPage
 {
-    partial class ProducciónPlásticosVerForm
+    partial class RetrabajoVerForm
     {
         /// <summary>
         /// Required designer variable.
@@ -52,7 +52,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.BuscarButton.Location = new System.Drawing.Point(675, 21);
             this.BuscarButton.Name = "BuscarButton";
             this.BuscarButton.Size = new System.Drawing.Size(90, 31);
-            this.BuscarButton.TabIndex = 19;
+            this.BuscarButton.TabIndex = 12;
             this.BuscarButton.Text = "Buscar";
             this.BuscarButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.BuscarButton.UseVisualStyleBackColor = true;
@@ -65,7 +65,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.HastaPicker.Location = new System.Drawing.Point(505, 20);
             this.HastaPicker.Name = "HastaPicker";
             this.HastaPicker.Size = new System.Drawing.Size(137, 33);
-            this.HastaPicker.TabIndex = 18;
+            this.HastaPicker.TabIndex = 11;
             // 
             // HastaLabel
             // 
@@ -74,7 +74,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.HastaLabel.Location = new System.Drawing.Point(450, 25);
             this.HastaLabel.Name = "HastaLabel";
             this.HastaLabel.Size = new System.Drawing.Size(49, 21);
-            this.HastaLabel.TabIndex = 17;
+            this.HastaLabel.TabIndex = 10;
             this.HastaLabel.Text = "Hasta";
             // 
             // DesdePicker
@@ -84,7 +84,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.DesdePicker.Location = new System.Drawing.Point(259, 20);
             this.DesdePicker.Name = "DesdePicker";
             this.DesdePicker.Size = new System.Drawing.Size(137, 33);
-            this.DesdePicker.TabIndex = 16;
+            this.DesdePicker.TabIndex = 9;
             // 
             // DesdeLabel
             // 
@@ -93,7 +93,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.DesdeLabel.Location = new System.Drawing.Point(200, 25);
             this.DesdeLabel.Name = "DesdeLabel";
             this.DesdeLabel.Size = new System.Drawing.Size(53, 21);
-            this.DesdeLabel.TabIndex = 15;
+            this.DesdeLabel.TabIndex = 8;
             this.DesdeLabel.Text = "Desde";
             // 
             // TodosCheck
@@ -104,7 +104,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.TodosCheck.Location = new System.Drawing.Point(25, 25);
             this.TodosCheck.Name = "TodosCheck";
             this.TodosCheck.Size = new System.Drawing.Size(121, 25);
-            this.TodosCheck.TabIndex = 14;
+            this.TodosCheck.TabIndex = 7;
             this.TodosCheck.Text = "Mostrar Todo";
             this.TodosCheck.UseVisualStyleBackColor = true;
             this.TodosCheck.CheckedChanged += new System.EventHandler(this.TodosCheck_CheckedChanged);
@@ -121,11 +121,11 @@ namespace CZS_LaVictoria.PlásticosPage
             this.DataGrid.Name = "DataGrid";
             this.DataGrid.ShowGroupDropArea = true;
             this.DataGrid.Size = new System.Drawing.Size(1276, 764);
-            this.DataGrid.TabIndex = 20;
+            this.DataGrid.TabIndex = 13;
             this.DataGrid.Text = "sfDataGrid1";
             this.DataGrid.AutoGeneratingColumn += new Syncfusion.WinForms.DataGrid.Events.AutoGeneratingColumnEventHandler(this.DataGrid_AutoGeneratingColumn);
             // 
-            // ProducciónPlásticosVerForm
+            // RetrabajoVerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -140,8 +140,9 @@ namespace CZS_LaVictoria.PlásticosPage
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "ProducciónPlásticosVerForm";
-            this.Text = "ProducciónVerForm";
+            this.Name = "RetrabajoVerForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "RetrabajoVerForm";
             ((System.ComponentModel.ISupportInitialize)(this.DataGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

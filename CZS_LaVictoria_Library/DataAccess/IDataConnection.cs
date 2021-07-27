@@ -602,6 +602,16 @@ namespace CZS_LaVictoria_Library.DataAccess
             MaterialModel fibraEntrada, MaterialModel alambreEntrada, MaterialModel materialSalida);
 
         /// <summary>
+        ///     Registra un retrabajo de piezas malas derivadas del proceso de insertado.
+        /// </summary>
+        /// <param name="retrabajo">Un modelo con las propiedades del retrabajo.</param>
+        /// <param name="entrada">Un modelo con las propiedades de las piezas malas.</param>
+        /// <param name="salida">Un modelo con las propiedades de las piezas retrabajadas.</param>
+        /// <param name="salidaQty">La cantidad de piezas retrabajadas.</param>
+        /// <returns></returns>
+        bool PlasticProduction_ProcesarPiezasMalas(RetrabajoPlásticosModel retrabajo, MaterialModel entrada, MaterialModel salida, double salidaQty);
+
+        /// <summary>
         ///     Obtiene todos los registros de producciones de plásticos.
         /// </summary>
         /// <returns>Una lista con los modelos de las producciones.</returns>
@@ -621,6 +631,20 @@ namespace CZS_LaVictoria_Library.DataAccess
         /// <param name="proceso">El proceso de producción (molido, insertado, etc.).</param>
         /// <returns>Una lista con los modelos de las producciones.</returns>
         List<ProducciónPlásticosModel> PlasticProduction_GetByProceso(string proceso);
+
+        /// <summary>
+        ///     Obtiene todos los registros de retrabajos de plásticos.
+        /// </summary>
+        /// <returns>Una lista con los modelos de los retrabajos.</returns>
+        List<RetrabajoPlásticosModel> PlasticProduction_RetrabajoGetAll();
+
+        /// <summary>
+        ///     Obtiene todos los registros de retrabajos de plásticos entre ciertas fechas.
+        /// </summary>
+        /// <param name="desde">La fecha de inicio.</param>
+        /// <param name="hasta">La fecha de final.</param>
+        /// <returns>Una lista con los modelos de los retrabajos.</returns>
+        List<RetrabajoPlásticosModel> PlasticProduction_RetrabajoGetByDate(DateTime desde, DateTime hasta);
 
         /// <summary>
         ///     Obtiene todas las máquinas usadas anteriormente en procesos de plásticos.
@@ -658,9 +682,8 @@ namespace CZS_LaVictoria_Library.DataAccess
         ///     Crea un registro de una producción de open end.
         /// </summary>
         /// <param name="model">Un modelo con las propiedades de la producción.</param>
-        /// <param name="materialSalida">Un modelo con las propiedades del material de salida del proceso.</param>
         /// <returns>True, si se creó correctamente, falso si no.</returns>
-        bool WoolProduction_CreateOpenEnd(ProducciónAlgodónModel model, MaterialModel materialSalida);
+        bool WoolProduction_CreateOpenEnd(ProducciónAlgodónModel model);
 
         /// <summary>
         ///     Crea un registro de una producción de torcedura.

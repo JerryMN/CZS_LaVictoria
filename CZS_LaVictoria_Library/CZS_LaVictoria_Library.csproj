@@ -71,6 +71,7 @@
     <Compile Include="Models\ProveedorProductoModel.cs" />
     <Compile Include="Models\OrdenVentaLíneaModel.cs" />
     <Compile Include="Models\OrdenVentaModel.cs" />
+    <Compile Include="Models\RetrabajoPlásticosModel.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tools.cs" />

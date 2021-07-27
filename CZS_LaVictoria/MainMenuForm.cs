@@ -148,14 +148,24 @@ namespace CZS_LaVictoria
             OpenChildForm(new RegistrarInsertadoForm());
         }
 
-        void VerProduccionesButton_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            OpenChildForm(new ProducciónPlásticosVerForm());
-        }
-
         void VerPiezasMalasButton_ItemClick(object sender, ItemClickEventArgs e)
         {
             OpenChildForm(new PiezasMalasVerForm());
+        }
+
+        void ProcesarPiezasMalasButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new RetrabajoCrearForm());
+        }
+
+        void VerRetrabajosButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new RetrabajoVerForm());
+        }
+
+        void VerProduccionesButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new ProducciónPlásticosVerForm());
         }
 
         void VerReporteProducciónPlásticosButton_ItemClick(object sender, ItemClickEventArgs e)

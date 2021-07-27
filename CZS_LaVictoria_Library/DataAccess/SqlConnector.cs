@@ -2520,6 +2520,120 @@ namespace CZS_LaVictoria_Library.DataAccess
             }
         }
 
+        public bool PlasticProduction_ProcesarPiezasMalas(RetrabajoPlásticosModel retrabajo, MaterialModel entrada,
+            MaterialModel salida, double salidaQty)
+        {
+            using (var scope = new TransactionScope())
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    var producto = new MaterialModel();
+                    var moler = new MaterialModel();
+                    var p = new DynamicParameters();
+                    p.Add("@CantidadDisponible", entrada.CantidadDisponible - salidaQty);
+                    p.Add("@Id", entrada.Id);
+                    connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+
+                    p = new DynamicParameters();
+                    switch (salida.Categoría)
+                    {
+                        case "Producto Terminado":
+                            p.Add("@Nombre", salida.Nombre);
+                            p.Add("@Area", "Plásticos");
+                            try
+                            {
+                                producto = connection.QuerySingle<MaterialModel>("dbo.spStock_GetByNombreArea", p,
+                                    commandType: CommandType.StoredProcedure);
+                            }
+                            catch (Exception ex)
+                            {
+                                if (ex.Message != "Sequence contains no elements")
+                                {
+                                    Debug.WriteLine(ex.ToString());
+                                    Debug.Assert(false);
+                                }
+                            }
+                            finally
+                            {
+                                if (producto == null || producto.Id == 0)
+                                {
+                                    p = new DynamicParameters();
+                                    p.Add("@Nombre", salida.Nombre);
+                                    p.Add("@Area", "Plásticos");
+                                    p.Add("@Categoría", "Producto Terminado");
+                                    p.Add("@CantidadDisponible", salidaQty);
+                                    connection.Execute("dbo.spStock_Insert", p, commandType: CommandType.StoredProcedure);
+                                }
+                                else
+                                {
+                                    p = new DynamicParameters();
+                                    p.Add("@CantidadDisponible", producto.CantidadDisponible + salidaQty);
+                                    p.Add("@Id", producto.Id);
+                                    connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                                }
+                            }
+
+                            break;
+                        case "Por Moler":
+                            p.Add("@Nombre", salida.Nombre);
+                            p.Add("@Area", "Plásticos");
+                            try
+                            {
+                                moler = connection.QuerySingle<MaterialModel>("dbo.spStock_GetByNombreArea", p,
+                                    commandType: CommandType.StoredProcedure);
+                            }
+                            catch (Exception ex)
+                            {
+                                if (ex.Message != "Sequence contains no elements")
+                                {
+                                    Debug.WriteLine(ex.ToString());
+                                    Debug.Assert(false);
+                                }
+                            }
+                            finally
+                            {
+                                if (moler == null || moler.Id == 0)
+                                {
+                                    p = new DynamicParameters();
+                                    p.Add("@Nombre", salida.Nombre);
+                                    p.Add("@Area", "Plásticos");
+                                    p.Add("@Categoría", "Por Moler");
+                                    p.Add("@CantidadDisponible", salidaQty);
+                                    connection.Execute("dbo.spStock_Insert", p, commandType: CommandType.StoredProcedure);
+                                }
+                                else
+                                {
+                                    p = new DynamicParameters();
+                                    p.Add("@CantidadDisponible", moler.CantidadDisponible + salidaQty);
+                                    p.Add("@Id", moler.Id);
+                                    connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                                }
+                            }
+
+                            break;
+                    }
+
+                    p = new DynamicParameters();
+                    p.Add("@Fecha", retrabajo.Fecha);
+                    p.Add("@PiezaMala", retrabajo.PiezaMala);
+                    p.Add("@Piezas", retrabajo.Piezas);
+                    p.Add("@Proceso", retrabajo.Proceso);
+                    p.Add("@Peso", retrabajo.Peso);
+                    connection.Execute("dbo.spPlasticRework_Insert", p, commandType: CommandType.StoredProcedure);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return false;
+                }
+
+                scope.Complete();
+                return true;
+            }
+        }
+
         public List<ProducciónPlásticosModel> PlasticProduction_GetAll()
         {
             using (IDbConnection connection = new SqlConnection(connectionString))
@@ -2548,7 +2662,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
                 try
                 {
-                    var output = connection.Query<ProducciónPlásticosModel>("dbo.spPlasticProduction_GetByDate", p,
+                    var output = connection.Query<ProducciónPlásticosModel>("dbo.spPlasticProduction_GetByFecha", p,
                         commandType: CommandType.StoredProcedure).ToList();
                     return output;
                 }
@@ -2571,6 +2685,47 @@ namespace CZS_LaVictoria_Library.DataAccess
                 try
                 {
                     var output = connection.Query<ProducciónPlásticosModel>("dbo.spPlasticProduction_GetByProceso", p,
+                        commandType: CommandType.StoredProcedure).ToList();
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
+        }
+
+        public List<RetrabajoPlásticosModel> PlasticProduction_RetrabajoGetAll()
+        {
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    var output = connection.Query<RetrabajoPlásticosModel>("dbo.spPlasticRework_GetAll").ToList();
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
+        }
+
+        public List<RetrabajoPlásticosModel> PlasticProduction_RetrabajoGetByDate(DateTime desde, DateTime hasta)
+        {
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@Desde", desde);
+                p.Add("@Hasta", hasta);
+
+                try
+                {
+                    var output = connection.Query<RetrabajoPlásticosModel>("dbo.spPlasticRework_GetByFecha", p,
                         commandType: CommandType.StoredProcedure).ToList();
                     return output;
                 }
@@ -2706,7 +2861,7 @@ namespace CZS_LaVictoria_Library.DataAccess
             }
         }
 
-        public bool WoolProduction_CreateOpenEnd(ProducciónAlgodónModel model, MaterialModel materialSalida)
+        public bool WoolProduction_CreateOpenEnd(ProducciónAlgodónModel model)
         {
             using (var scope = new TransactionScope())
             using (IDbConnection connection = new SqlConnection(connectionString))
