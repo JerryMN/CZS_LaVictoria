@@ -42,7 +42,7 @@ namespace CZS_LaVictoria.AlgodónPage
             orden.MaterialSale = "Hilo";
             orden.CantidadSale = _cantidadSalida;
 
-            var saveSuccess = GlobalConfig.Connection.WoolProduction_CreateOpenEnd(orden, new MaterialModel());
+            var saveSuccess = GlobalConfig.Connection.WoolProduction_CreateOpenEnd(orden);
 
             if (saveSuccess)
             {
@@ -82,7 +82,7 @@ namespace CZS_LaVictoria.AlgodónPage
         {
             MáquinaCombo.Items.Clear();
 
-            var máquinas = GlobalConfig.Connection.PlasticProduction_GetMáquinas();
+            var máquinas = GlobalConfig.Connection.WoolProduction_GetMáquinas();
             foreach (var máquina in máquinas) MáquinaCombo.Items.Add(máquina);
         }
 

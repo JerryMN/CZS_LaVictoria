@@ -84,7 +84,7 @@ namespace CZS_LaVictoria.AlgodónPage
         {
             MáquinaCombo.Items.Clear();
 
-            var máquinas = GlobalConfig.Connection.PlasticProduction_GetMáquinas();
+            var máquinas = GlobalConfig.Connection.WoolProduction_GetMáquinas();
             foreach (var máquina in máquinas) MáquinaCombo.Items.Add(máquina);
         }
 
