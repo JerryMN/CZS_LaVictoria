@@ -1,26 +1,26 @@
-﻿using CZS_LaVictoria_Library;
-using System;
+﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
+using CZS_LaVictoria_Library;
 using CZS_LaVictoria_Library.Models;
-using System.Diagnostics;
-using System.Collections;
 
 namespace CZS_LaVictoria.TrapeadoresPage
 {
     public partial class RegistrarTrapeadoresForm : Form
     {
-        MaterialModel _selectedAlambre = new MaterialModel();
-        KitModel _selectedKit = new KitModel();
         double _cantidadAlambre;
         int _cantidadKit;
+        MaterialModel _selectedAlambre = new MaterialModel();
+        KitModel _selectedKit = new KitModel();
 
 
         public RegistrarTrapeadoresForm()
         {
             InitializeComponent();
             GetOperadores();
+            GetMáquinas();
             FillComboBoxes();
             FechaPicker.Culture = new CultureInfo("es-MX");
         }
@@ -29,7 +29,7 @@ namespace CZS_LaVictoria.TrapeadoresPage
 
         void AlambreCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _selectedAlambre = (MaterialModel)AlambreCombo.SelectedItem;
+            _selectedAlambre = (MaterialModel) AlambreCombo.SelectedItem;
         }
 
         void InputOutputChanged(object sender, EventArgs e)
@@ -48,7 +48,6 @@ namespace CZS_LaVictoria.TrapeadoresPage
             }
 
             if (_selectedAlambre.Id != 0)
-            {
                 if (_cantidadAlambre > _selectedAlambre.CantidadDisponible)
                 {
                     MsgBox.Text =
@@ -56,9 +55,8 @@ namespace CZS_LaVictoria.TrapeadoresPage
                     MsgBox.Visible = true;
                     return;
                 }
-            }
 
-            _selectedKit = (KitModel)SalidaCombo.SelectedItem;
+            _selectedKit = (KitModel) SalidaCombo.SelectedItem;
 
             for (var i = 0; i < _selectedKit.Materiales.Count; i++)
             {
@@ -88,7 +86,7 @@ namespace CZS_LaVictoria.TrapeadoresPage
             Debug.Assert(FechaPicker.Value != null, "FechaPicker.Value != null");
             orden.Fecha = (DateTime) FechaPicker.Value;
             orden.Turno = int.Parse(TurnoText.Text);
-            orden.Máquina = int.Parse(MaquinaText.Text);
+            orden.Máquina = MáquinaCombo.Text;
             orden.Operador = OperadorCombo.Text;
             orden.Alambre = _selectedAlambre.Nombre;
             orden.CantidadAlambre = _cantidadAlambre;
@@ -126,12 +124,17 @@ namespace CZS_LaVictoria.TrapeadoresPage
         void GetOperadores()
         {
             var operadores = GlobalConfig.Connection.Operador_GetByArea("Trapeadores");
-            foreach (var operador in operadores)
-            {
-                OperadorCombo.Items.Add(operador);
-            }
+            foreach (var operador in operadores) OperadorCombo.Items.Add(operador);
 
             OperadorCombo.DisplayMember = "Nombre";
+        }
+
+        void GetMáquinas()
+        {
+            MáquinaCombo.Items.Clear();
+
+            var máquinas = GlobalConfig.Connection.PlasticProduction_GetMáquinas();
+            foreach (var máquina in máquinas) MáquinaCombo.Items.Add(máquina);
         }
 
         void FillComboBoxes()
@@ -142,16 +145,10 @@ namespace CZS_LaVictoria.TrapeadoresPage
             SalidaCombo.DisplayMember = "Nombre";
 
             var alambres = GlobalConfig.Connection.Material_GetByCat("Alambre");
-            foreach (var alambre in alambres)
-            {
-                AlambreCombo.Items.Add(alambre);
-            }
+            foreach (var alambre in alambres) AlambreCombo.Items.Add(alambre);
 
             var kits = GlobalConfig.Connection.Kit_GetAll();
-            foreach (var kit in kits)
-            {
-                SalidaCombo.Items.Add(kit);
-            }
+            foreach (var kit in kits) SalidaCombo.Items.Add(kit);
         }
 
         bool ValidateForm()
@@ -165,7 +162,7 @@ namespace CZS_LaVictoria.TrapeadoresPage
                 MsgBox.Text += "Selecciona un operador.\n";
             }
 
-            if (MaquinaText.Text == "")
+            if (MáquinaCombo.Text == "")
             {
                 output = false;
                 MsgBox.Text += "Selecciona una máquina.\n";
@@ -178,13 +175,11 @@ namespace CZS_LaVictoria.TrapeadoresPage
             }
 
             if (AlambreCombo.Text != "")
-            {
                 if (CantidadAlambreText.Text == "0" || !double.TryParse(CantidadAlambreText.Text, out _cantidadAlambre))
                 {
                     output = false;
                     MsgBox.Text += "Ingresa la cantidad de rollos de alambre.\n";
                 }
-            }
 
             if (SalidaCombo.Text == "")
             {
@@ -192,7 +187,8 @@ namespace CZS_LaVictoria.TrapeadoresPage
                 MsgBox.Text += "Selecciona un kit.\n";
             }
 
-            if (CantidadSalidaText.Text == "0" || !int.TryParse(CantidadSalidaText.Text.Replace(",",""), out _cantidadKit))
+            if (CantidadSalidaText.Text == "0" ||
+                !int.TryParse(CantidadSalidaText.Text.Replace(",", ""), out _cantidadKit))
             {
                 output = false;
                 MsgBox.Text += "Ingresa la cantidad de kits.\n";
@@ -203,21 +199,7 @@ namespace CZS_LaVictoria.TrapeadoresPage
 
         void ClearForm()
         {
-            void Func(IEnumerable controls)
-            {
-                foreach (Control control in controls)
-                    if (control is TextBox box)
-                        box.Clear();
-                    else if (control is ComboBox comboBox)
-                    {
-                        comboBox.Text = "";
-                        comboBox.SelectedItem = null;
-                    }
-                    else
-                        Func(control.Controls);
-            }
-
-            Func(Controls);
+            Tools.ClearForm(this);
 
             CantidadAlambreText.Text = "0";
             CantidadSalidaText.Text = "0";

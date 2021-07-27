@@ -22,7 +22,7 @@ namespace CZS_LaVictoria.AlgodónPage
             DataGrid.DataSource = LoadTable();
             DataGrid.Style.CellStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
             DataGrid.Style.HeaderStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
-            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
+            DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCellsWithLastColumnFill;
             DesdePicker.Culture = new CultureInfo("es-MX");
             HastaPicker.Culture = new CultureInfo("es-MX");
             DesdePicker.Value = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);

@@ -3086,7 +3086,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
                 try
                 {
-                    var output = connection.Query<ProducciónTrapeadoresModel>("dbo.spMopProduction_GetByDate", p,
+                    var output = connection.Query<ProducciónTrapeadoresModel>("dbo.spMopProduction_GetByFecha", p,
                         commandType: CommandType.StoredProcedure).ToList();
                     return output;
                 }
