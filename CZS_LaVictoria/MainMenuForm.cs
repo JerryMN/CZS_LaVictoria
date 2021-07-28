@@ -31,16 +31,16 @@ namespace CZS_LaVictoria
             var op = new FluentSplashScreenOptions
             {
                 Title = "Escobas La Victoria",
-                Subtitle = "Por CZ Systems. Versión 1.0",
+                Subtitle = "Por CZ Systems",
                 RightFooter = "Iniciando...",
-                LeftFooter = "Copyright © 2021 CZ Systems \nTodos los derechos reservados.",
+                LeftFooter = $"Copyright © 2021 CZ Systems \nVersión {Application.ProductVersion}",
                 LoadingIndicatorType = FluentLoadingIndicatorType.Dots,
                 Opacity = 50,
                 OpacityColor = Color.DarkRed
             };
 
             SplashScreenManager.ShowFluentSplashScreen(op, parentForm: this, useFadeIn: true, useFadeOut: true);
-            Thread.Sleep(2000);
+            Thread.Sleep(3000);
             SplashScreenManager.CloseForm();
 
             if (_validLicense) return;
