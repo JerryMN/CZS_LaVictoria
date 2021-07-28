@@ -270,6 +270,11 @@ namespace CZS_LaVictoria
             OpenChildForm(new CalculadoraForm());
         }
 
+        void VerGastosFijosButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new ReporteGastosFijosForm());
+        }
+
         void VerPagosHechosButton_ItemClick(object sender, ItemClickEventArgs e)
         {
             OpenChildForm(new ReportePorPagarForm());

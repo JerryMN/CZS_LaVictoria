@@ -89,6 +89,7 @@ namespace CZS_LaVictoria
             this.VerRetrabajosButton = new DevExpress.XtraBars.BarButtonItem();
             this.CrearGastoFijoButton = new DevExpress.XtraBars.BarButtonItem();
             this.VerCalculadoraButton = new DevExpress.XtraBars.BarButtonItem();
+            this.VerGastosFijosButton = new DevExpress.XtraBars.BarButtonItem();
             this.ÓrdenesTab = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.Órdenes_CompraGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Órdenes_VentaGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -119,7 +120,6 @@ namespace CZS_LaVictoria
             this.Datos_PersonalGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Datos_CorreoGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ChildPanel = new DevExpress.XtraEditors.PanelControl();
-            this.VerGastosFijosButton = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.RibbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ChildPanel)).BeginInit();
             this.SuspendLayout();
@@ -681,6 +681,14 @@ namespace CZS_LaVictoria
             this.VerCalculadoraButton.Name = "VerCalculadoraButton";
             this.VerCalculadoraButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerCalculadoraButton_ItemClick);
             // 
+            // VerGastosFijosButton
+            // 
+            this.VerGastosFijosButton.Caption = "Gastos Fijos";
+            this.VerGastosFijosButton.Id = 64;
+            this.VerGastosFijosButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("VerGastosFijosButton.ImageOptions.SvgImage")));
+            this.VerGastosFijosButton.Name = "VerGastosFijosButton";
+            this.VerGastosFijosButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerGastosFijosButton_ItemClick);
+            // 
             // ÓrdenesTab
             // 
             this.ÓrdenesTab.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F);
@@ -944,13 +952,6 @@ namespace CZS_LaVictoria
             this.ChildPanel.Name = "ChildPanel";
             this.ChildPanel.Size = new System.Drawing.Size(1278, 841);
             this.ChildPanel.TabIndex = 1;
-            // 
-            // VerGastosFijosButton
-            // 
-            this.VerGastosFijosButton.Caption = "Gastos Fijos";
-            this.VerGastosFijosButton.Id = 64;
-            this.VerGastosFijosButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("VerGastosFijosButton.ImageOptions.SvgImage")));
-            this.VerGastosFijosButton.Name = "VerGastosFijosButton";
             // 
             // MainMenuForm
             // 
