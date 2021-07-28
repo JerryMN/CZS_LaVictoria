@@ -853,7 +853,7 @@ namespace CZS_LaVictoria_Library.DataAccess
         List<PorCobrarPagosModel> Receivable_GetPagos();
 
         /// <summary>
-        ///     Obtiene todos los registros de pagos recibidos1 entre ciertas fechas.
+        ///     Obtiene todos los registros de pagos recibidos entre ciertas fechas.
         /// </summary>
         /// <param name="desde">La fecha desde donde buscar.</param>
         /// <param name="hasta">La fecha hasta donde buscar.</param>
