@@ -19,6 +19,11 @@ namespace CZS_LaVictoria.PlásticosPage
         {
             InitializeComponent();
             GetPiezasMalas();
+            if (GlobalConfig.Connection.CZS_GetLicencia()) return;
+            MessageBox.Show(
+                "No se puede verificar la licencia. Verifica el estatus de la misma y verifica tu conexión a internet.",
+                "Error de licencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            Application.Exit();
         }
 
         #region Events
@@ -95,6 +100,7 @@ namespace CZS_LaVictoria.PlásticosPage
             if (saveSuccess)
             {
                 ClearForm();
+                GetPiezasMalas();
                 MsgBox.Text = "Proceso registrado con éxito.";
                 MsgBox.IconColor = Color.DarkGreen;
             }

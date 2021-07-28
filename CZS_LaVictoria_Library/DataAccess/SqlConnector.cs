@@ -1840,25 +1840,44 @@ namespace CZS_LaVictoria_Library.DataAccess
                 try
                 {
                     var p = new DynamicParameters();
-                    p.Add("@CantidadDisponible", materialEntrada.CantidadDisponible);
+                    p.Add("@CantidadDisponible", materialEntrada.CantidadDisponible - model.CantidadEntra);
                     p.Add("@Id", materialEntrada.Id);
                     connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
 
                     p = new DynamicParameters();
-                    if (materialSalida.Id == 0)
+                    p.Add("@Nombre", materialSalida.Nombre);
+                    p.Add("@Area", "Plásticos");
+                    try
                     {
-                        p = new DynamicParameters();
-                        p.Add("@Nombre", materialSalida.Nombre);
-                        p.Add("@Area", materialSalida.Área);
-                        p.Add("@Categoría", materialSalida.Categoría);
-                        p.Add("@CantidadDisponible", materialSalida.CantidadDisponible);
-                        connection.Execute("dbo.spStock_Insert", p, commandType: CommandType.StoredProcedure);
+                        materialSalida = connection.QuerySingle<MaterialModel>("dbo.spStock_GetByNombreArea", p,
+                            commandType: CommandType.StoredProcedure);
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        p.Add("@CantidadDisponible", materialSalida.CantidadDisponible);
-                        p.Add("@Id", materialSalida.Id);
-                        connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                        if (ex.Message != "Sequence contains no elements")
+                        {
+                            Debug.WriteLine(ex.ToString());
+                            Debug.Assert(false);
+                        }
+                    }
+                    finally
+                    {
+                        if (materialSalida == null || materialSalida.Id == 0)
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@Nombre", model.MaterialSale);
+                            p.Add("@Area", "Plásticos");
+                            p.Add("@Categoría", "Molido");
+                            p.Add("@CantidadDisponible", model.CantidadSale);
+                            connection.Execute("dbo.spStock_Insert", p, commandType: CommandType.StoredProcedure);
+                        }
+                        else
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@CantidadDisponible", materialSalida.CantidadDisponible + model.CantidadSale);
+                            p.Add("@Id", materialSalida.Id);
+                            connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                        }
                     }
 
                     p = new DynamicParameters();
@@ -1886,7 +1905,7 @@ namespace CZS_LaVictoria_Library.DataAccess
             }
         }
 
-        public bool PlasticProduction_CreateExtruído(ProducciónPlásticosModel model, MezclaModel mezcla,
+        public bool PlasticProduction_CreateExtruido(ProducciónPlásticosModel model, MezclaModel mezcla,
             MaterialModel materialSalida)
         {
             using (var scope = new TransactionScope())
@@ -1896,33 +1915,56 @@ namespace CZS_LaVictoria_Library.DataAccess
                 {
                     var p = new DynamicParameters();
                     var materialPorMoler = new MaterialModel();
+                    var index = 0;
                     foreach (var material in mezcla.Materiales)
                     {
-                        p.Add("@CantidadDisponible", material.CantidadDisponible);
+                        p.Add("@CantidadDisponible",
+                            material.CantidadDisponible -
+                            model.CantidadEntra * mezcla.Cantidades[index] / mezcla.CantidadMezcla);
                         p.Add("@Id", material.Id);
                         connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                        index += 1;
                     }
 
                     p = new DynamicParameters();
-                    if (materialSalida.Id == 0)
+                    p.Add("@Nombre", materialSalida.Nombre);
+                    p.Add("@Area", "Plásticos");
+                    try
                     {
-                        p = new DynamicParameters();
-                        p.Add("@Nombre", materialSalida.Nombre);
-                        p.Add("@Area", materialSalida.Área);
-                        p.Add("@Categoría", materialSalida.Categoría);
-                        p.Add("@CantidadDisponible", materialSalida.CantidadDisponible);
-                        connection.Execute("dbo.spStock_Insert", p, commandType: CommandType.StoredProcedure);
+                        materialSalida = connection.QuerySingle<MaterialModel>("dbo.spStock_GetByNombreArea", p,
+                            commandType: CommandType.StoredProcedure);
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        p.Add("@CantidadDisponible", materialSalida.CantidadDisponible);
-                        p.Add("@Id", materialSalida.Id);
-                        connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                        if (ex.Message != "Sequence contains no elements")
+                        {
+                            Debug.WriteLine(ex.ToString());
+                            Debug.Assert(false);
+                        }
+                    }
+                    finally
+                    {
+                        if (materialSalida == null || materialSalida.Id == 0)
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@Nombre", model.MaterialSale);
+                            p.Add("@Area", "Plásticos");
+                            p.Add("@Categoría", "Extruido");
+                            p.Add("@CantidadDisponible", model.CantidadSale * model.PesoPromedio);
+                            connection.Execute("dbo.spStock_Insert", p, commandType: CommandType.StoredProcedure);
+                        }
+                        else
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@CantidadDisponible", materialSalida.CantidadDisponible + model.CantidadSale * model.PesoPromedio);
+                            p.Add("@Id", materialSalida.Id);
+                            connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                        }
                     }
 
                     p = new DynamicParameters();
                     p.Add("@Fecha", model.Fecha);
-                    p.Add("@Proceso", "Extruído");
+                    p.Add("@Proceso", "Extruido");
                     p.Add("@Turno", model.Turno);
                     p.Add("@Máquina", model.Máquina);
                     p.Add("@Operador", model.Operador);
@@ -1984,7 +2026,7 @@ namespace CZS_LaVictoria_Library.DataAccess
             }
         }
 
-        public bool PlasticProduction_CreateExtruído(ProducciónPlásticosModel model, MaterialModel materialEntrada,
+        public bool PlasticProduction_CreateExtruido(ProducciónPlásticosModel model, MaterialModel materialEntrada,
             MaterialModel materialSalida)
         {
             using (var scope = new TransactionScope())
@@ -1994,30 +2036,49 @@ namespace CZS_LaVictoria_Library.DataAccess
                 {
                     var p = new DynamicParameters();
                     var materialPorMoler = new MaterialModel();
-                    p.Add("@CantidadDisponible", materialEntrada.CantidadDisponible);
+                    p.Add("@CantidadDisponible", materialEntrada.CantidadDisponible - model.CantidadEntra);
                     p.Add("@Id", materialEntrada.Id);
                     connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
 
                     p = new DynamicParameters();
-                    if (materialSalida.Id == 0)
+                    p.Add("@Nombre", materialSalida.Nombre);
+                    p.Add("@Area", "Plásticos");
+                    try
                     {
-                        p = new DynamicParameters();
-                        p.Add("@Nombre", materialSalida.Nombre);
-                        p.Add("@Area", materialSalida.Área);
-                        p.Add("@Categoría", materialSalida.Categoría);
-                        p.Add("@CantidadDisponible", materialSalida.CantidadDisponible);
-                        connection.Execute("dbo.spStock_Insert", p, commandType: CommandType.StoredProcedure);
+                        materialSalida = connection.QuerySingle<MaterialModel>("dbo.spStock_GetByNombreArea", p,
+                            commandType: CommandType.StoredProcedure);
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        p.Add("@CantidadDisponible", materialSalida.CantidadDisponible);
-                        p.Add("@Id", materialSalida.Id);
-                        connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                        if (ex.Message != "Sequence contains no elements")
+                        {
+                            Debug.WriteLine(ex.ToString());
+                            Debug.Assert(false);
+                        }
+                    }
+                    finally
+                    {
+                        if (materialSalida == null || materialSalida.Id == 0)
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@Nombre", model.MaterialSale);
+                            p.Add("@Area", "Plásticos");
+                            p.Add("@Categoría", "Extruido");
+                            p.Add("@CantidadDisponible", model.CantidadSale * model.PesoPromedio);
+                            connection.Execute("dbo.spStock_Insert", p, commandType: CommandType.StoredProcedure);
+                        }
+                        else
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@CantidadDisponible", materialSalida.CantidadDisponible + model.CantidadSale * model.PesoPromedio);
+                            p.Add("@Id", materialSalida.Id);
+                            connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                        }
                     }
 
                     p = new DynamicParameters();
                     p.Add("@Fecha", model.Fecha);
-                    p.Add("@Proceso", "Extruído");
+                    p.Add("@Proceso", "Extruido");
                     p.Add("@Turno", model.Turno);
                     p.Add("@Máquina", model.Máquina);
                     p.Add("@Operador", model.Operador);
@@ -2089,25 +2150,44 @@ namespace CZS_LaVictoria_Library.DataAccess
                 {
                     var p = new DynamicParameters();
                     var materialPorMoler = new MaterialModel();
-                    p.Add("@CantidadDisponible", materialEntrada.CantidadDisponible);
+                    p.Add("@CantidadDisponible", materialEntrada.CantidadDisponible - model.CantidadEntra);
                     p.Add("@Id", materialEntrada.Id);
                     connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
 
                     p = new DynamicParameters();
-                    if (materialSalida.Id == 0)
+                    p.Add("@Nombre", materialSalida.Nombre);
+                    p.Add("@Area", "Plásticos");
+                    try
                     {
-                        p = new DynamicParameters();
-                        p.Add("@Nombre", materialSalida.Nombre);
-                        p.Add("@Area", materialSalida.Área);
-                        p.Add("@Categoría", materialSalida.Categoría);
-                        p.Add("@CantidadDisponible", materialSalida.CantidadDisponible);
-                        connection.Execute("dbo.spStock_Insert", p, commandType: CommandType.StoredProcedure);
+                        materialSalida = connection.QuerySingle<MaterialModel>("dbo.spStock_GetByNombreArea", p,
+                            commandType: CommandType.StoredProcedure);
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        p.Add("@CantidadDisponible", materialSalida.CantidadDisponible);
-                        p.Add("@Id", materialSalida.Id);
-                        connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                        if (ex.Message != "Sequence contains no elements")
+                        {
+                            Debug.WriteLine(ex.ToString());
+                            Debug.Assert(false);
+                        }
+                    }
+                    finally
+                    {
+                        if (materialSalida == null || materialSalida.Id == 0)
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@Nombre", model.MaterialSale);
+                            p.Add("@Area", "Plásticos");
+                            p.Add("@Categoría", "Cortado");
+                            p.Add("@CantidadDisponible", model.CantidadSale);
+                            connection.Execute("dbo.spStock_Insert", p, commandType: CommandType.StoredProcedure);
+                        }
+                        else
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@CantidadDisponible", materialSalida.CantidadDisponible + model.CantidadSale);
+                            p.Add("@Id", materialSalida.Id);
+                            connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                        }
                     }
 
                     p = new DynamicParameters();
@@ -2183,28 +2263,51 @@ namespace CZS_LaVictoria_Library.DataAccess
                 {
                     var p = new DynamicParameters();
                     var materialPorMoler = new MaterialModel();
+                    var index = 0;
                     foreach (var material in mezcla.Materiales)
                     {
-                        p.Add("@CantidadDisponible", material.CantidadDisponible);
+                        p.Add("@CantidadDisponible",
+                            material.CantidadDisponible -
+                            model.CantidadEntra * mezcla.Cantidades[index] / mezcla.CantidadMezcla);
                         p.Add("@Id", material.Id);
                         connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                        index += 1;
                     }
 
                     p = new DynamicParameters();
-                    if (materialSalida.Id == 0)
+                    p.Add("@Nombre", materialSalida.Nombre);
+                    p.Add("@Area", "Plásticos");
+                    try
                     {
-                        p = new DynamicParameters();
-                        p.Add("@Nombre", materialSalida.Nombre);
-                        p.Add("@Area", materialSalida.Área);
-                        p.Add("@Categoría", materialSalida.Categoría);
-                        p.Add("@CantidadDisponible", materialSalida.CantidadDisponible);
-                        connection.Execute("dbo.spStock_Insert", p, commandType: CommandType.StoredProcedure);
+                        materialSalida = connection.QuerySingle<MaterialModel>("dbo.spStock_GetByNombreArea", p,
+                            commandType: CommandType.StoredProcedure);
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        p.Add("@CantidadDisponible", materialSalida.CantidadDisponible);
-                        p.Add("@Id", materialSalida.Id);
-                        connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                        if (ex.Message != "Sequence contains no elements")
+                        {
+                            Debug.WriteLine(ex.ToString());
+                            Debug.Assert(false);
+                        }
+                    }
+                    finally
+                    {
+                        if (materialSalida == null || materialSalida.Id == 0)
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@Nombre", model.MaterialSale);
+                            p.Add("@Area", "Plásticos");
+                            p.Add("@Categoría", "Bases");
+                            p.Add("@CantidadDisponible", model.CantidadSale);
+                            connection.Execute("dbo.spStock_Insert", p, commandType: CommandType.StoredProcedure);
+                        }
+                        else
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@CantidadDisponible", materialSalida.CantidadDisponible + model.CantidadSale);
+                            p.Add("@Id", materialSalida.Id);
+                            connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                        }
                     }
 
                     p = new DynamicParameters();
@@ -2281,25 +2384,44 @@ namespace CZS_LaVictoria_Library.DataAccess
                 {
                     var p = new DynamicParameters();
                     var materialPorMoler = new MaterialModel();
-                    p.Add("@CantidadDisponible", materialEntrada.CantidadDisponible);
+                    p.Add("@CantidadDisponible", materialEntrada.CantidadDisponible - model.CantidadEntra);
                     p.Add("@Id", materialEntrada.Id);
                     connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
 
                     p = new DynamicParameters();
-                    if (materialSalida.Id == 0)
+                    p.Add("@Nombre", materialSalida.Nombre);
+                    p.Add("@Area", "Plásticos");
+                    try
                     {
-                        p = new DynamicParameters();
-                        p.Add("@Nombre", materialSalida.Nombre);
-                        p.Add("@Area", materialSalida.Área);
-                        p.Add("@Categoría", materialSalida.Categoría);
-                        p.Add("@CantidadDisponible", materialSalida.CantidadDisponible);
-                        connection.Execute("dbo.spStock_Insert", p, commandType: CommandType.StoredProcedure);
+                        materialSalida = connection.QuerySingle<MaterialModel>("dbo.spStock_GetByNombreArea", p,
+                            commandType: CommandType.StoredProcedure);
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        p.Add("@CantidadDisponible", materialSalida.CantidadDisponible);
-                        p.Add("@Id", materialSalida.Id);
-                        connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                        if (ex.Message != "Sequence contains no elements")
+                        {
+                            Debug.WriteLine(ex.ToString());
+                            Debug.Assert(false);
+                        }
+                    }
+                    finally
+                    {
+                        if (materialSalida == null || materialSalida.Id == 0)
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@Nombre", model.MaterialSale);
+                            p.Add("@Area", "Plásticos");
+                            p.Add("@Categoría", "Bases");
+                            p.Add("@CantidadDisponible", model.CantidadSale);
+                            connection.Execute("dbo.spStock_Insert", p, commandType: CommandType.StoredProcedure);
+                        }
+                        else
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@CantidadDisponible", materialSalida.CantidadDisponible + model.CantidadSale);
+                            p.Add("@Id", materialSalida.Id);
+                            connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                        }
                     }
 
                     p = new DynamicParameters();
@@ -2366,8 +2488,8 @@ namespace CZS_LaVictoria_Library.DataAccess
             }
         }
 
-        public bool PlasticProduction_CreateInsertado(ProducciónPlásticosModel model, MaterialModel baseEntrada,
-            MaterialModel fibraEntrada, MaterialModel alambreEntrada, MaterialModel materialSalida)
+        public bool PlasticProduction_CreateInsertado(ProducciónPlásticosModel model, MaterialModel @base,
+            MaterialModel fibra, MaterialModel alambre, MaterialModel caja, MaterialModel materialSalida)
         {
             using (var scope = new TransactionScope())
             using (IDbConnection connection = new SqlConnection(connectionString))
@@ -2375,37 +2497,65 @@ namespace CZS_LaVictoria_Library.DataAccess
                 try
                 {
                     var p = new DynamicParameters();
-                    p.Add("@CantidadDisponible", baseEntrada.CantidadDisponible - model.CantidadEntra);
-                    p.Add("@Id", baseEntrada.Id);
+                    p.Add("@CantidadDisponible", @base.CantidadDisponible - model.CantidadEntra);
+                    p.Add("@Id", @base.Id);
                     connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
 
                     p = new DynamicParameters();
-                    p.Add("@CantidadDisponible", fibraEntrada.CantidadDisponible - model.CantidadFibraEntra);
-                    p.Add("@Id", fibraEntrada.Id);
+                    p.Add("@CantidadDisponible", fibra.CantidadDisponible - model.CantidadFibraEntra);
+                    p.Add("@Id", fibra.Id);
                     connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
 
-                    if (alambreEntrada.Id != 0)
+                    if (alambre.Id != 0)
                     {
                         p = new DynamicParameters();
-                        p.Add("@CantidadDisponible", alambreEntrada.CantidadDisponible - model.RollosAlambre);
-                        p.Add("@Id", alambreEntrada.Id);
+                        p.Add("@CantidadDisponible", alambre.CantidadDisponible - model.RollosAlambre);
+                        p.Add("@Id", alambre.Id);
+                        connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                    }
+
+                    if (caja.Id != 0)
+                    {
+                        p = new DynamicParameters();
+                        p.Add("@CantidadDisponible", caja.CantidadDisponible - model.CantidadCajas);
+                        p.Add("@Id", caja.Id);
                         connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
                     }
 
                     p = new DynamicParameters();
-                    if (materialSalida.Id == 0)
+                    p.Add("@Nombre", materialSalida.Nombre);
+                    p.Add("@Area", "Plásticos");
+                    try
                     {
-                        p.Add("@Nombre", materialSalida.Nombre);
-                        p.Add("@Area", materialSalida.Área);
-                        p.Add("@Categoría", materialSalida.Categoría);
-                        p.Add("@CantidadDisponible", materialSalida.CantidadDisponible);
-                        connection.Execute("dbo.spStock_Insert", p, commandType: CommandType.StoredProcedure);
+                        materialSalida = connection.QuerySingle<MaterialModel>("dbo.spStock_GetByNombreArea", p,
+                            commandType: CommandType.StoredProcedure);
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        p.Add("@CantidadDisponible", materialSalida.CantidadDisponible);
-                        p.Add("@Id", materialSalida.Id);
-                        connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                        if (ex.Message != "Sequence contains no elements")
+                        {
+                            Debug.WriteLine(ex.ToString());
+                            Debug.Assert(false);
+                        }
+                    }
+                    finally
+                    {
+                        if (materialSalida == null || materialSalida.Id == 0)
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@Nombre", model.MaterialSale);
+                            p.Add("@Area", "Plásticos");
+                            p.Add("@Categoría", "Producto Terminado");
+                            p.Add("@CantidadDisponible", model.PiezasBuenas);
+                            connection.Execute("dbo.spStock_Insert", p, commandType: CommandType.StoredProcedure);
+                        }
+                        else
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@CantidadDisponible", materialSalida.CantidadDisponible + model.PiezasBuenas);
+                            p.Add("@Id", materialSalida.Id);
+                            connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                        }
                     }
 
                     p = new DynamicParameters();
@@ -2434,7 +2584,6 @@ namespace CZS_LaVictoria_Library.DataAccess
                     p = new DynamicParameters();
                     p.Add("@Nombre", "Merma Por Moler");
                     p.Add("@Area", "Plásticos");
-
                     try
                     {
                         materialPorMoler = connection.QuerySingle<MaterialModel>("dbo.spStock_GetByNombreArea", p,
@@ -2456,27 +2605,26 @@ namespace CZS_LaVictoria_Library.DataAccess
                             p.Add("@Nombre", "Merma Por Moler");
                             p.Add("@Area", "Plásticos");
                             p.Add("@Categoría", "Por Moler");
-                            p.Add("@CantidadDisponible", model.MermaBases + model.MermaFibra);
+                            p.Add("@CantidadDisponible", model.MermaBases);
                             connection.Execute("dbo.spStock_Insert", p, commandType: CommandType.StoredProcedure);
                         }
                         else
                         {
                             p = new DynamicParameters();
                             p.Add("@CantidadDisponible",
-                                materialPorMoler.CantidadDisponible + model.MermaBases + model.MermaFibra);
+                                materialPorMoler.CantidadDisponible + model.MermaBases);
                             p.Add("@Id", materialPorMoler.Id);
                             connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
                         }
                     }
 
-                    materialPorMoler = new MaterialModel();
+                    var fibraMala = new MaterialModel();
                     p = new DynamicParameters();
-                    p.Add("@Nombre", $"{materialSalida.Nombre} Malas");
+                    p.Add("@Nombre", "Fibra Para Reciclar");
                     p.Add("@Area", "Plásticos");
-
                     try
                     {
-                        materialPorMoler = connection.QuerySingle<MaterialModel>("dbo.spStock_GetByNombreArea", p,
+                        fibraMala = connection.QuerySingle<MaterialModel>("dbo.spStock_GetByNombreArea", p,
                             commandType: CommandType.StoredProcedure);
                     }
                     catch (Exception ex)
@@ -2489,21 +2637,62 @@ namespace CZS_LaVictoria_Library.DataAccess
                     }
                     finally
                     {
-                        if (materialPorMoler == null || materialPorMoler.Id == 0)
+                        if (fibraMala == null || fibraMala.Id == 0)
                         {
                             p = new DynamicParameters();
-                            p.Add("@Nombre", $"{materialSalida.Nombre} Malas");
+                            p.Add("@Nombre", "Fibra Por Reciclar");
                             p.Add("@Area", "Plásticos");
-                            p.Add("@Categoría", "Piezas Malas");
-                            p.Add("@CantidadDisponible", model.PiezasMalas);
+                            p.Add("@Categoría", "Molido");
+                            p.Add("@CantidadDisponible", model.MermaFibra);
                             connection.Execute("dbo.spStock_Insert", p, commandType: CommandType.StoredProcedure);
                         }
                         else
                         {
                             p = new DynamicParameters();
                             p.Add("@CantidadDisponible",
-                                materialPorMoler.CantidadDisponible + model.PiezasMalas);
-                            p.Add("@Id", materialPorMoler.Id);
+                                fibraMala.CantidadDisponible + model.MermaFibra);
+                            p.Add("@Id", fibraMala.Id);
+                            connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
+                        }
+                    }
+
+                    var piezasMalas = new MaterialModel();
+                    p = new DynamicParameters();
+                    p.Add("@Nombre", $"{model.MaterialSale} Malas");
+                    p.Add("@Area", "Plásticos");
+                    try
+                    {
+                        piezasMalas = connection.QuerySingle<MaterialModel>("dbo.spStock_GetByNombreArea", p,
+                            commandType: CommandType.StoredProcedure);
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex.Message != "Sequence contains no elements")
+                        {
+                            Debug.WriteLine(ex.ToString());
+                            Debug.Assert(false);
+                        }
+                    }
+                    finally
+                    {
+                        if (piezasMalas == null || piezasMalas.Id == 0)
+                        {
+                            if (model.PiezasMalas > 0)
+                            {
+                                p = new DynamicParameters();
+                                p.Add("@Nombre", $"{model.MaterialSale} Malas");
+                                p.Add("@Area", "Plásticos");
+                                p.Add("@Categoría", "Piezas Malas");
+                                p.Add("@CantidadDisponible", model.PiezasMalas);
+                                connection.Execute("dbo.spStock_Insert", p, commandType: CommandType.StoredProcedure);
+                            }
+                        }
+                        else
+                        {
+                            p = new DynamicParameters();
+                            p.Add("@CantidadDisponible",
+                                piezasMalas.CantidadDisponible + model.PiezasMalas);
+                            p.Add("@Id", piezasMalas.Id);
                             connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
                         }
                     }

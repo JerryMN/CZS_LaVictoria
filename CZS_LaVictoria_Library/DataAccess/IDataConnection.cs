@@ -540,23 +540,23 @@ namespace CZS_LaVictoria_Library.DataAccess
             MaterialModel materialSalida);
 
         /// <summary>
-        ///     Crea un registro de una producción de extruído.
+        ///     Crea un registro de una producción de extruido.
         /// </summary>
         /// <param name="model">Un modelo con las propiedades de la producción.</param>
         /// <param name="mezcla">Un modelo con las propiedades de la mezcla de entrada al proceso.</param>
         /// <param name="materialSalida">Un modelo con las propiedades del material de salida del proceso.</param>
         /// <returns>True, si se creó correctamente, falso si no.</returns>
-        bool PlasticProduction_CreateExtruído(ProducciónPlásticosModel model, MezclaModel mezcla,
+        bool PlasticProduction_CreateExtruido(ProducciónPlásticosModel model, MezclaModel mezcla,
             MaterialModel materialSalida);
 
         /// <summary>
-        ///     Crea un registro de una producción de extruído.
+        ///     Crea un registro de una producción de extruido.
         /// </summary>
         /// <param name="model">Un modelo con las propiedades de la producción.</param>
         /// <param name="materialEntrada">Un modelo con las propiedades del material de entrada al proceso.</param>
         /// <param name="materialSalida">Un modelo con las propiedades del material de salida del proceso.</param>
         /// <returns>True, si se creó correctamente, falso si no.</returns>
-        bool PlasticProduction_CreateExtruído(ProducciónPlásticosModel model, MaterialModel materialEntrada,
+        bool PlasticProduction_CreateExtruido(ProducciónPlásticosModel model, MaterialModel materialEntrada,
             MaterialModel materialSalida);
 
         /// <summary>
@@ -593,13 +593,14 @@ namespace CZS_LaVictoria_Library.DataAccess
         ///     Crea un registro de una producción de insertado.
         /// </summary>
         /// <param name="model">Un modelo con las propiedades de la producción.</param>
-        /// <param name="baseEntrada">Un modelo con las propiedades de la base de entrada al proceso.</param>
-        /// <param name="fibraEntrada">Un modelo con las propiedades de la fibra de entrada al proceso.</param>
-        /// <param name="alambreEntrada">Un modelo con las propiedades del alambre de entrada al proceso.</param>
-        /// <param name="materialSalida">Un modelo con las propiedades del material de salida del proceso.</param>
+        /// <param name="base">Un modelo con las propiedades de la base de entrada al proceso.</param>
+        /// <param name="fibra">Un modelo con las propiedades de la fibra de entrada al proceso.</param>
+        /// <param name="alambre">Un modelo con las propiedades del alambre de entrada al proceso.</param>
+        /// <param name="caja">Un modelo con las propiedades de la caja de entrada al proceso.</param>
+        /// <param name="materialSalida">Un modelo con las propiedades del producto de salida del proceso.</param>
         /// <returns>True, si se creó correctamente, falso si no.</returns>
-        bool PlasticProduction_CreateInsertado(ProducciónPlásticosModel model, MaterialModel baseEntrada,
-            MaterialModel fibraEntrada, MaterialModel alambreEntrada, MaterialModel materialSalida);
+        bool PlasticProduction_CreateInsertado(ProducciónPlásticosModel model, MaterialModel @base,
+            MaterialModel fibra, MaterialModel alambre, MaterialModel caja, MaterialModel materialSalida);
 
         /// <summary>
         ///     Registra un retrabajo de piezas malas derivadas del proceso de insertado.

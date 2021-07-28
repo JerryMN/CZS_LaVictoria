@@ -86,6 +86,7 @@ namespace CZS_LaVictoria
             this.VerReporteProducciónTrapeadoresButton = new DevExpress.XtraBars.BarButtonItem();
             this.ConfigurarCorreoButton = new DevExpress.XtraBars.BarButtonItem();
             this.ProcesarPiezasMalasButton = new DevExpress.XtraBars.BarButtonItem();
+            this.VerRetrabajosButton = new DevExpress.XtraBars.BarButtonItem();
             this.ÓrdenesTab = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.Órdenes_CompraGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Órdenes_VentaGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -114,7 +115,6 @@ namespace CZS_LaVictoria
             this.Datos_PersonalGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Datos_CorreoGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ChildPanel = new DevExpress.XtraEditors.PanelControl();
-            this.VerRetrabajosButton = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.RibbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ChildPanel)).BeginInit();
             this.SuspendLayout();
@@ -267,7 +267,7 @@ namespace CZS_LaVictoria
             // 
             // RegistrarExtruídoButton
             // 
-            this.RegistrarExtruídoButton.Caption = "Registrar Extruído";
+            this.RegistrarExtruídoButton.Caption = "Registrar Extruido";
             this.RegistrarExtruídoButton.Id = 9;
             this.RegistrarExtruídoButton.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("RegistrarExtruídoButton.ImageOptions.Image")));
             this.RegistrarExtruídoButton.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("RegistrarExtruídoButton.ImageOptions.LargeImage")));
@@ -649,6 +649,14 @@ namespace CZS_LaVictoria
             this.ProcesarPiezasMalasButton.Name = "ProcesarPiezasMalasButton";
             this.ProcesarPiezasMalasButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.ProcesarPiezasMalasButton_ItemClick);
             // 
+            // VerRetrabajosButton
+            // 
+            this.VerRetrabajosButton.Caption = "Ver Retrabajos";
+            this.VerRetrabajosButton.Id = 61;
+            this.VerRetrabajosButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("VerRetrabajosButton.ImageOptions.SvgImage")));
+            this.VerRetrabajosButton.Name = "VerRetrabajosButton";
+            this.VerRetrabajosButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerRetrabajosButton_ItemClick);
+            // 
             // ÓrdenesTab
             // 
             this.ÓrdenesTab.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F);
@@ -895,14 +903,6 @@ namespace CZS_LaVictoria
             this.ChildPanel.Name = "ChildPanel";
             this.ChildPanel.Size = new System.Drawing.Size(1278, 841);
             this.ChildPanel.TabIndex = 1;
-            // 
-            // VerRetrabajosButton
-            // 
-            this.VerRetrabajosButton.Caption = "Ver Retrabajos";
-            this.VerRetrabajosButton.Id = 61;
-            this.VerRetrabajosButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("VerRetrabajosButton.ImageOptions.SvgImage")));
-            this.VerRetrabajosButton.Name = "VerRetrabajosButton";
-            this.VerRetrabajosButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerRetrabajosButton_ItemClick);
             // 
             // MainMenuForm
             // 

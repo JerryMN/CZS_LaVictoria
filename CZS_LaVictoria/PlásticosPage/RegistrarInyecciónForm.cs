@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
@@ -7,6 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using CZS_LaVictoria_Library;
 using CZS_LaVictoria_Library.Models;
+
 // ReSharper disable UseObjectOrCollectionInitializer
 
 namespace CZS_LaVictoria.PlásticosPage
@@ -15,12 +15,12 @@ namespace CZS_LaVictoria.PlásticosPage
     {
         readonly MezclaModel _mezclaEntrada = new MezclaModel();
         double _kgEntrada;
-        MaterialModel _materialSalida = new MaterialModel();
-        int _piezasBuenas;
         double _kgSalida;
-        double _pesoProm;
+        MaterialModel _materialSalida = new MaterialModel();
         double _mermaMoler;
-        string _mezclaNombre;
+        static string _mezclaNombre;
+        double _pesoProm;
+        int _piezasBuenas;
 
         public RegistrarInyecciónForm()
         {
@@ -31,26 +31,35 @@ namespace CZS_LaVictoria.PlásticosPage
             GetBases();
             FechaPicker.Culture = new CultureInfo("es-MX");
             MaterialesListBox.DisplayMember = "Nombre";
+            if (GlobalConfig.Connection.CZS_GetLicencia()) return;
+            MessageBox.Show(
+                "No se puede verificar la licencia. Verifica el estatus de la misma y verifica tu conexión a internet.",
+                "Error de licencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            Application.Exit();
         }
 
         #region Events
 
         void AgregarButton_Click(object sender, EventArgs e)
         {
+            MsgBox.IconColor = Color.DarkRed;
             MsgBox.Visible = false;
+            MsgBox.Text = "";
+
             if (!ValidateMix())
             {
                 MsgBox.Visible = true;
                 return;
             }
 
-            var material = (MaterialModel)MaterialCombo.SelectedItem;
-            double.TryParse(CantidadText.Text, out var cantidad);
+            var material = (MaterialModel) MaterialCombo.SelectedItem;
+            double.TryParse(CantidadText.Text.Replace(",", ""), out var cantidad);
 
             if (cantidad > material.CantidadDisponible)
             {
                 MsgBox.Text =
-                    $"El material no se puede seleccionar. La cantidad máxima permitida es de {material.CantidadDisponible:N} kg.";
+                    $"El material \"{MaterialCombo.Text}\" no se puede seleccionar. " +
+                    $"Cantidad disponible: {material.CantidadDisponible:N} kg.";
                 MsgBox.Visible = true;
                 GuardarButton.Enabled = false;
                 return;
@@ -85,12 +94,15 @@ namespace CZS_LaVictoria.PlásticosPage
 
         void SalidaCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _materialSalida = (MaterialModel)SalidaCombo.SelectedItem;
+            _materialSalida = (MaterialModel) SalidaCombo.SelectedItem;
         }
 
         void CalcularButton_Click(object sender, EventArgs e)
         {
+            MsgBox.IconColor = Color.DarkRed;
             MsgBox.Visible = false;
+            MsgBox.Text = "";
+
             if (!ValidateForm())
             {
                 MsgBox.Visible = true;
@@ -99,7 +111,8 @@ namespace CZS_LaVictoria.PlásticosPage
 
             _mezclaEntrada.Materiales = MaterialesListBox.Items.Cast<MaterialModel>().ToList();
             _mezclaEntrada.Cantidades = CantidadesListBox.Items.Cast<double>().ToList();
-            _mezclaEntrada.CantidadMezcla = CantidadesListBox.Items.Cast<object>().Sum(item => double.Parse(item.ToString()));
+            _mezclaEntrada.CantidadMezcla =
+                CantidadesListBox.Items.Cast<object>().Sum(item => double.Parse(item.ToString()));
             for (var i = 0; i < _mezclaEntrada.Materiales.Count; i++)
             {
                 var material = _mezclaEntrada.Materiales[i];
@@ -107,7 +120,8 @@ namespace CZS_LaVictoria.PlásticosPage
                 if (cantidadRequerida > material.CantidadDisponible)
                 {
                     MsgBox.Text =
-                        $"La mezcla ingresada no se puede seleccionar. Necesita más material \"{material.Nombre}\".";
+                        "La mezcla no se puede seleccionar. " +
+                        $"Necesita más material \"{material.Nombre}\".";
                     MsgBox.Visible = true;
                     GuardarButton.Enabled = false;
                     return;
@@ -136,31 +150,30 @@ namespace CZS_LaVictoria.PlásticosPage
 
         void GuardarButton_Click(object sender, EventArgs e)
         {
+            if (SalidaCombo.Text != _materialSalida.Nombre) _materialSalida = new MaterialModel();
+            _mezclaNombre = "";
+            
             var orden = new ProducciónPlásticosModel();
             Debug.Assert(FechaPicker.Value != null, "FechaPicker.Value != null");
-            orden.Fecha = (DateTime)FechaPicker.Value;
+            orden.Fecha = (DateTime) FechaPicker.Value;
             orden.Proceso = "Inyección";
             orden.Turno = int.Parse(TurnoText.Text);
             orden.Máquina = MáquinaCombo.Text;
             orden.Operador = OperadorCombo.Text;
             orden.MaterialEntra = "Mezcla sin guardar";
-            orden.CantidadEntra = double.Parse(CantidadEntradaText.Text);
-            orden.CantidadSale = double.Parse(CantidadSalidaText.Text);
-            orden.PesoPromedio = double.Parse(PesoPromText.Text);
-            orden.MermaMoler = double.Parse(MermaMolerText.Text);
+            orden.CantidadEntra = _kgEntrada;
+            orden.MaterialSale = SalidaCombo.Text;
+            orden.CantidadSale = _piezasBuenas;
+            orden.PesoPromedio = _pesoProm;
+            orden.MermaMoler = _mermaMoler;
             orden.MermaFinal = double.Parse(MermaRealText.Text);
 
             // Dar opción de guardar la lista y cantidades de materiales seleccionados como una nueva mezcla.
-            if (MessageBox.Show("Deseas guardar esta mezcla para futuros registros?", "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Deseas guardar esta mezcla para futuros registros?", "Mensaje",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 ShowInputDialog(ref _mezclaNombre);
-                if (_mezclaNombre == "")
-                {
-                    MsgBox.Text = "Ingresa un nombre válido. Vuelve a dar click en Guardar.";
-                    MsgBox.Visible = true;
-                    return;
-                }
-
+                if (_mezclaNombre == "") return;
                 _mezclaEntrada.Nombre = _mezclaNombre;
                 orden.MaterialEntra = _mezclaNombre;
                 var saveMezclaSuccess = GlobalConfig.Connection.Mezcla_Create(_mezclaEntrada);
@@ -174,27 +187,12 @@ namespace CZS_LaVictoria.PlásticosPage
                     MsgBox.Text = "Error al registrar mezcla.\n";
                     MsgBox.IconColor = Color.DarkRed;
                 }
+
+                MsgBox.Visible = true;
             }
 
-            var index = 0;
-            foreach (var material in _mezclaEntrada.Materiales)
-            {
-                var cantidadUsada = _kgEntrada * _mezclaEntrada.Cantidades[index] / _mezclaEntrada.CantidadMezcla;
-                material.CantidadDisponible -= cantidadUsada;
-                index += 1;
-            }
-
-            if (_materialSalida == null || _materialSalida.Id == 0)
-            {
-                _materialSalida = new MaterialModel(SalidaCombo.Text, "Plásticos", "Bases", _piezasBuenas);
-            }
-            else
-            {
-                _materialSalida.CantidadDisponible += _piezasBuenas;
-            }
-
-            orden.MaterialSale = _materialSalida.Nombre;
-            var saveSuccess = GlobalConfig.Connection.PlasticProduction_CreateInyección(orden, _mezclaEntrada, _materialSalida);
+            var saveSuccess =
+                GlobalConfig.Connection.PlasticProduction_CreateInyección(orden, _mezclaEntrada, _materialSalida);
 
             if (saveSuccess)
             {
@@ -231,10 +229,7 @@ namespace CZS_LaVictoria.PlásticosPage
         void GetOperadores()
         {
             var operadores = GlobalConfig.Connection.Operador_GetByArea("Plásticos");
-            foreach (var operador in operadores)
-            {
-                OperadorCombo.Items.Add(operador);
-            }
+            foreach (var operador in operadores) OperadorCombo.Items.Add(operador);
 
             OperadorCombo.DisplayMember = "Nombre";
         }
@@ -244,10 +239,7 @@ namespace CZS_LaVictoria.PlásticosPage
             MáquinaCombo.Items.Clear();
 
             var máquinas = GlobalConfig.Connection.PlasticProduction_GetMáquinas();
-            foreach (var máquina in máquinas)
-            {
-                MáquinaCombo.Items.Add(máquina);
-            }
+            foreach (var máquina in máquinas) MáquinaCombo.Items.Add(máquina);
         }
 
         void GetMateriales()
@@ -255,10 +247,7 @@ namespace CZS_LaVictoria.PlásticosPage
             MaterialCombo.Items.Clear();
 
             var materiales = GlobalConfig.Connection.Material_GetByAreaCat("Plásticos", "Molido");
-            foreach (var material in materiales)
-            {
-                MaterialCombo.Items.Add(material);
-            }
+            foreach (var material in materiales) MaterialCombo.Items.Add(material);
 
             MaterialCombo.DisplayMember = "Nombre";
         }
@@ -268,10 +257,7 @@ namespace CZS_LaVictoria.PlásticosPage
             SalidaCombo.Items.Clear();
 
             var materiales = GlobalConfig.Connection.Material_GetByAreaCat("Plásticos", "Bases");
-            foreach (var material in materiales)
-            {
-                SalidaCombo.Items.Add(material);
-            }
+            foreach (var material in materiales) SalidaCombo.Items.Add(material);
 
             SalidaCombo.DisplayMember = "Nombre";
         }
@@ -279,7 +265,6 @@ namespace CZS_LaVictoria.PlásticosPage
         bool ValidateMix()
         {
             var output = true;
-            MsgBox.Text = "";
 
             if (MaterialCombo.Text == "")
             {
@@ -287,7 +272,8 @@ namespace CZS_LaVictoria.PlásticosPage
                 MsgBox.Text += "Selecciona un material.\n";
             }
 
-            if (CantidadText.Text == "" || CantidadText.Text == "0.00" || !double.TryParse(CantidadText.Text, out _))
+            if (CantidadText.Text == "" || CantidadText.Text == "0.00" ||
+                !double.TryParse(CantidadText.Text.Replace(",", ""), out _))
             {
                 output = false;
                 MsgBox.Text += "Ingresa la cantidad.\n";
@@ -299,7 +285,6 @@ namespace CZS_LaVictoria.PlásticosPage
         bool ValidateForm()
         {
             var output = true;
-            MsgBox.Text = "";
 
             if (OperadorCombo.Text == "")
             {
@@ -325,7 +310,8 @@ namespace CZS_LaVictoria.PlásticosPage
                 MsgBox.Text += "Ingresa al menos dos materiales a la mezcla. \n";
             }
 
-            if (CantidadEntradaText.Text == "" || CantidadEntradaText.Text == "0.00" || !double.TryParse(CantidadEntradaText.Text, out _kgEntrada))
+            if (CantidadEntradaText.Text == "" || CantidadEntradaText.Text == "0.00" ||
+                !double.TryParse(CantidadEntradaText.Text.Replace(",", ""), out _kgEntrada))
             {
                 output = false;
                 MsgBox.Text += "Ingresa la cantidad total de mezcla.\n";
@@ -337,19 +323,21 @@ namespace CZS_LaVictoria.PlásticosPage
                 MsgBox.Text += "Selecciona un material de salida.\n";
             }
 
-            if (CantidadSalidaText.Text == "" || CantidadSalidaText.Text == "0" || !int.TryParse(CantidadSalidaText.Text, out _piezasBuenas))
+            if (CantidadSalidaText.Text == "" || CantidadSalidaText.Text == "0" ||
+                !int.TryParse(CantidadSalidaText.Text.Replace(",", ""), out _piezasBuenas))
             {
                 output = false;
-                MsgBox.Text += "Ingresa la cantidad de piezas buenas.\n";
+                MsgBox.Text += "Ingresa la cantidad de bases.\n";
             }
 
-            if (PesoPromText.Text == "" || PesoPromText.Text == "0.00" || !double.TryParse(PesoPromText.Text, out _pesoProm))
+            if (PesoPromText.Text == "" || PesoPromText.Text == "0.00" ||
+                !double.TryParse(PesoPromText.Text.Replace(",", ""), out _pesoProm))
             {
                 output = false;
-                MsgBox.Text += "Ingresa el peso promedio de una pieza buena.\n";
+                MsgBox.Text += "Ingresa el peso promedio de una base.\n";
             }
 
-            if (MermaMolerText.Text == "" || !double.TryParse(MermaMolerText.Text, out _mermaMoler))
+            if (MermaMolerText.Text == "" || !double.TryParse(MermaMolerText.Text.Replace(",", ""), out _mermaMoler))
             {
                 output = false;
                 MsgBox.Text += "Ingresa la merma que se puede moler.\n";
@@ -366,6 +354,8 @@ namespace CZS_LaVictoria.PlásticosPage
             inputBox.FormBorderStyle = FormBorderStyle.FixedDialog;
             inputBox.ClientSize = size;
             inputBox.Text = "Nombre de la mezcla";
+            inputBox.MaximizeBox = false;
+            inputBox.MinimizeBox = false;
 
             var textBox = new TextBox();
             textBox.Size = new Size(size.Width - 10, 23);
@@ -397,6 +387,8 @@ namespace CZS_LaVictoria.PlásticosPage
             if (result == DialogResult.Cancel) return;
             if (string.IsNullOrEmpty(textBox.Text))
             {
+                MessageBox.Show("Ingresa un nombre!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowInputDialog(ref _mezclaNombre);
                 return;
             }
             input = textBox.Text;
@@ -404,28 +396,7 @@ namespace CZS_LaVictoria.PlásticosPage
 
         void ClearForm()
         {
-            void Func(IEnumerable controls)
-            {
-                foreach (Control control in controls)
-                    if (control is TextBox box)
-                    {
-                        box.Clear();
-                        box.Enabled = true;
-                    }
-                    else if (control is ComboBox comboBox)
-                    {
-                        comboBox.Text = "";
-                        comboBox.SelectedItem = null;
-                    }
-                    else if (control is ListBox listBox)
-                    {
-                        listBox.Items.Clear();
-                    }
-                    else
-                        Func(control.Controls);
-            }
-
-            Func(Controls);
+            Tools.ClearForm(this);
 
             TurnoText.Text = "1";
             CantidadEntradaText.Text = "0.00";

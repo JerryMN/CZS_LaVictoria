@@ -1,32 +1,36 @@
 ﻿using System;
-using System.Collections;
-using CZS_LaVictoria_Library;
-using CZS_LaVictoria_Library.Models;
+using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
-using System.Drawing;
-using System.Diagnostics;
+using CZS_LaVictoria_Library;
+using CZS_LaVictoria_Library.Models;
 
 namespace CZS_LaVictoria.PlásticosPage
 {
-    public partial class RegistrarExtruídoForm : Form
+    public partial class RegistrarExtruidoForm : Form
     {
-        MaterialModel _materialEntrada = new MaterialModel();
-        MezclaModel _mezclaEntrada = new MezclaModel();
         double _kgEntrada;
-        MaterialModel _materialSalida = new MaterialModel();
-        int _piezasBuenas;
         double _kgSalida;
-        double _pesoProm;
+        MaterialModel _materialEntrada = new MaterialModel();
+        MaterialModel _materialSalida = new MaterialModel();
         double _mermaMoler;
+        MezclaModel _mezclaEntrada = new MezclaModel();
+        double _pesoProm;
+        int _piezasBuenas;
 
-        public RegistrarExtruídoForm()
+        public RegistrarExtruidoForm()
         {
             InitializeComponent();
             GetOperadores();
             GetMáquinas();
             GetMazos();
             FechaPicker.Culture = new CultureInfo("es-MX");
+            if (GlobalConfig.Connection.CZS_GetLicencia()) return;
+            MessageBox.Show(
+                "No se puede verificar la licencia. Verifica el estatus de la misma y verifica tu conexión a internet.",
+                "Error de licencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            Application.Exit();
         }
 
         #region Events
@@ -35,26 +39,22 @@ namespace CZS_LaVictoria.PlásticosPage
         {
             if (MezclaRadio.Checked)
             {
-               GetMezclas();
-               EntradaLabel.Text = "Mezcla";
+                GetMezclas();
+                EntradaLabel.Text = "Mezcla*";
             }
             else
             {
-               GetMateriales();
-               EntradaLabel.Text = "Material";
+                GetMateriales();
+                EntradaLabel.Text = "Material*";
             }
         }
 
         void EntradaCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (MezclaRadio.Checked)
-            {
                 _mezclaEntrada = (MezclaModel) EntradaCombo.SelectedItem;
-            }
             else
-            {
                 _materialEntrada = (MaterialModel) EntradaCombo.SelectedItem;
-            }
         }
 
         void SalidaCombo_SelectedIndexChanged(object sender, EventArgs e)
@@ -71,6 +71,9 @@ namespace CZS_LaVictoria.PlásticosPage
         void CalcularButton_Click(object sender, EventArgs e)
         {
             MsgBox.IconColor = Color.DarkRed;
+            MsgBox.Visible = false;
+            MsgBox.Text = "";
+
             if (!ValidateForm())
             {
                 MsgBox.Visible = true;
@@ -86,7 +89,8 @@ namespace CZS_LaVictoria.PlásticosPage
                     if (cantidadRequerida > material.CantidadDisponible)
                     {
                         MsgBox.Text =
-                            $"La mezcla \"{EntradaCombo.Text}\" no se puede seleccionar. Necesita más material \"{material.Nombre}\".";
+                            $"La mezcla \"{EntradaCombo.Text}\" no se puede seleccionar. " +
+                            $"Necesita más material \"{material.Nombre}\".";
                         MsgBox.Visible = true;
                         GuardarButton.Enabled = false;
                         return;
@@ -98,7 +102,8 @@ namespace CZS_LaVictoria.PlásticosPage
                 if (_kgEntrada > _materialEntrada.CantidadDisponible)
                 {
                     MsgBox.Text =
-                        $"El material \"{EntradaCombo.Text}\" no se puede seleccionar. Cantidad disponible: {_materialEntrada.CantidadDisponible}.";
+                        $"El material \"{EntradaCombo.Text}\" no se puede seleccionar. " +
+                        $"Cantidad disponible: {_materialEntrada.CantidadDisponible:N} kg.";
                     MsgBox.Visible = true;
                     GuardarButton.Enabled = false;
                     return;
@@ -127,72 +132,49 @@ namespace CZS_LaVictoria.PlásticosPage
 
         void GuardarButton_Click(object sender, EventArgs e)
         {
+            if (SalidaCombo.Text != _materialSalida.Nombre) _materialSalida = new MaterialModel();
+
             bool saveSuccess;
             var orden = new ProducciónPlásticosModel();
             Debug.Assert(FechaPicker.Value != null, "FechaPicker.Value != null");
-            orden.Fecha = (DateTime)FechaPicker.Value;
-            orden.Proceso = "Extruído";
+            orden.Fecha = (DateTime) FechaPicker.Value;
+            orden.Proceso = "Extruido";
             orden.Turno = int.Parse(TurnoText.Text);
             orden.Máquina = MáquinaCombo.Text;
             orden.Operador = OperadorCombo.Text;
-            orden.CantidadEntra = double.Parse(CantidadEntradaText.Text);
-            orden.CantidadSale = double.Parse(CantidadSalidaText.Text);
-            orden.PesoPromedio = double.Parse(PesoPromText.Text);
-            orden.MermaMoler = double.Parse(MermaMolerText.Text);
+            orden.CantidadEntra = _kgEntrada;
+            orden.MaterialSale = SalidaCombo.Text;
+            orden.CantidadSale = _piezasBuenas;
+            orden.PesoPromedio = _pesoProm;
+            orden.MermaMoler = _mermaMoler;
             orden.MermaFinal = double.Parse(MermaRealText.Text);
 
             if (MezclaRadio.Checked)
             {
                 orden.MaterialEntra = _mezclaEntrada.Nombre;
-                var index = 0;
-                foreach (var material in _mezclaEntrada.Materiales)
-                {
-                    var cantidadUsada = _kgEntrada * _mezclaEntrada.Cantidades[index] / _mezclaEntrada.CantidadMezcla;
-                    material.CantidadDisponible -= cantidadUsada;
-                    index += 1;
-                }
-
-                if (_materialSalida == null || _materialSalida.Id == 0)
-                {
-                    _materialSalida = new MaterialModel(SalidaCombo.Text, "Plásticos", "Extruído", _piezasBuenas);
-                }
-                else
-                {
-                    _materialSalida.CantidadDisponible += _piezasBuenas;
-                }
-
-                orden.MaterialSale = _materialSalida.Nombre;
                 saveSuccess =
-                    GlobalConfig.Connection.PlasticProduction_CreateExtruído(orden, _mezclaEntrada, _materialSalida);
+                    GlobalConfig.Connection.PlasticProduction_CreateExtruido(orden, _mezclaEntrada, _materialSalida);
             }
             else
             {
                 orden.MaterialEntra = _materialEntrada.Nombre;
-                _materialEntrada.CantidadDisponible -= _kgEntrada;
-                if (_materialSalida == null || _materialSalida.Id == 0)
-                {
-                    _materialSalida = new MaterialModel(SalidaCombo.Text, "Plásticos", "Extruído", _piezasBuenas);
-                }
-                else
-                {
-                    _materialSalida.CantidadDisponible += _piezasBuenas;
-                }
-
-                orden.MaterialSale = _materialSalida.Nombre;
                 saveSuccess =
-                    GlobalConfig.Connection.PlasticProduction_CreateExtruído(orden, _materialEntrada, _materialSalida);
+                    GlobalConfig.Connection.PlasticProduction_CreateExtruido(orden, _materialEntrada, _materialSalida);
             }
 
             if (saveSuccess)
             {
                 ClearForm();
+                GetMáquinas();
+                GetMezclas();
+                GetMateriales();
                 GetMazos();
-                MsgBox.Text = "Extruído registrado con éxito.";
+                MsgBox.Text = "Extruido registrado con éxito.";
                 MsgBox.IconColor = Color.DarkGreen;
             }
             else
             {
-                MsgBox.Text = "Error al registrar extruído.";
+                MsgBox.Text = "Error al registrar extruido.";
                 MsgBox.IconColor = Color.DarkRed;
             }
 
@@ -213,10 +195,7 @@ namespace CZS_LaVictoria.PlásticosPage
         void GetOperadores()
         {
             var operadores = GlobalConfig.Connection.Operador_GetByArea("Plásticos");
-            foreach (var operador in operadores)
-            {
-                OperadorCombo.Items.Add(operador);
-            }
+            foreach (var operador in operadores) OperadorCombo.Items.Add(operador);
 
             OperadorCombo.DisplayMember = "Nombre";
         }
@@ -226,10 +205,7 @@ namespace CZS_LaVictoria.PlásticosPage
             MáquinaCombo.Items.Clear();
 
             var máquinas = GlobalConfig.Connection.PlasticProduction_GetMáquinas();
-            foreach (var máquina in máquinas)
-            {
-                MáquinaCombo.Items.Add(máquina);
-            }
+            foreach (var máquina in máquinas) MáquinaCombo.Items.Add(máquina);
         }
 
         void GetMezclas()
@@ -237,10 +213,7 @@ namespace CZS_LaVictoria.PlásticosPage
             EntradaCombo.Items.Clear();
 
             var mezclas = GlobalConfig.Connection.Mezcla_GetAll();
-            foreach (var mezcla in mezclas)
-            {
-                EntradaCombo.Items.Add(mezcla);
-            }
+            foreach (var mezcla in mezclas) EntradaCombo.Items.Add(mezcla);
 
             EntradaCombo.DisplayMember = "Nombre";
         }
@@ -250,10 +223,7 @@ namespace CZS_LaVictoria.PlásticosPage
             EntradaCombo.Items.Clear();
 
             var materiales = GlobalConfig.Connection.Material_GetByAreaCat("Plásticos", "Molido");
-            foreach (var material in materiales)
-            {
-                EntradaCombo.Items.Add(material);
-            }
+            foreach (var material in materiales) EntradaCombo.Items.Add(material);
 
             EntradaCombo.DisplayMember = "Nombre";
         }
@@ -262,11 +232,8 @@ namespace CZS_LaVictoria.PlásticosPage
         {
             SalidaCombo.Items.Clear();
 
-            var materiales = GlobalConfig.Connection.Material_GetByAreaCat("Plásticos", "Extruído");
-            foreach (var material in materiales)
-            {
-                SalidaCombo.Items.Add(material);
-            }
+            var materiales = GlobalConfig.Connection.Material_GetByAreaCat("Plásticos", "Extruido");
+            foreach (var material in materiales) SalidaCombo.Items.Add(material);
 
             SalidaCombo.DisplayMember = "Nombre";
         }
@@ -274,8 +241,7 @@ namespace CZS_LaVictoria.PlásticosPage
         bool ValidateForm()
         {
             var output = true;
-            MsgBox.Text = "";
-
+            
             if (OperadorCombo.Text == "")
             {
                 output = false;
@@ -300,7 +266,8 @@ namespace CZS_LaVictoria.PlásticosPage
                 MsgBox.Text += "Selecciona un material o mezcla.\n";
             }
 
-            if (CantidadEntradaText.Text == "" || CantidadEntradaText.Text == "0.00" || !double.TryParse(CantidadEntradaText.Text, out _kgEntrada))
+            if (CantidadEntradaText.Text == "" || CantidadEntradaText.Text == "0.00" ||
+                !double.TryParse(CantidadEntradaText.Text.Replace(",", ""), out _kgEntrada))
             {
                 output = false;
                 MsgBox.Text += "Ingresa la cantidad de material o mezcla.\n";
@@ -312,19 +279,21 @@ namespace CZS_LaVictoria.PlásticosPage
                 MsgBox.Text += "Selecciona un material de salida.\n";
             }
 
-            if (CantidadSalidaText.Text == "" || CantidadSalidaText.Text == "0" || !int.TryParse(CantidadSalidaText.Text, out _piezasBuenas))
+            if (CantidadSalidaText.Text == "" || CantidadSalidaText.Text == "0" ||
+                !int.TryParse(CantidadSalidaText.Text.Replace(",", ""), out _piezasBuenas))
             {
                 output = false;
                 MsgBox.Text += "Ingresa la cantidad de mazos.\n";
             }
 
-            if (PesoPromText.Text == "" || PesoPromText.Text == "0.00" || !double.TryParse(PesoPromText.Text, out _pesoProm))
+            if (PesoPromText.Text == "" || PesoPromText.Text == "0.00" ||
+                !double.TryParse(PesoPromText.Text.Replace(",", ""), out _pesoProm))
             {
                 output = false;
                 MsgBox.Text += "Ingresa el peso promedio de un mazo.\n";
             }
 
-            if (MermaMolerText.Text == "" || !double.TryParse(MermaMolerText.Text, out _mermaMoler))
+            if (MermaMolerText.Text == "" || !double.TryParse(MermaMolerText.Text.Replace(",", ""), out _mermaMoler))
             {
                 output = false;
                 MsgBox.Text += "Ingresa la merma que se puede moler.\n";
@@ -335,28 +304,14 @@ namespace CZS_LaVictoria.PlásticosPage
 
         void ClearForm()
         {
-            void Func(IEnumerable controls)
-            {
-                foreach (Control control in controls)
-                    if (control is TextBox box)
-                        box.Clear();
-                    else if (control is ComboBox comboBox)
-                    {
-                        comboBox.Text = "";
-                        comboBox.SelectedItem = null;
-                    }
-                    else
-                        Func(control.Controls);
-            }
+            Tools.ClearForm(this);
 
-            Func(Controls);
-
-            CantidadEntradaText.Text = "0.00";
             TurnoText.Text = "1";
+            CantidadEntradaText.Text = "0.00";
             CantidadSalidaText.Text = "0.00";
-            PesoPromText.Text = "0";
-            MermaMolerText.Text = "0";
-            MermaRealText.Text = "0";
+            PesoPromText.Text = "0.00";
+            MermaMolerText.Text = "0.00";
+            MermaRealText.Text = "0.00";
         }
 
         #endregion

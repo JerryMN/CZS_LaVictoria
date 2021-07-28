@@ -35,12 +35,12 @@ namespace CZS_LaVictoria
                 RightFooter = "Iniciando...",
                 LeftFooter = "Copyright © 2021 CZ Systems \nTodos los derechos reservados.",
                 LoadingIndicatorType = FluentLoadingIndicatorType.Dots,
-                Opacity = 30,
+                Opacity = 50,
                 OpacityColor = Color.DarkRed
             };
 
             SplashScreenManager.ShowFluentSplashScreen(op, parentForm: this, useFadeIn: true, useFadeOut: true);
-            Thread.Sleep(5000);
+            Thread.Sleep(2000);
             SplashScreenManager.CloseForm();
 
             if (_validLicense) return;
@@ -125,7 +125,7 @@ namespace CZS_LaVictoria
 
         void RegistrarExtruídoButton_ItemClick(object sender, ItemClickEventArgs e)
         {
-            OpenChildForm(new RegistrarExtruídoForm());
+            OpenChildForm(new RegistrarExtruidoForm());
         }
 
         void RegistrarCortadoButton_ItemClick(object sender, ItemClickEventArgs e)

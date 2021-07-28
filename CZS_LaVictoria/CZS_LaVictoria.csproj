@@ -436,11 +436,11 @@
     <Compile Include="PlásticosPage\RegistrarCortadoForm.Designer.cs">
       <DependentUpon>RegistrarCortadoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PlásticosPage\RegistrarExtruídoForm.cs">
+    <Compile Include="PlásticosPage\RegistrarExtruidoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PlásticosPage\RegistrarExtruídoForm.Designer.cs">
-      <DependentUpon>RegistrarExtruídoForm.cs</DependentUpon>
+    <Compile Include="PlásticosPage\RegistrarExtruidoForm.Designer.cs">
+      <DependentUpon>RegistrarExtruidoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PlásticosPage\RegistrarInsertadoForm.cs">
       <SubType>Form</SubType>
@@ -726,8 +726,8 @@
     <EmbeddedResource Include="PlásticosPage\RegistrarCortadoForm.resx">
       <DependentUpon>RegistrarCortadoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PlásticosPage\RegistrarExtruídoForm.resx">
-      <DependentUpon>RegistrarExtruídoForm.cs</DependentUpon>
+    <EmbeddedResource Include="PlásticosPage\RegistrarExtruidoForm.resx">
+      <DependentUpon>RegistrarExtruidoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PlásticosPage\RegistrarInsertadoForm.resx">
       <DependentUpon>RegistrarInsertadoForm.cs</DependentUpon>

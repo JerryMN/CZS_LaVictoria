@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
@@ -11,10 +10,11 @@ namespace CZS_LaVictoria.PlásticosPage
 {
     public partial class RegistrarMolidoForm : Form
     {
-        MaterialModel _materialEntrada = new MaterialModel();
-        MaterialModel _materialSalida = new MaterialModel();
         double _cantidadEntrada;
         double _cantidadSalida;
+        MaterialModel _materialEntrada = new MaterialModel();
+        MaterialModel _materialSalida = new MaterialModel();
+        double _merma;
 
         public RegistrarMolidoForm()
         {
@@ -23,10 +23,15 @@ namespace CZS_LaVictoria.PlásticosPage
             GetMáquinas();
             GetMateriales();
             FechaPicker.Culture = new CultureInfo("es-MX");
+            if (GlobalConfig.Connection.CZS_GetLicencia()) return;
+            MessageBox.Show(
+                "No se puede verificar la licencia. Verifica el estatus de la misma y verifica tu conexión a internet.",
+                "Error de licencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            Application.Exit();
         }
 
         #region Events
-        
+
         void EntradaCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             _materialEntrada = (MaterialModel) EntradaCombo.SelectedItem;
@@ -39,31 +44,26 @@ namespace CZS_LaVictoria.PlásticosPage
 
         void CantidadText_TextChanged(object sender, EventArgs e)
         {
-            if (CantidadEntradaText.Text == "" || CantidadEntradaText.Text == "0.00" || CantidadSalidaText.Text == "" || CantidadSalidaText.Text == "0.00") return;
-            double.TryParse(CantidadEntradaText.Text, out _cantidadEntrada);
-            double.TryParse(CantidadSalidaText.Text, out _cantidadSalida);
-            var merma = _cantidadEntrada - _cantidadSalida;
-            MermaText.Text = merma <= 0 ? "0.00" : merma.ToString(CultureInfo.InvariantCulture);
+            if (CantidadEntradaText.Text == "" || CantidadEntradaText.Text == "0.00" || CantidadSalidaText.Text == "" ||
+                CantidadSalidaText.Text == "0.00") return;
+            double.TryParse(CantidadEntradaText.Text.Replace(",", ""), out _cantidadEntrada);
+            double.TryParse(CantidadSalidaText.Text.Replace(",", ""), out _cantidadSalida);
+            _merma = _cantidadEntrada - _cantidadSalida;
+            MermaText.Text = _merma <= 0 ? "0.00" : _merma.ToString(CultureInfo.InvariantCulture);
         }
 
         void GuardarButton_Click(object sender, EventArgs e)
         {
+            MsgBox.Visible = false;
+            MsgBox.Text = "";
+
             if (!ValidateForm())
             {
                 MsgBox.Visible = true;
                 return;
             }
 
-            _materialEntrada.CantidadDisponible -= _cantidadEntrada;
-            if (_materialSalida == null)
-            {
-                _materialSalida = new MaterialModel(SalidaCombo.Text, "Plásticos", "Molido", _cantidadSalida);
-                GetMateriales();
-            }
-            else
-            {
-                _materialSalida.CantidadDisponible += _cantidadSalida;
-            }
+            if (SalidaCombo.Text != _materialSalida.Nombre) _materialSalida = new MaterialModel();
 
             var orden = new ProducciónPlásticosModel();
             Debug.Assert(FechaPicker.Value != null, "FechaPicker.Value != null");
@@ -73,18 +73,19 @@ namespace CZS_LaVictoria.PlásticosPage
             orden.Máquina = MáquinaCombo.Text;
             orden.Operador = OperadorCombo.Text;
             orden.MaterialEntra = _materialEntrada.Nombre;
-            orden.CantidadEntra = double.Parse(CantidadEntradaText.Text);
-            orden.MaterialSale = _materialSalida.Nombre;
-            orden.CantidadSale = double.Parse(CantidadSalidaText.Text);
-            orden.MermaFinal = double.Parse(MermaText.Text);
+            orden.CantidadEntra = _cantidadEntrada;
+            orden.MaterialSale = SalidaCombo.Text;
+            orden.CantidadSale = _cantidadSalida;
+            orden.MermaFinal = _merma;
 
             var saveSuccess =
                 GlobalConfig.Connection.PlasticProduction_CreateMolido(orden, _materialEntrada, _materialSalida);
-            
 
             if (saveSuccess)
             {
                 ClearForm();
+                GetMáquinas();
+                GetMateriales();
                 MsgBox.Text = "Molido registrado con éxito.";
                 MsgBox.IconColor = Color.DarkGreen;
             }
@@ -111,10 +112,7 @@ namespace CZS_LaVictoria.PlásticosPage
         void GetOperadores()
         {
             var operadores = GlobalConfig.Connection.Operador_GetByArea("Plásticos");
-            foreach (var operador in operadores)
-            {
-                OperadorCombo.Items.Add(operador);
-            }
+            foreach (var operador in operadores) OperadorCombo.Items.Add(operador);
 
             OperadorCombo.DisplayMember = "Nombre";
         }
@@ -124,10 +122,7 @@ namespace CZS_LaVictoria.PlásticosPage
             MáquinaCombo.Items.Clear();
 
             var máquinas = GlobalConfig.Connection.PlasticProduction_GetMáquinas();
-            foreach (var máquina in máquinas)
-            {
-                MáquinaCombo.Items.Add(máquina);
-            }
+            foreach (var máquina in máquinas) MáquinaCombo.Items.Add(máquina);
         }
 
         void GetMateriales()
@@ -136,16 +131,10 @@ namespace CZS_LaVictoria.PlásticosPage
             SalidaCombo.Items.Clear();
 
             var materiales = GlobalConfig.Connection.Material_GetByAreaCat("Plásticos", "Por Moler");
-            foreach (var material in materiales)
-            {
-                EntradaCombo.Items.Add(material);
-            }
+            foreach (var material in materiales) EntradaCombo.Items.Add(material);
 
             materiales = GlobalConfig.Connection.Material_GetByAreaCat("Plásticos", "Molido");
-            foreach (var material in materiales)
-            {
-                SalidaCombo.Items.Add(material);
-            }
+            foreach (var material in materiales) SalidaCombo.Items.Add(material);
 
             EntradaCombo.DisplayMember = "Nombre";
             SalidaCombo.DisplayMember = "Nombre";
@@ -154,8 +143,7 @@ namespace CZS_LaVictoria.PlásticosPage
         bool ValidateForm()
         {
             var output = true;
-            MsgBox.Text = "";
-
+            
             if (OperadorCombo.Text == "")
             {
                 output = false;
@@ -188,7 +176,8 @@ namespace CZS_LaVictoria.PlásticosPage
             else if (_cantidadEntrada > _materialEntrada.CantidadDisponible)
             {
                 output = false;
-                MsgBox.Text += $"Cantidad de entrada excede el disponible ({_materialEntrada.CantidadDisponible}).\n";
+                MsgBox.Text += $"El material {_materialEntrada.Nombre} no se puede seleccionar. " +
+                               $"Cantidad disponible: {_materialEntrada.CantidadDisponible:N} kg.\n";
             }
 
             if (SalidaCombo.Text == "")
@@ -214,28 +203,12 @@ namespace CZS_LaVictoria.PlásticosPage
 
         void ClearForm()
         {
-            CantidadEntradaText.Text = "0.00";
-            CantidadSalidaText.Text = "0.00";
-            MermaText.Text = "0.00";
-            void Func(IEnumerable controls)
-            {
-                foreach (Control control in controls)
-                    if (control is TextBox box)
-                        box.Clear();
-                    else if (control is ComboBox comboBox)
-                    {
-                        comboBox.Text = "";
-                        comboBox.SelectedItem = null;
-                    }
-                    else
-                        Func(control.Controls);
-            }
-
-            Func(Controls);
+            Tools.ClearForm(this);
 
             TurnoText.Text = "1";
             CantidadEntradaText.Text = "0.00";
             CantidadSalidaText.Text = "0.00";
+            MermaText.Text = "0.00";
         }
 
         #endregion
