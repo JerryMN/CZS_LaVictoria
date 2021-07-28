@@ -794,6 +794,33 @@ namespace CZS_LaVictoria_Library.DataAccess
         /// <returns>Una lista con los modelos de los pagos.</returns>
         List<PorPagarPagosModel> Payable_GetPagosByDate(DateTime desde, DateTime hasta);
 
+        /// <summary>
+        ///     Crea un gasto fijo.
+        /// </summary>
+        /// <param name="model">El modelo del gasto.</param>
+        /// <returns>True, si se creó correctamente, falso si no.</returns>
+        bool GastoFijo_Create(GastoFijoModel model);
+
+        /// <summary>
+        ///     Obtiene todos los gastos fijos.
+        /// </summary>
+        /// <returns>Una lista con los modelos de los gastos.</returns>
+        List<GastoFijoModel> GastoFijo_GetAll();
+
+        /// <summary>
+        ///     Actualiza un gasto fijo.
+        /// </summary>
+        /// <param name="model">El modelo del gasto.</param>
+        /// <returns>True, si se creó correctamente, falso si no.</returns>
+        bool GastoFijo_Update(GastoFijoModel model);
+
+        /// <summary>
+        ///     Elimina un gasto fijo.
+        /// </summary>
+        /// <param name="model">El modelo del gasto.</param>
+        /// <returns>True, si se creó correctamente, falso si no.</returns>
+        bool GastoFijo_Delete(GastoFijoModel model);
+
         #endregion
 
         #region Por Cobrar

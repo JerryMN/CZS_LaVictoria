@@ -3459,6 +3459,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                     p.Add("@Proveedor", línea.Proveedor);
                     p.Add("@Monto", línea.Monto);
                     p.Add("@Pagado", línea.Pagado);
+                    p.Add("@Pendiente", línea.Pendiente);
                     p.Add("@Condiciones", línea.Condiciones);
                     p.Add("@FechaLímite", línea.FechaLímite);
                     p.Add("@Estatus", línea.Estatus);
@@ -3574,6 +3575,95 @@ namespace CZS_LaVictoria_Library.DataAccess
                     Debug.Assert(false);
                     return null;
                 }
+            }
+        }
+
+        public bool GastoFijo_Create(GastoFijoModel model)
+        {
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@Concepto", model.Concepto);
+                    p.Add("@Monto", model.Monto);
+
+                    connection.Execute("dbo.spExpenses_Insert", p, commandType: CommandType.StoredProcedure);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return false;
+                }
+
+                return true;
+            }
+        }
+
+        public List<GastoFijoModel> GastoFijo_GetAll()
+        {
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    var output = connection
+                        .Query<GastoFijoModel>("dbo.spExpenses_GetAll", commandType: CommandType.StoredProcedure)
+                        .ToList();
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
+        }
+
+        public bool GastoFijo_Update(GastoFijoModel model)
+        {
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@Concepto", model.Concepto);
+                    p.Add("@Monto", model.Monto);
+                    p.Add("@Id", model.Id);
+
+                    connection.Execute("dbo.spExpenses_Update", p, commandType: CommandType.StoredProcedure);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return false;
+                }
+
+                return true;
+            }
+        }
+
+        public bool GastoFijo_Delete(GastoFijoModel model)
+        {
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@Id", model.Id);
+
+                    connection.Execute("dbo.spExpenses_Delete", p, commandType: CommandType.StoredProcedure);
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return false;
+                }
+
+                return true;
             }
         }
 
