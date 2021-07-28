@@ -1,14 +1,14 @@
-﻿using Syncfusion.WinForms.DataGrid.Enums;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using Syncfusion.WinForms.DataGrid.Styles;
-using CZS_LaVictoria_Library.Models;
 using CZS_LaVictoria_Library;
-using Syncfusion.WinForms.DataGrid.Events;
+using CZS_LaVictoria_Library.Models;
 using Syncfusion.WinForms.DataGrid;
+using Syncfusion.WinForms.DataGrid.Enums;
+using Syncfusion.WinForms.DataGrid.Events;
+using Syncfusion.WinForms.DataGrid.Styles;
 using Syncfusion.WinForms.Input.Enums;
-using System;
 
 namespace CZS_LaVictoria.CuentasPage
 {
@@ -23,10 +23,7 @@ namespace CZS_LaVictoria.CuentasPage
             DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCells;
         }
 
-        static List<PorCobrarModel> LoadTable()
-        {
-            return GlobalConfig.Connection.Receivable_GetAll();
-        }
+        #region Events
 
         void DataGrid_AutoGeneratingColumn(object sender, AutoGeneratingColumnArgs e)
         {
@@ -40,23 +37,23 @@ namespace CZS_LaVictoria.CuentasPage
                     break;
                 case "FechaFactura":
                     e.Column = new GridDateTimeColumn
-                        { MappingName = "FechaFactura", HeaderText = "Fecha Factura", NullValue = null };
+                        {MappingName = "FechaFactura", HeaderText = "Fecha Factura", NullValue = null};
                     break;
                 case "Monto":
                     e.Column = new GridNumericColumn
-                        { MappingName = "Monto", HeaderText = "Monto", FormatMode = FormatMode.Currency };
+                        {MappingName = "Monto", HeaderText = "Monto", FormatMode = FormatMode.Currency};
                     break;
                 case "Pagado":
                     e.Column = new GridNumericColumn
-                        { MappingName = "Pagado", HeaderText = "Pagado", FormatMode = FormatMode.Currency };
+                        {MappingName = "Pagado", HeaderText = "Cobrado", FormatMode = FormatMode.Currency};
                     break;
                 case "Pendiente":
                     e.Column = new GridNumericColumn
-                        { MappingName = "Pendiente", HeaderText = "Pendiente", FormatMode = FormatMode.Currency };
+                        {MappingName = "Pendiente", HeaderText = "Pendiente", FormatMode = FormatMode.Currency};
                     break;
                 case "FechaLiquidación":
                     e.Column = new GridDateTimeColumn
-                        { MappingName = "FechaLiquidación", HeaderText = "Fecha Liquidación", NullValue = null };
+                        {MappingName = "FechaLiquidación", HeaderText = "Fecha Liquidación", NullValue = null};
                     break;
             }
         }
@@ -69,11 +66,12 @@ namespace CZS_LaVictoria.CuentasPage
                 return;
             }
 
-            var línea = (PorCobrarModel)DataGrid.SelectedItem;
+            var línea = (PorCobrarModel) DataGrid.SelectedItem;
 
-            if (línea.Estatus == "Pagado")
+            if (línea.Estatus == "Cobrado")
             {
-                MessageBox.Show("Esta línea ya está cobrada, selecciona otra.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Esta línea ya está cobrada, selecciona otra.", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
                 return;
             }
 
@@ -87,5 +85,16 @@ namespace CZS_LaVictoria.CuentasPage
             agregar.Show();
             agregar.Disposed += (o, args) => DataGrid.DataSource = LoadTable();
         }
+
+        #endregion
+
+        #region Methods
+
+        static List<PorCobrarModel> LoadTable()
+        {
+            return GlobalConfig.Connection.Receivable_GetAll();
+        }
+
+        #endregion
     }
 }

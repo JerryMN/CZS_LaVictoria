@@ -1,20 +1,20 @@
-﻿using CZS_LaVictoria_Library.Models;
-using System;
-using System.Drawing;
-using System.Windows.Forms;
-using System.Globalization;
-using CZS_LaVictoria_Library;
+﻿using System;
 using System.Diagnostics;
+using System.Drawing;
+using System.Globalization;
+using System.Windows.Forms;
+using CZS_LaVictoria_Library;
+using CZS_LaVictoria_Library.Models;
 
 namespace CZS_LaVictoria.CuentasPage
 {
     public partial class PorCobrarCobrarForm : Form
     {
         readonly PorCobrarModel _línea;
-        decimal _monto;
         decimal _cobrado;
-        decimal _pendiente;
+        decimal _monto;
         decimal _nuevo;
+        decimal _pendiente;
 
         public PorCobrarCobrarForm(PorCobrarModel línea)
         {
@@ -47,11 +47,11 @@ namespace CZS_LaVictoria.CuentasPage
             }
 
             Debug.Assert(FechaCobroPicker.Value != null, "FechaPagoPicker.Value != null");
-            var registro = new PorCobrarPagosModel()
+            var registro = new PorCobrarPagosModel
             {
                 Factura = FacturaText.Text == "" ? _línea.NumOrden.ToString() : FacturaText.Text,
                 Pago = _nuevo,
-                FechaPago = (DateTime)FechaCobroPicker.Value
+                FechaPago = (DateTime) FechaCobroPicker.Value
             };
 
             _línea.Factura = FacturaText.Text;
@@ -61,7 +61,7 @@ namespace CZS_LaVictoria.CuentasPage
             if (_línea.Pendiente == decimal.Zero)
             {
                 _línea.FechaLiquidación = registro.FechaPago;
-                _línea.Estatus = "Pagado";
+                _línea.Estatus = "Cobrado";
             }
             else
             {
@@ -75,12 +75,12 @@ namespace CZS_LaVictoria.CuentasPage
 
             if (saveSuccess)
             {
-                MsgBox.Text = "Pago registrado con éxito.";
+                MsgBox.Text = "Cobro registrado con éxito.";
                 MsgBox.IconColor = Color.DarkGreen;
             }
             else
             {
-                MsgBox.Text = "Error al registrar pago.";
+                MsgBox.Text = "Error al registrar cobro.";
                 MsgBox.IconColor = Color.DarkRed;
             }
 
@@ -118,7 +118,8 @@ namespace CZS_LaVictoria.CuentasPage
             var output = true;
             MsgBox.Text = "";
 
-            if (NuevoText.Text == "$0.00" || !decimal.TryParse(NuevoText.Text.Replace("$", "").Replace(",", ""), out _nuevo))
+            if (NuevoText.Text == "$0.00" ||
+                !decimal.TryParse(NuevoText.Text.Replace("$", "").Replace(",", ""), out _nuevo))
             {
                 output = false;
                 MsgBox.Text += "Ingresa el monto del cobro a registrar.\n";

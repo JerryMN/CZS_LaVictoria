@@ -63,7 +63,7 @@ namespace CZS_LaVictoria.CuentasPage
             this.AgregarButton.IconColor = System.Drawing.Color.Black;
             this.AgregarButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.AgregarButton.IconSize = 24;
-            this.AgregarButton.Location = new System.Drawing.Point(176, 22);
+            this.AgregarButton.Location = new System.Drawing.Point(185, 22);
             this.AgregarButton.Name = "AgregarButton";
             this.AgregarButton.Size = new System.Drawing.Size(150, 31);
             this.AgregarButton.TabIndex = 17;
@@ -83,9 +83,9 @@ namespace CZS_LaVictoria.CuentasPage
             this.RegistrarButton.IconSize = 24;
             this.RegistrarButton.Location = new System.Drawing.Point(25, 22);
             this.RegistrarButton.Name = "RegistrarButton";
-            this.RegistrarButton.Size = new System.Drawing.Size(145, 31);
+            this.RegistrarButton.Size = new System.Drawing.Size(154, 31);
             this.RegistrarButton.TabIndex = 18;
-            this.RegistrarButton.Text = "Registrar Pago";
+            this.RegistrarButton.Text = "Registrar Cobro";
             this.RegistrarButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.RegistrarButton.UseVisualStyleBackColor = true;
             this.RegistrarButton.Click += new System.EventHandler(this.RegistrarButton_Click);

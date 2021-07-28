@@ -32,6 +32,7 @@ namespace CZS_LaVictoria.CuentasPage
             this.DataGrid = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             this.RegistrarButton = new FontAwesome.Sharp.IconButton();
             this.AgregarButton = new FontAwesome.Sharp.IconButton();
+            this.FijosButton = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)(this.DataGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -90,11 +91,30 @@ namespace CZS_LaVictoria.CuentasPage
             this.AgregarButton.UseVisualStyleBackColor = true;
             this.AgregarButton.Click += new System.EventHandler(this.AgregarButton_Click);
             // 
+            // FijosButton
+            // 
+            this.FijosButton.AutoSize = true;
+            this.FijosButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.FijosButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FijosButton.IconChar = FontAwesome.Sharp.IconChar.Plus;
+            this.FijosButton.IconColor = System.Drawing.Color.Black;
+            this.FijosButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.FijosButton.IconSize = 24;
+            this.FijosButton.Location = new System.Drawing.Point(332, 22);
+            this.FijosButton.Name = "FijosButton";
+            this.FijosButton.Size = new System.Drawing.Size(136, 31);
+            this.FijosButton.TabIndex = 16;
+            this.FijosButton.Text = "Agregar Fijos";
+            this.FijosButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.FijosButton.UseVisualStyleBackColor = true;
+            this.FijosButton.Click += new System.EventHandler(this.FijosButton_Click);
+            // 
             // PorPagarVerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1276, 839);
+            this.Controls.Add(this.FijosButton);
             this.Controls.Add(this.AgregarButton);
             this.Controls.Add(this.RegistrarButton);
             this.Controls.Add(this.DataGrid);
@@ -114,5 +134,6 @@ namespace CZS_LaVictoria.CuentasPage
         private Syncfusion.WinForms.DataGrid.SfDataGrid DataGrid;
         private FontAwesome.Sharp.IconButton RegistrarButton;
         private FontAwesome.Sharp.IconButton AgregarButton;
+        private FontAwesome.Sharp.IconButton FijosButton;
     }
 }

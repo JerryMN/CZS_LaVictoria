@@ -12,9 +12,9 @@ namespace CZS_LaVictoria.CuentasPage
     {
         readonly PorPagarModel _línea;
         decimal _monto;
+        decimal _nuevo;
         decimal _pagado;
         decimal _pendiente;
-        decimal _nuevo;
 
         public PorPagarPagarForm(PorPagarModel línea)
         {
@@ -40,6 +40,9 @@ namespace CZS_LaVictoria.CuentasPage
 
         void GuardarButton_Click(object sender, EventArgs e)
         {
+            MsgBox.Visible = false;
+            MsgBox.Text = "";
+
             if (!ValidateForm())
             {
                 MsgBox.Visible = true;
@@ -116,9 +119,9 @@ namespace CZS_LaVictoria.CuentasPage
         bool ValidateForm()
         {
             var output = true;
-            MsgBox.Text = "";
 
-            if (NuevoText.Text == "$0.00" || !decimal.TryParse(NuevoText.Text.Replace("$", "").Replace(",", ""), out _nuevo))
+            if (NuevoText.Text == "$0.00" ||
+                !decimal.TryParse(NuevoText.Text.Replace("$", "").Replace(",", ""), out _nuevo))
             {
                 output = false;
                 MsgBox.Text += "Ingresa el monto del pago a registrar.\n";

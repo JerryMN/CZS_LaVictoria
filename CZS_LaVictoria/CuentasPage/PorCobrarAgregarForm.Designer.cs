@@ -61,7 +61,8 @@ namespace CZS_LaVictoria.CuentasPage
             this.MsgBox.Location = new System.Drawing.Point(50, 550);
             this.MsgBox.Name = "MsgBox";
             this.MsgBox.Size = new System.Drawing.Size(420, 165);
-            this.MsgBox.TabIndex = 127;
+            this.MsgBox.TabIndex = 14;
+            this.MsgBox.TabStop = false;
             this.MsgBox.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.MsgBox.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.MsgBox.UseVisualStyleBackColor = true;
@@ -74,7 +75,7 @@ namespace CZS_LaVictoria.CuentasPage
             this.GuardarButton.Location = new System.Drawing.Point(392, 500);
             this.GuardarButton.Name = "GuardarButton";
             this.GuardarButton.Size = new System.Drawing.Size(78, 37);
-            this.GuardarButton.TabIndex = 126;
+            this.GuardarButton.TabIndex = 13;
             this.GuardarButton.Text = "Guardar";
             this.GuardarButton.UseVisualStyleBackColor = true;
             this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
@@ -90,7 +91,7 @@ namespace CZS_LaVictoria.CuentasPage
             this.CobradoText.Name = "CobradoText";
             this.CobradoText.Size = new System.Drawing.Size(250, 29);
             this.CobradoText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.CobradoText.TabIndex = 125;
+            this.CobradoText.TabIndex = 10;
             this.CobradoText.Text = "$0.00";
             this.CobradoText.WatermarkText = "Calculado automáticamente";
             // 
@@ -105,7 +106,7 @@ namespace CZS_LaVictoria.CuentasPage
             this.MontoText.Name = "MontoText";
             this.MontoText.Size = new System.Drawing.Size(250, 29);
             this.MontoText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.MontoText.TabIndex = 124;
+            this.MontoText.TabIndex = 8;
             this.MontoText.Text = "$0.00";
             this.MontoText.WatermarkText = "Calculado automáticamente";
             // 
@@ -115,7 +116,7 @@ namespace CZS_LaVictoria.CuentasPage
             this.CobradoLabel.Location = new System.Drawing.Point(50, 350);
             this.CobradoLabel.Name = "CobradoLabel";
             this.CobradoLabel.Size = new System.Drawing.Size(120, 21);
-            this.CobradoLabel.TabIndex = 122;
+            this.CobradoLabel.TabIndex = 9;
             this.CobradoLabel.Text = "Monto Cobrado";
             // 
             // MontoLabel
@@ -123,9 +124,9 @@ namespace CZS_LaVictoria.CuentasPage
             this.MontoLabel.AutoSize = true;
             this.MontoLabel.Location = new System.Drawing.Point(50, 300);
             this.MontoLabel.Name = "MontoLabel";
-            this.MontoLabel.Size = new System.Drawing.Size(110, 21);
-            this.MontoLabel.TabIndex = 123;
-            this.MontoLabel.Text = "Monto Factura";
+            this.MontoLabel.Size = new System.Drawing.Size(127, 21);
+            this.MontoLabel.TabIndex = 7;
+            this.MontoLabel.Text = "Monto a Cobrar*";
             // 
             // FechaFacturaPicker
             // 
@@ -133,7 +134,7 @@ namespace CZS_LaVictoria.CuentasPage
             this.FechaFacturaPicker.Location = new System.Drawing.Point(220, 197);
             this.FechaFacturaPicker.Name = "FechaFacturaPicker";
             this.FechaFacturaPicker.Size = new System.Drawing.Size(250, 33);
-            this.FechaFacturaPicker.TabIndex = 120;
+            this.FechaFacturaPicker.TabIndex = 4;
             // 
             // FechaFacturaLabel
             // 
@@ -142,7 +143,7 @@ namespace CZS_LaVictoria.CuentasPage
             this.FechaFacturaLabel.Location = new System.Drawing.Point(50, 200);
             this.FechaFacturaLabel.Name = "FechaFacturaLabel";
             this.FechaFacturaLabel.Size = new System.Drawing.Size(123, 21);
-            this.FechaFacturaLabel.TabIndex = 118;
+            this.FechaFacturaLabel.TabIndex = 3;
             this.FechaFacturaLabel.Text = "Fecha de factura";
             // 
             // NotasText
@@ -152,7 +153,7 @@ namespace CZS_LaVictoria.CuentasPage
             this.NotasText.Multiline = true;
             this.NotasText.Name = "NotasText";
             this.NotasText.Size = new System.Drawing.Size(250, 76);
-            this.NotasText.TabIndex = 117;
+            this.NotasText.TabIndex = 12;
             // 
             // ClienteText
             // 
@@ -160,7 +161,7 @@ namespace CZS_LaVictoria.CuentasPage
             this.ClienteText.Location = new System.Drawing.Point(220, 247);
             this.ClienteText.Name = "ClienteText";
             this.ClienteText.Size = new System.Drawing.Size(250, 29);
-            this.ClienteText.TabIndex = 116;
+            this.ClienteText.TabIndex = 6;
             // 
             // FacturaText
             // 
@@ -168,7 +169,7 @@ namespace CZS_LaVictoria.CuentasPage
             this.FacturaText.Location = new System.Drawing.Point(220, 147);
             this.FacturaText.Name = "FacturaText";
             this.FacturaText.Size = new System.Drawing.Size(250, 29);
-            this.FacturaText.TabIndex = 115;
+            this.FacturaText.TabIndex = 2;
             // 
             // NotasLabel
             // 
@@ -177,7 +178,7 @@ namespace CZS_LaVictoria.CuentasPage
             this.NotasLabel.Location = new System.Drawing.Point(50, 400);
             this.NotasLabel.Name = "NotasLabel";
             this.NotasLabel.Size = new System.Drawing.Size(51, 21);
-            this.NotasLabel.TabIndex = 114;
+            this.NotasLabel.TabIndex = 11;
             this.NotasLabel.Text = "Notas";
             // 
             // ClienteLabel
@@ -186,9 +187,9 @@ namespace CZS_LaVictoria.CuentasPage
             this.ClienteLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ClienteLabel.Location = new System.Drawing.Point(50, 250);
             this.ClienteLabel.Name = "ClienteLabel";
-            this.ClienteLabel.Size = new System.Drawing.Size(58, 21);
-            this.ClienteLabel.TabIndex = 111;
-            this.ClienteLabel.Text = "Cliente";
+            this.ClienteLabel.Size = new System.Drawing.Size(65, 21);
+            this.ClienteLabel.TabIndex = 5;
+            this.ClienteLabel.Text = "Cliente*";
             // 
             // FacturaLabel
             // 
@@ -197,7 +198,7 @@ namespace CZS_LaVictoria.CuentasPage
             this.FacturaLabel.Location = new System.Drawing.Point(50, 150);
             this.FacturaLabel.Name = "FacturaLabel";
             this.FacturaLabel.Size = new System.Drawing.Size(60, 21);
-            this.FacturaLabel.TabIndex = 113;
+            this.FacturaLabel.TabIndex = 1;
             this.FacturaLabel.Text = "Factura";
             // 
             // SubtitleLabel
@@ -207,7 +208,7 @@ namespace CZS_LaVictoria.CuentasPage
             this.SubtitleLabel.Location = new System.Drawing.Point(50, 25);
             this.SubtitleLabel.Name = "SubtitleLabel";
             this.SubtitleLabel.Size = new System.Drawing.Size(374, 37);
-            this.SubtitleLabel.TabIndex = 110;
+            this.SubtitleLabel.TabIndex = 0;
             this.SubtitleLabel.Text = "Agregar Cobro Manualmente";
             // 
             // MsgBoxTimer

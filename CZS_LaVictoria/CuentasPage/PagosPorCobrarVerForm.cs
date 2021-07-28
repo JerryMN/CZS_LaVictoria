@@ -1,12 +1,12 @@
-﻿using Syncfusion.WinForms.DataGrid.Enums;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using Syncfusion.WinForms.DataGrid.Styles;
 using CZS_LaVictoria_Library.Models;
 using CZS_LaVictoria_Library;
-using Syncfusion.WinForms.DataGrid.Events;
 using Syncfusion.WinForms.DataGrid;
+using Syncfusion.WinForms.DataGrid.Enums;
+using Syncfusion.WinForms.DataGrid.Events;
+using Syncfusion.WinForms.DataGrid.Styles;
 using Syncfusion.WinForms.Input.Enums;
 
 namespace CZS_LaVictoria.CuentasPage
@@ -22,6 +22,8 @@ namespace CZS_LaVictoria.CuentasPage
             DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCellsWithLastColumnFill;
         }
 
+        #region Events
+
         void DataGrid_AutoGeneratingColumn(object sender, AutoGeneratingColumnArgs e)
         {
             switch (e.Column.MappingName)
@@ -34,17 +36,23 @@ namespace CZS_LaVictoria.CuentasPage
                     break;
                 case "Pago":
                     e.Column = new GridNumericColumn
-                        { MappingName = "Pago", HeaderText = "Pago", FormatMode = FormatMode.Currency };
+                        {MappingName = "Pago", HeaderText = "Pago", FormatMode = FormatMode.Currency};
                     break;
                 case "FechaPago":
-                    e.Column = new GridDateTimeColumn { MappingName = "FechaPago", HeaderText = "Fecha Pago" };
+                    e.Column = new GridDateTimeColumn {MappingName = "FechaPago", HeaderText = "Fecha Pago"};
                     break;
             }
         }
+
+        #endregion
+
+        #region Methods
 
         static List<PorCobrarPagosModel> LoadTable()
         {
             return GlobalConfig.Connection.Receivable_GetPagos();
         }
+
+        #endregion
     }
 }

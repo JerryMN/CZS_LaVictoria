@@ -21,12 +21,14 @@ namespace CZS_LaVictoria.CuentasPage
             DataGrid.Style.CellStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
             DataGrid.Style.HeaderStyle.Font = new GridFontInfo(new Font("Segoe UI", 12));
             DataGrid.AutoSizeColumnsMode = AutoSizeColumnsMode.AllCellsWithLastColumnFill;
+            if (GlobalConfig.Connection.CZS_GetLicencia()) return;
+            MessageBox.Show(
+                "No se puede verificar la licencia. Verifica el estatus de la misma y verifica tu conexión a internet.",
+                "Error de licencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            Application.Exit();
         }
 
-        static List<PorPagarModel> LoadTable()
-        {
-            return GlobalConfig.Connection.Payable_GetAll();
-        }
+        #region Events
 
         void DataGrid_AutoGeneratingColumn(object sender, AutoGeneratingColumnArgs e)
         {
@@ -91,5 +93,23 @@ namespace CZS_LaVictoria.CuentasPage
             agregar.Show();
             agregar.Disposed += (o, args) => DataGrid.DataSource = LoadTable();
         }
+
+        void FijosButton_Click(object sender, EventArgs e)
+        {
+            var fijos = new GastosFijosAgregarForm();
+            fijos.Show();
+            fijos.Disposed += (o, args) => DataGrid.DataSource = LoadTable();
+        }
+
+        #endregion
+
+        #region Methods
+
+        static List<PorPagarModel> LoadTable()
+        {
+            return GlobalConfig.Connection.Payable_GetAll();
+        }
+
+        #endregion
     }
 }

@@ -65,7 +65,8 @@ namespace CZS_LaVictoria.CuentasPage
             this.MsgBox.Location = new System.Drawing.Point(50, 647);
             this.MsgBox.Name = "MsgBox";
             this.MsgBox.Size = new System.Drawing.Size(420, 165);
-            this.MsgBox.TabIndex = 108;
+            this.MsgBox.TabIndex = 18;
+            this.MsgBox.TabStop = false;
             this.MsgBox.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.MsgBox.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.MsgBox.UseVisualStyleBackColor = true;
@@ -78,7 +79,7 @@ namespace CZS_LaVictoria.CuentasPage
             this.GuardarButton.Location = new System.Drawing.Point(392, 597);
             this.GuardarButton.Name = "GuardarButton";
             this.GuardarButton.Size = new System.Drawing.Size(78, 37);
-            this.GuardarButton.TabIndex = 107;
+            this.GuardarButton.TabIndex = 17;
             this.GuardarButton.Text = "Guardar";
             this.GuardarButton.UseVisualStyleBackColor = true;
             this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click);
@@ -94,7 +95,7 @@ namespace CZS_LaVictoria.CuentasPage
             this.PagadoText.Name = "PagadoText";
             this.PagadoText.Size = new System.Drawing.Size(250, 29);
             this.PagadoText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.PagadoText.TabIndex = 104;
+            this.PagadoText.TabIndex = 10;
             this.PagadoText.Text = "$0.00";
             this.PagadoText.WatermarkText = "Calculado automáticamente";
             // 
@@ -109,7 +110,7 @@ namespace CZS_LaVictoria.CuentasPage
             this.MontoText.Name = "MontoText";
             this.MontoText.Size = new System.Drawing.Size(250, 29);
             this.MontoText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.MontoText.TabIndex = 103;
+            this.MontoText.TabIndex = 8;
             this.MontoText.Text = "$0.00";
             this.MontoText.WatermarkText = "Calculado automáticamente";
             // 
@@ -119,7 +120,7 @@ namespace CZS_LaVictoria.CuentasPage
             this.PagadoLabel.Location = new System.Drawing.Point(50, 350);
             this.PagadoLabel.Name = "PagadoLabel";
             this.PagadoLabel.Size = new System.Drawing.Size(111, 21);
-            this.PagadoLabel.TabIndex = 99;
+            this.PagadoLabel.TabIndex = 9;
             this.PagadoLabel.Text = "Monto Pagado";
             // 
             // MontoLabel
@@ -127,9 +128,9 @@ namespace CZS_LaVictoria.CuentasPage
             this.MontoLabel.AutoSize = true;
             this.MontoLabel.Location = new System.Drawing.Point(50, 300);
             this.MontoLabel.Name = "MontoLabel";
-            this.MontoLabel.Size = new System.Drawing.Size(110, 21);
-            this.MontoLabel.TabIndex = 102;
-            this.MontoLabel.Text = "Monto Factura";
+            this.MontoLabel.Size = new System.Drawing.Size(118, 21);
+            this.MontoLabel.TabIndex = 7;
+            this.MontoLabel.Text = "Monto a Pagar*";
             // 
             // FechaLimitePicker
             // 
@@ -137,7 +138,7 @@ namespace CZS_LaVictoria.CuentasPage
             this.FechaLimitePicker.Location = new System.Drawing.Point(220, 444);
             this.FechaLimitePicker.Name = "FechaLimitePicker";
             this.FechaLimitePicker.Size = new System.Drawing.Size(250, 33);
-            this.FechaLimitePicker.TabIndex = 98;
+            this.FechaLimitePicker.TabIndex = 14;
             // 
             // FechaFacturaPicker
             // 
@@ -145,7 +146,7 @@ namespace CZS_LaVictoria.CuentasPage
             this.FechaFacturaPicker.Location = new System.Drawing.Point(220, 197);
             this.FechaFacturaPicker.Name = "FechaFacturaPicker";
             this.FechaFacturaPicker.Size = new System.Drawing.Size(250, 33);
-            this.FechaFacturaPicker.TabIndex = 97;
+            this.FechaFacturaPicker.TabIndex = 4;
             // 
             // FechaLimiteLabel
             // 
@@ -153,9 +154,9 @@ namespace CZS_LaVictoria.CuentasPage
             this.FechaLimiteLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FechaLimiteLabel.Location = new System.Drawing.Point(50, 450);
             this.FechaLimiteLabel.Name = "FechaLimiteLabel";
-            this.FechaLimiteLabel.Size = new System.Drawing.Size(153, 21);
-            this.FechaLimiteLabel.TabIndex = 96;
-            this.FechaLimiteLabel.Text = "Fecha límite de pago";
+            this.FechaLimiteLabel.Size = new System.Drawing.Size(163, 21);
+            this.FechaLimiteLabel.TabIndex = 13;
+            this.FechaLimiteLabel.Text = "Fecha Límite de Pago*";
             // 
             // FechaFacturaLabel
             // 
@@ -163,9 +164,9 @@ namespace CZS_LaVictoria.CuentasPage
             this.FechaFacturaLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FechaFacturaLabel.Location = new System.Drawing.Point(50, 200);
             this.FechaFacturaLabel.Name = "FechaFacturaLabel";
-            this.FechaFacturaLabel.Size = new System.Drawing.Size(123, 21);
-            this.FechaFacturaLabel.TabIndex = 95;
-            this.FechaFacturaLabel.Text = "Fecha de factura";
+            this.FechaFacturaLabel.Size = new System.Drawing.Size(125, 21);
+            this.FechaFacturaLabel.TabIndex = 3;
+            this.FechaFacturaLabel.Text = "Fecha de Factura";
             // 
             // NotasText
             // 
@@ -174,7 +175,7 @@ namespace CZS_LaVictoria.CuentasPage
             this.NotasText.Multiline = true;
             this.NotasText.Name = "NotasText";
             this.NotasText.Size = new System.Drawing.Size(250, 76);
-            this.NotasText.TabIndex = 94;
+            this.NotasText.TabIndex = 16;
             // 
             // FacturaText
             // 
@@ -182,7 +183,7 @@ namespace CZS_LaVictoria.CuentasPage
             this.FacturaText.Location = new System.Drawing.Point(220, 147);
             this.FacturaText.Name = "FacturaText";
             this.FacturaText.Size = new System.Drawing.Size(250, 29);
-            this.FacturaText.TabIndex = 93;
+            this.FacturaText.TabIndex = 2;
             // 
             // NotasLabel
             // 
@@ -191,7 +192,7 @@ namespace CZS_LaVictoria.CuentasPage
             this.NotasLabel.Location = new System.Drawing.Point(50, 497);
             this.NotasLabel.Name = "NotasLabel";
             this.NotasLabel.Size = new System.Drawing.Size(51, 21);
-            this.NotasLabel.TabIndex = 90;
+            this.NotasLabel.TabIndex = 15;
             this.NotasLabel.Text = "Notas";
             // 
             // FacturaLabel
@@ -201,7 +202,7 @@ namespace CZS_LaVictoria.CuentasPage
             this.FacturaLabel.Location = new System.Drawing.Point(50, 150);
             this.FacturaLabel.Name = "FacturaLabel";
             this.FacturaLabel.Size = new System.Drawing.Size(60, 21);
-            this.FacturaLabel.TabIndex = 89;
+            this.FacturaLabel.TabIndex = 1;
             this.FacturaLabel.Text = "Factura";
             // 
             // SubtitleLabel
@@ -211,7 +212,7 @@ namespace CZS_LaVictoria.CuentasPage
             this.SubtitleLabel.Location = new System.Drawing.Point(50, 25);
             this.SubtitleLabel.Name = "SubtitleLabel";
             this.SubtitleLabel.Size = new System.Drawing.Size(360, 37);
-            this.SubtitleLabel.TabIndex = 88;
+            this.SubtitleLabel.TabIndex = 0;
             this.SubtitleLabel.Text = "Agregar Pago Manualmente";
             // 
             // ProveedorLabel
@@ -220,9 +221,9 @@ namespace CZS_LaVictoria.CuentasPage
             this.ProveedorLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ProveedorLabel.Location = new System.Drawing.Point(50, 250);
             this.ProveedorLabel.Name = "ProveedorLabel";
-            this.ProveedorLabel.Size = new System.Drawing.Size(82, 21);
-            this.ProveedorLabel.TabIndex = 89;
-            this.ProveedorLabel.Text = "Proveedor";
+            this.ProveedorLabel.Size = new System.Drawing.Size(89, 21);
+            this.ProveedorLabel.TabIndex = 5;
+            this.ProveedorLabel.Text = "Proveedor*";
             // 
             // ProveedorText
             // 
@@ -230,7 +231,7 @@ namespace CZS_LaVictoria.CuentasPage
             this.ProveedorText.Location = new System.Drawing.Point(220, 247);
             this.ProveedorText.Name = "ProveedorText";
             this.ProveedorText.Size = new System.Drawing.Size(250, 29);
-            this.ProveedorText.TabIndex = 93;
+            this.ProveedorText.TabIndex = 6;
             // 
             // MsgBoxTimer
             // 
@@ -244,7 +245,7 @@ namespace CZS_LaVictoria.CuentasPage
             this.CondicionesLabel.Location = new System.Drawing.Point(50, 400);
             this.CondicionesLabel.Name = "CondicionesLabel";
             this.CondicionesLabel.Size = new System.Drawing.Size(95, 21);
-            this.CondicionesLabel.TabIndex = 89;
+            this.CondicionesLabel.TabIndex = 11;
             this.CondicionesLabel.Text = "Condiciones";
             // 
             // CondicionesCombo
@@ -255,7 +256,7 @@ namespace CZS_LaVictoria.CuentasPage
             this.CondicionesCombo.Location = new System.Drawing.Point(220, 397);
             this.CondicionesCombo.Name = "CondicionesCombo";
             this.CondicionesCombo.Size = new System.Drawing.Size(250, 29);
-            this.CondicionesCombo.TabIndex = 109;
+            this.CondicionesCombo.TabIndex = 12;
             // 
             // PorPagarAgregarForm
             // 
@@ -282,8 +283,10 @@ namespace CZS_LaVictoria.CuentasPage
             this.Controls.Add(this.FacturaLabel);
             this.Controls.Add(this.SubtitleLabel);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "PorPagarAgregarForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Agregar Pago Manualmente";

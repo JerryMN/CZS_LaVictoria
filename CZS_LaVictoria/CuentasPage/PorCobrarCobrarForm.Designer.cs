@@ -161,9 +161,9 @@ namespace CZS_LaVictoria.CuentasPage
             this.NuevoLabel.AutoSize = true;
             this.NuevoLabel.Location = new System.Drawing.Point(50, 450);
             this.NuevoLabel.Name = "NuevoLabel";
-            this.NuevoLabel.Size = new System.Drawing.Size(103, 21);
+            this.NuevoLabel.Size = new System.Drawing.Size(110, 21);
             this.NuevoLabel.TabIndex = 100;
-            this.NuevoLabel.Text = "Nuevo Cobro";
+            this.NuevoLabel.Text = "Nuevo Cobro*";
             // 
             // PendienteLabel
             // 
@@ -188,9 +188,9 @@ namespace CZS_LaVictoria.CuentasPage
             this.MontoLabel.AutoSize = true;
             this.MontoLabel.Location = new System.Drawing.Point(50, 300);
             this.MontoLabel.Name = "MontoLabel";
-            this.MontoLabel.Size = new System.Drawing.Size(110, 21);
+            this.MontoLabel.Size = new System.Drawing.Size(120, 21);
             this.MontoLabel.TabIndex = 98;
-            this.MontoLabel.Text = "Monto Factura";
+            this.MontoLabel.Text = "Monto a Cobrar";
             // 
             // FechaCobroPicker
             // 
@@ -214,9 +214,9 @@ namespace CZS_LaVictoria.CuentasPage
             this.FechaCobroLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FechaCobroLabel.Location = new System.Drawing.Point(550, 250);
             this.FechaCobroLabel.Name = "FechaCobroLabel";
-            this.FechaCobroLabel.Size = new System.Drawing.Size(115, 21);
+            this.FechaCobroLabel.Size = new System.Drawing.Size(125, 21);
             this.FechaCobroLabel.TabIndex = 95;
-            this.FechaCobroLabel.Text = "Fecha de cobro";
+            this.FechaCobroLabel.Text = "Fecha de Cobro*";
             // 
             // FechaFacturaLabel
             // 
@@ -224,9 +224,9 @@ namespace CZS_LaVictoria.CuentasPage
             this.FechaFacturaLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FechaFacturaLabel.Location = new System.Drawing.Point(50, 250);
             this.FechaFacturaLabel.Name = "FechaFacturaLabel";
-            this.FechaFacturaLabel.Size = new System.Drawing.Size(123, 21);
+            this.FechaFacturaLabel.Size = new System.Drawing.Size(125, 21);
             this.FechaFacturaLabel.TabIndex = 94;
-            this.FechaFacturaLabel.Text = "Fecha de factura";
+            this.FechaFacturaLabel.Text = "Fecha de Factura";
             // 
             // NotasText
             // 
