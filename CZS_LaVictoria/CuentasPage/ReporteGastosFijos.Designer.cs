@@ -31,6 +31,7 @@ namespace CZS_LaVictoria.CuentasPage
         {
             this.components = new System.ComponentModel.Container();
             DevExpress.XtraReports.UI.XRSummary xrSummary1 = new DevExpress.XtraReports.UI.XRSummary();
+            DevExpress.DataAccess.ConnectionParameters.MsSqlConnectionParameters msSqlConnectionParameters1 = new DevExpress.DataAccess.ConnectionParameters.MsSqlConnectionParameters();
             DevExpress.DataAccess.Sql.StoredProcQuery storedProcQuery1 = new DevExpress.DataAccess.Sql.StoredProcQuery();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReporteGastosFijos));
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
@@ -216,7 +217,7 @@ namespace CZS_LaVictoria.CuentasPage
             this.tableCell4.StylePriority.UseFont = false;
             this.tableCell4.StylePriority.UseTextAlignment = false;
             this.tableCell4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.tableCell4.TextFormatString = "{0:C2}";
+            this.tableCell4.TextFormatString = "{0:$###,###.00}";
             this.tableCell4.Weight = 0.41992572490985575D;
             // 
             // panel1
@@ -234,7 +235,7 @@ namespace CZS_LaVictoria.CuentasPage
             this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold);
             this.label2.LocationFloat = new DevExpress.Utils.PointFloat(377.0483F, 11.5F);
             this.label2.Name = "label2";
-            this.label2.SizeF = new System.Drawing.SizeF(56.37903F, 14.88444F);
+            this.label2.SizeF = new System.Drawing.SizeF(52.9068F, 14.88444F);
             this.label2.StyleName = "GrandTotalCaption1";
             this.label2.StylePriority.UseFont = false;
             this.label2.Text = "Total";
@@ -245,9 +246,9 @@ namespace CZS_LaVictoria.CuentasPage
             this.label3.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Monto])")});
             this.label3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold);
-            this.label3.LocationFloat = new DevExpress.Utils.PointFloat(433.4273F, 11.5F);
+            this.label3.LocationFloat = new DevExpress.Utils.PointFloat(429.9551F, 11.5F);
             this.label3.Name = "label3";
-            this.label3.SizeF = new System.Drawing.SizeF(216.5727F, 14.88444F);
+            this.label3.SizeF = new System.Drawing.SizeF(220.0449F, 14.88444F);
             this.label3.StyleName = "GrandTotalData1";
             this.label3.StylePriority.UseFont = false;
             this.label3.StylePriority.UseTextAlignment = false;
@@ -259,7 +260,13 @@ namespace CZS_LaVictoria.CuentasPage
             // 
             // sqlDataSource1
             // 
-            this.sqlDataSource1.ConnectionName = "czsystems.escobaslavictoria.dbo";
+            this.sqlDataSource1.ConnectionName = "localhost_escobaslavictoria_Connection";
+            msSqlConnectionParameters1.AuthorizationType = DevExpress.DataAccess.ConnectionParameters.MsSqlAuthorizationType.SqlServer;
+            msSqlConnectionParameters1.DatabaseName = "escobaslavictoria";
+            msSqlConnectionParameters1.Password = "fn8u4m34#c!g6$u";
+            msSqlConnectionParameters1.ServerName = "czsystems.database.windows.net";
+            msSqlConnectionParameters1.UserName = "czsystems_admin";
+            this.sqlDataSource1.ConnectionParameters = msSqlConnectionParameters1;
             this.sqlDataSource1.Name = "sqlDataSource1";
             storedProcQuery1.Name = "spExpenses_GetAll";
             storedProcQuery1.StoredProcName = "spExpenses_GetAll";
