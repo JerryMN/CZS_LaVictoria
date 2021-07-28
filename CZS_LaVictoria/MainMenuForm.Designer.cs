@@ -87,6 +87,8 @@ namespace CZS_LaVictoria
             this.ConfigurarCorreoButton = new DevExpress.XtraBars.BarButtonItem();
             this.ProcesarPiezasMalasButton = new DevExpress.XtraBars.BarButtonItem();
             this.VerRetrabajosButton = new DevExpress.XtraBars.BarButtonItem();
+            this.CrearGastoFijoButton = new DevExpress.XtraBars.BarButtonItem();
+            this.VerCalculadoraButton = new DevExpress.XtraBars.BarButtonItem();
             this.ÓrdenesTab = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.Órdenes_CompraGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Órdenes_VentaGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -103,8 +105,10 @@ namespace CZS_LaVictoria
             this.Trapeadores_RegistrarGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Trapeadores_VerGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.CuentasTab = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.Cuentas_FijosGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Cuentas_PagarGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Cuentas_CobrarGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.Cuentas_CalculadoraGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Cuentas_ReportesGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.DatosTab = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.Datos_ProveedoresGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -115,6 +119,7 @@ namespace CZS_LaVictoria
             this.Datos_PersonalGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Datos_CorreoGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ChildPanel = new DevExpress.XtraEditors.PanelControl();
+            this.VerGastosFijosButton = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.RibbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ChildPanel)).BeginInit();
             this.SuspendLayout();
@@ -181,10 +186,13 @@ namespace CZS_LaVictoria
             this.VerReporteProducciónTrapeadoresButton,
             this.ConfigurarCorreoButton,
             this.ProcesarPiezasMalasButton,
-            this.VerRetrabajosButton});
+            this.VerRetrabajosButton,
+            this.CrearGastoFijoButton,
+            this.VerCalculadoraButton,
+            this.VerGastosFijosButton});
             this.RibbonControl.Location = new System.Drawing.Point(0, 0);
             this.RibbonControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.RibbonControl.MaxItemId = 62;
+            this.RibbonControl.MaxItemId = 65;
             this.RibbonControl.Name = "RibbonControl";
             this.RibbonControl.OptionsMenuMinWidth = 495;
             this.RibbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -555,7 +563,7 @@ namespace CZS_LaVictoria
             // 
             // VerCobrosButton
             // 
-            this.VerCobrosButton.Caption = "Ver Cobros Hechos";
+            this.VerCobrosButton.Caption = "Ver Cobros Recibidos";
             this.VerCobrosButton.Id = 49;
             this.VerCobrosButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("VerCobrosButton.ImageOptions.SvgImage")));
             this.VerCobrosButton.Name = "VerCobrosButton";
@@ -656,6 +664,22 @@ namespace CZS_LaVictoria
             this.VerRetrabajosButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("VerRetrabajosButton.ImageOptions.SvgImage")));
             this.VerRetrabajosButton.Name = "VerRetrabajosButton";
             this.VerRetrabajosButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerRetrabajosButton_ItemClick);
+            // 
+            // CrearGastoFijoButton
+            // 
+            this.CrearGastoFijoButton.Caption = "Crear Gasto Fijo";
+            this.CrearGastoFijoButton.Id = 62;
+            this.CrearGastoFijoButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("CrearGastoFijoButton.ImageOptions.SvgImage")));
+            this.CrearGastoFijoButton.Name = "CrearGastoFijoButton";
+            this.CrearGastoFijoButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.CrearGastoFijoButton_ItemClick);
+            // 
+            // VerCalculadoraButton
+            // 
+            this.VerCalculadoraButton.Caption = "Calculadora de Costos";
+            this.VerCalculadoraButton.Id = 63;
+            this.VerCalculadoraButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("VerCalculadoraButton.ImageOptions.SvgImage")));
+            this.VerCalculadoraButton.Name = "VerCalculadoraButton";
+            this.VerCalculadoraButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.VerCalculadoraButton_ItemClick);
             // 
             // ÓrdenesTab
             // 
@@ -793,11 +817,20 @@ namespace CZS_LaVictoria
             // CuentasTab
             // 
             this.CuentasTab.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.Cuentas_FijosGroup,
             this.Cuentas_PagarGroup,
             this.Cuentas_CobrarGroup,
+            this.Cuentas_CalculadoraGroup,
             this.Cuentas_ReportesGroup});
             this.CuentasTab.Name = "CuentasTab";
             this.CuentasTab.Text = "Cuentas";
+            // 
+            // Cuentas_FijosGroup
+            // 
+            this.Cuentas_FijosGroup.AllowTextClipping = false;
+            this.Cuentas_FijosGroup.ItemLinks.Add(this.CrearGastoFijoButton);
+            this.Cuentas_FijosGroup.Name = "Cuentas_FijosGroup";
+            this.Cuentas_FijosGroup.Text = "Gastos Fijos";
             // 
             // Cuentas_PagarGroup
             // 
@@ -815,9 +848,17 @@ namespace CZS_LaVictoria
             this.Cuentas_CobrarGroup.Name = "Cuentas_CobrarGroup";
             this.Cuentas_CobrarGroup.Text = "Por Cobrar";
             // 
+            // Cuentas_CalculadoraGroup
+            // 
+            this.Cuentas_CalculadoraGroup.AllowTextClipping = false;
+            this.Cuentas_CalculadoraGroup.ItemLinks.Add(this.VerCalculadoraButton);
+            this.Cuentas_CalculadoraGroup.Name = "Cuentas_CalculadoraGroup";
+            this.Cuentas_CalculadoraGroup.Text = "Calculadora";
+            // 
             // Cuentas_ReportesGroup
             // 
             this.Cuentas_ReportesGroup.AllowTextClipping = false;
+            this.Cuentas_ReportesGroup.ItemLinks.Add(this.VerGastosFijosButton);
             this.Cuentas_ReportesGroup.ItemLinks.Add(this.VerPagosHechosButton);
             this.Cuentas_ReportesGroup.ItemLinks.Add(this.VerCobrosRecibidosButton);
             this.Cuentas_ReportesGroup.ItemLinks.Add(this.VerCuentasButton);
@@ -903,6 +944,13 @@ namespace CZS_LaVictoria
             this.ChildPanel.Name = "ChildPanel";
             this.ChildPanel.Size = new System.Drawing.Size(1278, 841);
             this.ChildPanel.TabIndex = 1;
+            // 
+            // VerGastosFijosButton
+            // 
+            this.VerGastosFijosButton.Caption = "Gastos Fijos";
+            this.VerGastosFijosButton.Id = 64;
+            this.VerGastosFijosButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("VerGastosFijosButton.ImageOptions.SvgImage")));
+            this.VerGastosFijosButton.Name = "VerGastosFijosButton";
             // 
             // MainMenuForm
             // 
@@ -1016,6 +1064,11 @@ namespace CZS_LaVictoria
         private DevExpress.XtraBars.BarButtonItem ProcesarPiezasMalasButton;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup Plásticos_MalasGroup;
         private DevExpress.XtraBars.BarButtonItem VerRetrabajosButton;
+        private DevExpress.XtraBars.BarButtonItem CrearGastoFijoButton;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup Cuentas_FijosGroup;
+        private DevExpress.XtraBars.BarButtonItem VerCalculadoraButton;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup Cuentas_CalculadoraGroup;
+        private DevExpress.XtraBars.BarButtonItem VerGastosFijosButton;
     }
 }
 

@@ -240,6 +240,11 @@ namespace CZS_LaVictoria
 
         #region Cuentas
 
+        void CrearGastoFijoButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new GastosFijosForm());
+        }
+
         void VerPorPagarButton_ItemClick(object sender, ItemClickEventArgs e)
         {
             OpenChildForm(new PorPagarVerForm());
@@ -258,6 +263,11 @@ namespace CZS_LaVictoria
         void VerCobrosButton_ItemClick(object sender, ItemClickEventArgs e)
         {
             OpenChildForm(new PagosPorCobrarVerForm());
+        }
+
+        void VerCalculadoraButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenChildForm(new CalculadoraForm());
         }
 
         void VerPagosHechosButton_ItemClick(object sender, ItemClickEventArgs e)

@@ -226,6 +226,24 @@
     <Compile Include="AlgodónPage\ReporteProducciónAlgodónForm.Designer.cs">
       <DependentUpon>ReporteProducciónAlgodónForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CuentasPage\CalculadoraForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuentasPage\CalculadoraForm.Designer.cs">
+      <DependentUpon>CalculadoraForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CuentasPage\GastosFijosAgregarForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuentasPage\GastosFijosAgregarForm.Designer.cs">
+      <DependentUpon>GastosFijosAgregarForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CuentasPage\GastosFijosForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CuentasPage\GastosFijosForm.Designer.cs">
+      <DependentUpon>GastosFijosForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CuentasPage\PagosPorCobrarVerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -620,6 +638,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AlgodónPage\ReporteProducciónAlgodónForm.resx">
       <DependentUpon>ReporteProducciónAlgodónForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CuentasPage\CalculadoraForm.resx">
+      <DependentUpon>CalculadoraForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CuentasPage\GastosFijosAgregarForm.resx">
+      <DependentUpon>GastosFijosAgregarForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CuentasPage\GastosFijosForm.resx">
+      <DependentUpon>GastosFijosForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CuentasPage\PagosPorCobrarVerForm.resx">
       <DependentUpon>PagosPorCobrarVerForm.cs</DependentUpon>
