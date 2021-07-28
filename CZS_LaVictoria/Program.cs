@@ -12,7 +12,7 @@ namespace CZS_LaVictoria
         [STAThread]
         static void Main()
         {
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NDYyNTk5QDMxMzkyZTMxMmUzMFhYN3AzeWEwdVlZVUtvdDh6cjdMRXJQdlYxNTdaRko5NGsraFZMYVZ6M0U9");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NDgxMTM2QDMxMzkyZTMyMmUzMGZQRzdjU0lOdjZCRUxYcWE2K2JIUEl4aHFZN0lmRjBJUUJKTHhvUHBRNGc9");
 
             GlobalConfig.InitializeSql();
 
