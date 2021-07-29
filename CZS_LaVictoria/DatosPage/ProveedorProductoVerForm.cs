@@ -50,10 +50,10 @@ namespace CZS_LaVictoria.DatosPage
                     e.Column.AllowEditing = false;
                     break;
                 case "MaterialExterno":
-                    e.Column.HeaderText = "Nombre Proveedor";
+                    e.Column.HeaderText = "Material Proveedor";
                     break;
                 case "MaterialInterno":
-                    e.Column.HeaderText = "Nombre Interno";
+                    e.Column.HeaderText = "Material Interno";
                     e.Column.AutoSizeColumnsMode = AutoSizeColumnsMode.LastColumnFill;
                     break;
                 case "PrecioUnitario":
