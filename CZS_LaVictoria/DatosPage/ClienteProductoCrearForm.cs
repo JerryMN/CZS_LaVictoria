@@ -11,6 +11,7 @@ namespace CZS_LaVictoria.DatosPage
         public ClienteProductoCrearForm()
         {
             InitializeComponent();
+            GetMaterialInterno();
             GetAreas();
             if (GlobalConfig.Connection.CZS_GetLicencia()) return;
             MessageBox.Show(
@@ -32,7 +33,7 @@ namespace CZS_LaVictoria.DatosPage
                 return;
             }
 
-            var model = new ClienteProductoModel(ProductoInternoText.Text, PrecioUnitarioText.Text, AreaCombo.Text);
+            var model = new ClienteProductoModel(ProductoInternoCombo.Text, PrecioUnitarioText.Text, AreaCombo.Text);
 
             var saveSuccess = GlobalConfig.Connection.ClienteProducto_Create(model);
 
@@ -69,11 +70,17 @@ namespace CZS_LaVictoria.DatosPage
             foreach (var area in areas) AreaCombo.Items.Add(area);
         }
 
+        void GetMaterialInterno()
+        {
+            var materiales = GlobalConfig.Connection.Material_GetDistinct();
+            foreach (var material in materiales) ProductoInternoCombo.Items.Add(material);
+        }
+
         bool ValidateForm()
         {
             var output = true;
 
-            if (ProductoInternoText.Text == "")
+            if (ProductoInternoCombo.Text == "")
             {
                 output = false;
                 MsgBox.Text += "Ingresa el nombre del material.\n";

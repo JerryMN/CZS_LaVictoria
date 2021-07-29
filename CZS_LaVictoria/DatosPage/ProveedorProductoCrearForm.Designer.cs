@@ -35,7 +35,6 @@ namespace CZS_LaVictoria.DatosPage
             this.MaterialInternoLabel = new System.Windows.Forms.Label();
             this.PrecioUnitarioLabel = new System.Windows.Forms.Label();
             this.MaterialProveedorText = new System.Windows.Forms.TextBox();
-            this.MaterialInternoText = new System.Windows.Forms.TextBox();
             this.PrecioUnitarioText = new Syncfusion.Windows.Forms.Tools.CurrencyTextBox();
             this.ProveedorCombo = new System.Windows.Forms.ComboBox();
             this.MsgBox = new FontAwesome.Sharp.IconButton();
@@ -46,6 +45,7 @@ namespace CZS_LaVictoria.DatosPage
             this.SubtitleLabel = new System.Windows.Forms.Label();
             this.CategoríaLabel = new System.Windows.Forms.Label();
             this.CategoríaCombo = new System.Windows.Forms.ComboBox();
+            this.MaterialInternoCombo = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.PrecioUnitarioText)).BeginInit();
             this.SuspendLayout();
             // 
@@ -96,14 +96,6 @@ namespace CZS_LaVictoria.DatosPage
             this.MaterialProveedorText.Name = "MaterialProveedorText";
             this.MaterialProveedorText.Size = new System.Drawing.Size(250, 29);
             this.MaterialProveedorText.TabIndex = 4;
-            // 
-            // MaterialInternoText
-            // 
-            this.MaterialInternoText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MaterialInternoText.Location = new System.Drawing.Point(220, 297);
-            this.MaterialInternoText.Name = "MaterialInternoText";
-            this.MaterialInternoText.Size = new System.Drawing.Size(250, 29);
-            this.MaterialInternoText.TabIndex = 6;
             // 
             // PrecioUnitarioText
             // 
@@ -218,6 +210,17 @@ namespace CZS_LaVictoria.DatosPage
             this.CategoríaCombo.Size = new System.Drawing.Size(250, 29);
             this.CategoríaCombo.TabIndex = 12;
             // 
+            // MaterialInternoCombo
+            // 
+            this.MaterialInternoCombo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.MaterialInternoCombo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.MaterialInternoCombo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MaterialInternoCombo.FormattingEnabled = true;
+            this.MaterialInternoCombo.Location = new System.Drawing.Point(220, 297);
+            this.MaterialInternoCombo.Name = "MaterialInternoCombo";
+            this.MaterialInternoCombo.Size = new System.Drawing.Size(250, 29);
+            this.MaterialInternoCombo.TabIndex = 2;
+            // 
             // ProveedorProductoCrearForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -228,9 +231,9 @@ namespace CZS_LaVictoria.DatosPage
             this.Controls.Add(this.GuardarButton);
             this.Controls.Add(this.CategoríaCombo);
             this.Controls.Add(this.AreaCombo);
+            this.Controls.Add(this.MaterialInternoCombo);
             this.Controls.Add(this.ProveedorCombo);
             this.Controls.Add(this.PrecioUnitarioText);
-            this.Controls.Add(this.MaterialInternoText);
             this.Controls.Add(this.MaterialProveedorText);
             this.Controls.Add(this.CategoríaLabel);
             this.Controls.Add(this.PrecioUnitarioLabel);
@@ -256,7 +259,6 @@ namespace CZS_LaVictoria.DatosPage
         private System.Windows.Forms.Label MaterialInternoLabel;
         private System.Windows.Forms.Label PrecioUnitarioLabel;
         private System.Windows.Forms.TextBox MaterialProveedorText;
-        private System.Windows.Forms.TextBox MaterialInternoText;
         private Syncfusion.Windows.Forms.Tools.CurrencyTextBox PrecioUnitarioText;
         private System.Windows.Forms.ComboBox ProveedorCombo;
         private FontAwesome.Sharp.IconButton MsgBox;
@@ -267,5 +269,6 @@ namespace CZS_LaVictoria.DatosPage
         private System.Windows.Forms.Label SubtitleLabel;
         private System.Windows.Forms.Label CategoríaLabel;
         private System.Windows.Forms.ComboBox CategoríaCombo;
+        private System.Windows.Forms.ComboBox MaterialInternoCombo;
     }
 }

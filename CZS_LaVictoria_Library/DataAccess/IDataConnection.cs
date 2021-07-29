@@ -282,6 +282,12 @@ namespace CZS_LaVictoria_Library.DataAccess
         List<string> Material_GetDistinctCategorías();
 
         /// <summary>
+        ///     Obtiene el nombre de los distintos materiales o productos en el inventario.
+        /// </summary>
+        /// <returns>Una lista con los nombres.</returns>
+        List<string> Material_GetDistinct();
+
+        /// <summary>
         ///     Actualiza un material o producto en el inventario.
         /// </summary>
         /// <param name="model">Un modelo con las propiedades del material o producto.</param>

@@ -12,6 +12,7 @@ namespace CZS_LaVictoria.DatosPage
         {
             InitializeComponent();
             GetProveedores();
+            GetMaterialInterno();
             GetAreas();
             GetCategorías();
             if (GlobalConfig.Connection.CZS_GetLicencia()) return;
@@ -34,7 +35,7 @@ namespace CZS_LaVictoria.DatosPage
                 return;
             }
 
-            var model = new ProveedorProductoModel(MaterialProveedorText.Text, MaterialInternoText.Text,
+            var model = new ProveedorProductoModel(MaterialProveedorText.Text, MaterialInternoCombo.Text,
                 PrecioUnitarioText.Text, AreaCombo.Text, CategoríaCombo.Text);
             var proveedor = (ProveedorModel) ProveedorCombo.SelectedItem;
             var saveSuccess = GlobalConfig.Connection.ProveedorProducto_Create(model, proveedor);
@@ -42,6 +43,8 @@ namespace CZS_LaVictoria.DatosPage
             if (saveSuccess)
             {
                 Tools.ClearForm(this);
+                GetMaterialInterno();
+                GetCategorías();
                 MsgBox.Text = $"Material {model.MaterialExterno} del proveedor {proveedor.Nombre} guardado con éxito.";
                 MsgBox.IconColor = Color.DarkGreen;
             }
@@ -73,6 +76,12 @@ namespace CZS_LaVictoria.DatosPage
             foreach (var proveedor in proveedores) ProveedorCombo.Items.Add(proveedor);
 
             ProveedorCombo.DisplayMember = "Nombre";
+        }
+
+        void GetMaterialInterno()
+        {
+            var materiales = GlobalConfig.Connection.Material_GetDistinct();
+            foreach (var material in materiales) MaterialInternoCombo.Items.Add(material);
         }
 
         void GetAreas()
@@ -107,7 +116,7 @@ namespace CZS_LaVictoria.DatosPage
                 MsgBox.Text += "Ingresa el nombre del material (proveedor).\n";
             }
 
-            if (MaterialInternoText.Text == "")
+            if (MaterialInternoCombo.Text == "")
             {
                 output = false;
                 MsgBox.Text += "Ingresa el nombre del material (interno).\n";

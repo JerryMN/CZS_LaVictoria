@@ -34,12 +34,12 @@ namespace CZS_LaVictoria.DatosPage
             this.GuardarButton = new System.Windows.Forms.Button();
             this.AreaCombo = new System.Windows.Forms.ComboBox();
             this.PrecioUnitarioText = new Syncfusion.Windows.Forms.Tools.CurrencyTextBox();
-            this.ProductoInternoText = new System.Windows.Forms.TextBox();
             this.PrecioUnitarioLabel = new System.Windows.Forms.Label();
             this.AreaLabel = new System.Windows.Forms.Label();
             this.ProductoInternoLabel = new System.Windows.Forms.Label();
             this.MsgBoxTimer = new System.Windows.Forms.Timer(this.components);
             this.SubtitleLabel = new System.Windows.Forms.Label();
+            this.ProductoInternoCombo = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.PrecioUnitarioText)).BeginInit();
             this.SuspendLayout();
             // 
@@ -100,14 +100,6 @@ namespace CZS_LaVictoria.DatosPage
             this.PrecioUnitarioText.TabIndex = 6;
             this.PrecioUnitarioText.Text = "$0.00";
             // 
-            // ProductoInternoText
-            // 
-            this.ProductoInternoText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ProductoInternoText.Location = new System.Drawing.Point(220, 147);
-            this.ProductoInternoText.Name = "ProductoInternoText";
-            this.ProductoInternoText.Size = new System.Drawing.Size(250, 29);
-            this.ProductoInternoText.TabIndex = 4;
-            // 
             // PrecioUnitarioLabel
             // 
             this.PrecioUnitarioLabel.AutoSize = true;
@@ -153,17 +145,28 @@ namespace CZS_LaVictoria.DatosPage
             this.SubtitleLabel.TabIndex = 0;
             this.SubtitleLabel.Text = "Crear Producto para Cliente";
             // 
+            // ProductoInternoCombo
+            // 
+            this.ProductoInternoCombo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.ProductoInternoCombo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.ProductoInternoCombo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProductoInternoCombo.FormattingEnabled = true;
+            this.ProductoInternoCombo.Location = new System.Drawing.Point(220, 147);
+            this.ProductoInternoCombo.Name = "ProductoInternoCombo";
+            this.ProductoInternoCombo.Size = new System.Drawing.Size(250, 29);
+            this.ProductoInternoCombo.TabIndex = 11;
+            // 
             // ClienteProductoCrearForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1276, 839);
+            this.Controls.Add(this.ProductoInternoCombo);
             this.Controls.Add(this.SubtitleLabel);
             this.Controls.Add(this.MsgBox);
             this.Controls.Add(this.GuardarButton);
             this.Controls.Add(this.AreaCombo);
             this.Controls.Add(this.PrecioUnitarioText);
-            this.Controls.Add(this.ProductoInternoText);
             this.Controls.Add(this.PrecioUnitarioLabel);
             this.Controls.Add(this.AreaLabel);
             this.Controls.Add(this.ProductoInternoLabel);
@@ -184,11 +187,11 @@ namespace CZS_LaVictoria.DatosPage
         private System.Windows.Forms.Button GuardarButton;
         private System.Windows.Forms.ComboBox AreaCombo;
         private Syncfusion.Windows.Forms.Tools.CurrencyTextBox PrecioUnitarioText;
-        private System.Windows.Forms.TextBox ProductoInternoText;
         private System.Windows.Forms.Label PrecioUnitarioLabel;
         private System.Windows.Forms.Label AreaLabel;
         private System.Windows.Forms.Label ProductoInternoLabel;
         private System.Windows.Forms.Timer MsgBoxTimer;
         private System.Windows.Forms.Label SubtitleLabel;
+        private System.Windows.Forms.ComboBox ProductoInternoCombo;
     }
 }

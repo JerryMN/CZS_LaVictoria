@@ -832,6 +832,25 @@ namespace CZS_LaVictoria_Library.DataAccess
             }
         }
 
+        public List<string> Material_GetDistinct()
+        {
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    var output = connection.Query<string>("dbo.spStock_GetDistinct").ToList();
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    if (ex.Message == "Sequence contains no elements") return null;
+                    Debug.WriteLine(ex.ToString());
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
+        }
+
         public bool Material_Update(MaterialModel model)
         {
             using (IDbConnection connection = new SqlConnection(connectionString))
