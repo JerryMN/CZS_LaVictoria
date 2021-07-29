@@ -18,7 +18,6 @@ namespace CZS_LaVictoria
     public partial class MainMenuForm : RibbonForm
     {
         Form _currentChildForm;
-        bool _validLicense;
 
         public MainMenuForm()
         {
@@ -27,7 +26,7 @@ namespace CZS_LaVictoria
 
         void MainMenuForm_Load(object sender, EventArgs e)
         {
-            _validLicense = GlobalConfig.Connection.CZS_GetLicencia();
+            var licencia = GlobalConfig.Connection.CZS_SelectLicencia();
             var op = new FluentSplashScreenOptions
             {
                 Title = "Escobas La Victoria",
@@ -43,11 +42,20 @@ namespace CZS_LaVictoria
             Thread.Sleep(3000);
             SplashScreenManager.CloseForm();
 
-            if (_validLicense) return;
-            MessageBox.Show(
-                "No se puede verificar la licencia. Verifica el estatus de la misma y verifica tu conexión a internet.",
-                "Error de licencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            Application.Exit();
+            var días = (licencia.SigPago - DateTime.Today).TotalDays;
+            if (días <= 15)
+            {
+                MessageBox.Show($"La licencia caducará el {licencia.SigPago:dd/MMM/yyyy} (en {días} día(s)).",
+                    "Aviso de licencia",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (!licencia.Habilitado)
+            {
+                MessageBox.Show(
+                    "No se puede verificar la licencia. Verifica el estatus de la misma y verifica tu conexión a internet.",
+                    "Error de licencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
         }
 
         /// <summary>

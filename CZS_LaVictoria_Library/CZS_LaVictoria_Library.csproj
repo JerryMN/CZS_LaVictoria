@@ -56,6 +56,7 @@
     <Compile Include="Models\GastoFijoModel.cs" />
     <Compile Include="Models\HistorialModel.cs" />
     <Compile Include="Models\KitModel.cs" />
+    <Compile Include="Models\LicenciaModel.cs" />
     <Compile Include="Models\MaterialModel.cs" />
     <Compile Include="Models\MezclaModel.cs" />
     <Compile Include="Models\OperadorModel.cs" />

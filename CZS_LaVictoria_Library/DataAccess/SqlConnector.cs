@@ -21,6 +21,28 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         #region Licencia
 
+        public LicenciaModel CZS_SelectLicencia()
+        {
+            DefaultTypeMap.MatchNamesWithUnderscores = true;
+            using (IDbConnection connection = new SqlConnection(MasterString))
+            {
+                try
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@Empresa", "Escobas La Victoria");
+                    var output = connection.QuerySingle<LicenciaModel>("dbo.spLicencias_Select", p,
+                        commandType: CommandType.StoredProcedure);
+                    return output;
+                }
+                catch (Exception ex)
+                {
+                    Debug.Write(ex.ToString());
+                    Debug.Assert(false);
+                    return null;
+                }
+            }
+        }
+
         public bool CZS_GetLicencia()
         {
             using (IDbConnection connection = new SqlConnection(MasterString))

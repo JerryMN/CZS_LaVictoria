@@ -8,6 +8,8 @@ namespace CZS_LaVictoria_Library.DataAccess
     {
         #region Licencia
 
+        LicenciaModel CZS_SelectLicencia();
+
         bool CZS_GetLicencia();
 
         #endregion
