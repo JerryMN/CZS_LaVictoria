@@ -1,18 +1,26 @@
 ﻿using System;
 using System.Drawing;
+using System.Globalization;
 using System.Windows.Forms;
 using CZS_LaVictoria_Library;
 using CZS_LaVictoria_Library.Models;
 
 namespace CZS_LaVictoria.ÓrdenesPage
 {
-    public partial class InventarioCrearForm : Form
+    public partial class InventarioEditarForm : Form
     {
-        public InventarioCrearForm()
+        readonly MaterialModel _material;
+        double _cantidad;
+
+        public InventarioEditarForm(MaterialModel material)
         {
             InitializeComponent();
-            GetAreas();
             GetCategorías();
+            _material = material;
+            MaterialText.Text = _material.Nombre;
+            AreaText.Text = _material.Área;
+            CategoríaCombo.Text = _material.Categoría;
+            CantidadText.Text = _material.CantidadDisponible.ToString(CultureInfo.InvariantCulture);
         }
 
         #region Events
@@ -28,19 +36,21 @@ namespace CZS_LaVictoria.ÓrdenesPage
                 return;
             }
 
-            var material = new MaterialModel(MaterialText.Text, AreaCombo.Text, CategoríaCombo.Text, CantidadText.Text);
-            var saveSuccess = GlobalConfig.Connection.Material_Create(material);
+            _material.Categoría = CategoríaCombo.Text;
+            _material.CantidadDisponible = _cantidad;
+
+            var saveSuccess = GlobalConfig.Connection.Material_Update(_material);
 
             if (saveSuccess)
             {
-                MsgBox.Text = $"{MaterialText.Text} guardado en inventario";
+                MsgBox.Text = $"{MaterialText.Text} actualizado";
                 MsgBox.IconColor = Color.DarkGreen;
                 Tools.ClearForm(this);
                 CantidadText.Text = "0";
             }
             else
             {
-                MsgBox.Text = $"Ocurrió un error al guardar {MaterialText.Text}";
+                MsgBox.Text = $"Ocurrió un error al actualizar {MaterialText.Text}";
                 MsgBox.IconColor = Color.DarkRed;
             }
 
@@ -52,18 +62,12 @@ namespace CZS_LaVictoria.ÓrdenesPage
         {
             MsgBoxTimer.Stop();
             MsgBox.Visible = false;
+            Dispose();
         }
 
         #endregion
 
         #region Methods
-
-        void GetAreas()
-        {
-            var areas = GlobalConfig.Connection.Area_GetDistinct();
-
-            foreach (var area in areas) AreaCombo.Items.Add(area);
-        }
 
         void GetCategorías()
         {
@@ -78,25 +82,13 @@ namespace CZS_LaVictoria.ÓrdenesPage
         {
             var output = true;
 
-            if (MaterialText.Text == "")
-            {
-                output = false;
-                MsgBox.Text += "Ingresa el nombre del material.\n";
-            }
-
-            if (AreaCombo.Text == "")
-            {
-                output = false;
-                MsgBox.Text += "Selecciona un área.\n";
-            }
-
             if (CategoríaCombo.Text == "")
             {
                 output = false;
                 MsgBox.Text += "Ingresa una categoría.\n";
             }
 
-            if (CantidadText.Text == "0.00")
+            if (CantidadText.Text == "0.00" || !double.TryParse(CantidadText.Text.Replace(",", ""), out _cantidad))
             {
                 output = false;
                 MsgBox.Text += "Ingresa la cantidad en inventario.\n";

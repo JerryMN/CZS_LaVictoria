@@ -878,6 +878,7 @@ namespace CZS_LaVictoria_Library.DataAccess
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
                 var p = new DynamicParameters();
+                p.Add("@Categoría", model.Categoría);
                 p.Add("@CantidadDisponible", model.CantidadDisponible);
                 p.Add("@Id", model.Id);
 

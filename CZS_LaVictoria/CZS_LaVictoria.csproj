@@ -168,6 +168,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -557,6 +558,12 @@
     <Compile Include="ÓrdenesPage\InventarioCrearForm.Designer.cs">
       <DependentUpon>InventarioCrearForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ÓrdenesPage\InventarioEditarForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ÓrdenesPage\InventarioEditarForm.Designer.cs">
+      <DependentUpon>InventarioEditarForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ÓrdenesPage\InventarioVerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -816,6 +823,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ÓrdenesPage\InventarioCrearForm.resx">
       <DependentUpon>InventarioCrearForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ÓrdenesPage\InventarioEditarForm.resx">
+      <DependentUpon>InventarioEditarForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ÓrdenesPage\InventarioVerForm.resx">
       <DependentUpon>InventarioVerForm.cs</DependentUpon>
