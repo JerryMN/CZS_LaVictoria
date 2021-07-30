@@ -81,7 +81,7 @@ namespace CZS_LaVictoria.PlásticosPage
                 return;
             }
 
-            MermaRealText.Text = mermaFinal.ToString(CultureInfo.InvariantCulture);
+            MermaRealText.Text = mermaFinal.ToString(CultureInfo.CurrentUICulture);
             MsgBox.Text = "Cantidades válidas.";
             MsgBox.IconColor = Color.DarkGreen;
             MsgBox.Visible = true;

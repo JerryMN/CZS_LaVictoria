@@ -37,7 +37,7 @@ namespace CZS_LaVictoria.DatosPage
 
             foreach (var cantidad in _selectedModel?.Cantidades) CantidadesListBox.Items.Add(cantidad);
 
-            CantidadText.Text = _selectedModel.CantidadMezcla.ToString(CultureInfo.InvariantCulture);
+            CantidadText.Text = _selectedModel.CantidadMezcla.ToString(CultureInfo.CurrentUICulture);
         }
 
         void EliminarButton_Click(object sender, EventArgs e)

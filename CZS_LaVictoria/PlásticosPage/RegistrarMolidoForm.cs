@@ -49,7 +49,7 @@ namespace CZS_LaVictoria.PlásticosPage
             double.TryParse(CantidadEntradaText.Text.Replace(",", ""), out _cantidadEntrada);
             double.TryParse(CantidadSalidaText.Text.Replace(",", ""), out _cantidadSalida);
             _merma = _cantidadEntrada - _cantidadSalida;
-            MermaText.Text = _merma <= 0 ? "0.00" : _merma.ToString(CultureInfo.InvariantCulture);
+            MermaText.Text = _merma <= 0 ? "0.00" : _merma.ToString(CultureInfo.CurrentUICulture);
         }
 
         void GuardarButton_Click(object sender, EventArgs e)

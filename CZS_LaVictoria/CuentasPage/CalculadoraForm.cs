@@ -29,7 +29,7 @@ namespace CZS_LaVictoria.CuentasPage
         {
             _egreso = decimal.Parse(EgresosText.Text.Replace("$", "").Replace(",", ""));
             _ingreso = decimal.Parse(IngresosText.Text.Replace("$", "").Replace(",", ""));
-            ProductividadText.Text = (_ingreso / _egreso).ToString(CultureInfo.InvariantCulture);
+            ProductividadText.Text = (_ingreso / _egreso).ToString(CultureInfo.CurrentUICulture);
             _piezas = int.Parse(PiezasText.Text.Replace(",", ""));
             if (_piezas == 0)
             {
@@ -38,8 +38,8 @@ namespace CZS_LaVictoria.CuentasPage
             }
             else
             {
-                CostoText.Text = (_egreso / _piezas).ToString(CultureInfo.InvariantCulture);
-                GananciaText.Text = (_ingreso / _piezas).ToString(CultureInfo.InvariantCulture);
+                CostoText.Text = (_egreso / _piezas).ToString(CultureInfo.CurrentUICulture);
+                GananciaText.Text = (_ingreso / _piezas).ToString(CultureInfo.CurrentUICulture);
             }
         }
 
@@ -52,7 +52,7 @@ namespace CZS_LaVictoria.CuentasPage
                     (DateTime) HastaPicker.Value);
             _ingreso = ingresos.Sum(model => model.Pago);
 
-            IngresosText.Text = _ingreso.ToString(CultureInfo.InvariantCulture);
+            IngresosText.Text = _ingreso.ToString(CultureInfo.CurrentUICulture);
         }
 
         void GetEgresos()
@@ -63,7 +63,7 @@ namespace CZS_LaVictoria.CuentasPage
                 GlobalConfig.Connection.Payable_GetPagosByDate((DateTime) DesdePicker.Value,
                     (DateTime) HastaPicker.Value);
             _egreso = egresos.Sum(model => model.Pago);
-            EgresosText.Text = _egreso.ToString(CultureInfo.InvariantCulture);
+            EgresosText.Text = _egreso.ToString(CultureInfo.CurrentUICulture);
         }
     }
 }

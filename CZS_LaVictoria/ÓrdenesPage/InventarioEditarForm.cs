@@ -20,7 +20,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             MaterialText.Text = _material.Nombre;
             AreaText.Text = _material.Área;
             CategoríaCombo.Text = _material.Categoría;
-            CantidadText.Text = _material.CantidadDisponible.ToString(CultureInfo.InvariantCulture);
+            CantidadText.Text = _material.CantidadDisponible.ToString(CultureInfo.CurrentUICulture);
         }
 
         #region Events
