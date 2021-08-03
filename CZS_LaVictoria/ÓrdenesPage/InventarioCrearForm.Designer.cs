@@ -87,6 +87,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             // 
             this.CategoríaCombo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.CategoríaCombo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.CategoríaCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CategoríaCombo.FormattingEnabled = true;
             this.CategoríaCombo.Location = new System.Drawing.Point(142, 129);
             this.CategoríaCombo.Name = "CategoríaCombo";

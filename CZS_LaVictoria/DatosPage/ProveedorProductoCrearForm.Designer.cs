@@ -201,8 +201,7 @@ namespace CZS_LaVictoria.DatosPage
             // 
             // CategoríaCombo
             // 
-            this.CategoríaCombo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.CategoríaCombo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.CategoríaCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CategoríaCombo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CategoríaCombo.FormattingEnabled = true;
             this.CategoríaCombo.Location = new System.Drawing.Point(220, 447);

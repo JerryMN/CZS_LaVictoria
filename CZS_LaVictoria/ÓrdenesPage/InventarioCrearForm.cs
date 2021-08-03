@@ -67,11 +67,13 @@ namespace CZS_LaVictoria.ÓrdenesPage
 
         void GetCategorías()
         {
-            var categorías = GlobalConfig.Connection.Material_GetDistinctCategorías();
+            CategoríaCombo.Items.AddRange(new object[]
+            {
+                "Por Moler", "Molido", "Alambre", "Algodón Sucio", "Bases", "Caja", "Cortado", "Extruido",
+                "Producto Terminado"
+            });
 
-            foreach (var categoría in categorías)
-                if (categoría != null)
-                    CategoríaCombo.Items.Add(categoría);
+            CategoríaCombo.Sorted = true;
         }
 
         bool ValidateForm()
