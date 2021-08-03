@@ -142,6 +142,7 @@ namespace CZS_LaVictoria.DatosPage
             this.TeléfonoText.Name = "TeléfonoText";
             this.TeléfonoText.Size = new System.Drawing.Size(250, 29);
             this.TeléfonoText.TabIndex = 4;
+            this.TeléfonoText.Click += new System.EventHandler(this.TeléfonoText_Enter);
             this.TeléfonoText.Enter += new System.EventHandler(this.TeléfonoText_Enter);
             // 
             // GuardarButton
