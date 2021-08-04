@@ -95,8 +95,8 @@ namespace CZS_LaVictoria.DatosPage
         {
             CategoríaCombo.Items.AddRange(new object[]
             {
-                "Por Moler", "Molido", "Alambre", "Algodón Sucio", "Bases", "Caja", "Cortado", "Extruido",
-                "Producto Terminado"
+                "Alambre", "Algodón Sucio", "Bases", "Caja", "Cortado", "Enrollado", "Extruido",
+                "Molido", "Piezas Malas", "Por Moler", "Producto Terminado"
             });
 
             CategoríaCombo.Sorted = true;
