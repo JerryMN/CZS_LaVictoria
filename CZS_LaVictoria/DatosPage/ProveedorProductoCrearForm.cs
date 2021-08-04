@@ -43,8 +43,8 @@ namespace CZS_LaVictoria.DatosPage
             if (saveSuccess)
             {
                 Tools.ClearForm(this);
+                PrecioUnitarioText.Text = "0.00";
                 GetMaterialInterno();
-                GetCategorías();
                 MsgBox.Text = $"Material {model.MaterialExterno} del proveedor {proveedor.Nombre} guardado con éxito.";
                 MsgBox.IconColor = Color.DarkGreen;
             }

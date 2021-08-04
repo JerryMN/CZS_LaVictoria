@@ -20,5 +20,7 @@
         public string ProductoInterno { get; set; }
         public decimal PrecioUnitario { get; set; }
         public string Área { get; set; }
+        public int IdClient { get; set; }
+        public string Cliente { get; set; }
     }
 }

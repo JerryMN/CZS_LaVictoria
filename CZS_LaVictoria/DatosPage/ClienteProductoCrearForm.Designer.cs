@@ -40,6 +40,8 @@ namespace CZS_LaVictoria.DatosPage
             this.MsgBoxTimer = new System.Windows.Forms.Timer(this.components);
             this.SubtitleLabel = new System.Windows.Forms.Label();
             this.ProductoInternoCombo = new System.Windows.Forms.ComboBox();
+            this.ClienteCombo = new System.Windows.Forms.ComboBox();
+            this.ClienteLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PrecioUnitarioText)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,7 +55,7 @@ namespace CZS_LaVictoria.DatosPage
             this.MsgBox.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.MsgBox.IconSize = 32;
             this.MsgBox.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.MsgBox.Location = new System.Drawing.Point(50, 350);
+            this.MsgBox.Location = new System.Drawing.Point(50, 450);
             this.MsgBox.Name = "MsgBox";
             this.MsgBox.Size = new System.Drawing.Size(420, 150);
             this.MsgBox.TabIndex = 10;
@@ -67,7 +69,7 @@ namespace CZS_LaVictoria.DatosPage
             // 
             this.GuardarButton.AutoSize = true;
             this.GuardarButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GuardarButton.Location = new System.Drawing.Point(392, 300);
+            this.GuardarButton.Location = new System.Drawing.Point(392, 400);
             this.GuardarButton.Name = "GuardarButton";
             this.GuardarButton.Size = new System.Drawing.Size(78, 31);
             this.GuardarButton.TabIndex = 9;
@@ -80,7 +82,7 @@ namespace CZS_LaVictoria.DatosPage
             this.AreaCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.AreaCombo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AreaCombo.FormattingEnabled = true;
-            this.AreaCombo.Location = new System.Drawing.Point(220, 247);
+            this.AreaCombo.Location = new System.Drawing.Point(220, 347);
             this.AreaCombo.Name = "AreaCombo";
             this.AreaCombo.Size = new System.Drawing.Size(250, 29);
             this.AreaCombo.TabIndex = 8;
@@ -94,7 +96,7 @@ namespace CZS_LaVictoria.DatosPage
             0,
             131072});
             this.PrecioUnitarioText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PrecioUnitarioText.Location = new System.Drawing.Point(220, 197);
+            this.PrecioUnitarioText.Location = new System.Drawing.Point(220, 297);
             this.PrecioUnitarioText.Name = "PrecioUnitarioText";
             this.PrecioUnitarioText.Size = new System.Drawing.Size(250, 29);
             this.PrecioUnitarioText.TabIndex = 6;
@@ -104,7 +106,7 @@ namespace CZS_LaVictoria.DatosPage
             // 
             this.PrecioUnitarioLabel.AutoSize = true;
             this.PrecioUnitarioLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PrecioUnitarioLabel.Location = new System.Drawing.Point(50, 200);
+            this.PrecioUnitarioLabel.Location = new System.Drawing.Point(50, 300);
             this.PrecioUnitarioLabel.Name = "PrecioUnitarioLabel";
             this.PrecioUnitarioLabel.Size = new System.Drawing.Size(120, 21);
             this.PrecioUnitarioLabel.TabIndex = 5;
@@ -114,7 +116,7 @@ namespace CZS_LaVictoria.DatosPage
             // 
             this.AreaLabel.AutoSize = true;
             this.AreaLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AreaLabel.Location = new System.Drawing.Point(50, 250);
+            this.AreaLabel.Location = new System.Drawing.Point(50, 350);
             this.AreaLabel.Name = "AreaLabel";
             this.AreaLabel.Size = new System.Drawing.Size(102, 21);
             this.AreaLabel.TabIndex = 7;
@@ -124,7 +126,7 @@ namespace CZS_LaVictoria.DatosPage
             // 
             this.ProductoInternoLabel.AutoSize = true;
             this.ProductoInternoLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ProductoInternoLabel.Location = new System.Drawing.Point(50, 150);
+            this.ProductoInternoLabel.Location = new System.Drawing.Point(50, 250);
             this.ProductoInternoLabel.Name = "ProductoInternoLabel";
             this.ProductoInternoLabel.Size = new System.Drawing.Size(134, 21);
             this.ProductoInternoLabel.TabIndex = 3;
@@ -151,16 +153,38 @@ namespace CZS_LaVictoria.DatosPage
             this.ProductoInternoCombo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.ProductoInternoCombo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ProductoInternoCombo.FormattingEnabled = true;
-            this.ProductoInternoCombo.Location = new System.Drawing.Point(220, 147);
+            this.ProductoInternoCombo.Location = new System.Drawing.Point(220, 247);
             this.ProductoInternoCombo.Name = "ProductoInternoCombo";
             this.ProductoInternoCombo.Size = new System.Drawing.Size(250, 29);
             this.ProductoInternoCombo.TabIndex = 11;
+            // 
+            // ClienteCombo
+            // 
+            this.ClienteCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ClienteCombo.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ClienteCombo.FormattingEnabled = true;
+            this.ClienteCombo.Location = new System.Drawing.Point(220, 147);
+            this.ClienteCombo.Name = "ClienteCombo";
+            this.ClienteCombo.Size = new System.Drawing.Size(250, 29);
+            this.ClienteCombo.TabIndex = 13;
+            // 
+            // ClienteLabel
+            // 
+            this.ClienteLabel.AutoSize = true;
+            this.ClienteLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ClienteLabel.Location = new System.Drawing.Point(50, 150);
+            this.ClienteLabel.Name = "ClienteLabel";
+            this.ClienteLabel.Size = new System.Drawing.Size(65, 21);
+            this.ClienteLabel.TabIndex = 12;
+            this.ClienteLabel.Text = "Cliente*";
             // 
             // ClienteProductoCrearForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1276, 839);
+            this.Controls.Add(this.ClienteCombo);
+            this.Controls.Add(this.ClienteLabel);
             this.Controls.Add(this.ProductoInternoCombo);
             this.Controls.Add(this.SubtitleLabel);
             this.Controls.Add(this.MsgBox);
@@ -193,5 +217,7 @@ namespace CZS_LaVictoria.DatosPage
         private System.Windows.Forms.Timer MsgBoxTimer;
         private System.Windows.Forms.Label SubtitleLabel;
         private System.Windows.Forms.ComboBox ProductoInternoCombo;
+        private System.Windows.Forms.ComboBox ClienteCombo;
+        private System.Windows.Forms.Label ClienteLabel;
     }
 }

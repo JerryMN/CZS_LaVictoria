@@ -11,6 +11,7 @@ namespace CZS_LaVictoria.DatosPage
         public ClienteProductoCrearForm()
         {
             InitializeComponent();
+            GetClientes();
             GetMaterialInterno();
             GetAreas();
             if (GlobalConfig.Connection.CZS_GetLicencia()) return;
@@ -34,12 +35,13 @@ namespace CZS_LaVictoria.DatosPage
             }
 
             var model = new ClienteProductoModel(ProductoInternoCombo.Text, PrecioUnitarioText.Text, AreaCombo.Text);
-
-            var saveSuccess = GlobalConfig.Connection.ClienteProducto_Create(model);
+            var cliente = (ClienteModel) ClienteCombo.SelectedItem;
+            var saveSuccess = GlobalConfig.Connection.ClienteProducto_Create(model, cliente);
 
             if (saveSuccess)
             {
                 Tools.ClearForm(this);
+                PrecioUnitarioText.Text = "0.00";
                 MsgBox.Text = $"Producto {model.ProductoInterno} guardado con éxito.";
                 MsgBox.IconColor = Color.DarkGreen;
             }
@@ -63,6 +65,15 @@ namespace CZS_LaVictoria.DatosPage
 
         #region Methods
 
+        void GetClientes()
+        {
+            var clientes = GlobalConfig.Connection.Cliente_GetAll();
+
+            foreach (var cliente in clientes) ClienteCombo.Items.Add(cliente);
+
+            ClienteCombo.DisplayMember = "Nombre";
+        }
+
         void GetAreas()
         {
             var areas = GlobalConfig.Connection.Area_GetDistinct();
@@ -79,6 +90,12 @@ namespace CZS_LaVictoria.DatosPage
         bool ValidateForm()
         {
             var output = true;
+
+            if (ClienteCombo.Text == "")
+            {
+                output = false;
+                MsgBox.Text += "Selecciona un cliente.\n";
+            }
 
             if (ProductoInternoCombo.Text == "")
             {

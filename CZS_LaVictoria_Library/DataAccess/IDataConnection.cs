@@ -188,8 +188,9 @@ namespace CZS_LaVictoria_Library.DataAccess
         ///     Crea un producto a comercializar.
         /// </summary>
         /// <param name="model">Un modelo con las propiedades del producto.</param>
+        /// <param name="cliente">Un modelo con las propiedades del cliente.</param>
         /// <returns>True, si se creó correctamente, falso si no.</returns>
-        bool ClienteProducto_Create(ClienteProductoModel model);
+        bool ClienteProducto_Create(ClienteProductoModel model, ClienteModel cliente);
 
         /// <summary>
         ///     Obtiene todos los productos con o sin cliente.

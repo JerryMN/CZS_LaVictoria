@@ -562,7 +562,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         #region ClienteProducto
 
-        public bool ClienteProducto_Create(ClienteProductoModel model)
+        public bool ClienteProducto_Create(ClienteProductoModel model, ClienteModel cliente)
         {
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
@@ -570,6 +570,8 @@ namespace CZS_LaVictoria_Library.DataAccess
                 p.Add("@ProductoInterno", model.ProductoInterno);
                 p.Add("@PrecioUnitario", model.PrecioUnitario);
                 p.Add("@Area", model.Área);
+                p.Add("@IdClient", cliente.Id);
+                p.Add("@Cliente", cliente.Nombre);
 
                 try
                 {
