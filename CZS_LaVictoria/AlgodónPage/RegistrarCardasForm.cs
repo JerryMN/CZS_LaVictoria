@@ -11,6 +11,7 @@ namespace CZS_LaVictoria.AlgodónPage
     public partial class RegistrarCardasForm : Form
     {
         double _cantidadSalida;
+        double _merma;
 
         public RegistrarCardasForm()
         {
@@ -45,6 +46,7 @@ namespace CZS_LaVictoria.AlgodónPage
             orden.MaterialEntra = "Algodón Limpio";
             orden.MaterialSale = "Tambos Grandes";
             orden.CantidadSale = _cantidadSalida;
+            orden.Merma = _merma;
 
             var saveSuccess = GlobalConfig.Connection.WoolProduction_CreateCardas(orden);
 
@@ -118,6 +120,12 @@ namespace CZS_LaVictoria.AlgodónPage
             {
                 output = false;
                 MsgBox.Text += "Ingresa la cantidad de tambos grandes.\n";
+            }
+
+            if (!double.TryParse(MermaText.Text.Replace(",", ""), out _merma))
+            {
+                output = false;
+                MsgBox.Text += "Ingresa la merma como un número.\n";
             }
 
             return output;
