@@ -10,9 +10,7 @@ namespace CZS_LaVictoria.TrapeadoresPage
 {
     public partial class RegistrarTrapeadoresForm : Form
     {
-        double _cantidadAlambre;
         int _cantidadKit;
-        MaterialModel _selectedAlambre = new MaterialModel();
         KitModel _selectedKit = new KitModel();
 
 
@@ -32,11 +30,6 @@ namespace CZS_LaVictoria.TrapeadoresPage
 
         #region Events
 
-        void AlambreCombo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            _selectedAlambre = (MaterialModel) AlambreCombo.SelectedItem;
-        }
-
         void InputOutputChanged(object sender, EventArgs e)
         {
             GuardarButton.Enabled = false;
@@ -51,15 +44,6 @@ namespace CZS_LaVictoria.TrapeadoresPage
                 MsgBox.Visible = true;
                 return;
             }
-
-            if (_selectedAlambre.Id != 0)
-                if (_cantidadAlambre > _selectedAlambre.CantidadDisponible)
-                {
-                    MsgBox.Text =
-                        $"El alambre no se puede seleccionar. Cantidad disponible: {_selectedAlambre.CantidadDisponible:N}.";
-                    MsgBox.Visible = true;
-                    return;
-                }
 
             _selectedKit = (KitModel) SalidaCombo.SelectedItem;
 
@@ -93,12 +77,10 @@ namespace CZS_LaVictoria.TrapeadoresPage
             orden.Turno = int.Parse(TurnoText.Text);
             orden.Máquina = MáquinaCombo.Text;
             orden.Operador = OperadorCombo.Text;
-            orden.Alambre = _selectedAlambre.Nombre;
-            orden.CantidadAlambre = _cantidadAlambre;
             orden.Kit = _selectedKit.Nombre;
             orden.CantidadKit = _cantidadKit;
 
-            var saveSuccess = GlobalConfig.Connection.MopProduction_Create(orden, _selectedAlambre, _selectedKit);
+            var saveSuccess = GlobalConfig.Connection.MopProduction_Create(orden, _selectedKit);
 
             if (saveSuccess)
             {
@@ -144,13 +126,8 @@ namespace CZS_LaVictoria.TrapeadoresPage
 
         void FillComboBoxes()
         {
-            AlambreCombo.Items.Clear();
             SalidaCombo.Items.Clear();
-            AlambreCombo.DisplayMember = "Nombre";
             SalidaCombo.DisplayMember = "Nombre";
-
-            var alambres = GlobalConfig.Connection.Material_GetByCat("Alambre");
-            foreach (var alambre in alambres) AlambreCombo.Items.Add(alambre);
 
             var kits = GlobalConfig.Connection.Kit_GetAll();
             foreach (var kit in kits) SalidaCombo.Items.Add(kit);
@@ -179,13 +156,6 @@ namespace CZS_LaVictoria.TrapeadoresPage
                 MsgBox.Text += "Selecciona un turno.\n";
             }
 
-            if (AlambreCombo.Text != "")
-                if (CantidadAlambreText.Text == "0" || !double.TryParse(CantidadAlambreText.Text, out _cantidadAlambre))
-                {
-                    output = false;
-                    MsgBox.Text += "Ingresa la cantidad de rollos de alambre.\n";
-                }
-
             if (SalidaCombo.Text == "")
             {
                 output = false;
@@ -206,7 +176,6 @@ namespace CZS_LaVictoria.TrapeadoresPage
         {
             Tools.ClearForm(this);
 
-            CantidadAlambreText.Text = "0";
             CantidadSalidaText.Text = "0";
         }
 

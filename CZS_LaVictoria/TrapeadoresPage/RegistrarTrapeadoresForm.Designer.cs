@@ -37,10 +37,6 @@ namespace CZS_LaVictoria.TrapeadoresPage
             this.MaquinaLabel = new System.Windows.Forms.Label();
             this.OperadorLabel = new System.Windows.Forms.Label();
             this.FechaLabel = new System.Windows.Forms.Label();
-            this.AlambreLabel = new System.Windows.Forms.Label();
-            this.CantidadAlambreLabel = new System.Windows.Forms.Label();
-            this.AlambreCombo = new System.Windows.Forms.ComboBox();
-            this.CantidadAlambreText = new Syncfusion.WinForms.Input.SfNumericTextBox();
             this.ArrowButton = new FontAwesome.Sharp.IconButton();
             this.MsgBox = new FontAwesome.Sharp.IconButton();
             this.GuardarButton = new System.Windows.Forms.Button();
@@ -133,51 +129,6 @@ namespace CZS_LaVictoria.TrapeadoresPage
             this.FechaLabel.Size = new System.Drawing.Size(151, 21);
             this.FechaLabel.TabIndex = 2;
             this.FechaLabel.Text = "Fecha de operación*";
-            // 
-            // AlambreLabel
-            // 
-            this.AlambreLabel.AutoSize = true;
-            this.AlambreLabel.Location = new System.Drawing.Point(50, 300);
-            this.AlambreLabel.Name = "AlambreLabel";
-            this.AlambreLabel.Size = new System.Drawing.Size(130, 21);
-            this.AlambreLabel.TabIndex = 8;
-            this.AlambreLabel.Text = "Rollo de Alambre";
-            // 
-            // CantidadAlambreLabel
-            // 
-            this.CantidadAlambreLabel.AutoSize = true;
-            this.CantidadAlambreLabel.Location = new System.Drawing.Point(50, 350);
-            this.CantidadAlambreLabel.Name = "CantidadAlambreLabel";
-            this.CantidadAlambreLabel.Size = new System.Drawing.Size(72, 21);
-            this.CantidadAlambreLabel.TabIndex = 10;
-            this.CantidadAlambreLabel.Text = "Cantidad";
-            // 
-            // AlambreCombo
-            // 
-            this.AlambreCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.AlambreCombo.FormattingEnabled = true;
-            this.AlambreCombo.Location = new System.Drawing.Point(200, 297);
-            this.AlambreCombo.Name = "AlambreCombo";
-            this.AlambreCombo.Size = new System.Drawing.Size(250, 29);
-            this.AlambreCombo.TabIndex = 9;
-            this.AlambreCombo.SelectedIndexChanged += new System.EventHandler(this.AlambreCombo_SelectedIndexChanged);
-            this.AlambreCombo.TextChanged += new System.EventHandler(this.InputOutputChanged);
-            // 
-            // CantidadAlambreText
-            // 
-            this.CantidadAlambreText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.CantidadAlambreText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CantidadAlambreText.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.CantidadAlambreText.HideTrailingZeros = true;
-            this.CantidadAlambreText.Location = new System.Drawing.Point(200, 347);
-            this.CantidadAlambreText.MinValue = 0D;
-            this.CantidadAlambreText.Name = "CantidadAlambreText";
-            this.CantidadAlambreText.Size = new System.Drawing.Size(250, 29);
-            this.CantidadAlambreText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.CantidadAlambreText.TabIndex = 11;
-            this.CantidadAlambreText.Text = "0";
-            this.CantidadAlambreText.WatermarkText = "Ingresa la cantidad";
-            this.CantidadAlambreText.TextChanged += new System.EventHandler(this.InputOutputChanged);
             // 
             // ArrowButton
             // 
@@ -312,10 +263,6 @@ namespace CZS_LaVictoria.TrapeadoresPage
             this.Controls.Add(this.CantidadSalidaLabel);
             this.Controls.Add(this.SalidaLabel);
             this.Controls.Add(this.ArrowButton);
-            this.Controls.Add(this.CantidadAlambreText);
-            this.Controls.Add(this.AlambreCombo);
-            this.Controls.Add(this.CantidadAlambreLabel);
-            this.Controls.Add(this.AlambreLabel);
             this.Controls.Add(this.TurnoText);
             this.Controls.Add(this.FechaPicker);
             this.Controls.Add(this.OperadorCombo);
@@ -343,10 +290,6 @@ namespace CZS_LaVictoria.TrapeadoresPage
         private System.Windows.Forms.Label MaquinaLabel;
         private System.Windows.Forms.Label OperadorLabel;
         private System.Windows.Forms.Label FechaLabel;
-        private System.Windows.Forms.Label AlambreLabel;
-        private System.Windows.Forms.Label CantidadAlambreLabel;
-        private System.Windows.Forms.ComboBox AlambreCombo;
-        private Syncfusion.WinForms.Input.SfNumericTextBox CantidadAlambreText;
         private FontAwesome.Sharp.IconButton ArrowButton;
         private FontAwesome.Sharp.IconButton MsgBox;
         private System.Windows.Forms.Button GuardarButton;

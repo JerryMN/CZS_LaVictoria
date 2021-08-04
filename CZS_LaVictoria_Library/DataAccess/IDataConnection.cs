@@ -744,10 +744,9 @@ namespace CZS_LaVictoria_Library.DataAccess
         ///     Crea un registro de una producción de trapeadores.
         /// </summary>
         /// <param name="model">Un modelo con las propiedades de la producción.</param>
-        /// <param name="alambre">Un modelo con las propiedades del alambre de entrada al proceso.</param>
         /// <param name="kit">Un modelo con las propiedades del kit de salida del proceso.</param>
         /// <returns>True, si se creó correctamente, falso si no.</returns>
-        bool MopProduction_Create(ProducciónTrapeadoresModel model, MaterialModel alambre, KitModel kit);
+        bool MopProduction_Create(ProducciónTrapeadoresModel model, KitModel kit);
 
         /// <summary>
         ///     Obtiene todos los registros de producciones de trapeadores.

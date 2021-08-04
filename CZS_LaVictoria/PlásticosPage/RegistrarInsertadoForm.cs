@@ -20,7 +20,7 @@ namespace CZS_LaVictoria.PlásticosPage
         double _mermaFibra;
         double _numBases;
         int _numCajas;
-        int _numRollos;
+        int _cantidadAlambre;
         int _piezasBuenas;
         int _piezasMalas;
 
@@ -99,10 +99,10 @@ namespace CZS_LaVictoria.PlásticosPage
                 return;
             }
 
-            if (_numRollos > _alambreSeleccionado.CantidadDisponible)
+            if (_cantidadAlambre > _alambreSeleccionado.CantidadDisponible)
             {
                 MsgBox.Text = $"El alambre \"{_alambreSeleccionado.Nombre}\" no se puede seleccionar. " +
-                              $"Cantidad disponible: {_alambreSeleccionado.CantidadDisponible:##,###} rollo(s).\n";
+                              $"Cantidad disponible: {_alambreSeleccionado.CantidadDisponible:##,###} kg.\n";
                 MsgBox.Visible = true;
                 return;
             }
@@ -151,7 +151,7 @@ namespace CZS_LaVictoria.PlásticosPage
             orden.MermaBases = _mermaBases;
             orden.MermaFibra = _mermaFibra;
             orden.TipoAlambre = _alambreSeleccionado.Nombre;
-            orden.RollosAlambre = _numRollos;
+            orden.CantidadAlambre = _cantidadAlambre;
             orden.TipoCaja = _cajaSeleccionada.Nombre;
             orden.CantidadCajas = _numCajas;
 
@@ -283,11 +283,11 @@ namespace CZS_LaVictoria.PlásticosPage
             }
 
             if (TipoAlambreCombo.Text != "")
-                if (CantidadRollosText.Text == "" || CantidadRollosText.Text == "0" ||
-                    !int.TryParse(CantidadRollosText.Text.Replace(",", ""), out _numRollos))
+                if (CantidadAlambreText.Text == "" || CantidadAlambreText.Text == "0.00" ||
+                    !int.TryParse(CantidadAlambreText.Text.Replace(",", ""), out _cantidadAlambre))
                 {
                     output = false;
-                    MsgBox.Text += "Ingresa la cantidad de rollos.\n";
+                    MsgBox.Text += "Ingresa la cantidad de alambre.\n";
                 }
 
             if (TipoCajaCombo.Text != "")
@@ -338,7 +338,7 @@ namespace CZS_LaVictoria.PlásticosPage
 
             CantidadBaseText.Text = "0";
             CantidadFibraText.Text = "0.00";
-            CantidadRollosText.Text = "0";
+            CantidadAlambreText.Text = "0";
             CantidadCajasText.Text = "0";
             PiezasBuenasText.Text = "0";
             PiezasMalasText.Text = "0";

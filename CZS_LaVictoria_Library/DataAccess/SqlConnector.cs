@@ -1367,6 +1367,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                     else
                     {
                         p = new DynamicParameters();
+                        p.Add("@Categoría", material.Categoría);
                         p.Add("@CantidadDisponible", material.CantidadDisponible + nuevaCantidad);
                         p.Add("@Id", material.Id);
 
@@ -1632,6 +1633,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                         return false;
 
                     p = new DynamicParameters();
+                    p.Add("@Categoría", material.Categoría);
                     p.Add("@CantidadDisponible", material.CantidadDisponible - newQty + oldQty);
                     p.Add("@Id", material.Id);
 
@@ -1882,6 +1884,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                 try
                 {
                     var p = new DynamicParameters();
+                    p.Add("@Categoría", materialEntrada.Categoría);
                     p.Add("@CantidadDisponible", materialEntrada.CantidadDisponible - model.CantidadEntra);
                     p.Add("@Id", materialEntrada.Id);
                     connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
@@ -1916,6 +1919,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                         else
                         {
                             p = new DynamicParameters();
+                            p.Add("@Categoría", materialSalida.Categoría);
                             p.Add("@CantidadDisponible", materialSalida.CantidadDisponible + model.CantidadSale);
                             p.Add("@Id", materialSalida.Id);
                             connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
@@ -1960,6 +1964,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                     var index = 0;
                     foreach (var material in mezcla.Materiales)
                     {
+                        p.Add("@Categoría", material.Categoría);
                         p.Add("@CantidadDisponible",
                             material.CantidadDisponible -
                             model.CantidadEntra * mezcla.Cantidades[index] / mezcla.CantidadMezcla);
@@ -1998,6 +2003,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                         else
                         {
                             p = new DynamicParameters();
+                            p.Add("@Categoría", materialSalida.Categoría);
                             p.Add("@CantidadDisponible", materialSalida.CantidadDisponible + model.CantidadSale * model.PesoPromedio);
                             p.Add("@Id", materialSalida.Id);
                             connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
@@ -2050,6 +2056,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                         else
                         {
                             p = new DynamicParameters();
+                            p.Add("@Categoría", materialPorMoler.Categoría);
                             p.Add("@CantidadDisponible", materialPorMoler.CantidadDisponible + model.MermaMoler);
                             p.Add("@Id", materialPorMoler.Id);
                             connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
@@ -2078,6 +2085,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                 {
                     var p = new DynamicParameters();
                     var materialPorMoler = new MaterialModel();
+                    p.Add("@Categoría", materialEntrada.Categoría);
                     p.Add("@CantidadDisponible", materialEntrada.CantidadDisponible - model.CantidadEntra);
                     p.Add("@Id", materialEntrada.Id);
                     connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
@@ -2112,6 +2120,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                         else
                         {
                             p = new DynamicParameters();
+                            p.Add("@Categoría", materialSalida.Categoría);
                             p.Add("@CantidadDisponible", materialSalida.CantidadDisponible + model.CantidadSale * model.PesoPromedio);
                             p.Add("@Id", materialSalida.Id);
                             connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
@@ -2164,6 +2173,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                         else
                         {
                             p = new DynamicParameters();
+                            p.Add("@Categoría", materialPorMoler.Categoría);
                             p.Add("@CantidadDisponible", materialPorMoler.CantidadDisponible + model.MermaMoler);
                             p.Add("@Id", materialPorMoler.Id);
                             connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
@@ -2192,6 +2202,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                 {
                     var p = new DynamicParameters();
                     var materialPorMoler = new MaterialModel();
+                    p.Add("@Categoría", materialEntrada.Categoría);
                     p.Add("@CantidadDisponible", materialEntrada.CantidadDisponible - model.CantidadEntra);
                     p.Add("@Id", materialEntrada.Id);
                     connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
@@ -2226,6 +2237,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                         else
                         {
                             p = new DynamicParameters();
+                            p.Add("@Categoría", materialSalida.Categoría);
                             p.Add("@CantidadDisponible", materialSalida.CantidadDisponible + model.CantidadSale);
                             p.Add("@Id", materialSalida.Id);
                             connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
@@ -2277,6 +2289,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                         else
                         {
                             p = new DynamicParameters();
+                            p.Add("@Categoría", materialPorMoler.Categoría);
                             p.Add("@CantidadDisponible", materialPorMoler.CantidadDisponible + model.MermaMoler);
                             p.Add("@Id", materialPorMoler.Id);
                             connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
@@ -2308,6 +2321,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                     var index = 0;
                     foreach (var material in mezcla.Materiales)
                     {
+                        p.Add("@Categoría", material.Categoría);
                         p.Add("@CantidadDisponible",
                             material.CantidadDisponible -
                             model.CantidadEntra * mezcla.Cantidades[index] / mezcla.CantidadMezcla);
@@ -2346,6 +2360,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                         else
                         {
                             p = new DynamicParameters();
+                            p.Add("@Categoría", materialSalida.Categoría);
                             p.Add("@CantidadDisponible", materialSalida.CantidadDisponible + model.CantidadSale);
                             p.Add("@Id", materialSalida.Id);
                             connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
@@ -2398,6 +2413,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                         else
                         {
                             p = new DynamicParameters();
+                            p.Add("@Categoría", materialPorMoler.Categoría);
                             p.Add("@CantidadDisponible", materialPorMoler.CantidadDisponible + model.MermaMoler);
                             p.Add("@Id", materialPorMoler.Id);
                             connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
@@ -2426,6 +2442,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                 {
                     var p = new DynamicParameters();
                     var materialPorMoler = new MaterialModel();
+                    p.Add("@Categoría", materialEntrada.Categoría);
                     p.Add("@CantidadDisponible", materialEntrada.CantidadDisponible - model.CantidadEntra);
                     p.Add("@Id", materialEntrada.Id);
                     connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
@@ -2460,6 +2477,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                         else
                         {
                             p = new DynamicParameters();
+                            p.Add("@Categoría", materialSalida.Categoría);
                             p.Add("@CantidadDisponible", materialSalida.CantidadDisponible + model.CantidadSale);
                             p.Add("@Id", materialSalida.Id);
                             connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
@@ -2512,6 +2530,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                         else
                         {
                             p = new DynamicParameters();
+                            p.Add("@Categoría", materialPorMoler.Categoría);
                             p.Add("@CantidadDisponible", materialPorMoler.CantidadDisponible + model.MermaMoler);
                             p.Add("@Id", materialPorMoler.Id);
                             connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
@@ -2539,11 +2558,13 @@ namespace CZS_LaVictoria_Library.DataAccess
                 try
                 {
                     var p = new DynamicParameters();
+                    p.Add("@Categoría", @base.Categoría);
                     p.Add("@CantidadDisponible", @base.CantidadDisponible - model.CantidadEntra);
                     p.Add("@Id", @base.Id);
                     connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
 
                     p = new DynamicParameters();
+                    p.Add("@Categoría", fibra.Categoría);
                     p.Add("@CantidadDisponible", fibra.CantidadDisponible - model.CantidadFibraEntra);
                     p.Add("@Id", fibra.Id);
                     connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
@@ -2551,7 +2572,8 @@ namespace CZS_LaVictoria_Library.DataAccess
                     if (alambre.Id != 0)
                     {
                         p = new DynamicParameters();
-                        p.Add("@CantidadDisponible", alambre.CantidadDisponible - model.RollosAlambre);
+                        p.Add("@Categoría", alambre.Categoría);
+                        p.Add("@CantidadDisponible", alambre.CantidadDisponible - model.CantidadAlambre);
                         p.Add("@Id", alambre.Id);
                         connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
                     }
@@ -2559,6 +2581,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                     if (caja.Id != 0)
                     {
                         p = new DynamicParameters();
+                        p.Add("@Categoría", caja.Categoría);
                         p.Add("@CantidadDisponible", caja.CantidadDisponible - model.CantidadCajas);
                         p.Add("@Id", caja.Id);
                         connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
@@ -2594,6 +2617,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                         else
                         {
                             p = new DynamicParameters();
+                            p.Add("@Categoría", materialSalida.Categoría);
                             p.Add("@CantidadDisponible", materialSalida.CantidadDisponible + model.PiezasBuenas);
                             p.Add("@Id", materialSalida.Id);
                             connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
@@ -2617,7 +2641,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                     p.Add("@MermaBases", model.MermaBases);
                     p.Add("@MermaFibra", model.MermaFibra);
                     p.Add("@TipoAlambre", model.TipoAlambre);
-                    p.Add("@RollosAlambre", model.RollosAlambre);
+                    p.Add("@CantidadAlambre", model.CantidadAlambre);
                     p.Add("@TipoCaja", model.TipoCaja);
                     p.Add("@CantidadCajas", model.CantidadCajas);
                     connection.Execute("dbo.spPlasticProduction_Insert", p, commandType: CommandType.StoredProcedure);
@@ -2653,6 +2677,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                         else
                         {
                             p = new DynamicParameters();
+                            p.Add("@Categoría", materialPorMoler.Categoría);
                             p.Add("@CantidadDisponible",
                                 materialPorMoler.CantidadDisponible + model.MermaBases);
                             p.Add("@Id", materialPorMoler.Id);
@@ -2691,6 +2716,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                         else
                         {
                             p = new DynamicParameters();
+                            p.Add("@Categoría", fibraMala.Categoría);
                             p.Add("@CantidadDisponible",
                                 fibraMala.CantidadDisponible + model.MermaFibra);
                             p.Add("@Id", fibraMala.Id);
@@ -2732,6 +2758,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                         else
                         {
                             p = new DynamicParameters();
+                            p.Add("@Categoría", piezasMalas.Categoría);
                             p.Add("@CantidadDisponible",
                                 piezasMalas.CantidadDisponible + model.PiezasMalas);
                             p.Add("@Id", piezasMalas.Id);
@@ -2762,6 +2789,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                     var producto = new MaterialModel();
                     var moler = new MaterialModel();
                     var p = new DynamicParameters();
+                    p.Add("@Categoría", entrada.Categoría);
                     p.Add("@CantidadDisponible", entrada.CantidadDisponible - salidaQty);
                     p.Add("@Id", entrada.Id);
                     connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
@@ -2799,6 +2827,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                                 else
                                 {
                                     p = new DynamicParameters();
+                                    p.Add("@Categoría", producto.Categoría);
                                     p.Add("@CantidadDisponible", producto.CantidadDisponible + salidaQty);
                                     p.Add("@Id", producto.Id);
                                     connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
@@ -2836,6 +2865,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                                 else
                                 {
                                     p = new DynamicParameters();
+                                    p.Add("@Categoría", moler.Categoría);
                                     p.Add("@CantidadDisponible", moler.CantidadDisponible + salidaQty);
                                     p.Add("@Id", moler.Id);
                                     connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
@@ -2999,6 +3029,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                 try
                 {
                     var p = new DynamicParameters();
+                    p.Add("@Categoría", materialEntrada.Categoría);
                     p.Add("@CantidadDisponible", materialEntrada.CantidadDisponible - model.CantidadEntra);
                     p.Add("@Id", materialEntrada.Id);
                     connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
@@ -3144,6 +3175,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                         else
                         {
                             p = new DynamicParameters();
+                            p.Add("@Categoría", hilo.Categoría);
                             p.Add("@CantidadDisponible", hilo.CantidadDisponible + model.CantidadSale);
                             p.Add("@Id", hilo.Id);
                             connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
@@ -3184,6 +3216,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
                     var hilo = Material_GetByNombreArea(model.MaterialEntra, "Algodón");
                     p = new DynamicParameters();
+                    p.Add("@Categoría", hilo.Categoría);
                     p.Add("@CantidadDisponible", hilo.CantidadDisponible - model.CantidadEntra);
                     p.Add("@Id", hilo.Id);
                     connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
@@ -3208,6 +3241,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                 try
                 {
                     var p = new DynamicParameters();
+                    p.Add("@Categoría", materialSalida.Categoría);
                     p.Add("@CantidadDisponible", materialSalida.CantidadDisponible + model.CantidadSale);
                     p.Add("@Id", materialSalida.Id);
                     connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
@@ -3257,6 +3291,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                         else
                         {
                             p = new DynamicParameters();
+                            p.Add("@Categoría", enrollado.Categoría);
                             p.Add("@CantidadDisponible", enrollado.CantidadDisponible + model.CantidadSale);
                             p.Add("@Id", enrollado.Id);
                             connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
@@ -3360,7 +3395,7 @@ namespace CZS_LaVictoria_Library.DataAccess
 
         #region Producción Trapeadores
 
-        public bool MopProduction_Create(ProducciónTrapeadoresModel model, MaterialModel alambre, KitModel kit)
+        public bool MopProduction_Create(ProducciónTrapeadoresModel model, KitModel kit)
         {
             using (var scope = new TransactionScope())
             using (IDbConnection connection = new SqlConnection(connectionString))
@@ -3372,17 +3407,13 @@ namespace CZS_LaVictoria_Library.DataAccess
                     var index = 0;
                     foreach (var material in kit.Materiales)
                     {
+                        p.Add("@Categoría", material.Categoría);
                         p.Add("@CantidadDisponible",
                             material.CantidadDisponible - model.CantidadKit * kit.Cantidades[index]);
                         p.Add("@Id", material.Id);
                         connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
                         index += 1;
                     }
-
-                    p = new DynamicParameters();
-                    p.Add("@CantidadDisponible", alambre.CantidadDisponible - model.CantidadAlambre);
-                    p.Add("@Id", alambre.Id);
-                    connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
 
                     p = new DynamicParameters();
                     p.Add("@Nombre", kit.Nombre);
@@ -3415,6 +3446,7 @@ namespace CZS_LaVictoria_Library.DataAccess
                         else
                         {
                             p = new DynamicParameters();
+                            p.Add("@Categoría", kitSalida.Categoría);
                             p.Add("@CantidadDisponible", kitSalida.CantidadDisponible + model.CantidadKit);
                             p.Add("@Id", kitSalida.Id);
                             connection.Execute("dbo.spStock_Update", p, commandType: CommandType.StoredProcedure);
@@ -3426,8 +3458,6 @@ namespace CZS_LaVictoria_Library.DataAccess
                     p.Add("@Turno", model.Turno);
                     p.Add("@Máquina", model.Máquina);
                     p.Add("@Operador", model.Operador);
-                    p.Add("@Alambre", model.Alambre);
-                    p.Add("@CantidadAlambre", model.CantidadAlambre);
                     p.Add("@Kit", kit.Nombre);
                     p.Add("@CantidadKit", model.CantidadKit);
                     connection.Execute("dbo.spMopProduction_Insert", p, commandType: CommandType.StoredProcedure);

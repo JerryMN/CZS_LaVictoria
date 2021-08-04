@@ -52,8 +52,8 @@ namespace CZS_LaVictoria.PlásticosPage
             this.FibraCombo = new System.Windows.Forms.ComboBox();
             this.CantidadFibraLabel = new System.Windows.Forms.Label();
             this.FibraLabel = new System.Windows.Forms.Label();
-            this.CantidadRollosLabel = new System.Windows.Forms.Label();
-            this.CantidadRollosText = new Syncfusion.WinForms.Input.SfNumericTextBox();
+            this.CantidadAlambreLabel = new System.Windows.Forms.Label();
+            this.CantidadAlambreText = new Syncfusion.WinForms.Input.SfNumericTextBox();
             this.RebabaUnidad = new System.Windows.Forms.Label();
             this.MermaFibraLabel = new System.Windows.Forms.Label();
             this.MermaFibraText = new Syncfusion.WinForms.Input.SfNumericTextBox();
@@ -72,6 +72,7 @@ namespace CZS_LaVictoria.PlásticosPage
             this.CantidadCajasLabel = new System.Windows.Forms.Label();
             this.CantidadCajasText = new Syncfusion.WinForms.Input.SfNumericTextBox();
             this.MáquinaCombo = new System.Windows.Forms.ComboBox();
+            this.CantidadAlambreUnidad = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.TurnoText)).BeginInit();
             this.SuspendLayout();
             // 
@@ -318,9 +319,9 @@ namespace CZS_LaVictoria.PlásticosPage
             this.CantidadFibraLabel.AutoSize = true;
             this.CantidadFibraLabel.Location = new System.Drawing.Point(50, 450);
             this.CantidadFibraLabel.Name = "CantidadFibraLabel";
-            this.CantidadFibraLabel.Size = new System.Drawing.Size(79, 21);
+            this.CantidadFibraLabel.Size = new System.Drawing.Size(118, 21);
             this.CantidadFibraLabel.TabIndex = 14;
-            this.CantidadFibraLabel.Text = "Cantidad*";
+            this.CantidadFibraLabel.Text = "Cantidad Fibra*";
             // 
             // FibraLabel
             // 
@@ -331,30 +332,28 @@ namespace CZS_LaVictoria.PlásticosPage
             this.FibraLabel.TabIndex = 12;
             this.FibraLabel.Text = "Fibra*";
             // 
-            // CantidadRollosLabel
+            // CantidadAlambreLabel
             // 
-            this.CantidadRollosLabel.AutoSize = true;
-            this.CantidadRollosLabel.Location = new System.Drawing.Point(50, 550);
-            this.CantidadRollosLabel.Name = "CantidadRollosLabel";
-            this.CantidadRollosLabel.Size = new System.Drawing.Size(137, 21);
-            this.CantidadRollosLabel.TabIndex = 19;
-            this.CantidadRollosLabel.Text = "Rollos de Alambre";
+            this.CantidadAlambreLabel.AutoSize = true;
+            this.CantidadAlambreLabel.Location = new System.Drawing.Point(50, 550);
+            this.CantidadAlambreLabel.Name = "CantidadAlambreLabel";
+            this.CantidadAlambreLabel.Size = new System.Drawing.Size(135, 21);
+            this.CantidadAlambreLabel.TabIndex = 19;
+            this.CantidadAlambreLabel.Text = "Cantidad Alambre";
             // 
-            // CantidadRollosText
+            // CantidadAlambreText
             // 
-            this.CantidadRollosText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.CantidadRollosText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CantidadRollosText.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.CantidadRollosText.HideTrailingZeros = true;
-            this.CantidadRollosText.Location = new System.Drawing.Point(200, 547);
-            this.CantidadRollosText.MinValue = 0D;
-            this.CantidadRollosText.Name = "CantidadRollosText";
-            this.CantidadRollosText.Size = new System.Drawing.Size(250, 29);
-            this.CantidadRollosText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.CantidadRollosText.TabIndex = 20;
-            this.CantidadRollosText.Text = "0";
-            this.CantidadRollosText.WatermarkText = "Ingresa la cantidad";
-            this.CantidadRollosText.TextChanged += new System.EventHandler(this.InputOutputChanged);
+            this.CantidadAlambreText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.CantidadAlambreText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CantidadAlambreText.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.CantidadAlambreText.Location = new System.Drawing.Point(200, 547);
+            this.CantidadAlambreText.MinValue = 0D;
+            this.CantidadAlambreText.Name = "CantidadAlambreText";
+            this.CantidadAlambreText.Size = new System.Drawing.Size(250, 29);
+            this.CantidadAlambreText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.CantidadAlambreText.TabIndex = 20;
+            this.CantidadAlambreText.WatermarkText = "Ingresa la cantidad";
+            this.CantidadAlambreText.TextChanged += new System.EventHandler(this.InputOutputChanged);
             // 
             // RebabaUnidad
             // 
@@ -551,6 +550,15 @@ namespace CZS_LaVictoria.PlásticosPage
             this.MáquinaCombo.TabIndex = 6;
             this.MáquinaCombo.TextChanged += new System.EventHandler(this.InputOutputChanged);
             // 
+            // CantidadAlambreUnidad
+            // 
+            this.CantidadAlambreUnidad.AutoSize = true;
+            this.CantidadAlambreUnidad.Location = new System.Drawing.Point(456, 550);
+            this.CantidadAlambreUnidad.Name = "CantidadAlambreUnidad";
+            this.CantidadAlambreUnidad.Size = new System.Drawing.Size(27, 21);
+            this.CantidadAlambreUnidad.TabIndex = 16;
+            this.CantidadAlambreUnidad.Text = "kg";
+            // 
             // RegistrarInsertadoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -563,12 +571,13 @@ namespace CZS_LaVictoria.PlásticosPage
             this.Controls.Add(this.OperadorLabel);
             this.Controls.Add(this.FechaLabel);
             this.Controls.Add(this.CalcularButton);
+            this.Controls.Add(this.CantidadAlambreUnidad);
             this.Controls.Add(this.CantidadFibraUnidad);
             this.Controls.Add(this.CantidadCajasText);
-            this.Controls.Add(this.CantidadRollosText);
+            this.Controls.Add(this.CantidadAlambreText);
             this.Controls.Add(this.CantidadFibraText);
             this.Controls.Add(this.CantidadCajasLabel);
-            this.Controls.Add(this.CantidadRollosLabel);
+            this.Controls.Add(this.CantidadAlambreLabel);
             this.Controls.Add(this.TipoCajaCombo);
             this.Controls.Add(this.TipoAlambreCombo);
             this.Controls.Add(this.FibraCombo);
@@ -633,8 +642,8 @@ namespace CZS_LaVictoria.PlásticosPage
         private System.Windows.Forms.ComboBox FibraCombo;
         private System.Windows.Forms.Label CantidadFibraLabel;
         private System.Windows.Forms.Label FibraLabel;
-        private System.Windows.Forms.Label CantidadRollosLabel;
-        private Syncfusion.WinForms.Input.SfNumericTextBox CantidadRollosText;
+        private System.Windows.Forms.Label CantidadAlambreLabel;
+        private Syncfusion.WinForms.Input.SfNumericTextBox CantidadAlambreText;
         private System.Windows.Forms.Label RebabaUnidad;
         private System.Windows.Forms.Label MermaFibraLabel;
         private Syncfusion.WinForms.Input.SfNumericTextBox MermaFibraText;
@@ -653,5 +662,6 @@ namespace CZS_LaVictoria.PlásticosPage
         private System.Windows.Forms.Label CantidadCajasLabel;
         private Syncfusion.WinForms.Input.SfNumericTextBox CantidadCajasText;
         private System.Windows.Forms.ComboBox MáquinaCombo;
+        private System.Windows.Forms.Label CantidadAlambreUnidad;
     }
 }

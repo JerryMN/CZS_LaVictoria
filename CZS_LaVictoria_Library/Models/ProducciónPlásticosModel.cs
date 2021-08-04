@@ -22,7 +22,7 @@ namespace CZS_LaVictoria_Library.Models
         public double MermaBases { get; set; }
         public double MermaFibra { get; set; }
         public string TipoAlambre { get; set; }
-        public int RollosAlambre { get; set; }
+        public int CantidadAlambre { get; set; }
         public string TipoCaja { get; set; }
         public int CantidadCajas { get; set; }
         public double MermaMoler { get; set; }
