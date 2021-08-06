@@ -44,6 +44,9 @@ namespace CZS_LaVictoria.AlgodónPage
             this.MsgBoxTimer = new System.Windows.Forms.Timer(this.components);
             this.MáquinaCombo = new System.Windows.Forms.ComboBox();
             this.MsgBox = new FontAwesome.Sharp.IconButton();
+            this.MermaText = new Syncfusion.WinForms.Input.SfNumericTextBox();
+            this.MermaLabel = new System.Windows.Forms.Label();
+            this.MermaUnidad = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.TurnoText)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,7 +64,7 @@ namespace CZS_LaVictoria.AlgodónPage
             // 
             this.GuardarButton.AutoSize = true;
             this.GuardarButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GuardarButton.Location = new System.Drawing.Point(922, 200);
+            this.GuardarButton.Location = new System.Drawing.Point(922, 250);
             this.GuardarButton.Name = "GuardarButton";
             this.GuardarButton.Size = new System.Drawing.Size(78, 35);
             this.GuardarButton.TabIndex = 11;
@@ -204,7 +207,7 @@ namespace CZS_LaVictoria.AlgodónPage
             this.MsgBox.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.MsgBox.IconSize = 32;
             this.MsgBox.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.MsgBox.Location = new System.Drawing.Point(580, 250);
+            this.MsgBox.Location = new System.Drawing.Point(580, 300);
             this.MsgBox.Name = "MsgBox";
             this.MsgBox.Size = new System.Drawing.Size(420, 165);
             this.MsgBox.TabIndex = 12;
@@ -214,11 +217,46 @@ namespace CZS_LaVictoria.AlgodónPage
             this.MsgBox.UseVisualStyleBackColor = true;
             this.MsgBox.Visible = false;
             // 
+            // MermaText
+            // 
+            this.MermaText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.MermaText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MermaText.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.MermaText.Location = new System.Drawing.Point(750, 197);
+            this.MermaText.MinValue = 0D;
+            this.MermaText.Name = "MermaText";
+            this.MermaText.Size = new System.Drawing.Size(250, 29);
+            this.MermaText.Style.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.MermaText.TabIndex = 23;
+            this.MermaText.WatermarkText = "Ingresa la cantidad";
+            // 
+            // MermaLabel
+            // 
+            this.MermaLabel.AutoSize = true;
+            this.MermaLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MermaLabel.Location = new System.Drawing.Point(600, 200);
+            this.MermaLabel.Name = "MermaLabel";
+            this.MermaLabel.Size = new System.Drawing.Size(60, 21);
+            this.MermaLabel.TabIndex = 22;
+            this.MermaLabel.Text = "Merma";
+            // 
+            // MermaUnidad
+            // 
+            this.MermaUnidad.AutoSize = true;
+            this.MermaUnidad.Location = new System.Drawing.Point(1006, 200);
+            this.MermaUnidad.Name = "MermaUnidad";
+            this.MermaUnidad.Size = new System.Drawing.Size(27, 21);
+            this.MermaUnidad.TabIndex = 24;
+            this.MermaUnidad.Text = "kg";
+            // 
             // RegistrarEstiradoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1276, 839);
+            this.Controls.Add(this.MermaText);
+            this.Controls.Add(this.MermaLabel);
+            this.Controls.Add(this.MermaUnidad);
             this.Controls.Add(this.MáquinaCombo);
             this.Controls.Add(this.MsgBox);
             this.Controls.Add(this.GuardarButton);
@@ -259,5 +297,8 @@ namespace CZS_LaVictoria.AlgodónPage
         private System.Windows.Forms.Timer MsgBoxTimer;
         private System.Windows.Forms.ComboBox MáquinaCombo;
         private FontAwesome.Sharp.IconButton MsgBox;
+        private Syncfusion.WinForms.Input.SfNumericTextBox MermaText;
+        private System.Windows.Forms.Label MermaLabel;
+        private System.Windows.Forms.Label MermaUnidad;
     }
 }

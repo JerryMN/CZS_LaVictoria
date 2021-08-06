@@ -11,6 +11,7 @@ namespace CZS_LaVictoria.AlgodónPage
     public partial class RegistrarEstiradoForm : Form
     {
         double _cantidadSalida;
+        double _merma;
 
         public RegistrarEstiradoForm()
         {
@@ -45,6 +46,7 @@ namespace CZS_LaVictoria.AlgodónPage
             orden.MaterialEntra = "Tambos Grandes";
             orden.MaterialSale = "Tambos Chicos";
             orden.CantidadSale = _cantidadSalida;
+            orden.Merma = _merma;
 
             var saveSuccess = GlobalConfig.Connection.WoolProduction_CreateEstirado(orden);
 
@@ -118,6 +120,12 @@ namespace CZS_LaVictoria.AlgodónPage
             {
                 output = false;
                 MsgBox.Text += "Ingresa la cantidad de tambos chicos.\n";
+            }
+
+            if (!double.TryParse(MermaText.Text.Replace(",", ""), out _merma))
+            {
+                output = false;
+                MsgBox.Text += "Ingresa la merma como un número.\n";
             }
 
             return output;
