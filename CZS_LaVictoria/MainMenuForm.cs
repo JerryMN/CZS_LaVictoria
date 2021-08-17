@@ -75,6 +75,12 @@ namespace CZS_LaVictoria
             _currentChildForm = childForm;
         }
 
+        void AboutButton_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            MessageBox.Show($"Versión {Application.ProductVersion}.", "Información", MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+        }
+
         #region Ordenes
 
         void CrearOrdenCompraButton_ItemClick(object sender, ItemClickEventArgs e)

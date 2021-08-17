@@ -120,6 +120,7 @@ namespace CZS_LaVictoria
             this.Datos_PersonalGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.Datos_CorreoGroup = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ChildPanel = new DevExpress.XtraEditors.PanelControl();
+            this.AboutButton = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.RibbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ChildPanel)).BeginInit();
             this.SuspendLayout();
@@ -189,10 +190,11 @@ namespace CZS_LaVictoria
             this.VerRetrabajosButton,
             this.CrearGastoFijoButton,
             this.VerCalculadoraButton,
-            this.VerGastosFijosButton});
+            this.VerGastosFijosButton,
+            this.AboutButton});
             this.RibbonControl.Location = new System.Drawing.Point(0, 0);
             this.RibbonControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.RibbonControl.MaxItemId = 65;
+            this.RibbonControl.MaxItemId = 68;
             this.RibbonControl.Name = "RibbonControl";
             this.RibbonControl.OptionsMenuMinWidth = 495;
             this.RibbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -202,6 +204,7 @@ namespace CZS_LaVictoria
             this.TrapeadoresTab,
             this.CuentasTab,
             this.DatosTab});
+            this.RibbonControl.QuickToolbarItemLinks.Add(this.AboutButton);
             this.RibbonControl.Size = new System.Drawing.Size(1278, 158);
             // 
             // CrearOrdenCompraButton
@@ -953,6 +956,13 @@ namespace CZS_LaVictoria
             this.ChildPanel.Size = new System.Drawing.Size(1278, 841);
             this.ChildPanel.TabIndex = 1;
             // 
+            // AboutButton
+            // 
+            this.AboutButton.Id = 67;
+            this.AboutButton.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("AboutButton.ImageOptions.SvgImage")));
+            this.AboutButton.Name = "AboutButton";
+            this.AboutButton.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.AboutButton_ItemClick);
+            // 
             // MainMenuForm
             // 
             this.Appearance.BackColor = System.Drawing.SystemColors.Control;
@@ -1070,6 +1080,7 @@ namespace CZS_LaVictoria
         private DevExpress.XtraBars.BarButtonItem VerCalculadoraButton;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup Cuentas_CalculadoraGroup;
         private DevExpress.XtraBars.BarButtonItem VerGastosFijosButton;
+        private DevExpress.XtraBars.BarButtonItem AboutButton;
     }
 }
 
