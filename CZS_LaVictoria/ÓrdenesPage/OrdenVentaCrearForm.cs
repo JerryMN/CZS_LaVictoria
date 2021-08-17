@@ -307,7 +307,7 @@ namespace CZS_LaVictoria.ÓrdenesPage
             var header = new PdfPageTemplateElement(width, 80);
             var footer = new PdfPageTemplateElement(width, 80);
 
-            header.Graphics.DrawImage(PdfImage.FromFile(@"..\..\Resources\Logo.png"), width - 70, 0, 70, 70);
+            header.Graphics.DrawImage(PdfImage.FromImage(Resources.Logo), width - 70, 0, 70, 70);
             header.Graphics.DrawString($"Escobas La Victoria — Orden de Venta {NumOrdenText.Text}", font, brush, 0, 0);
             header.Graphics.DrawString($"Fecha Orden: {FechaOrdenPicker.Value.ToString().Substring(0, 11)}  |   " +
                                        $"Área: {AreaCombo.Text}", smallFont, brush, 0, 30);

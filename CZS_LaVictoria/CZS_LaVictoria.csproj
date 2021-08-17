@@ -890,6 +890,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="newicon.ico" />
+    <None Include="Resources\Logo.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CZS_LaVictoria_Library\CZS_LaVictoria_Library.csproj">
