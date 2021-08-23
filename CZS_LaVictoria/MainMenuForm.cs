@@ -43,18 +43,18 @@ namespace CZS_LaVictoria
             SplashScreenManager.CloseForm();
 
             var días = (licencia.SigPago - DateTime.Today).TotalDays;
-            if (días <= 15)
-            {
-                MessageBox.Show($"La licencia caducará el {licencia.SigPago:dd/MMM/yyyy} (en {días} día(s)).",
-                    "Aviso de licencia",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else if (!licencia.Habilitado)
+            if (!licencia.Habilitado)
             {
                 MessageBox.Show(
                     "No se puede verificar la licencia. Verifica el estatus de la misma y verifica tu conexión a internet.",
                     "Error de licencia", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
+            }
+            else if (días <= 15)
+            {
+                MessageBox.Show($"La licencia caducará el {licencia.SigPago:dd/MMM/yyyy} (en {días} día(s)).",
+                    "Aviso de licencia",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
